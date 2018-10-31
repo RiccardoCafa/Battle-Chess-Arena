@@ -28,4 +28,8 @@ public abstract class Peca {
 	private void setX(int x) {
 		this.x = x;
 	}
+	
+	public void TesteCOmuna() {
+		
+	}
 }
