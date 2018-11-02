@@ -10,7 +10,7 @@ public abstract class Piece {
     public Image myImage;
     public int healthPoints;
     public boolean alive;
-    protected int pieceDamage;
+    public int pieceDamage;
     
     public Piece(String n, Image im, int heal, boolean al, int pd){
         name = n;

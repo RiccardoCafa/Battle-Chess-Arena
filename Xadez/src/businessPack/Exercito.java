@@ -5,9 +5,9 @@ import java.util.ArrayList;
 
 
 public class Exercito {
-    ArrayList<Piece> deadPieces;
-    ArrayList<Piece> pieces;
-    
+   public ArrayList<Piece> deadPieces; //list of dead pieces
+   public ArrayList<Piece> pieces; // list of alive pieces
+   public int killCount = 0; 
     public Exercito() {
         this.deadPieces = new ArrayList<>();
         this.pieces =  new ArrayList<>();
@@ -23,13 +23,27 @@ public class Exercito {
         }
     }
     
-    
     // function that ends the game, if the list of alive pieces is empty
     public boolean endGame(){
-        if(pieces.size()==0){
+        if(pieces.isEmpty()){
             return true;
         }else return false;
     }
+    
+    //method for attack a piece in the sigth of other
+     public boolean Attack(Piece atcker, Piece victm){
+         victm.healthPoints = victm.healthPoints - atcker.getPieceDamage();
+         if(victm.healthPoints == 0){
+             killCount++;
+         }
+         return true;
+         
+     }
+   
+    public int getArmyNumber(){
+        return pieces.size();
+    } 
+     
     
     
     
