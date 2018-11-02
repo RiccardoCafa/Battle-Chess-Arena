@@ -5,8 +5,20 @@
  */
 package businessPack;
 
+import java.util.ArrayList;
 
+/**
+ *
+ * @author patri
+ */
+public class Exercito {
+    ArrayList<Piece> listPiecesDead;
 
-public class Tabuleiro{
-     Bloco[][] tab = new Bloco[8][8];
+    public Exercito() {
+        this.listPiecesDead = new ArrayList<>();
+    }
 }
+
+ 
+   
+
