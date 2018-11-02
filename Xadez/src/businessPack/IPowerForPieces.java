@@ -1,7 +1,7 @@
 
 package businessPack;
 
-public interface PowerForPieces {
+public interface IPowerForPieces {
 
     public abstract void superPower();
     

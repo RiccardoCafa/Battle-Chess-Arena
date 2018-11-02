@@ -17,7 +17,9 @@ public abstract class Piece {
         healthPoints = heal;
         alive = al;
     }
-    
+    public void Move(){
+        
+    }
     public void setName(String name){
         this.name = name;
     }
