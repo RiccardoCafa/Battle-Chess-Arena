@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 
 
 
-public class King extends Piece {
+public class Bispo extends Piece {
     
-    public King(String n, Image im, int heal, boolean al){
+    public Bispo(String n, Image im, int heal, boolean al){
         super(n,im,heal,al);
     }
     
@@ -19,5 +19,4 @@ public class King extends Piece {
         String a = "nothing";
         
     }
-    
 }
