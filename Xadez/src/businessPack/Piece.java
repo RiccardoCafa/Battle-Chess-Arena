@@ -10,12 +10,14 @@ public abstract class Piece {
     public Image myImage;
     public int healthPoints;
     public boolean alive;
+    public int pieceDamage;
     
-    public Piece(String n, Image im, int heal, boolean al){
+    public Piece(String n, Image im, int heal, boolean al, int pd){
         name = n;
         myImage = im;
         healthPoints = heal;
         alive = al;
+        pieceDamage = pd;
     }
     
     public void Move(){
@@ -43,7 +45,9 @@ public abstract class Piece {
     public Image getMyImage(Image myImage){
         return myImage;
     }
-    
+    public int getPieceDamage(){
+        return pieceDamage;
+    }
     
     
     
