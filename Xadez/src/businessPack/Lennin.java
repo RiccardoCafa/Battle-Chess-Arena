@@ -5,10 +5,13 @@
  */
 package businessPack;
 
+import javax.sound.sampled.AudioInputStream;
+
 /**
  *
  * @author falca
  */
-public class Lennin {
+public class Lennin extends Character {
+    //criar a do click
     
 }

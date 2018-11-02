@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package businessPack;
+package InterfaceView;
 
-
-
-public class Tabuleiro{
-
-     Bloco[][] tab = new Bloco[8][8];
+/**
+ *
+ * @author falca
+ */
+class image {
+    
 }
