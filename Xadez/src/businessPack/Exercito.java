@@ -1,22 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package businessPack;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author patri
- */
-public class Exercito {
-    ArrayList<Piece> listPiecesDead;
 
+public class Exercito {
+   public ArrayList<Piece> deadPieces; //list of dead pieces
+   public ArrayList<Piece> pieces; // list of alive pieces
+   public int killCount = 0; 
     public Exercito() {
-        this.listPiecesDead = new ArrayList<>();
+        this.deadPieces = new ArrayList<>();
+        this.pieces =  new ArrayList<>();
     }
+    
+    
+    
+    //remove the dead pieces from the board
+    public void entomb(Piece p){
+        if(p.alive == false){
+            pieces.remove(p);
+            deadPieces.add(p);
+        }
+    }
+    
+    // function that ends the game, if the list of alive pieces is empty
+    public boolean endGame(){
+        if(pieces.isEmpty()){
+            return true;
+        }else return false;
+    }
+    
+    //method for attack a piece in the sigth of other
+     public boolean Attack(Piece atcker, Piece victm){
+         victm.healthPoints = victm.healthPoints - atcker.getPieceDamage();
+         if(victm.healthPoints == 0){
+             killCount++;
+         }
+         return true;
+         
+     }
+   
+    public int getArmyNumber(){
+        return pieces.size();
+    } 
+     
+    
+    
+    
+    
+    
 }
 
  

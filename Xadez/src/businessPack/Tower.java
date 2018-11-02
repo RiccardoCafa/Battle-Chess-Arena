@@ -13,8 +13,8 @@ import javafx.scene.image.Image;
  */
 public class Tower extends Piece implements IPowerForPieces {
     
-    public Tower(String n, Image im, int heal, boolean al) {
-        super(n, im, heal, al);
+    public Tower(String n, Image im, int heal, boolean al, int pd){
+        super(n,im,heal,al, pd);
     }
     
     @Override
