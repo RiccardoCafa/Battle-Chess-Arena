@@ -12,11 +12,13 @@ import java.util.ArrayList;
  * @author patri
  */
 public class Exercito {
-    ArrayList<cemiterio> listPiecesDead = new ArrayList<cemiterio>();
+    ArrayList<Piece> listPiecesDead;
 
-    private static class cemiterio {
-
-        public cemiterio() {
-        }
+    public Exercito() {
+        this.listPiecesDead = new ArrayList<>();
     }
 }
+
+ 
+   
+
