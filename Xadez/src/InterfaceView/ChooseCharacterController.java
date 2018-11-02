@@ -34,18 +34,20 @@ public class ChooseCharacterController implements Initializable {
     ImageView myImageView;
     int count = 0;
     Image[] perso = new Image[5];
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        perso[0] = new Image("");
-        perso[1] = new Image("");
-        perso[2] = new Image("");
-        perso[3] = new Image("");
-        perso[4] = new Image("");
-        myImage = new Image("Imagens/Setas/setaesq.png");
+        
+        perso[0] = new Image("InterfaceView/setaesq.png");
+        perso[1] = new Image("InterfaceView/setadir.png");
+        perso[2] = new Image("InterfaceView/setaesq.png");
+        perso[3] = new Image("InterfaceView/setadir.png");
+        perso[4] = new Image("InterfaceView/setaesq.png");
+        myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
         setaEsq.setGraphic(myImageView);
-        myImage = new Image("Imagens/Setas/setadir.png");
+        myImage = new Image("InterfaceView/setadir.png");
         myImageView = new ImageView(myImage);
         setaDir.setGraphic(myImageView);
         characterSelection.setGraphic(new ImageView(perso[0]));
