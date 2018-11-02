@@ -11,9 +11,9 @@ import javafx.scene.image.Image;
  *
  * @author falca
  */
-public class Quenn extends Piece implements IPowerForPieces {
+public class Queen extends Piece implements IPowerForPieces {
     
-     public Quenn(String n, Image im, int heal, boolean al) {
+     public Queen(String n, Image im, int heal, boolean al) {
         super(n, im, heal, al);
     }
     
