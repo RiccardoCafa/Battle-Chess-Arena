@@ -17,6 +17,7 @@ public abstract class Piece {
         healthPoints = heal;
         alive = al;
     }
+    
     public void Move(){
         
     }
