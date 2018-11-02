@@ -5,10 +5,9 @@
  */
 package businessPack;
 
-/**
- *
- * @author patri
- */
-public class Table {
-    
+import java.util.ArrayList;
+
+
+public class Tabuleiro{
+     Piece[][] tab = new Piece[8][8];
 }
