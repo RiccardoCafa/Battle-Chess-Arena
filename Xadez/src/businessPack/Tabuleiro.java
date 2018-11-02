@@ -5,9 +5,8 @@
  */
 package businessPack;
 
-import java.util.ArrayList;
-
-
 public class Tabuleiro{
-     Piece[][] tab = new Piece[8][8];
+     Bloco[][] tab = new Bloco[8][8];
+
+
 }

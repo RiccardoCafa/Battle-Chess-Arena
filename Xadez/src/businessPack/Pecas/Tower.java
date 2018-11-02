@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package businessPack;
+package businessPack.Pecas;
 
+import businessPack.IPowerForPieces;
+import businessPack.Piece;
+import businessPack.Tabuleiro;
 import javafx.scene.image.Image;
 
 /**
@@ -25,6 +28,11 @@ public class Tower extends Piece implements IPowerForPieces {
     @Override
     public void superPower() {
 
+    }
+
+    @Override
+    public void CheckMovePossibility(Tabuleiro tab) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

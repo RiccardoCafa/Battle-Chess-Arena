@@ -18,9 +18,10 @@ public abstract class Piece {
         alive = al;
     }
     
-    public void Move(){
-        
-    }
+    public abstract void Move();
+    
+    public abstract void CheckMovePossibility(Tabuleiro tab);
+    
     public void setName(String name){
         this.name = name;
     }

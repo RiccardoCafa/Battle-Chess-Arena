@@ -48,9 +48,6 @@ public class InterfaceManager extends Application {
         1.2 Opções
         1.3 Créditos
     2. Lobby
-        
     3. Game
-    
-    
     */
 }
