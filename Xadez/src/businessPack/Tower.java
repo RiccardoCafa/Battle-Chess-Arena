@@ -27,4 +27,5 @@ public class Tower extends Piece implements IPowerForPieces {
 
     }
     
+    
 }

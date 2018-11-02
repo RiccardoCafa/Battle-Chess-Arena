@@ -39,7 +39,6 @@ public abstract class Piece {
     public boolean getLife(){
         return alive;
     }
-    
    // getter for the variable Image
     public Image getMyImage(Image myImage){
         return myImage;
