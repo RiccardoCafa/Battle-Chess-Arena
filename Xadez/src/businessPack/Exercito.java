@@ -39,7 +39,7 @@ public class Exercito {
          return true;
          
      }
-   
+     // number of the army
     public int getArmyNumber(){
         return pieces.size();
     } 
