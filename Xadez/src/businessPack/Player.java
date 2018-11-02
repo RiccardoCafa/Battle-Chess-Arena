@@ -5,8 +5,10 @@
  */
 package businessPack;
 
-
-
-public class Tabuleiro{
-     Piece[][] tab = new Piece[8][8];
+/**
+ *
+ * @author patri
+ */
+public class Player {
+    
 }
