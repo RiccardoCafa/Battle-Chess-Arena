@@ -18,6 +18,12 @@ public abstract class Character {
         return myFace;
     }
     
+    public King getKing(){
+        return commander;
+    }
+    
+    
+    
     
     
     
