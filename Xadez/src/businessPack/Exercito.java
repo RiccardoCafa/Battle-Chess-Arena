@@ -31,7 +31,7 @@ public class Exercito {
     }
     
     //method for attack a piece in the sigth of other
-     public boolean Attack(Piece atcker, Piece victm){
+    public boolean Attack(Piece atcker, Piece victm){
          victm.healthPoints = victm.healthPoints - atcker.getPieceDamage();
          if(victm.healthPoints == 0){
              killCount++;
