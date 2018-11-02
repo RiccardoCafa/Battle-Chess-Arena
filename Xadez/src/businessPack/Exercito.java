@@ -1,22 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package businessPack;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author patri
- */
+
 public class Exercito {
-    ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> army;
 
     public Exercito() {
-        this.listPiecesDead = new ArrayList<>();
+        listPiecesDead = new ArrayList<>();
+        army = new ArrayList<>();
     }
+    
+    public Piece addPieceToArmy(Piece e) {
+        army.add(e);
+        return e;
+    }
+    
 }
 
  
