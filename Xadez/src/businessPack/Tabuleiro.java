@@ -9,6 +9,6 @@ package businessPack;
  *
  * @author patri
  */
-public class Table {
+public class Tabuleiro {
     
 }
