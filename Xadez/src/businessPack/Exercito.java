@@ -8,6 +8,7 @@ public class Exercito {
    public ArrayList<Piece> deadPieces; //list of dead pieces
    public ArrayList<Piece> pieces; // list of alive pieces
    public int killCount = 0; 
+   //oo
     public Exercito() {
         this.deadPieces = new ArrayList<>();
         this.pieces =  new ArrayList<>();
