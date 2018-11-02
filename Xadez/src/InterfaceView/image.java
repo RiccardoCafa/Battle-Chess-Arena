@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package businessPack;
-
-import javax.sound.sampled.AudioInputStream;
+package InterfaceView;
 
 /**
  *
  * @author falca
  */
-public class Lennin extends Character {
-    //criar a do click
+class image {
     
 }
