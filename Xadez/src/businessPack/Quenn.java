@@ -11,9 +11,9 @@ import javafx.scene.image.Image;
  *
  * @author falca
  */
-public class Tower extends Piece implements IPowerForPieces {
+public class Quenn extends Piece implements IPowerForPieces {
     
-    public Tower(String n, Image im, int heal, boolean al) {
+     public Quenn(String n, Image im, int heal, boolean al) {
         super(n, im, heal, al);
     }
     
@@ -26,6 +26,4 @@ public class Tower extends Piece implements IPowerForPieces {
     public void superPower() {
 
     }
-    
-    
 }
