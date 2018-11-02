@@ -12,10 +12,18 @@ import com.sun.javafx.geom.Vec2d;
  * @author patri
  */
 public class Bloco {
-    Piece mypiece;
+    Piece myPiece;
     Vec2d pos;
-
+    
+    public Bloco() {
+        myPiece = null;
+    }
+    
+    public Bloco(Piece p) {
+        myPiece = p;
+    }
+    
     public boolean CheckEmpty(){
-        return mypiece == null;
-}
+        return myPiece == null;
+    }
 }
