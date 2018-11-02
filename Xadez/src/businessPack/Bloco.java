@@ -6,14 +6,17 @@
 package businessPack;
 
 import com.sun.javafx.geom.Vec2d;
+import javafx.scene.image.Image;
 
 /**
  *
  * @author patri
  */
 public class Bloco {
+    
     Piece myPiece;
     Vec2d pos;
+    Image imageBloco;
     
     public Bloco() {
         myPiece = null;

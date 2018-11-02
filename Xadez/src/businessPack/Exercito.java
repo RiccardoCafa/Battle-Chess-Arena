@@ -12,11 +12,18 @@ import java.util.ArrayList;
  * @author patri
  */
 public class Exercito {
-    ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> army;
 
     public Exercito() {
         this.listPiecesDead = new ArrayList<>();
+        this.army = new ArrayList<>();
     }
+    
+    public void addPieceToArmy(Piece e) {
+        army.add(e);
+    }
+    
 }
 
  
