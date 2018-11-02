@@ -17,6 +17,7 @@ public abstract class Piece {
         healthPoints = heal;
         alive = al;
     }
+    
     public void Move(){
         
     }
@@ -38,7 +39,6 @@ public abstract class Piece {
     public boolean getLife(){
         return alive;
     }
-    
    // getter for the variable Image
     public Image getMyImage(Image myImage){
         return myImage;
