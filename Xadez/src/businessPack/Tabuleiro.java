@@ -1,7 +1,7 @@
+
 package businessPack;
 
 //import businessPack.Pecas.*;
-
 public class Tabuleiro{   
      Bloco[][] tab = new Bloco[8][8];
 

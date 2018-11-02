@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package businessPack;
 
-/**
- *
- * @author patri
- */
-public class PlayManager {
+import java.util.Random;
+
+
+public class PlayManager {/* Fazer os controles principais do jogo */
     
+    /* Deixar aleatorio quem começa o jogo */
+    Random random = new Random();
+    int vezPlayer = random.nextInt(2) + 1;
 }

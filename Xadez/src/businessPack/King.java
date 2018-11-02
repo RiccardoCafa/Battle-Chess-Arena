@@ -1,17 +1,15 @@
 
-package businessPack.Pecas;
+package businessPack;
 
-import businessPack.Piece;
-import businessPack.Tabuleiro;
 import javafx.scene.image.Image;
 
 
 
 
 public class King extends Piece {
-
-    public King(String n, Image im, int heal, boolean al, int pd) {
-        super(n, im, heal, al, pd);
+    
+    public King(String n, Image im, int heal, boolean al, int pd){
+        super(n,im,heal,al, pd);
     }
     
     @Override
