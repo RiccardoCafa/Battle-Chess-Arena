@@ -54,22 +54,20 @@ public class ChooseCharacterController implements Initializable {
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
         if(count == 0){
-            characterSelection.setGraphic(new ImageView(perso[4]));
             count = 4;
         }else{
-            characterSelection.setGraphic(new ImageView(perso[count-1]));
-            count = count - 1;
+            count--;
         }
+        characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
         if(count == 4){
-            characterSelection.setGraphic(new ImageView(perso[0]));
             count = 0;
         }else{
-            characterSelection.setGraphic(new ImageView(perso[count+1]));
-            count = count + 1;
+            count++;
         }
+        characterSelection.setGraphic(new ImageView(perso[count]));
     }
     
     
