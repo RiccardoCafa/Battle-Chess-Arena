@@ -5,10 +5,17 @@
  */
 package businessPack;
 
+import com.sun.javafx.geom.Vec2d;
+
 /**
  *
  * @author patri
  */
 public class Bloco {
-    
+    Piece mypiece;
+    Vec2d pos;
+
+    public boolean CheckEmpty(){
+        return mypiece == null;
+}
 }
