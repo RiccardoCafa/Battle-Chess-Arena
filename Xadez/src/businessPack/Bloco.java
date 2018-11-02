@@ -1,7 +1,6 @@
 
 package businessPack;
 
-import javafx.scene.image.Image;
 import com.sun.javafx.geom.Vec2d;
 import javafx.scene.image.Image;
 

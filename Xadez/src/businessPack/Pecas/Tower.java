@@ -12,6 +12,14 @@ public class Tower extends Piece implements IPowerForPieces {
         super(n, im, heal, al, pd);
     }
     
+    public Tower(String n, Image im, int heal, int pd) {
+        super(n, im, heal, pd);
+    }
+    
+    public Tower(String n, int heal, int pd) {
+        super(n, heal, pd);
+    }
+    
     @Override
     public void Move(){
         

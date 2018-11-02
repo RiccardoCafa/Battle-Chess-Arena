@@ -9,12 +9,13 @@ public class Exercito {
     private ArrayList<Piece> army;
 
     public Exercito() {
-        this.listPiecesDead = new ArrayList<>();
-        this.army = new ArrayList<>();
+        listPiecesDead = new ArrayList<>();
+        army = new ArrayList<>();
     }
     
-    public void addPieceToArmy(Piece e) {
+    public Piece addPieceToArmy(Piece e) {
         army.add(e);
+        return e;
     }
     
 }

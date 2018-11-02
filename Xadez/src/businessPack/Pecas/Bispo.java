@@ -13,6 +13,14 @@ public class Bispo extends Piece {
         super(n, im, heal, al, pd);
     }
     
+    public Bispo(String n, Image im, int heal, int pd) {
+        super(n, im, heal, pd);
+    }
+    
+    public Bispo(String n, int heal, int pd) {
+        super(n, heal, pd);
+    }
+    
     @Override
     public void Move(){
         String a = "nothing";
