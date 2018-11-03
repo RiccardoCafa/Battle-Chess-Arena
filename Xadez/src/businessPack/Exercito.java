@@ -5,11 +5,19 @@ import java.util.ArrayList;
 
 
 public class Exercito {
-    ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> army;
 
     public Exercito() {
-        this.listPiecesDead = new ArrayList<>();
+        listPiecesDead = new ArrayList<>();
+        army = new ArrayList<>();
     }
+    
+    public Piece addPieceToArmy(Piece e) {
+        army.add(e);
+        return e;
+    }
+    
 }
 
  

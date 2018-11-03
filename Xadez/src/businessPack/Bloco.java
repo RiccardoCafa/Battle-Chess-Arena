@@ -1,11 +1,12 @@
 
 package businessPack;
 
-import javafx.scene.image.Image;
 import com.sun.javafx.geom.Vec2d;
+import javafx.scene.image.Image;
 
 
 public class Bloco {
+
     Piece myPiece;
     Vec2d pos;
     Image imageBloco;
@@ -13,11 +14,16 @@ public class Bloco {
     public Bloco() {
         myPiece = null;
     }
+
+    public Bloco(Piece p) {
+        myPiece = p;
+    }
     
     public boolean CheckEmpty(){
         return myPiece == null;
     }
-     public Image getMyImage(Image imageBloco){
+
+    public Image getMyImage(Image imageBloco){
         return imageBloco;
     }
 }

@@ -12,6 +12,19 @@ public abstract class Piece {
     public boolean alive;
     public int pieceDamage;
     
+    public Piece(String n, Image im, int heal, int pd){
+        name = n;
+        myImage = im;
+        healthPoints = heal;
+        pieceDamage = pd;
+    }
+    
+    public Piece(String n, int heal, int pd){
+        name = n;
+        healthPoints = heal;
+        pieceDamage = pd;
+    }
+    
     public Piece(String n, Image im, int heal, boolean al, int pd){
         name = n;
         myImage = im;
@@ -20,9 +33,10 @@ public abstract class Piece {
         pieceDamage = pd;
     }
     
-    public void Move(){
-        
-    }
+    public abstract void Move();
+    
+    public abstract void CheckMovePossibility(Tabuleiro tab);
+    
     public void setName(String name){
         this.name = name;
     }
