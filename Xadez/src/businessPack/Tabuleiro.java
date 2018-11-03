@@ -8,12 +8,7 @@ import businessPack.Pecas.Horse;
 import businessPack.Pecas.Bispo;
 import businessPack.Pecas.King;
 
-<<<<<<< HEAD
-public class Tabuleiro{
 
-     Bloco[][] tab = new Bloco[8][8];
-}
-=======
 public class Tabuleiro{   
      Bloco[][] tab = new Bloco[8][8];
 
@@ -59,4 +54,4 @@ public class Tabuleiro{
      }
      
 }
->>>>>>> master
+

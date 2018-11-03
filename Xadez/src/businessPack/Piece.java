@@ -43,10 +43,10 @@ public abstract class Piece {
     public String getName(){
         return name;
     }
-    public void getHealthPoints(int healthPoints){
+    public void setHealthPoints(int healthPoints){
         this.healthPoints = healthPoints;
     }
-    public int setHealthPoints(){
+    public int getHealthPoints(){
         return healthPoints;
     }
     public void setLife(boolean alive){

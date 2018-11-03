@@ -5,18 +5,13 @@ import java.util.ArrayList;
 
 
 public class Exercito {
-<<<<<<< HEAD
-   public ArrayList<Piece> deadPieces; //list of dead pieces
-   public ArrayList<Piece> pieces; // list of alive pieces
-   public int killCount = 0; 
-   //oo
-=======
-    private ArrayList<Piece> listPiecesDead;
+    
+    private ArrayList<Piece> Graveyard;
     private ArrayList<Piece> army;
 
->>>>>>> master
+
     public Exercito() {
-        listPiecesDead = new ArrayList<>();
+        Graveyard = new ArrayList<>();
         army = new ArrayList<>();
     }
     
@@ -25,29 +20,30 @@ public class Exercito {
         return e;
     }
     
-<<<<<<< HEAD
     //method for attack a piece in the sigth of other
-    public boolean Attack(Piece atcker, Piece victm){
+    public boolean Attack(Piece atcker, Piece victm, Player enemy){
          victm.healthPoints = victm.healthPoints - atcker.getPieceDamage();
-         if(victm.healthPoints == 0){
-             killCount++;
+         if(victm.getHealthPoints() == 0){
+             enemy.exercito.army.remove(victm);
+             enemy.exercito.Graveyard.add(victm);
          }
+         
+         
+         
+         
          return true;
          
      }
      // number of the army
     public int getArmyNumber(){
-        return pieces.size();
+        return army.size();
     } 
-     
+
+   
     
     
-    
-    
-    
-=======
->>>>>>> master
 }
+
 
  
    
