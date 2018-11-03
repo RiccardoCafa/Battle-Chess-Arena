@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -30,20 +31,29 @@ public class ChooseCharacterController implements Initializable {
     Button setaDir;
     @FXML
     Button characterSelection;
+    @FXML
+    Text heroName;
     Image myImage;
     ImageView myImageView;
     int count = 0;
     Image[] perso = new Image[5];
+    String[] heroNames = new String[5];
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        perso[0] = new Image("InterfaceView/huehuebr-01.png",223, 168, false, false);
-        perso[1] = new Image("InterfaceView/lapa-01.png",223, 168, false, false);
-        perso[2] = new Image("InterfaceView/lenin-01.png",223, 168, false, false);
-        perso[3] = new Image("InterfaceView/omago-01.png", 223, 168, false, false);
-        perso[4] = new Image("InterfaceView/pistoleiro-01.png",223, 168, false, false);
+        int resX = 446;
+        int resY = 336;
+        perso[0] = new Image("InterfaceView/huehuebr-01.png",resX, resY, false, false);
+        heroNames[0] = "Huehue br";
+        perso[1] = new Image("InterfaceView/lapa-01.png",resX, resY, false, false);
+        heroNames[1] = "Lapa";
+        perso[2] = new Image("InterfaceView/lenin-01.png",resX, resY, false, false);
+        heroNames[2] = "Lenin";
+        perso[3] = new Image("InterfaceView/omago-01.png", resX, resY, false, false);
+        heroNames[3] = "The Wizard";
+        perso[4] = new Image("InterfaceView/pistoleiro-01.png",resX, resY, false, false);
+        heroNames[4] = "Gunslinger";
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
         setaEsq.setGraphic(myImageView);
@@ -60,6 +70,7 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count--;
         }
+        heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
@@ -69,6 +80,7 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count++;
         }
+        heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     
