@@ -39,11 +39,11 @@ public class ChooseCharacterController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-        perso[0] = new Image("InterfaceView/setaesq.png");
-        perso[1] = new Image("InterfaceView/setadir.png");
-        perso[2] = new Image("InterfaceView/setaesq.png");
-        perso[3] = new Image("InterfaceView/setadir.png");
-        perso[4] = new Image("InterfaceView/setaesq.png");
+        perso[0] = new Image("InterfaceView/huehuebr-01.png",223, 168, false, false);
+        perso[1] = new Image("InterfaceView/lapa-01.png",223, 168, false, false);
+        perso[2] = new Image("InterfaceView/lenin-01.png",223, 168, false, false);
+        perso[3] = new Image("InterfaceView/omago-01.png", 223, 168, false, false);
+        perso[4] = new Image("InterfaceView/pistoleiro-01.png",223, 168, false, false);
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
         setaEsq.setGraphic(myImageView);

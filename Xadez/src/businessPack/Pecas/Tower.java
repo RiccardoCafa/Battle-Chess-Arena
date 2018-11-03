@@ -32,7 +32,7 @@ public class Tower extends Piece implements IPowerForPieces {
 
     @Override
     public void CheckMovePossibility(Tabuleiro tab) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
     
