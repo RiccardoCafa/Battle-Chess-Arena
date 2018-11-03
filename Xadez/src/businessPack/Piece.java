@@ -2,6 +2,7 @@
 package businessPack;
 
 import javafx.scene.image.Image;
+import xadez.Vetor;
 
 
 public abstract class Piece {
@@ -11,6 +12,7 @@ public abstract class Piece {
     public int healthPoints;
     public boolean alive;
     public int pieceDamage;
+    public Vetor vetor;
     
     public Piece(String n, Image im, int heal, int pd){
         name = n;
