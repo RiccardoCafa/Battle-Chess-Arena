@@ -28,9 +28,6 @@ public class Exercito {
              enemy.exercito.Graveyard.add(victm);
          }
          
-         
-         
-         
          return true;
          
      }

@@ -14,10 +14,10 @@ public class Bloco {
     public Bloco() {
         myPiece = null;
     }
-
+// test
     public Bloco(Piece p) {
         myPiece = p;
-    }
+    } 
     
     public boolean CheckEmpty(){
         return myPiece == null;
