@@ -10,9 +10,13 @@ public class Bloco {
     Vec2d pos;
     Image imageBloco;
 
-    public Bloco(Image img) {
-        myPiece = null;
-        this.imageBloco = img;
+// test
+    public Bloco(Piece p) {
+        myPiece = p;
+    } 
+
+    Bloco() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public boolean CheckEmpty(){
