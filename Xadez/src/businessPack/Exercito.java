@@ -5,32 +5,27 @@ import java.util.ArrayList;
 
 
 public class Exercito {
+<<<<<<< HEAD
    public ArrayList<Piece> deadPieces; //list of dead pieces
    public ArrayList<Piece> pieces; // list of alive pieces
    public int killCount = 0; 
    //oo
+=======
+    private ArrayList<Piece> listPiecesDead;
+    private ArrayList<Piece> army;
+
+>>>>>>> master
     public Exercito() {
-        this.deadPieces = new ArrayList<>();
-        this.pieces =  new ArrayList<>();
+        listPiecesDead = new ArrayList<>();
+        army = new ArrayList<>();
     }
     
-    
-    
-    //remove the dead pieces from the board
-    public void entomb(Piece p){
-        if(p.alive == false){
-            pieces.remove(p);
-            deadPieces.add(p);
-        }
+    public Piece addPieceToArmy(Piece e) {
+        army.add(e);
+        return e;
     }
     
-    // function that ends the game, if the list of alive pieces is empty
-    public boolean endGame(){
-        if(pieces.isEmpty()){
-            return true;
-        }else return false;
-    }
-    
+<<<<<<< HEAD
     //method for attack a piece in the sigth of other
     public boolean Attack(Piece atcker, Piece victm){
          victm.healthPoints = victm.healthPoints - atcker.getPieceDamage();
@@ -50,6 +45,8 @@ public class Exercito {
     
     
     
+=======
+>>>>>>> master
 }
 
  

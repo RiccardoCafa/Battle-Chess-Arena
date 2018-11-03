@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package businessPack;
 
 /**
- *
  * @author patri
  */
 public class Player {
+    Character personagemPlayer;
+    Exercito exercito;
+ 
+    public Player() {
+        exercito = new Exercito();
+        //personagemPlayer = new Character();
+    }
     
+    public Exercito getExercito() {
+        return exercito;
+    }
 }
