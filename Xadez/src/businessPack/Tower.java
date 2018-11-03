@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class Tower extends Piece implements IPowerForPieces {
 
-    public Tower(String n, Image im, int heal, boolean al, int pd) {
-        super(n, im, heal, al, pd);
+    public Tower(String n, Image im, int heal, int pd) {
+        super(n, im, heal, pd);
     }
     
     
