@@ -1,4 +1,4 @@
-package businessPack;
+package businessPack.Pecas;
 
 import businessPack.IPowerForPieces;
 import businessPack.Piece;
@@ -16,13 +16,8 @@ public class Queen extends Piece implements IPowerForPieces {
         super(n, im, heal, pd);
     }
     
-<<<<<<< HEAD
-     public Queen(String n, Image im, int heal, int pd) {
-        super(n, im, heal, pd);
-=======
     public Queen(String n, int heal, int pd) {
         super(n, heal, pd);
->>>>>>> master
     }
     
     @Override
@@ -37,6 +32,6 @@ public class Queen extends Piece implements IPowerForPieces {
 
     @Override
     public void CheckMovePossibility(Tabuleiro tab) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }
