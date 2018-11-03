@@ -8,6 +8,7 @@ import businessPack.Pecas.Horse;
 import businessPack.Pecas.Bispo;
 import businessPack.Pecas.King;
 
+
 public class Tabuleiro{   
      Bloco[][] tab = new Bloco[8][8];
 
@@ -53,3 +54,4 @@ public class Tabuleiro{
      }
      
 }
+
