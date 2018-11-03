@@ -1,7 +1,7 @@
 
 package businessPack;
 
-import businessPack.Pecas.Bispo;
+import businessPack.Pecas.Queen;
 import businessPack.Pecas.Peon;
 import businessPack.Pecas.Tower;
 import businessPack.Pecas.Horse;
