@@ -26,7 +26,7 @@ public class InterfaceManager extends Application {
     public void WindowConfig() {
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(InterfaceManager.class.getResource("ChooseCharacter.fxml"));
+            loader.setLocation(InterfaceManager.class.getResource("Menu.fxml"));
             rootLayout = (AnchorPane) loader.load();
             
             Scene scene = new Scene(rootLayout);
