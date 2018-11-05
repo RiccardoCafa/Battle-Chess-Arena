@@ -1,28 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package InterfaceView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.text.Text;
 
-/**
- * FXML Controller class
- *
- * @author falca
- */
 public class ChooseCharacterController implements Initializable {
 
     @FXML
@@ -40,7 +27,7 @@ public class ChooseCharacterController implements Initializable {
     String[] heroNames = new String[5];
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
         // TODO
         int resX = 446;
         int resY = 336;
@@ -49,7 +36,7 @@ public class ChooseCharacterController implements Initializable {
         perso[1] = new Image("InterfaceView/lapa-01.png",resX, resY, false, false);
         heroNames[1] = "Lapa";
         perso[2] = new Image("InterfaceView/lenin-01.png",resX, resY, false, false);
-        heroNames[2] = "Lenin";
+        heroNames[2] = "Czar Nicolau II";
         perso[3] = new Image("InterfaceView/omago-01.png", resX, resY, false, false);
         heroNames[3] = "The Wizard";
         perso[4] = new Image("InterfaceView/pistoleiro-01.png",resX, resY, false, false);
@@ -83,6 +70,5 @@ public class ChooseCharacterController implements Initializable {
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
-    
     
 }

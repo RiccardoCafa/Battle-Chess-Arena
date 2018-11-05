@@ -4,7 +4,6 @@ import businessPack.Direcao;
 import businessPack.IPowerForPieces;
 import businessPack.Piece;
 import businessPack.Tabuleiro;
-import businessPack.direcao;
 import javafx.scene.image.Image;
 
 
