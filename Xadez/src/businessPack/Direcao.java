@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Direcoes;
+package businessPack;
 
 /**
  *
  * @author ricca
  */
-public enum direcoes {
-    
+public enum Direcao {
+    N, NNE, NE, ENE, E, ESE, SE, SSE, S, SSW, SW, W, WNW, NW, NNW
 }
