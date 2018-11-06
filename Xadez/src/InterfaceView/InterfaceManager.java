@@ -1,18 +1,14 @@
 package InterfaceView;
-
+/*
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-/**
- *
- * @author falca
- */
-public class InterfaceManager extends Application {
-
+*/
+public class InterfaceManager  { //extends Application
+/*
     private Stage primaryStage;
     private AnchorPane rootLayout;
     
@@ -26,7 +22,7 @@ public class InterfaceManager extends Application {
     public void WindowConfig() {
         try{
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(InterfaceManager.class.getResource("ChooseCharacter.fxml"));
+            loader.setLocation(InterfaceManager.class.getResource("Menu.fxml"));
             rootLayout = (AnchorPane) loader.load();
             
             Scene scene = new Scene(rootLayout);
