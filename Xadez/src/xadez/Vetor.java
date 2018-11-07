@@ -5,50 +5,46 @@ package xadez;
  * @author Lucas
  */
 public class Vetor {
-    
+    //atributos>>
     private int x;
     private int y;
-    
+    //construtor>>
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
     }
-     
+    //metodos>>
+    public static Vetor subtract(Vetor vetor1, Vetor vetor2) {
+        try {
+            Vetor aux = new Vetor(vetor1.getX() - vetor2.getX(),
+                                  vetor1.getY() - vetor2.getY());
+            return aux;
+        } catch(NullPointerException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static Vetor sum(Vetor vetor1, Vetor vetor2) {
+        try {
+            Vetor aux = new Vetor(vetor1.getX() + vetor2.getX(),
+                                  vetor1.getY() + vetor2.getY());
+            return aux;
+        } catch(NullPointerException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //getset>>
     public int getX() {
         return x;
     }
-    
     public void setX(int x) {
         this.x = x;
     }
-   
-    public void setY(int y) {
-        this.y = y;
-    }
-     
     public int getY() {
         return y;
     }
-    
-    public Vetor sub(Vetor vector1, Vetor vector2) {
-        try {
-            Vetor aux = new Vetor(vector1.getX() - vector2.getX(),
-                                  vector1.getY() - vector2.getY());
-            return aux;
-        } catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    public Vetor sum(Vetor vector1, Vetor vector2) {
-        try {
-            Vetor aux = new Vetor(vector1.getX() + vector2.getX(),
-                                  vector1.getY() + vector2.getY());
-            return aux;
-        } catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public void setY(int y) {
+        this.y = y;
     }
 }
