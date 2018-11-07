@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class Peon extends Piece {
     //construtor>>
-    public Peon(boolean alive, int hp, int damage, int x, int y, Image image) {
-        super(typePiece.peon, alive, hp, damage, x, y, image);
+    public Peon(boolean alive, int x, int y, Image image) {
+        super(typePiece.peon, alive, 2, 1, x, y, image);
     }
     //metodos>>
     @Override
