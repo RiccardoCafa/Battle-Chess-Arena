@@ -14,9 +14,6 @@ public class Block {
         this.piece = piece;
         vetor = new Vetor(x, y);
     }
-    Block() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     //metodos>>
     public boolean isEmpty(){
         return piece == null;
