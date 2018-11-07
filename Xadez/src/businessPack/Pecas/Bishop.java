@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 
 public class Bishop extends Piece {
     //construtor>>
-    public Bishop(boolean alive, int hp, int damage, int x, int y, Image image) {
-        super(typePiece.bishop, alive, hp, damage, x, y, image);
+    public Bishop(boolean alive, int x, int y, Image image) {
+        super(typePiece.bishop, alive, 4, 1, x, y, image);
     }
     //metodos>>
     /* String a = "nothing";//deixei de recordação :D */

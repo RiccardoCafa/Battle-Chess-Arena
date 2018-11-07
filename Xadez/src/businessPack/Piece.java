@@ -2,6 +2,7 @@
 package businessPack;
 
 import businessPack.Pecas.typePiece;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 import xadez.Vetor;
 
@@ -13,6 +14,8 @@ public abstract class Piece {
     protected boolean alive;
     protected int damage;
     protected Vetor vetor;
+    protected ArrayList<Vetor> freeWay;
+    protected ArrayList<Vetor> hitWay;
     //construtor>>
     public Piece(typePiece tpPiece, boolean alive, int hp, int damage, int x, int y, Image image){
         this.tpPiece = tpPiece;
