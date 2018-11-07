@@ -46,4 +46,7 @@ public abstract class Piece {
     public int getDamage(){
         return damage;
     }
+    public Vetor getVetor(){
+        return vetor;
+    }
 }
