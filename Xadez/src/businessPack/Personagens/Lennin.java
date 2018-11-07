@@ -5,7 +5,7 @@
  */
 package businessPack.Personagens;
 
-import businessPack.Character;
+import businessPack.Hero;
 import businessPack.Pecas.King;
 import javafx.scene.image.Image;
 
@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
  *
  * @author falca
  */
-public class Lennin extends Character {
+public class Lennin extends Hero {
     
     public Lennin(Image myFace, King myHero) {
         super(myFace, myHero);
