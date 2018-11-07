@@ -5,17 +5,20 @@ import businessPack.Pecas.Queen;
 import businessPack.Pecas.Peon;
 import businessPack.Pecas.Tower;
 import businessPack.Pecas.Horse;
-import businessPack.Pecas.Bispo;
+import businessPack.Pecas.Bishop;
 import businessPack.Pecas.King;
+import businessPack.Pecas.typePiece;
+import javafx.scene.image.Image;
 
-
-public class Tabuleiro{   
-    Bloco[][] tab = new Bloco[8][8];
-
-    public void InitTab8x8(Player p1, Player p2) {
-
-        for(int i = 0; i < 8; i++) {
-            tab[1][i] = new Bloco(p1.exercito.addPieceToArmy(new Peon("Peão", 2, 1)));
+public class Table{
+    //atributos>>
+    Block[][] table;
+    Image genericImage;//fiz apenas para não dar conflito nos argumentos que exigem imagens
+    //construtor>>
+    public Table(int m, int n, Player p1, Player p2) {
+        table = new Block[m][n];//m = quantidade de linhas (relaciona-se com i); n = quantidade de colunas (relaciona-se com j)
+        for(int j = 0; j < 8; j++) {
+            table[1][j] = new Block(p1.army.addPiece(new Peon(typePiece.peon, true, 2, 1, 1, j, genericImage)));
         }
 
         tab[0][0] = new Bloco(p1.exercito.addPieceToArmy(new Tower("Torre", 10, 2)));

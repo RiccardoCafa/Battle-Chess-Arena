@@ -1,39 +1,17 @@
 package businessPack.Pecas;
 
-import businessPack.IPowerForPieces;
 import businessPack.Piece;
-import businessPack.Tabuleiro;
+import businessPack.Table;
 import javafx.scene.image.Image;
 
-
-public class Horse extends Piece implements IPowerForPieces {
-
-    public Horse(String n, Image im, int heal, boolean al, int pd) {
-        super(n, im, heal, al, pd);
+public class Horse extends Piece {
+    //construtor>>
+    public Horse(boolean alive, int hp, int damage, int x, int y, Image image) {
+        super(typePiece.horse, alive, hp, damage, x, y, image);
     }
-    
-    public Horse(String n, Image im, int heal, int pd) {
-        super(n, im, heal, pd);
-    }
-    
-    public Horse(String n, int heal, int pd) {
-        super(n, heal, pd);
-    }
-    
+    //metodos>>
     @Override
-    public void superPower() {
-        
-    }
-    public void MoveHorse(){
-        
-    }
-    @Override
-    public void Move(){
-        
-    }
-
-    @Override
-    public void CheckMovePossibility(Tabuleiro tab) {
+    public void checkMove(Table table) {
        
     }
 }

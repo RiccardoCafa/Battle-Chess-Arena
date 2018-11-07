@@ -4,15 +4,19 @@ package businessPack;
  * @author patri
  */
 public class Player {
-    Character personagemPlayer;
-    Exercito exercito;
- 
-    public Player() {
-        exercito = new Exercito();
-        //personagemPlayer = new Character();
+    //atributos>>
+    //Character char;
+    Army army;
+    int sentido;//se começa embaixo, -1; se começa em cima, 1
+    //construtor>>
+    public Player(int sentido) {
+        army = new Army(/*char*/);
+        this.sentido = sentido;
     }
+    //metodos>>
     
-    public Exercito getExercito() {
-        return exercito;
+    //getset>>
+    public Army getArmy() {
+        return army;
     }
 }
