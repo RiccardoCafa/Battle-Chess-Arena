@@ -1,6 +1,5 @@
 package businessPack.Pecas;
 
-import businessPack.Direcao;
 import businessPack.IPowerForPieces;
 import businessPack.Piece;
 import businessPack.Tabuleiro;
@@ -25,7 +24,7 @@ public class Horse extends Piece implements IPowerForPieces {
     public void superPower() {
         
     }
-    public void MoveHorse(Direcao direction){
+    public void MoveHorse(){
         
     }
     @Override
