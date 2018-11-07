@@ -7,12 +7,12 @@ import xadez.Vetor;
 
 public abstract class Piece {
     //atributos>>
-    private typePiece tpPiece;
-    public Image image;
-    public int hp;
-    public boolean alive;
-    public int damage;
-    public Vetor vetor;
+    protected typePiece tpPiece;
+    protected Image image;
+    protected int hp;
+    protected boolean alive;
+    protected int damage;
+    protected Vetor vetor;
     //construtor>>
     public Piece(typePiece tpPiece, boolean alive, int hp, int damage, int x, int y, Image image){
         this.tpPiece = tpPiece;
