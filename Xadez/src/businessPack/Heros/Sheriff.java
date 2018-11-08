@@ -30,17 +30,17 @@ public class Sheriff extends Hero {
     }
     //metodos>>
     @Override
-    public void createArmy(Army army){
+    public void createArmy(Army army, int sentido){
         for(int j = 0; j < 8; j++) {
-            army.addPiece(new Peon(new SheriffPeon(), true, 6, j, sheriffPeonImage));//peões
+            army.addPiece(new Peon(new SheriffPeon(), true, (int)(3.5 + sentido*2.5), j, sheriffPeonImage));//peões
         }
-        army.addPiece(new Bishop(new DefaultBishop(), true, 7, 2, sheriffBishopImage));//bispos
-        army.addPiece(new Bishop(new DefaultBishop(), true, 7, 5, sheriffBishopImage));
-        army.addPiece(new Horse(new SheriffHorse(), true, 7, 1, sheriffHorseImage));//cavalos
-        army.addPiece(new Horse(new SheriffHorse(), true, 7, 6, sheriffHorseImage));
-        army.addPiece(new Tower(new SheriffTower(), true, 7, 0, sheriffTowerImage));//torres
-        army.addPiece(new Tower(new SheriffTower(), true, 7, 7, sheriffTowerImage));
-        army.addPiece(new King(new SheriffKing(), true, 7, 4, sheriffKingImage));//rei
-        army.addPiece(new Queen(new SheriffQueen(), true, 7, 3, sheriffQueenImage));//rainha
+        army.addPiece(new Bishop(new DefaultBishop(), true, (int)(3.5 + sentido*3.5), 2, sheriffBishopImage));//bispos
+        army.addPiece(new Bishop(new DefaultBishop(), true, (int)(3.5 + sentido*3.5), 5, sheriffBishopImage));
+        army.addPiece(new Horse(new SheriffHorse(),   true, (int)(3.5 + sentido*3.5), 1, sheriffHorseImage));//cavalos
+        army.addPiece(new Horse(new SheriffHorse(),   true, (int)(3.5 + sentido*3.5), 6, sheriffHorseImage));
+        army.addPiece(new Tower(new SheriffTower(),   true, (int)(3.5 + sentido*3.5), 0, sheriffTowerImage));//torres
+        army.addPiece(new Tower(new SheriffTower(),   true, (int)(3.5 + sentido*3.5), 7, sheriffTowerImage));
+        army.addPiece(new King(new SheriffKing(),     true, (int)(3.5 + sentido*3.5), 4, sheriffKingImage));//rei
+        army.addPiece(new Queen(new SheriffQueen(),   true, (int)(3.5 + sentido*3.5), 3, sheriffQueenImage));//rainha
     }
 }

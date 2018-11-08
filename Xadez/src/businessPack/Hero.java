@@ -10,7 +10,7 @@ public abstract class Hero {
         this.image = image;
     }
     //metodos>>
-    public abstract void createArmy(Army army);
+    public abstract void createArmy(Army army, int sentido);
     //getset>>
     public Image getMyFace(){
         return image;
