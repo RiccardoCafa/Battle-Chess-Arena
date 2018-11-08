@@ -29,7 +29,7 @@ public abstract class Piece {
     }
     //metodos>>
     public abstract ArrayList<Vetor> checkMove(Table table);
-    private void updateHitWay(Table table){
+    public void updateHitWay(Table table){
         hitWay.clear();
         for(Vetor vetor : freeWay){
             if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){

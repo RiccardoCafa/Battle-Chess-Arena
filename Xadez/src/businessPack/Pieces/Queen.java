@@ -17,8 +17,9 @@ public class Queen extends Piece {
     }
     //metodos>>
     @Override
-    public ArrayList<Vetor> checkMove(Table table) {
-       return tpQueen.IcheckMove(table);
+    public void checkMove(Table table, Vetor vetor) {
+        freeWay = tpQueen.IcheckMove(table, vetor);
+        updateHitWay(table);
     }
     //getset>>
     public void setTypeQueen(ItypeQueen tpQueen){//muda o comportamento do checkMove()
