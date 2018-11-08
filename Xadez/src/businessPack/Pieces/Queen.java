@@ -12,7 +12,7 @@ public class Queen extends Piece {
     ItypeQueen tpQueen;
     //construtor>>
     public Queen(ItypeQueen tpQueen, boolean alive, int x, int y, Image image) {
-        super(typePiece.queen, alive, 8, 1, x, y, image);
+        super(TypePiece.queen, alive, 8, 1, x, y, image);
         this.tpQueen = tpQueen;
     }
     //metodos>>

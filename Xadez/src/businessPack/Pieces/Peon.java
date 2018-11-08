@@ -12,7 +12,7 @@ public class Peon extends Piece {
     ItypePeon tpPeon;
     //construtor>>
     public Peon(ItypePeon tpPeon, boolean alive, int x, int y, Image image) {
-        super(typePiece.peon, alive, 2, 1, x, y, image);
+        super(TypePiece.peon, alive, 2, 1, x, y, image);
         this.tpPeon = tpPeon;
     }
     //metodos>>

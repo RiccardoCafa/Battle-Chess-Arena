@@ -25,4 +25,7 @@ public class Block {
     public Vetor getVetor(){
         return vetor;
     }
+    public Piece getPiece(){
+        return piece;
+    }
 }

@@ -12,7 +12,7 @@ public class Horse extends Piece {
     ItypeHorse tpHorse;
     //construtor>>
     public Horse(ItypeHorse tpHorse, boolean alive, int x, int y, Image image) {
-        super(typePiece.horse, alive, 6, 1, x, y, image);
+        super(TypePiece.horse, alive, 6, 1, x, y, image);
         this.tpHorse = tpHorse;
     }
     //metodos>>

@@ -12,7 +12,7 @@ public class King extends Piece {
     ItypeKing tpKing;
     //construtor>>
     public King(ItypeKing tpKing, boolean alive, int x, int y, Image image) {
-        super(typePiece.king, alive, 18, 1, x, y, image);
+        super(TypePiece.king, alive, 18, 1, x, y, image);
         this.tpKing = tpKing;
     }
     //metodos>>

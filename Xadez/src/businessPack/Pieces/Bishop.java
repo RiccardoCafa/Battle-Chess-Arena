@@ -12,7 +12,7 @@ public class Bishop extends Piece {
     ItypeBishop tpBishop;
     //construtor>>
     public Bishop(ItypeBishop tpBishop, boolean alive, int x, int y, Image image) {
-        super(typePiece.bishop, alive, 4, 1, x, y, image);
+        super(TypePiece.bishop, alive, 4, 1, x, y, image);
         this.tpBishop = tpBishop;
     }
     //metodos>>

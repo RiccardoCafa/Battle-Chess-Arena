@@ -12,7 +12,7 @@ public class Tower extends Piece {
     private ItypeTower tpTower;
     //construtor>>
     public Tower(ItypeTower tpTower, boolean alive, int x, int y, Image image) {
-        super(typePiece.tower, alive, 10, 1, x, y, image);
+        super(TypePiece.tower, alive, 10, 1, x, y, image);
         this.tpTower = tpTower;
     }
     //metodos>>
