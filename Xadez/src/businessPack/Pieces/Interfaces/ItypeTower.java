@@ -5,5 +5,5 @@ import extras.Vetor;
 import java.util.ArrayList;
 
 public interface ItypeTower {
-    public ArrayList<Vetor> IcheckMove(Table table);
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor);
 }

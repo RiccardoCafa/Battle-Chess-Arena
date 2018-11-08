@@ -28,7 +28,7 @@ public abstract class Piece {
         this.image = image;
     }
     //metodos>>
-    public abstract ArrayList<Vetor> checkMove(Table table);
+    public abstract void checkMove(Table table);
     public void updateHitWay(Table table){
         hitWay.clear();
         for(Vetor vetor : freeWay){

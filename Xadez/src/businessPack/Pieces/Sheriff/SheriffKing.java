@@ -8,8 +8,7 @@ import java.util.ArrayList;
 public class SheriffKing implements ItypeKing {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table) {
-        //implementação do rei especial do Sheriff
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor) {//implementação do rei especial do Sheriff
         return null;
     }
 }
