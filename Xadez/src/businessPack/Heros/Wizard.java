@@ -11,8 +11,8 @@ public class Wizard extends Hero {
     }
 
     @Override
-    public void createArmy(Army army) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createArmy(Army army, int sentido) {
+
     }
   
     // contemplar o mago :)
