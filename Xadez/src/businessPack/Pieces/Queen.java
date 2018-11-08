@@ -3,6 +3,8 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Piece;
 import businessPack.Table;
+import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Queen extends Piece {
@@ -15,8 +17,8 @@ public class Queen extends Piece {
     }
     //metodos>>
     @Override
-    public void checkMove(Table table) {
-       tpQueen.IcheckMove(table);
+    public ArrayList<Vetor> checkMove(Table table) {
+       return tpQueen.IcheckMove(table);
     }
     //getset>>
     public void setTypeQueen(ItypeQueen tpQueen){//muda o comportamento do checkMove()

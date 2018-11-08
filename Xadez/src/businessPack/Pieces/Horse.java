@@ -3,6 +3,8 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeHorse;
 import businessPack.Piece;
 import businessPack.Table;
+import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Horse extends Piece {
@@ -15,8 +17,8 @@ public class Horse extends Piece {
     }
     //metodos>>
     @Override
-    public void checkMove(Table table) {
-       tpHorse.IcheckMove(table);
+    public ArrayList<Vetor> checkMove(Table table) {
+       return tpHorse.IcheckMove(table);
     }
     //getset>>
     public void setTypeHorse(ItypeHorse tpHorse){//muda o comportamento do checkMove()

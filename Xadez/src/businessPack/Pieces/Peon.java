@@ -3,6 +3,8 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Piece;
 import businessPack.Table;
+import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Peon extends Piece {
@@ -15,8 +17,8 @@ public class Peon extends Piece {
     }
     //metodos>>
     @Override
-    public void checkMove(Table table) {
-       tpPeon.IcheckMove(table);
+    public ArrayList<Vetor> checkMove(Table table) {
+       return tpPeon.IcheckMove(table);
     }
     //getset>>
     public void setTypePeon(ItypePeon tpPeon){//muda o comportamento do checkMove()
