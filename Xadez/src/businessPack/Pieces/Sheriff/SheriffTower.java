@@ -8,8 +8,7 @@ import java.util.ArrayList;
 public class SheriffTower implements ItypeTower {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table) {
-        //implementação da torre especial do Sheriff
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor) {//implementação da torre especial do Sheriff
         return null;
     }
 }
