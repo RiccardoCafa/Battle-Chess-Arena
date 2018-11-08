@@ -2,8 +2,8 @@ package businessPack.Pieces.Interfaces;
 
 import businessPack.Table;
 import extras.Vetor;
-import java.util.List;
+import java.util.ArrayList;
 
 public interface ItypePeon {
-    public List<Vetor> IcheckMove(Table table);
+    public ArrayList<Vetor> IcheckMove(Table table);
 }

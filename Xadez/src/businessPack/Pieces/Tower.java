@@ -3,6 +3,8 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Piece;
 import businessPack.Table;
+import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Tower extends Piece {
@@ -15,8 +17,8 @@ public class Tower extends Piece {
     }
     //metodos>>
     @Override
-    public void checkMove(Table table) {
-       tpTower.IcheckMove(table);
+    public ArrayList<Vetor> checkMove(Table table) {
+       return tpTower.IcheckMove(table);
     }
     //getset>>
     public void setTypeTower(ItypeTower tpTower){//muda o comportamento do checkMove()

@@ -10,5 +10,6 @@ public class SheriffHorse implements ItypeHorse {
     @Override
     public ArrayList<Vetor> IcheckMove(Table table) {
         //implementação do cavalo especial do Sheriff
+        return null;
     }
 }

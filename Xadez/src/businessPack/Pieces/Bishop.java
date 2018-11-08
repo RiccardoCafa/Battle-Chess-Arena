@@ -3,6 +3,8 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeBishop;
 import businessPack.Piece;
 import businessPack.Table;
+import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Bishop extends Piece {
@@ -15,8 +17,8 @@ public class Bishop extends Piece {
     }
     //metodos>>
     @Override
-    public void checkMove(Table table) {
-       tpBishop.IcheckMove(table);
+    public ArrayList<Vetor> checkMove(Table table) {
+       return tpBishop.IcheckMove(table);
     }
     //getset>>
     public void setTypeBishop(ItypeBishop tpBishop){//muda o comportamento do checkMove()
