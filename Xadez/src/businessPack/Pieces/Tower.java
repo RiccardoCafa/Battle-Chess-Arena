@@ -7,7 +7,7 @@ import javafx.scene.image.Image;
 
 public class Tower extends Piece {
     //atributos>>
-    ItypeTower tpTower;
+    private ItypeTower tpTower;
     //construtor>>
     public Tower(ItypeTower tpTower, boolean alive, int x, int y, Image image) {
         super(typePiece.tower, alive, 10, 1, x, y, image);
@@ -17,5 +17,9 @@ public class Tower extends Piece {
     @Override
     public void checkMove(Table table) {
        tpTower.IcheckMove(table);
+    }
+    //getset>>
+    public void setTypeTower(ItypeTower tpTower){//muda o comportamento do checkMove()
+        this.tpTower = tpTower;
     }
 }

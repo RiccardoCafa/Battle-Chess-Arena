@@ -18,4 +18,8 @@ public class Peon extends Piece {
     public void checkMove(Table table) {
        tpPeon.IcheckMove(table);
     }
+    //getset>>
+    public void setTypePeon(ItypePeon tpTower){//muda o comportamento do checkMove()
+        this.tpPeon = tpPeon;
+    }
 }

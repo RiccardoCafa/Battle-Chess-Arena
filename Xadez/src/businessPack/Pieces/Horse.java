@@ -18,4 +18,8 @@ public class Horse extends Piece {
     public void checkMove(Table table) {
        tpHorse.IcheckMove(table);
     }
+    //getset>>
+    public void setTypeHorse(ItypeHorse tpTower){//muda o comportamento do checkMove()
+        this.tpHorse = tpHorse;
+    }
 }

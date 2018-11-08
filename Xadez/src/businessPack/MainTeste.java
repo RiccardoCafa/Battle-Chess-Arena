@@ -11,7 +11,7 @@ package businessPack;
  */
 public class MainTeste {
     public static void main(String[] args) {
-        Tabuleiro t = new Tabuleiro();
+        Table t = new Table();
         Player p1 = new Player();
         Player p2 = new Player();
         t.InitTab8x8(p1, p2);
