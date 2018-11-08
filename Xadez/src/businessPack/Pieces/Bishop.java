@@ -19,7 +19,7 @@ public class Bishop extends Piece {
        tpBishop.IcheckMove(table);
     }
     //getset>>
-    public void setTypeBishop(ItypeBishop tpTower){//muda o comportamento do checkMove()
+    public void setTypeBishop(ItypeBishop tpBishop){//muda o comportamento do checkMove()
         this.tpBishop = tpBishop;
     }
 }
