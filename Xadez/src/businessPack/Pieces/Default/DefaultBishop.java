@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class DefaultBishop implements ItypeBishop {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table) {
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor) {
         //implementação da movimentação padrão do bispo
         return null;
     }

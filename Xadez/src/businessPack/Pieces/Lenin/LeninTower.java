@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class LeninTower implements ItypeTower {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table) {
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor) {
         return null;
     }
 }
