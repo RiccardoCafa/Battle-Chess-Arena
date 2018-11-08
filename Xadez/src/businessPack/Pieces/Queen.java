@@ -19,7 +19,7 @@ public class Queen extends Piece {
        tpQueen.IcheckMove(table);
     }
     //getset>>
-    public void setTypeQueen(ItypeQueen tpTower){//muda o comportamento do checkMove()
+    public void setTypeQueen(ItypeQueen tpQueen){//muda o comportamento do checkMove()
         this.tpQueen = tpQueen;
     }
 }

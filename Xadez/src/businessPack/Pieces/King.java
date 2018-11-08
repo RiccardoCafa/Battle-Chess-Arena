@@ -19,7 +19,7 @@ public class King extends Piece {
        tpKing.IcheckMove(table);
     }
     //getset>>
-    public void setTypeKing(ItypeKing tpTower){//muda o comportamento do checkMove()
+    public void setTypeKing(ItypeKing tpKing){//muda o comportamento do checkMove()
         this.tpKing = tpKing;
     }
 }
