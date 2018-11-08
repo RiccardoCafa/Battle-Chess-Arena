@@ -1,7 +1,7 @@
-package businessPack.Personagens;
+package businessPack.Heros;
 
 import businessPack.Hero;
-import businessPack.Pecas.King;
+import businessPack.Pieces.King;
 import javafx.scene.image.Image;
 public class Wizard extends Hero {
     public Wizard(Image myFace, King myHero) {
