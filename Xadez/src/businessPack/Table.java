@@ -12,8 +12,9 @@ public class Table{
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
                 table[i][j] = new Block(p1.getArmy().findPiece(i, j), i, j);
-                if(p1.getArmy().findPiece(i, j) != null)
+                if(p1.getArmy().findPiece(i, j) != null){
                     table[i][j] = new Block(p2.getArmy().findPiece(i, j), i, j);
+                }
             }
         }
     }
