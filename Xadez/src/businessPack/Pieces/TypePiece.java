@@ -9,6 +9,6 @@ package businessPack.Pieces;
  *
  * @author Lucas
  */
-public enum typePiece {
+public enum TypePiece {
     peon, tower, bishop, horse, queen, king
 }

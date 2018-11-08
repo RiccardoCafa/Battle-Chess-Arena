@@ -29,4 +29,7 @@ public class Table{
     public int getN(){
         return m;
     }
+    public Block getBlock(int x, int y){
+        return table[x][y];
+    }
 }

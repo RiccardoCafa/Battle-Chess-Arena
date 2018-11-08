@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class DefaultPeon implements ItypePeon {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table) {
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor) {
         //implementação da movimentação padrão do peão
         return null;
     }

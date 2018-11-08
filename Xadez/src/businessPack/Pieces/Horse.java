@@ -3,22 +3,23 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeHorse;
 import businessPack.Piece;
 import businessPack.Table;
-import extras.Vetor;
-import java.util.ArrayList;
+import businessPack.TypeHero;
 import javafx.scene.image.Image;
 
 public class Horse extends Piece {
     //atributos>>
     ItypeHorse tpHorse;
     //construtor>>
-    public Horse(ItypeHorse tpHorse, boolean alive, int x, int y, Image image) {
-        super(typePiece.horse, alive, 6, 1, x, y, image);
+    public Horse(ItypeHorse tpHorse, TypeHero tpHero, int x, int y, Image image) {
+        super(TypePiece.horse, tpHero, 6, 1, x, y, image);
         this.tpHorse = tpHorse;
     }
     //metodos>>
     @Override
-    public ArrayList<Vetor> checkMove(Table table) {
-       return tpHorse.IcheckMove(table);
+    public void checkMove(Table table) {
+        freeWay.clear();
+        freeWay = tpHorse.IcheckMove(table, vetor);
+        updateHitWay(table);
     }
     //getset>>
     public void setTypeHorse(ItypeHorse tpHorse){//muda o comportamento do checkMove()

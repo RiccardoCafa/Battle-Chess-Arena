@@ -8,8 +8,7 @@ import java.util.ArrayList;
 public class SheriffPeon implements ItypePeon {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table) {
-        //implementação do peão especial do Sheriff
+    public ArrayList<Vetor> IcheckMove(Table table, Vetor vetor) {//implementação do peão especial do Sheriff
         return null;
     }
 }
