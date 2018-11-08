@@ -13,6 +13,7 @@ public class Wizard extends Hero {
     @Override
     public void createArmy(Army army, int sentido) {
 
+        
     }
   
     // contemplar o mago :)
