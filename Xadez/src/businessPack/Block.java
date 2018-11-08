@@ -2,7 +2,7 @@
 package businessPack;
 
 import javafx.scene.image.Image;
-import xadez.Vetor;
+import extras.Vetor;
 
 public class Block {
     //atributos>>

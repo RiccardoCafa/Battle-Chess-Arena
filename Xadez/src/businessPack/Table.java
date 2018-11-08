@@ -1,11 +1,11 @@
 
 package businessPack;
-import businessPack.Pecas.Queen;
-import businessPack.Pecas.Peon;
-import businessPack.Pecas.Tower;
-import businessPack.Pecas.Horse;
-import businessPack.Pecas.Bishop;
-import businessPack.Pecas.King;
+import businessPack.Pieces.Queen;
+import businessPack.Pieces.Peon;
+import businessPack.Pieces.Tower;
+import businessPack.Pieces.Horse;
+import businessPack.Pieces.Bishop;
+import businessPack.Pieces.King;
 import javafx.scene.image.Image;
 
 public class Table{

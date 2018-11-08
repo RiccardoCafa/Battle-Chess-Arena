@@ -11,7 +11,7 @@ public class Player {
     //construtor>>
     public Player(int sentido, Hero hero) {
         this.hero = hero;
-        army = hero.createArmy();
+        hero.createArmy(army);
         this.sentido = sentido;
     }
     //metodos>>
