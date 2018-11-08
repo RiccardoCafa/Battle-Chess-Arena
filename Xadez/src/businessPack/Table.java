@@ -14,7 +14,7 @@ public class Table{
     Image genericImage;//fiz apenas para não dar conflito nos argumentos que exigem imagens
     //construtor>>
     public Table(int m, int n, Player p1, Player p2) {
-        table = new Block[m][n];//m = quantidade de linhas (relaciona-se com i); n = quantidade de colunas (relaciona-se com j)
+        /*table = new Block[m][n];//m = quantidade de linhas (relaciona-se com i); n = quantidade de colunas (relaciona-se com j)
         for(int j = 0; j < n; j++) {
             table[1][j] = new Block(p1.getArmy().addPiece(new Peon(true, 1, j, genericImage)), 1, j);//peões
         }
@@ -42,5 +42,6 @@ public class Table{
         table[7][5] = new Block(p2.getArmy().addPiece(new Bishop(true, 7, 5, genericImage)), 7, 5);
         table[7][3] = new Block(p2.getArmy().addPiece(new King(true, 7, 3, genericImage)), 7, 3);//rei
         table[7][4] = new Block(p2.getArmy().addPiece(new Queen(true, 7, 4, genericImage)), 7, 4);//rainha
+*/
     }
 }

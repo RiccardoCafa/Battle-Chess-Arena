@@ -5,16 +5,19 @@
  */
 package businessPack;
 
+import javafx.scene.image.Image;
+
 /**
  *
  * @author Lucas
  */
 public class MainTeste {
     public static void main(String[] args) {
-        Table t = new Table();
-        Player p1 = new Player();
+        /*Player p1 = new Player(-1, new Hero(new Image()));
         Player p2 = new Player();
-        t.InitTab8x8(p1, p2);
+        Table t = new Table(8, 8, p1, p2);
+        
+        t.InitTab8x8(p1, p2);*/
         
     }
 }

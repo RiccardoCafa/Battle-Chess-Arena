@@ -1,7 +1,9 @@
 package businessPack.Pieces.Interfaces;
 
 import businessPack.Table;
+import extras.Vetor;
+import java.util.List;
 
 public interface ItypeHorse {
-    public void IcheckMove(Table table);
+    public List<Vetor> IcheckMove(Table table);
 }
