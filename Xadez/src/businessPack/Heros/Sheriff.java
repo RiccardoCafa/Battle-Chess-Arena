@@ -32,16 +32,16 @@ public class Sheriff extends Hero {
     //metodos>>
     @Override
     public void createArmy(Army army, int sentido){
-        for(int j = 0; j < 8; j++) {
-            army.addPiece(new Peon(new SheriffPeon(), TypeHero.sheriff, (int)(3.5 + sentido*2.5), j, sheriffPeonImage));//peões
+        for(int i = 0; i < 8; i++) {
+            army.addPiece(new Peon(new SheriffPeon(), TypeHero.sheriff, i, (int)(3.5 + sentido*2.5), sheriffPeonImage));//peões
         }
-        army.addPiece(new Bishop(new DefaultBishop(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 2, sheriffBishopImage));//bispos
-        army.addPiece(new Bishop(new DefaultBishop(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 5, sheriffBishopImage));
-        army.addPiece(new  Horse(new  SheriffHorse(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 1,  sheriffHorseImage));//cavalos
-        army.addPiece(new  Horse(new  SheriffHorse(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 6,  sheriffHorseImage));
-        army.addPiece(new  Tower(new  SheriffTower(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 0,  sheriffTowerImage));//torres
-        army.addPiece(new  Tower(new  SheriffTower(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 7,  sheriffTowerImage));
-        army.addPiece(new   King(new   SheriffKing(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 4,   sheriffKingImage));//rei
-        army.addPiece(new  Queen(new  SheriffQueen(), TypeHero.sheriff, (int)(3.5 + sentido*3.5), 3,  sheriffQueenImage));//rainha
+        army.addPiece(new Bishop(new DefaultBishop(), TypeHero.sheriff, 2, (int)(3.5 + sentido*3.5), sheriffBishopImage));//bispos
+        army.addPiece(new Bishop(new DefaultBishop(), TypeHero.sheriff, 5, (int)(3.5 + sentido*3.5), sheriffBishopImage));
+        army.addPiece(new  Horse(new  SheriffHorse(), TypeHero.sheriff, 1, (int)(3.5 + sentido*3.5),  sheriffHorseImage));//cavalos
+        army.addPiece(new  Horse(new  SheriffHorse(), TypeHero.sheriff, 6, (int)(3.5 + sentido*3.5),  sheriffHorseImage));
+        army.addPiece(new  Tower(new  SheriffTower(), TypeHero.sheriff, 0, (int)(3.5 + sentido*3.5),  sheriffTowerImage));//torres
+        army.addPiece(new  Tower(new  SheriffTower(), TypeHero.sheriff, 7, (int)(3.5 + sentido*3.5),  sheriffTowerImage));
+        army.addPiece(new   King(new   SheriffKing(), TypeHero.sheriff, 4, (int)(3.5 + sentido*3.5),   sheriffKingImage));//rei
+        army.addPiece(new  Queen(new  SheriffQueen(), TypeHero.sheriff, 3, (int)(3.5 + sentido*3.5),  sheriffQueenImage));//rainha
     }
 }
