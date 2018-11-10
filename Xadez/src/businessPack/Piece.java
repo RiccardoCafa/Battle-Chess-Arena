@@ -27,7 +27,7 @@ public abstract class Piece {
     }
     //metodos>>
     public abstract void checkMove(Table table);
-    public void updateHitWay(Table table){
+    protected void updateHitWay(Table table){
         hitWay.clear();
         for(Block block : freeWay){
             if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){

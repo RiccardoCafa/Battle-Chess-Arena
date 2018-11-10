@@ -1,5 +1,7 @@
 package extras;
 
+import businessPack.Table;
+
 public class Vetor {
     //atributos>>
     private int x;
@@ -46,7 +48,7 @@ public class Vetor {
         return x;
     }
     public void setX(int x) {
-        if(x >= 0 && x <= 7){
+        if(x >= 0 && x <= Table.getM()){
             this.x = x;
         }
     }
@@ -54,7 +56,7 @@ public class Vetor {
         return y;
     }
     public void setY(int y) {
-        if(y >= 0 && y <= 7){
+        if(y >= 0 && y <= Table.getN()){
             this.y = y;
         }
     }

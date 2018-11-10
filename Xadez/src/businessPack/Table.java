@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 public class Table{
     //atributos>>
     private Block[][] table;
-    private int m;
-    private int n;
+    private static int m;
+    private static int n;
     Image genericImage;//fiz apenas para não dar conflito nos argumentos que exigem imagens
     //construtor>>
     public Table(int m, int n, Player p1, Player p2) {
@@ -33,11 +33,11 @@ public class Table{
         }
     }
     //getset>>
-    public int getM(){
+    public static int getM(){
         return m;
     }
-    public int getN(){
-        return m;
+    public static int getN(){
+        return n;
     }
     public Block getBlock(int x, int y){
         return table[x][y];
