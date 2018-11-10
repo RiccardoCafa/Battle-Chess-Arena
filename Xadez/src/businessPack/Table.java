@@ -43,4 +43,8 @@ public class Table{
         table[7][3] = new Block(p2.getArmy().addPiece(new King(true, 7, 3, genericImage)), 7, 3);//rei
         table[7][4] = new Block(p2.getArmy().addPiece(new Queen(true, 7, 4, genericImage)), 7, 4);//rainha
     }
+
+    Table() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
