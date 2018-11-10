@@ -12,8 +12,9 @@ public class LeninBishop implements ItypeBishop{
 
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-         ArrayList<Block> vector;
+        ArrayList<Block> vector;
         vector = new ArrayList<>();
+        vector.clear();
         // diagonais
         //diagonal para cima e para a esquerda
         for(int i = vetor.getX()-1, j = vetor.getY()-1;i<table.getM();i--,j--){

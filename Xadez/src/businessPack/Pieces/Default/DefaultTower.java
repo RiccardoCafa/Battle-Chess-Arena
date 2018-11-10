@@ -12,6 +12,7 @@ public class DefaultTower implements ItypeTower {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         ArrayList<Block> vector;
         vector = new ArrayList<>();
+        vector.clear();
         for(int i = vetor.getX()+1;i<table.getM();i++){
             if(table.getBlock(i, vetor.getY())==null){
                 vector.add(table.getBlock(i, vetor.getY()));

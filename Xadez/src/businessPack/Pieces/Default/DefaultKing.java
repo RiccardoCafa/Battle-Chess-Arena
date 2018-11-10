@@ -12,6 +12,7 @@ public class DefaultKing implements ItypeKing {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         ArrayList<Block> vector;
         vector = new ArrayList<>();
+        vector.clear();
            if(table.getBlock(vetor.getX()+1,vetor.getY())==null||table.getBlock(vetor.getX()+1,  
                 vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
             vector.add(table.getBlock(vetor.getX()+1, vetor.getY()));
