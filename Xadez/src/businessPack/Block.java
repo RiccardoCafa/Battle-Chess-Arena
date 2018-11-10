@@ -18,7 +18,14 @@ public class Block {
     public boolean isEmpty(){
         return piece == null;
     }
+    //getset>>
     public Image getImage(Image image){
         return image;
+    }
+    public Vetor getVetor(){
+        return vetor;
+    }
+    public Piece getPiece(){
+        return piece;
     }
 }

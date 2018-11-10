@@ -4,6 +4,7 @@ import businessPack.Army;
 import businessPack.Hero;
 import businessPack.Pieces.Tower;
 import businessPack.Pieces.Lenin.LeninTower;
+import businessPack.TypeHero;
 import javafx.scene.image.Image;
 
 public class Lenin extends Hero {
@@ -15,7 +16,7 @@ public class Lenin extends Hero {
     }
     //metodos>>
     @Override
-    public void createArmy(Army army){
-        army.addPiece(new Tower(new LeninTower(), true, 0, 0, leninTowerImage));
+    public void createArmy(Army army, int sentido){
+        army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, 0, leninTowerImage));
     }
 }

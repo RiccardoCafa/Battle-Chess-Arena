@@ -30,4 +30,7 @@ public class Army {
     public int getArmyNumber(){
         return army.size();
     }
+    public ArrayList<Piece> getArmy(){
+        return army;
+    }
 }

@@ -1,15 +1,15 @@
 package businessPack.Pieces.Lenin;
 
+import businessPack.Block;
 import businessPack.Table;
 import businessPack.Pieces.Interfaces.ItypeTower;
+import extras.Vetor;
+import java.util.ArrayList;
 
 public class LeninTower implements ItypeTower {
-    //atributos>>
-    //construtor>>
     //metodos>>
     @Override
-    public void IcheckMove(Table table) {
-        
+    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
+        return null;
     }
-    //getset>>
 }
