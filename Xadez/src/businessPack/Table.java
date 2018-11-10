@@ -1,5 +1,7 @@
 
 package businessPack;
+import extras.Compass;
+import extras.Vetor;
 import javafx.scene.image.Image;
 
 public class Table{
@@ -22,6 +24,14 @@ public class Table{
             }
         }
     }
+    //metodos>>
+    public void clearTrend(){
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                table[m][n].getVetor().setTrend(Compass.C);
+            }
+        }
+    }
     //getset>>
     public int getM(){
         return m;
@@ -31,5 +41,12 @@ public class Table{
     }
     public Block getBlock(int x, int y){
         return table[x][y];
+    }
+    public Block getBlock(Vetor vetor){
+        if(vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n){
+            return table[vetor.getX()][vetor.getY()];
+        }else{
+            return null;
+        }
     }
 }

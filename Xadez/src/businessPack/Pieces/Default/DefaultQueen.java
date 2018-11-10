@@ -1,5 +1,6 @@
 package businessPack.Pieces.Default;
 
+import businessPack.Block;
 import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Table;
 import extras.Vetor;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 public class DefaultQueen implements ItypeQueen {
     //metodos>>
     @Override
-    public ArrayList<Vetor> IcheckMove(Table table,Vetor vetor) {
-        ArrayList<Vetor> vector;
+    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
+        ArrayList<Block> vector;
         vector = new ArrayList<>();
         //linhas retas
         for(int i = vetor.getX()+1;i<table.getM();i++){

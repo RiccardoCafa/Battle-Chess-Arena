@@ -12,7 +12,7 @@ public abstract class Hero {
     //metodos>>
     public abstract void createArmy(Army army, int sentido);
     //getset>>
-    public Image getMyFace(){
+    public Image getIMage(){
         return image;
     }
 }

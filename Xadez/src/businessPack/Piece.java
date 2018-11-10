@@ -1,7 +1,5 @@
-
 package businessPack;
 
-import businessPack.Pieces.TypePiece;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import extras.Vetor;
@@ -15,8 +13,8 @@ public abstract class Piece {
     protected boolean alive;
     protected int damage;
     protected Vetor vetor;
-    protected ArrayList<Vetor> freeWay;
-    protected ArrayList<Vetor> hitWay;
+    protected ArrayList<Block> freeWay;
+    protected ArrayList<Block> hitWay;
     //construtor>>
     protected Piece(TypePiece tpPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image){
         this.tpPiece = tpPiece;
@@ -31,9 +29,9 @@ public abstract class Piece {
     public abstract void checkMove(Table table);
     public void updateHitWay(Table table){
         hitWay.clear();
-        for(Vetor vetor : freeWay){
+        for(Block block : freeWay){
             if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){
-                hitWay.add(vetor);
+                hitWay.add(block);
             }
         }
     }
