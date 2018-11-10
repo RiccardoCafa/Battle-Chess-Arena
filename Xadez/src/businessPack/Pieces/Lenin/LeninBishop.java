@@ -1,66 +1,19 @@
-package businessPack.Pieces.Default;
+    
+package businessPack.Pieces.Lenin;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypeQueen;
+import businessPack.Pieces.Interfaces.ItypeBishop;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class DefaultQueen implements ItypeQueen {
-    //metodos>>
+
+public class LeninBishop implements ItypeBishop{
+
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-        ArrayList<Block> vector;
+         ArrayList<Block> vector;
         vector = new ArrayList<>();
-        //linhas retas
-        for(int i = vetor.getX()+1;i<table.getM();i++){
-            if(table.getBlock(i, vetor.getY())==null){
-                vector.add(table.getBlock(i, vetor.getY()));
-            }else{
-                if(table.getBlock(           i, vetor.getY()).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, vetor.getY()));
-                    break;
-                }
-                break;
-            }
-        }
-        for(int i = vetor.getX()-1;i<table.getM();i--){
-            if(table.getBlock(i, vetor.getY())==null){
-                vector.add(table.getBlock(i, vetor.getY()));
-            }else{
-                if(table.getBlock(           i, vetor.getY()).getPiece().getTpHero()!=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, vetor.getY()));
-                    break;
-                }
-                break;
-            }
-        }
-        for(int j = vetor.getY()+1;j<table.getN();j++){
-            if(table.getBlock(vetor.getX(), j)==null){
-                vector.add(table.getBlock(vetor.getX(), j));
-            }else{
-                if(table.getBlock(vetor.getX(),            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(vetor.getX(), j));
-                    break;
-                }
-            break;
-            }
-        }
-        for(int j = vetor.getY()-1;j<table.getN();j--){
-            if(table.getBlock(vetor.getX(), j)==null){
-                vector.add(table.getBlock(vetor.getX(), j));
-            }else{
-                if(table.getBlock(vetor.getX(),            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(vetor.getX(), j));
-                    break;
-                }
-                break;
-            }
-        }
         // diagonais
         //diagonal para cima e para a esquerda
         for(int i = vetor.getX()-1, j = vetor.getY()-1;i<table.getM();i--,j--){
@@ -115,6 +68,23 @@ public class DefaultQueen implements ItypeQueen {
                 break;
             }
         }
+        if(table.getBlock(vetor.getX()+1,vetor.getY())==null||table.getBlock(vetor.getX()+1,  
+                vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
+            vector.add(table.getBlock(vetor.getX()+1, vetor.getY()));
+        }
+         if(table.getBlock(vetor.getX()-1,vetor.getY())==null||table.getBlock(vetor.getX()-1,  
+                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
+            vector.add(table.getBlock(vetor.getX()-1, vetor.getY()));
+        }
+          if(table.getBlock(vetor.getX(),vetor.getY()-1)==null||table.getBlock(vetor.getX()+1,  
+                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
+            vector.add(table.getBlock(vetor.getX(), vetor.getY()-1));
+        }
+           if(table.getBlock(vetor.getX(),vetor.getY()+1)==null||table.getBlock(vetor.getX()-1,  
+                vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
+            vector.add(table.getBlock(vetor.getX(), vetor.getY()+1));
+        }
         return vector;
     }
+    
 }
