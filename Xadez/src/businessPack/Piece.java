@@ -44,6 +44,11 @@ public abstract class Piece {
     }
     public void setHP(int hp){
         this.hp = hp;
+        if(hp == 0){
+            alive = false;
+        }else{
+            alive = true;
+        }
     }
     public boolean getLife(){
         return alive;
