@@ -21,8 +21,9 @@ public class Army {
     }
     public Piece findPiece(int x, int y){//retorna a peça da posição requerida
         for(Piece piece : army){
-            if(piece.getVetor().getX() == x && piece.getVetor().getY() == y)
+            if(piece.getVetor().getX() == x && piece.getVetor().getY() == y){
                 return piece;
+            }
         }
         return null;
     }

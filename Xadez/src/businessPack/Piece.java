@@ -25,9 +25,18 @@ public abstract class Piece {
         vetor = new Vetor(x, y);
         this.image = image;
     }
+    protected Piece(TypePiece tpPiece, TypeHero tpHero, int hp, int damage, Vetor vetor, Image image){
+        this.tpPiece = tpPiece;
+        this.tpHero = tpHero;
+        alive = true;
+        this.hp = hp;
+        this.damage = damage;
+        this.vetor = vetor;
+        this.image = image;
+    }
     //metodos>>
-    public abstract void checkMove(Table table);
-    protected void updateHitWay(Table table){
+    public abstract void checkMove(Table table);//criação da freeWay
+    protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         hitWay.clear();
         for(Block block : freeWay){
             if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){
