@@ -30,18 +30,20 @@ public class Lenin extends Hero {
         super(image);
     }
     //metodos>>
+
     @Override
     public void createArmy(Army army, int sentido){
         for(int k = 0;k<8;k++){
-            army.addPiece(new Peon(new DefaultPeon(), TypeHero.lenin, k, (int)(3.5 + sentido*2.5), LeninPeonImage));
+           // army.addPiece(new Peon(new DefaultPeon(), TypeHero.lenin, k, (int)(3.5 + sentido*2.5), LeninPeonImage));
         }
-        army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, (int)(3.5 + sentido*2.5), leninTowerImage));
-        army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 1, (int)(3.5 + sentido*2.5), LeninQueenImage));
-        army.addPiece(new Bishop(new LeninBishop(), TypeHero.lenin, 2, (int)(3.5 + sentido*2.5), LeninBishopImage));
-        army.addPiece(new King(new LeninKing(), TypeHero.lenin, 3, (int)(3.5 + sentido*2.5), LeninKingImage));
-        army.addPiece(new Queen(new DefaultQueen(), TypeHero.lenin, 4, (int)(3.5 + sentido*2.5), LeninQueenImage));
-        army.addPiece(new Bishop(new LeninBishop(), TypeHero.lenin, 5, (int)(3.5 + sentido*2.5), LeninBishopImage));
-        army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 6, (int)(3.5 + sentido*2.5), LeninQueenImage));
-        army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 7, (int)(3.5 + sentido*2.5), leninTowerImage));
+       // army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, (int)(3.5 + sentido*2.5), leninTowerImage));
+        //army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 1, (int)(3.5 + sentido*2.5), LeninQueenImage));
+       // army.addPiece(new Bishop(new LeninBishop(), TypeHero.lenin, 2, (int)(3.5 + sentido*2.5), LeninBishopImage));
+       // army.addPiece(new King(new LeninKing(), TypeHero.lenin, 3, (int)(3.5 + sentido*2.5), LeninKingImage));
+        //army.addPiece(new Queen(new DefaultQueen(), TypeHero.lenin, 4, (int)(3.5 + sentido*2.5), LeninQueenImage));
+       // army.addPiece(new Bishop(new LeninBishop(), TypeHero.lenin, 5, (int)(3.5 + sentido*2.5), LeninBishopImage));
+       // army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 6, (int)(3.5 + sentido*2.5), LeninQueenImage));
+       // army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 7, (int)(3.5 + sentido*2.5), leninTowerImage));
+        //army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, 0, leninTowerImage));
     }
 }

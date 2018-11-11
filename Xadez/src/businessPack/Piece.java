@@ -1,5 +1,6 @@
 package businessPack;
 
+import extras.PlayerPiece;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import extras.Vetor;
@@ -8,6 +9,7 @@ public abstract class Piece {
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
+    protected PlayerPiece player;
     protected Image image;
     protected int hp;
     protected boolean alive;
@@ -16,9 +18,9 @@ public abstract class Piece {
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     //construtor>>
-    protected Piece(TypePiece tpPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image){
-        this.tpPiece = tpPiece;
+    protected Piece(PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image){
         this.tpHero = tpHero;
+        this.player = pPiece;
         alive = true;
         this.hp = hp;
         this.damage = damage;
@@ -73,5 +75,8 @@ public abstract class Piece {
     }
     public TypeHero getTpHero(){
         return tpHero;
+    }
+    public PlayerPiece getPlayer() {
+        return player;
     }
 }

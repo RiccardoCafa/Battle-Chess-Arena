@@ -26,10 +26,10 @@ public class Wizard extends Hero {
     @Override
     public void createArmy(Army army, int sentido) {
         for(int k = 0;k<8;k++){
-            army.addPiece(new Peon(new WizardPeon(), TypeHero.wizard, k, (int)(3.5 + sentido*2.5), wizardPeon)); //peões
+           // army.addPiece(new Peon(new WizardPeon(), TypeHero.wizard, k, (int)(3.5 + sentido*2.5), wizardPeon)); //peões
         }
-        army.addPiece(new Bishop(new WizardBishop(), TypeHero.wizard, 2, (int)(3.5 + sentido*2.5), wizardBishop));// Bispos 
-        army.addPiece(new Bishop(new WizardBishop(), TypeHero.wizard, 5, (int)(3.5 + sentido*2.5), wizardBishop));// Bispos 
+        //army.addPiece(new Bishop(new WizardBishop(), TypeHero.wizard, 2, (int)(3.5 + sentido*2.5), wizardBishop));// Bispos 
+        //army.addPiece(new Bishop(new WizardBishop(), TypeHero.wizard, 5, (int)(3.5 + sentido*2.5), wizardBishop));// Bispos 
 
         
     }

@@ -8,11 +8,25 @@ public class Vetor {
     private int y;
     private Compass trend;//fluxo do vetor, registrando de onde veio
     //construtor>>
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
         trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
+
+    /**
+     * Trend é um Enum Compass.
+     * 
+     * @param x
+     * @param y
+     * @param trend
+     */
     public Vetor(int x, int y, Compass trend) {
         this.x = x;
         this.y = y;
