@@ -2,7 +2,6 @@ package businessPack;
 
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
-import extras.Vetor;
 import javafx.scene.image.Image;
 
 public class MainTeste {
