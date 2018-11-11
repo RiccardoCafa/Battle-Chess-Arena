@@ -6,11 +6,25 @@ public class Vetor {
     private int y;
     private Compass trend;
     //construtor>>
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
         trend = Compass.C;
     }
+
+    /**
+     * Trend é um Enum Compass.
+     * 
+     * @param x
+     * @param y
+     * @param trend
+     */
     public Vetor(int x, int y, Compass trend) {
         this.x = x;
         this.y = y;

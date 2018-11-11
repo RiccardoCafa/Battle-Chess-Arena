@@ -20,6 +20,6 @@ public class Lenin extends Hero {
 
     @Override
     public void createArmy(Army army, int sentido){
-        army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, 0, leninTowerImage));
+        //army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, 0, leninTowerImage));
     }
 }
