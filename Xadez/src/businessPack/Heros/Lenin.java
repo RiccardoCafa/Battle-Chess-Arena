@@ -3,8 +3,10 @@ package businessPack.Heros;
 import businessPack.Army;
 import businessPack.Hero;
 import businessPack.Pieces.Bishop;
+import businessPack.Pieces.Default.DefaultHorse;
 import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Pieces.Default.DefaultQueen;
+import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
 import businessPack.Pieces.Lenin.LeninBishop;
 import businessPack.Pieces.Lenin.LeninKing;
@@ -39,6 +41,7 @@ public class Lenin extends Hero {
         army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 7, (int)(3.5 + sentido*2.5), leninTowerImage));
         army.addPiece(new King(new LeninKing(), TypeHero.lenin, 3, (int)(3.5 + sentido*2.5), LeninKingImage));
         army.addPiece(new Queen(new DefaultQueen(), TypeHero.lenin, 4, (int)(3.5 + sentido*2.5), LeninQueenImage));
-        
+        army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 1, (int)(3.5 + sentido*2.5), LeninQueenImage));
+        army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 6, (int)(3.5 + sentido*2.5), LeninQueenImage));
     }
 }
