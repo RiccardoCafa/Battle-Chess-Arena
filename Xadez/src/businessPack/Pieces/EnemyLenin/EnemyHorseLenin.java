@@ -1,19 +1,20 @@
-package businessPack.Pieces.Lenin;
+
+package businessPack.Pieces.EnemyLenin;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypeTower;
+import businessPack.Pieces.Interfaces.ItypeHorse;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class LeninTower implements ItypeTower {
-    //metodos>>
+public class EnemyHorseLenin implements ItypeHorse {
+
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-         ArrayList<Block> vector;
+        ArrayList<Block> vector;
         vector = new ArrayList<>();
         vector.clear();
-        for(int i = vetor.getX()+1;i<table.getM();i++){
+        for(int i = vetor.getX()+1;i<vetor.getX()+2;i++){
             if(table.getBlock(i, vetor.getY())==null){
                 vector.add(table.getBlock(i, vetor.getY()));
             }else{
@@ -25,7 +26,7 @@ public class LeninTower implements ItypeTower {
                 break;
             }
         }
-        for(int i = vetor.getX()-1;i<table.getM();i--){
+        for(int i = vetor.getX()-1;i<vetor.getX()-2;i--){
             if(table.getBlock(i, vetor.getY())==null){
                 vector.add(table.getBlock(i, vetor.getY()));
             }else{
@@ -37,7 +38,7 @@ public class LeninTower implements ItypeTower {
                 break;
             }
         }
-        for(int j = vetor.getY()+1;j<table.getN();j++){
+        for(int j = vetor.getY()+1;j<vetor.getY()+2;j++){
             if(table.getBlock(vetor.getX(), j)==null){
                 vector.add(table.getBlock(vetor.getX(), j));
             }else{
@@ -49,7 +50,7 @@ public class LeninTower implements ItypeTower {
             break;
             }
         }
-        for(int j = vetor.getY()-1;j<table.getN();j--){
+        for(int j = vetor.getY()-1;j<vetor.getY()-2;j--){
             if(table.getBlock(vetor.getX(), j)==null){
                 vector.add(table.getBlock(vetor.getX(), j));
             }else{
@@ -61,22 +62,7 @@ public class LeninTower implements ItypeTower {
                 break;
             }
         }
-        if(table.getBlock(vetor.getX()+1,vetor.getY()+1)==null||table.getBlock(vetor.getX()+1,  
-                vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()+1, vetor.getY()+1));
-        }
-         if(table.getBlock(vetor.getX()-1,vetor.getY()-1)==null||table.getBlock(vetor.getX()-1,  
-                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()-1, vetor.getY()-1));
-        }
-          if(table.getBlock(vetor.getX()+1,vetor.getY()-1)==null||table.getBlock(vetor.getX()+1,  
-                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()+1, vetor.getY()-1));
-        }
-           if(table.getBlock(vetor.getX()-1,vetor.getY()+1)==null||table.getBlock(vetor.getX()-1,  
-                vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()-1, vetor.getY()+1));
-        }
         return vector;
     }
+    
 }
