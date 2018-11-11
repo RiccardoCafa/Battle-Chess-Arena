@@ -5,15 +5,17 @@ import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Piece;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.PlayerPiece;
 import javafx.scene.image.Image;
 
 public class Peon extends Piece {
     //atributos>>
     ItypePeon tpPeon;
     //construtor>>
-    public Peon(ItypePeon tpPeon, TypeHero tpHero, int x, int y, Image image) {
-        super(TypePiece.peon, tpHero, 8, 1, x, y, image);
-        this.tpPeon = tpPeon;
+    public Peon( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
+        super(pPiece, tpHero, hp, damage, x, y, image);
+        tpPiece = TypePiece.peon;
+        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
     //metodos>>
     @Override
