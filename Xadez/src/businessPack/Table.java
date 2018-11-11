@@ -42,7 +42,7 @@ public class Table{
      * 
      * @return the 'x' width of the table.
      */
-    public int getM(){
+    public static int getM(){
         return m;
     }
     
@@ -50,7 +50,7 @@ public class Table{
      *
      * @return the 'y' height of the table.
      */
-    public int getN(){
+    public static int getN(){
         return m;
     }
     
