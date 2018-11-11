@@ -1,5 +1,6 @@
 package businessPack.Pieces;
 
+import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Piece;
 import businessPack.Table;
@@ -18,6 +19,7 @@ public class Tower extends Piece {
     @Override
     public void checkMove(Table table) {
         freeWay.clear();
+        table.clearTrend();
         freeWay = tpTower.IcheckMove(table, vetor);
         updateHitWay(table);
     }

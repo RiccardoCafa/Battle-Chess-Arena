@@ -1,16 +1,20 @@
-package businessPack.Pieces.Default;
+
+package businessPack.Pieces.EnemyLenin;
 
 import businessPack.Block;
 import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
+public class EnemyPeonLenin implements ItypePeon{
 
-public class DefaultPeon implements ItypePeon {
-    //metodos>>
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-        //implementação da movimentação padrão do peão
-        return null;
+        ArrayList<Block> vector;
+        vector = new ArrayList<>();
+        vector.clear();
+        vector.add(null);
+        return vector;
     }
+    
 }

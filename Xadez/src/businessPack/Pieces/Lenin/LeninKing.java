@@ -1,20 +1,20 @@
-package businessPack.Pieces.Default;
+package businessPack.Pieces.Lenin;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Table;
+import businessPack.Pieces.Interfaces.ItypeKing;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class DefaultQueen implements ItypeQueen {
-    //metodos>>
+
+public class LeninKing implements ItypeKing {
+
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         ArrayList<Block> vector;
         vector = new ArrayList<>();
         vector.clear();
-        //linhas retas
-        for(int i = vetor.getX()+1;i<table.getM();i++){
+        for(int i = vetor.getX()+1;i<vetor.getX()+2;i++){
             if(table.getBlock(i, vetor.getY())==null){
                 vector.add(table.getBlock(i, vetor.getY()));
             }else{
@@ -26,7 +26,7 @@ public class DefaultQueen implements ItypeQueen {
                 break;
             }
         }
-        for(int i = vetor.getX()-1;i<table.getM();i--){
+        for(int i = vetor.getX()-1;i<vetor.getX()-2;i--){
             if(table.getBlock(i, vetor.getY())==null){
                 vector.add(table.getBlock(i, vetor.getY()));
             }else{
@@ -38,7 +38,7 @@ public class DefaultQueen implements ItypeQueen {
                 break;
             }
         }
-        for(int j = vetor.getY()+1;j<table.getN();j++){
+        for(int j = vetor.getY()+1;j<vetor.getY()+2;j++){
             if(table.getBlock(vetor.getX(), j)==null){
                 vector.add(table.getBlock(vetor.getX(), j));
             }else{
@@ -50,7 +50,7 @@ public class DefaultQueen implements ItypeQueen {
             break;
             }
         }
-        for(int j = vetor.getY()-1;j<table.getN();j--){
+        for(int j = vetor.getY()-1;j<vetor.getY()-2;j--){
             if(table.getBlock(vetor.getX(), j)==null){
                 vector.add(table.getBlock(vetor.getX(), j));
             }else{
@@ -64,7 +64,7 @@ public class DefaultQueen implements ItypeQueen {
         }
         // diagonais
         //diagonal para cima e para a esquerda
-        for(int i = vetor.getX()-1, j = vetor.getY()-1;i<table.getM();i--,j--){
+        for(int i = vetor.getX()-1, j = vetor.getY()-1;i<vetor.getX()+2;i--,j--){
             if(table.getBlock(i, j)== null){
                 vector.add(table.getBlock(i, j));
             }else{
@@ -77,7 +77,7 @@ public class DefaultQueen implements ItypeQueen {
             }
         }
         //diagonal para cima e para a direita
-        for(int i = vetor.getX()+1, j = vetor.getY()-1;i<table.getM();i++,j--){
+        for(int i = vetor.getX()+1, j = vetor.getY()-1;i<vetor.getX()+2;i++,j--){
             if(table.getBlock(i, j)== null){
                 vector.add(table.getBlock(i, j));
             }else{
@@ -91,7 +91,7 @@ public class DefaultQueen implements ItypeQueen {
         } 
 
         //diagonal para baixo e para a esquerda
-        for(int i = vetor.getX()-1, j = vetor.getY()+1;i<table.getM();i--,j++){
+        for(int i = vetor.getX()-1, j = vetor.getY()+1;i<vetor.getX()-2;i--,j++){
             if(table.getBlock(i, j)== null){
                 vector.add(table.getBlock(i, j));
             }else{
@@ -104,7 +104,7 @@ public class DefaultQueen implements ItypeQueen {
             }
         }
         //diagonal para baixo e para a direita
-        for(int i = vetor.getX()+1, j = vetor.getY()+1;i<table.getM();i++,j++){
+        for(int i = vetor.getX()+1, j = vetor.getY()+1;i<vetor.getX()-2;i++,j++){
             if(table.getBlock(i, j)== null){
                 vector.add(table.getBlock(i, j));
             }else{
@@ -118,4 +118,5 @@ public class DefaultQueen implements ItypeQueen {
         }
         return vector;
     }
+    
 }

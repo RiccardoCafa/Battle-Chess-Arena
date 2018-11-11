@@ -1,5 +1,6 @@
 package businessPack.Pieces;
 
+import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeHorse;
 import businessPack.Piece;
 import businessPack.Table;
@@ -18,6 +19,7 @@ public class Horse extends Piece {
     @Override
     public void checkMove(Table table) {
         freeWay.clear();
+        table.clearTrend();
         freeWay = tpHorse.IcheckMove(table, vetor);
         updateHitWay(table);
     }
