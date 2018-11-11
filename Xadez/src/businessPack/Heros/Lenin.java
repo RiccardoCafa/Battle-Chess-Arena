@@ -33,7 +33,7 @@ public class Lenin extends Hero {
     @Override
     public void createArmy(Army army, int sentido){
         for(int k = 0;k<8;k++){
-            army.addPiece(new Peon(new DefaultPeon(), TypeHero.lenin, k, (int)(3.5 + sentido*2.5), LeninPeonImage)); //peões
+            army.addPiece(new Peon(new DefaultPeon(), TypeHero.lenin, k, (int)(3.5 + sentido*2.5), LeninPeonImage));
         }
         army.addPiece(new Tower(new LeninTower(), TypeHero.lenin, 0, (int)(3.5 + sentido*2.5), leninTowerImage));
         army.addPiece(new Horse(new DefaultHorse(), TypeHero.lenin, 1, (int)(3.5 + sentido*2.5), LeninQueenImage));
