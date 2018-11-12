@@ -18,6 +18,7 @@ public class Player {
         this.jogador = jogador;
         this.playingTurn = playingTurn;
         hero.createArmy(army, sentido,jogador);
+        //hero.createArmy(army, sentido);
         this.sentido = sentido;
     }
     //metodos>>

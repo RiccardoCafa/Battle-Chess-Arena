@@ -25,10 +25,15 @@ public class MainTeste {
         Wizard wizard = new Wizard(null);
         //Criando o tabuleiro
         Table table = new Table(8, 8, p1, p2);
-        Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 3, 4, null, new LapaTower(p1));
-        table.getTable()[3][4] = new Block(t, 3, 4);
-        Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 5, 5, 3, 7, null);
-        table.getTable()[3][2] = new Block(b, 3, 8);
+        System.out.println("as");
+        Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 2, 3, null, new LapaTower(p1));
+        table.getTable()[2][3] = new Block(t, 2, 3);
+        Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 5, 5, 2, 1, null);
+        table.getTable()[2][1] = new Block(b, 2, 1);
+        Bishop b2 = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 5, 5, 6, 3, null);
+        table.getTable()[6][3] = new Block(b2, 6, 3);
+        Bishop b1 = new Bishop(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 0, 3, null);
+        table.getTable()[0][3] = new Block(b1, 0, 3);
         t.checkMove(table);
         
     }

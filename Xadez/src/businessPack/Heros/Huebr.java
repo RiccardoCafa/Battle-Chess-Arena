@@ -12,10 +12,12 @@ public class Huebr extends Hero {
         super(image);
     }
     //metodos>>
+    
+    ///HU3HU3HU3HU3 BRBRBRB
+
     @Override
     public void createArmy(Army army, int sentido,PlayerPiece jogador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
-    ///HU3HU3HU3HU3 BRBRBRB
     
 }
