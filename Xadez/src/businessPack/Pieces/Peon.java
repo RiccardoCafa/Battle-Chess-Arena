@@ -3,6 +3,7 @@ package businessPack.Pieces;
 import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Piece;
+import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.PlayerPiece;
