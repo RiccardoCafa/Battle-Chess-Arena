@@ -38,17 +38,17 @@ public class LapaTower implements ItypeTower {
         int i = vetor.getX() + xDirection;
         int j = vetor.getY() + yDirection;
         newVetor = new Vetor(i, j);
-        int xMax = xDirection == 1 ? table.getM() - 1 : 0;
-        int yMax = yDirection == 1 ? table.getN() - 1 : 0;
+        int xMax = xDirection == 1 ? Table.getM() - 1 : 0;
+        int yMax = yDirection == 1 ? Table.getN() - 1 : 0;
         //System.out.println(table.getM() + " " + table.getN());
         if(xDirection == 0) {
             // MAXIMIUM PEGANDO TAMANHO DO TABULEIRO, CORRIGIR
-            if((yMax == 0 && j < yMax) || (yMax == table.getN()-1 && j >= yMax)) {
+            if((yMax == 0 && j < yMax) || (yMax == Table.getN()-1 && j >= yMax)) {
                 System.out.println("Última posiçao encontrada em: " + vetor.getX() + " " + vetor.getY());
                 return vetor;
             }
         } else if(yDirection == 0) {
-            if((xMax == 0 && i < xMax) || (xMax == table.getM()-1 && i >= xMax)) {
+            if((xMax == 0 && i < xMax) || (xMax == Table.getM()-1 && i >= xMax)) {
                 System.out.println("Última posiçao encontrada em: " + vetor.getX() + " " + vetor.getY());
                 return vetor;
             }
