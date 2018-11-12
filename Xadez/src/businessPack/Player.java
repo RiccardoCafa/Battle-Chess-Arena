@@ -13,7 +13,7 @@ public class Player {
     public Player(int sentido, Hero hero, int playingTurn) {
         this.hero = hero;
         this.playingTurn = playingTurn;
-        hero.createArmy(army, sentido);
+        //hero.createArmy(army, sentido);
         this.sentido = sentido;
     }
     //metodos>>
