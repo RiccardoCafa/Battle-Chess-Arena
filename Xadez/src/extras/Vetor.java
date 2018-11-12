@@ -62,7 +62,7 @@ public class Vetor {
         return x;
     }
     public void setX(int x) {
-        if(x >= 0 && x <= Table.getM()){
+       if(x >= 0 && x <= Table.getM()){
             this.x = x;
         }
     }
