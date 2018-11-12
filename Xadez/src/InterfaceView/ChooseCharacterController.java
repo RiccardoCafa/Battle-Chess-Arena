@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Player;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ public class ChooseCharacterController implements Initializable {
     int count = 0;
     Image[] perso = new Image[5];
     String[] heroNames = new String[5];
-    
+    Player p1,p2;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO
@@ -72,7 +73,6 @@ public class ChooseCharacterController implements Initializable {
     }
     @FXML
     public void onClickButton(MouseEvent event){
-        
-    }
-    
+       
+       }
 }
