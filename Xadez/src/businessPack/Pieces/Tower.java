@@ -26,6 +26,8 @@ public class Tower extends Piece {
         tpTower = typeTower;
         defaultTower = tpTower;
     }
+
+
     //metodos>>
     @Override
     public void checkMove(Table table) {

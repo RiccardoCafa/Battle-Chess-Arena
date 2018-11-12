@@ -1,19 +1,23 @@
 package businessPack;
 
+import extras.PlayerPiece;
+
 /**
  * @author patri
  */
 public class Player {
     //atributos>>
+    private PlayerPiece jogador;
     private Army army;
     private Hero hero;
     private int playingTurn;
     private int sentido;//se começa embaixo, -1; se começa em cima, 1
     //construtor>>
-    public Player(int sentido, Hero hero, int playingTurn) {
+    public Player(int sentido, Hero hero, int playingTurn,PlayerPiece jogador) {
         this.hero = hero;
+        this.jogador = jogador;
         this.playingTurn = playingTurn;
-        hero.createArmy(army, sentido);
+        hero.createArmy(army, sentido,jogador);
         this.sentido = sentido;
     }
     //metodos>>

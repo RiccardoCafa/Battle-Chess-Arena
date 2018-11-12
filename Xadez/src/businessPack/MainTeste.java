@@ -8,6 +8,8 @@ import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Tower;
 import extras.PlayerPiece;
+import static extras.PlayerPiece.Player1;
+import static extras.PlayerPiece.Player2;
 import javafx.scene.image.Image;
 
 public class MainTeste {
@@ -16,8 +18,8 @@ public class MainTeste {
         Image sheriffImage = null;
         Image leninImage = null;
         //Criando os players
-        Player p1 = new Player(1, new Sheriff(sheriffImage), 1);
-        Player p2 = new Player(-1, new Lenin(leninImage), 2);
+        Player p1 = new Player(1, new Sheriff(sheriffImage), 1,Player1);
+        Player p2 = new Player(-1, new Lenin(leninImage), 2,Player2);
         //Cirando os personagens dos players
         Lapa lapa = new Lapa(null);
         Wizard wizard = new Wizard(null);
