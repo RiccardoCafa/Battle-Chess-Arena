@@ -22,7 +22,7 @@ public class DefaultHorse implements ItypeHorse {
         ArrayList<Block> freeWay = new ArrayList<>();
         int sinalX = -1, sinalY = -1, valorX = 1, valorY = 2;
         for(int i = 1; i <= 8; i++){
-            freeWay.add(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)));
+            freeWay.add(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)));//adiciona todas as posições
             if(i%4 == 0){ sinalX *= -1; }//***************calculos
             if((i - 1)%2 == 0){ sinalY *= -1; }
             if(i%2 == 0){
@@ -59,6 +59,10 @@ public class DefaultHorse implements ItypeHorse {
                 }//*******************************************
             }
         }catch(NullPointerException e){ }
+        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);//setas de volta a origem
+        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
+        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
+        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
         for(Block block : freeWay){
             if(block.getBlockState(player) == BlockState.Friend){
                 freeWay.remove(block);//remove os blocos amigos

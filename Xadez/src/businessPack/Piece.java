@@ -9,7 +9,7 @@ public abstract class Piece {
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
-    protected Who player;
+    protected Player player;
     protected Image image;
     protected int hp;
     protected boolean alive;
@@ -18,7 +18,7 @@ public abstract class Piece {
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     //construtor>>
-    protected Piece(Who player, TypeHero tpHero, int x, int y){
+    protected Piece(Player player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
         this.player = player;
         alive = true;
@@ -72,7 +72,7 @@ public abstract class Piece {
         return tpHero;
     }
     public Who getPlayer() {
-        return player;
+        return player.getWho();
     }
     public ArrayList<Block> getFreeWay() {
         return freeWay;

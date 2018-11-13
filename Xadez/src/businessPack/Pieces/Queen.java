@@ -3,15 +3,15 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultQueen;
+import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.Who;
 
 public class Queen extends Piece {
     //atributos>>
     ItypeQueen tpQueen;
     //construtor>>
-    public Queen(Who pPiece, TypeHero tpHero, int x, int y) {
+    public Queen(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 8;
         damage = 1;

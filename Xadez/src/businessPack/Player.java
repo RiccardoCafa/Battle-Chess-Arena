@@ -34,8 +34,10 @@ public class Player {
     public Army getArmy() {
         return army;
     }
-    
     public int getPlayingTurn() {
         return playingTurn;
+    }
+    public Who getWho(){
+        return player;
     }
 }

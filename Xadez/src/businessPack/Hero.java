@@ -1,6 +1,5 @@
 package businessPack;
 
-import extras.Who;
 import javafx.scene.image.Image;
 
 public abstract class Hero {
@@ -13,7 +12,7 @@ public abstract class Hero {
         
     }
     //metodos>>
-    public abstract void createArmy(Army army, int sentido, Who player);
+    public abstract void createArmy(Army army, int sentido, Player player);
     //getset>>
     public Image getImage(){
         return image;

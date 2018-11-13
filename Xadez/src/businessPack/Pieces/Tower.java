@@ -1,25 +1,24 @@
 package businessPack.Pieces;
 
-import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultTower;
+import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.Who;
 import javafx.scene.image.Image;
 
 public class Tower extends Piece {
     //atributos>>
     private ItypeTower tpTower;
     //construtor>>
-    public Tower(Who pPiece, TypeHero tpHero, int x, int y) {
+    public Tower(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 10;
         damage = 1;
         tpTower = new DefaultTower();
     }
-    public Tower(Who pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
+    public Tower(Player pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
         super(pPiece, tpHero, x, y);
         hp = 10;
         damage = 1;
