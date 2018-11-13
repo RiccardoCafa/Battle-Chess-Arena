@@ -90,6 +90,12 @@ public class Vetor {
             default: return new Vetor( 0,  0);
         }
     }
+    public Vetor useTrend(Compass trend){
+        int xAux = x, yAux = y;
+        xAux += getVersor(trend).getX();
+        yAux += getVersor(trend).getY();
+        return new Vetor(xAux, yAux);
+    }
     public void setTrend(Compass trend){
         this.trend = trend;
     }

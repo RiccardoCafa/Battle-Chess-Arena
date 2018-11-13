@@ -5,6 +5,7 @@
  */
 package businessPack.Pieces.Huebr;
 
+import businessPack.Block;
 import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Table;
 import extras.Vetor;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class huebrPeon implements ItypePeon {
 
     @Override
-         public ArrayList<Vetor> IcheckMove(Table table) {
+    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         //implementação do peão especial do Huebr
         return null;
     }

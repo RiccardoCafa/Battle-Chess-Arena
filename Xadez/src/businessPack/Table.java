@@ -65,7 +65,6 @@ public class Table{
             return null;
         }
     }
-    
     public Block getBlock(Vetor vetor){
         if(vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n){
             return table[vetor.getX()][vetor.getY()];
