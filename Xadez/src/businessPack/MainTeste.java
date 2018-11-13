@@ -25,13 +25,13 @@ public class MainTeste {
         Table table = new Table(8, 8, p1, p2);
         
         Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 2, 3, new LapaTower(p1));
-        table.getTable()[2][3] = new Block(t, 2, 3);
+        //table.getTable()[2][3] = new Block(t, 2, 3);
         Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 2, 1);
-        table.getTable()[2][1] = new Block(b, 2, 1);
+        //table.getTable()[2][1] = new Block(b, 2, 1);
         Bishop b2 = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 6, 3);
-        table.getTable()[6][3] = new Block(b2, 6, 3);
+        //table.getTable()[6][3] = new Block(b2, 6, 3);
         Bishop b1 = new Bishop(PlayerPiece.Player1, TypeHero.lapa, 0, 3);
-        table.getTable()[0][3] = new Block(b1, 0, 3);
+        //table.getTable()[0][3] = new Block(b1, 0, 3);
         t.checkMove(table);
         
     }

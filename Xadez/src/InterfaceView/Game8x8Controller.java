@@ -53,9 +53,9 @@ public class Game8x8Controller implements Initializable {
         player1 = new Player(1, new Sheriff(null), 2);
         tab = new Table(8, 8, player1, player2);
         Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 2, 3, new LapaTower(player1));
-        tab.getTable()[2][3] = new Block(t, 2, 3);
+        tab.getTable()[2][3].setPiece(t);
         MountArmyOnTable(tab);
-        MoveImage(new Vetor(2, 3), new Vetor(5, 4));
+        //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }    
     
     public void MountArmyOnTable(Table tab) {
@@ -72,10 +72,48 @@ public class Game8x8Controller implements Initializable {
                 if(!tab.getBlock(i, j).isEmpty()) {
                     pieceImage = tab.getBlock(i, j).getPiece().getImage();
                 }
-                gridPane.add(makeBloco(white, pieceImage), i, j);  
+                gridPane.add(makeBloco(i, j, pieceImage), i, j);  
                 pieceImage = null;
             }
         }
+    }
+    
+    public Pane makeBloco(int i, int j, Image pieceImg) {
+        Pane bloco = new Pane();
+        ImageView g;
+        g = tab.getBlock(i, j);
+        g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            Block myBlock = (Block) e.getSource();
+            if(!movingPiece) {
+                if(!myBlock.isEmpty()) {
+                    selectedVector = new Vetor(myBlock.getVetor());
+                    movingPiece = true;
+                    myBlock.colorChange(0);
+                    System.out.println("Selected Piece");
+                } else {
+                    System.out.println("Nothing here");
+                }
+            } else {
+                if(myBlock.isEmpty()) {
+                    Vetor novaPos = new Vetor(myBlock.getVetor());
+                    MoveImage(selectedVector, novaPos);
+                    tab.MovePiece(selectedVector, novaPos);
+                    tab.getBlock(selectedVector).colorDefault();
+                    movingPiece = false;
+                    System.out.println("Moved Piece");
+                }
+            }
+        });
+        //g = white == true ? new ImageView(whiteBlock) : new ImageView(blackBlock);
+        bloco.getChildren().add(g);
+        if(pieceImg != null) {
+            ImageView p1 = new ImageView(pieceImg);
+            p1.setLayoutX(2.5);
+            p1.setLayoutY(-75);
+            bloco.getChildren().add(p1);
+        }
+         
+        return bloco;
     }
     
     public void MoveImage(Vetor source, Vetor dest) {
@@ -98,21 +136,6 @@ public class Game8x8Controller implements Initializable {
         Node tempPane = myPane.getChildren().get(1);
         myPane.getChildren().remove(1);
         destPane.getChildren().add(1, tempPane);
-    }
-    
-    public Pane makeBloco(boolean white, Image pieceImg) {
-        Pane bloco = new Pane();
-        ImageView g;
-        g = white == true ? new ImageView(whiteBlock) : new ImageView(blackBlock);
-        bloco.getChildren().add(g);
-        if(pieceImg != null) {
-            ImageView p1 = new ImageView(pieceImg);
-            p1.setLayoutX(2.5);
-            p1.setLayoutY(-75);
-            bloco.getChildren().add(p1);
-        }
-         
-        return bloco;
     }
     
     public void OnBlockSelected() {

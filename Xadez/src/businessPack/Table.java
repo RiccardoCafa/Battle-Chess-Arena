@@ -17,7 +17,12 @@ public class Table{
         table = new Block[m][n];//m = quantidade de linhas (relaciona-se com i); n = quantidade de colunas (relaciona-se com j)
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                table[i][j] = new Block(null, i, j);
+                //Piece piece, int x, int y, int color
+                if((i%2==0 && j%2==0) || (j%2!=0 && i%2!=0)) {
+                    table[i][j] = new Block(null, i, j, 0);
+                } else {
+                    table[i][j] = new Block(null, i, j, 1);
+                }
             }
         }
         /*for(int i = 0; i < m; i++){
@@ -71,9 +76,9 @@ public class Table{
     }
     
     public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
-        Block tempB = table[piecePos.getX()][piecePos.getY()];
-        table[piecePos.getX()][piecePos.getY()] = null;
-        table[pieceDestination.getX()][pieceDestination.getY()] = tempB;
+        Piece tempB = table[piecePos.getX()][piecePos.getY()].getPiece();
+        table[piecePos.getX()][piecePos.getY()].setPiece(null);
+        table[pieceDestination.getX()][pieceDestination.getY()].setPiece(tempB);
     }
     
     public void AttackManaging() {

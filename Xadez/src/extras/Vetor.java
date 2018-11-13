@@ -19,6 +19,16 @@ public class Vetor {
         this.y = y;
         trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
+    
+    /**
+     *
+     * @param vetor
+     */
+    public Vetor(Vetor vetor) {
+        this.x = vetor.getX();
+        this.y = vetor.getY();
+        trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+    }
 
     /**
      * Trend é um Enum Compass.
