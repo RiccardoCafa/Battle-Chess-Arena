@@ -4,17 +4,19 @@ import extras.PlayerPiece;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import extras.Vetor;
+import javafx.scene.image.ImageView;
 
-public abstract class Piece {
+public abstract class Piece extends ImageView {
 
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
     protected PlayerPiece player;
-    protected Image image;
+    //protected Image image;
     protected int hp;
-    protected boolean alive;
     protected int damage = 1;
+    protected boolean alive;
+    protected boolean empty;
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
@@ -31,6 +33,9 @@ public abstract class Piece {
         alive = true;
         this.vetor = vetor;
     }
+    protected Piece(){
+        empty = true;
+    }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
     
@@ -42,6 +47,7 @@ public abstract class Piece {
             }
         }
     }
+    
     //getset>>
     public TypePiece getPiece(){
         return tpPiece;
@@ -78,17 +84,8 @@ public abstract class Piece {
     public ArrayList<Block> getFreeWay() {
         return freeWay;
     }
-     /**
-     * @return the image
-     */
-    public Image getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(Image image) {
-        this.image = image;
+    public void ResetPiece() {
+        setImage(null);
+        
     }
 }
