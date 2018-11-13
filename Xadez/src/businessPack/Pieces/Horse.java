@@ -13,7 +13,7 @@ public class Horse extends Piece {
     ItypeHorse tpHorse;
     //construtor>>
     public Horse( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
+        super(pPiece, tpHero, x, y);
         tpPiece = TypePiece.horse;
         //tpPiece = TypePiece.bishop; // Isso não faz sentido nenhum... (Ricc) 
     }
