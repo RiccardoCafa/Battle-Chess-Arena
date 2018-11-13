@@ -2,7 +2,8 @@ package businessPack.Heros;
 
 import businessPack.Army;
 import businessPack.Hero;
-import extras.PlayerPiece;
+import businessPack.Player;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Lapa extends Hero {
@@ -12,7 +13,7 @@ public class Lapa extends Hero {
     }
 
     @Override
-    public void createArmy(Army army, int sentido,PlayerPiece jogador) {
+    public void createArmy(Army army, int sentido, Player jogador) {
         
     }
 

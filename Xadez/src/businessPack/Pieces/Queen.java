@@ -1,21 +1,21 @@
 package businessPack.Pieces;
 
-import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Piece;
+import businessPack.Pieces.Default.DefaultQueen;
+import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
-import javafx.scene.image.Image;
 
 public class Queen extends Piece {
     //atributos>>
     ItypeQueen tpQueen;
     //construtor>>
-    public Queen( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
+    public Queen(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
-        tpPiece = TypePiece.queen;
-        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
+        hp = 8;
+        damage = 1;
+        tpQueen = new DefaultQueen();
     }
     //metodos>>
     @Override

@@ -1,21 +1,27 @@
 package businessPack.Pieces;
 
-import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeHorse;
 import businessPack.Piece;
+import businessPack.Pieces.Default.DefaultHorse;
+import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
-import javafx.scene.image.Image;
 
 public class Horse extends Piece {
     //atributos>>
     ItypeHorse tpHorse;
     //construtor>>
-    public Horse( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, x, y);
-        tpPiece = TypePiece.horse;
-        //tpPiece = TypePiece.bishop; // Isso não faz sentido nenhum... (Ricc) 
+    public Horse(Player player, TypeHero tpHero, int x, int y) {
+        super(player, tpHero, x, y);
+        hp = 6;
+        damage = 1;
+        tpHorse = new DefaultHorse(player);
+    }
+    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
+        super(player, tpHero, x, y);
+        hp = 6;
+        damage = 1;
+        this.tpHorse = tpHorse;
     }
     //metodos>>
     @Override

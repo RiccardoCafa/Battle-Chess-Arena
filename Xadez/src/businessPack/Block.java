@@ -1,7 +1,7 @@
 
 package businessPack;
 import extras.BlockState;
-import extras.PlayerPiece;
+import extras.Who;
 import javafx.scene.image.Image;
 import extras.Vetor;
 import javafx.event.EventHandler;
@@ -44,9 +44,9 @@ public class Block extends ImageView {
     public BlockState getBlockState(Player playerLooking) {
         if(piece != null) {
             if(playerLooking.getPlayingTurn() == 1) {
-                return piece.getPlayer() == PlayerPiece.Player1 ? BlockState.Friend : BlockState.Enemy;
+                return piece.getPlayer() == Who.player1 ? BlockState.Friend : BlockState.Enemy;
             } else {
-                return piece.getPlayer() == PlayerPiece.Player2 ? BlockState.Enemy : BlockState.Friend;
+                return piece.getPlayer() == Who.player2 ? BlockState.Enemy : BlockState.Friend;
             }
         }
         return BlockState.Empty;

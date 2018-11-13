@@ -1,18 +1,17 @@
 package businessPack;
 
-import extras.PlayerPiece;
+import extras.Who;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
 import extras.Vetor;
 import javafx.scene.image.ImageView;
 
 public abstract class Piece extends ImageView {
-
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
-    protected PlayerPiece player;
-    //protected Image image;
+    protected Player player;
+    protected Image image;
     protected int hp;
     protected int damage = 1;
     protected boolean alive;
@@ -21,9 +20,9 @@ public abstract class Piece extends ImageView {
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     //construtor>>
-    protected Piece(PlayerPiece pPiece, TypeHero tpHero, int x, int y){
+    protected Piece(Player player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
-        this.player = pPiece;
+        this.player = player;
         alive = true;
         vetor = new Vetor(x, y);
     }
@@ -78,8 +77,8 @@ public abstract class Piece extends ImageView {
     public TypeHero getTpHero(){
         return tpHero;
     }
-    public PlayerPiece getPlayer() {
-        return player;
+    public Who getPlayer() {
+        return player.getWho();
     }
     public ArrayList<Block> getFreeWay() {
         return freeWay;
