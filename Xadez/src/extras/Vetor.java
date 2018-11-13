@@ -77,6 +77,19 @@ public class Vetor {
     public Compass getTrend(){
         return trend;
     }
+    public Vetor getVersor(Compass trend){
+        switch(trend){
+            case  N: return new Vetor( 0, -1);
+            case NE: return new Vetor( 1, -1);
+            case  E: return new Vetor( 1,  0);
+            case SE: return new Vetor( 1,  1);
+            case  S: return new Vetor( 0,  1);
+            case SW: return new Vetor(-1,  1);
+            case  W: return new Vetor( 1,  0);
+            case NW: return new Vetor(-1, -1);
+            default: return new Vetor( 0,  0);
+        }
+    }
     public void setTrend(Compass trend){
         this.trend = trend;
     }
