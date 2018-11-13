@@ -7,16 +7,22 @@ import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.PlayerPiece;
-import javafx.scene.image.Image;
 
 public class Peon extends Piece {
     //atributos>>
     ItypePeon tpPeon;
     //construtor>>
-    public Peon( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
-        tpPiece = TypePiece.peon;
-        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
+    public Peon(PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
+        super(pPiece, tpHero, x, y);
+        hp = 2;
+        damage = 1;
+        tpPeon = new DefaultPeon();
+    }
+    public Peon(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
+        super(pPiece, tpHero, x, y);
+        hp = 2;
+        damage = 1;
+        this.tpPeon = tpPeon;
     }
     //metodos>>
     @Override

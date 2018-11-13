@@ -11,19 +11,18 @@ import extras.PlayerPiece;
 public class Tower extends Piece {
     //atributos>>
     private ItypeTower tpTower;
-    private ItypeTower defaultTower;
     //construtor>>
     public Tower(PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
-        tpPiece = TypePiece.tower;
+        hp = 10;
+        damage = 1;
         tpTower = new DefaultTower();
-        defaultTower = tpTower;
     }
-    public Tower(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypeTower typeTower) {
+    public Tower(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
         super(pPiece, tpHero, x, y);
-        tpPiece = TypePiece.tower;
-        tpTower = typeTower;
-        defaultTower = tpTower;
+        hp = 10;
+        damage = 1;
+        this.tpTower = tpTower;
     }
     //metodos>>
     @Override
@@ -36,8 +35,5 @@ public class Tower extends Piece {
     //getset>>
     public void setTypeTower(ItypeTower tpTower){//muda o comportamento do checkMove()
         this.tpTower = tpTower;
-    }
-    public void setDefaultType() {
-        this.tpTower = defaultTower;
     }
 }
