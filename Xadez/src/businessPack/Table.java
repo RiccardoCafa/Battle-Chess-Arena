@@ -69,4 +69,14 @@ public class Table{
             return null;
         }
     }
+    
+    public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
+        Block tempB = table[piecePos.getX()][piecePos.getY()];
+        table[piecePos.getX()][piecePos.getY()] = null;
+        table[pieceDestination.getX()][pieceDestination.getY()] = tempB;
+    }
+    
+    public void AttackManaging() {
+        
+    }
 }

@@ -13,6 +13,7 @@ import extras.Vetor;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -42,7 +43,9 @@ public class Game8x8Controller implements Initializable {
     
     Image whiteBlock = new Image("InterfaceView/imagens/blocoBranco.png", 62, 62, false, false );
     Image blackBlock = new Image("InterfaceView/imagens/blocoPreto.png", 62, 62, false, false );
-    Image rei = new Image("InterfaceView/imagens/lapaPieces/lapaKing.png", 57, 130, false, false);
+    Image greenBlock = new Image("InterfaceView/imagens/blocoVerde.png", 62, 62, false, false );
+    Image redBlock = new Image("InterfaceView/imagens/blocoVermelho.png", 62, 62, false, false );
+    //Image rei = new Image("InterfaceView/imagens/lapaPieces/lapaKing.png", 57, 130, false, false);
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,52 +55,49 @@ public class Game8x8Controller implements Initializable {
         Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 2, 3, new LapaTower(player1));
         tab.getTable()[2][3] = new Block(t, 2, 3);
         MountArmyOnTable(tab);
+        MoveImage(new Vetor(2, 3), new Vetor(5, 4));
     }    
     
     public void MountArmyOnTable(Table tab) {
-        //Node myNode = null;
-        //Node pieceNode = null;
         Image pieceImage = null;
         boolean white;
         
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if((i%2==0 && j%2==0) || (j%2!=0 && i%2!=0)) {
-                    //myNode = new ImageView(whiteBlock);
                     white = true;
                 }else{
-                    //myNode = new ImageView(blackBlock);
                     white = false;
                 }
                 if(!tab.getBlock(i, j).isEmpty()) {
                     pieceImage = tab.getBlock(i, j).getPiece().getImage();
-                    //pieceNode = new ImageView(pieceImage);
                 }
-                /*
-                myNode.setOnMouseReleased((MouseEvent e) -> {
-                    if(!movingPiece) {
-                        Node myBlock = (Node) e.getSource();
-                        if(myBlock != null)
-                            selectedVector = new Vetor(
-                                            GridPane.getColumnIndex(
-                                                    myBlock), 
-                                            GridPane.getRowIndex(myBlock));
-                        OnBlockSelected();
-                        //movingPiece = true;
-                    } else {
-                        //Checar se a peça que ele clicou é uma peça possível
-                        
-                    }
-                });*/
                 gridPane.add(makeBloco(white, pieceImage), i, j);  
-                //gridPane.add(myNode, i, j);
-                //if(pieceNode != null) bloco = new Group(pieceNode, myNode);
-                //else bloco = new Group(myNode);
-                //gridPane.add(myNode, i, j);
-                //pieceNode = null;
                 pieceImage = null;
             }
         }
+    }
+    
+    public void MoveImage(Vetor source, Vetor dest) {
+        ObservableList<Node> childrens = gridPane.getChildren();
+        Pane myPane= null;
+        Pane destPane = null;
+        for (Node p : childrens) {
+            if(myPane == null && GridPane.getRowIndex(p) == source.getY() && GridPane.getColumnIndex(p) == source.getX()) {
+                myPane = (Pane) p;
+            }
+            if(destPane == null && GridPane.getRowIndex(p) == dest.getY() && GridPane.getColumnIndex(p) == dest.getX()) {
+                destPane = (Pane) p;
+            }
+            if(destPane != null && myPane != null) {
+                break;
+            }
+        }
+        if(myPane == null || destPane == null) return;
+        
+        Node tempPane = myPane.getChildren().get(1);
+        myPane.getChildren().remove(1);
+        destPane.getChildren().add(1, tempPane);
     }
     
     public Pane makeBloco(boolean white, Image pieceImg) {
@@ -109,7 +109,6 @@ public class Game8x8Controller implements Initializable {
             ImageView p1 = new ImageView(pieceImg);
             p1.setLayoutX(2.5);
             p1.setLayoutY(-75);
-            System.out.println("Add image");
             bloco.getChildren().add(p1);
         }
          
