@@ -1,5 +1,6 @@
 package businessPack;
 
+import extras.PlayerPiece;
 import javafx.scene.image.Image;
 
 public abstract class Hero {
@@ -10,9 +11,9 @@ public abstract class Hero {
         this.image = image;
     }
     //metodos>>
-    public abstract void createArmy(Army army, int sentido);
+    public abstract void createArmy(Army army, int sentido,PlayerPiece jogador);
     //getset>>
-    public Image getMyFace(){
+    public Image getIMage(){
         return image;
     }
 }

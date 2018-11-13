@@ -70,5 +70,9 @@ public class ChooseCharacterController implements Initializable {
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
+    @FXML
+    public void onClickButton(MouseEvent event){
+        
+    }
     
 }
