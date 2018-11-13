@@ -1,23 +1,39 @@
 package extras;
 
+import businessPack.Table;
+
 public class Vetor {
     //atributos>>
     private int x;
     private int y;
-    private Compass trend;
+    private Compass trend;//fluxo do vetor, registrando de onde veio
     //construtor>>
+
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
-        trend = Compass.C;
+        trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
+
+    /**
+     * Trend é um Enum Compass.
+     * 
+     * @param x
+     * @param y
+     * @param trend
+     */
     public Vetor(int x, int y, Compass trend) {
         this.x = x;
         this.y = y;
         this.trend = trend;
     }
     //metodos>>
-    public static Vetor subtract(Vetor vetor1, Vetor vetor2) {
+    public static Vetor subtract(Vetor vetor1, Vetor vetor2) {//subtrai dois vetores
         return new Vetor(vetor1.getX() - vetor2.getX(),
                          vetor1.getY() - vetor2.getY());
     }
@@ -29,7 +45,7 @@ public class Vetor {
         return new Vetor(x1 - vetor2.getX(),
                          y1 - vetor2.getY());
     }
-    public static Vetor sum(Vetor vetor1, Vetor vetor2) {
+    public static Vetor sum(Vetor vetor1, Vetor vetor2) {//soma dois vetores
         return new Vetor(vetor1.getX() + vetor2.getX(),
                          vetor1.getY() + vetor2.getY());
     }
@@ -46,7 +62,7 @@ public class Vetor {
         return x;
     }
     public void setX(int x) {
-        if(x >= 0 && x <= 7){
+       if(x >= 0 && x <= Table.getM()){
             this.x = x;
         }
     }
@@ -54,7 +70,7 @@ public class Vetor {
         return y;
     }
     public void setY(int y) {
-        if(y >= 0 && y <= 7){
+        if(y >= 0 && y <= Table.getN()){
             this.y = y;
         }
     }

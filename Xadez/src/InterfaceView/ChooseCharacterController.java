@@ -72,6 +72,7 @@ public class ChooseCharacterController implements Initializable {
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
+
     public void onClickButton(MouseEvent e){
         switch(count){
             case 0:

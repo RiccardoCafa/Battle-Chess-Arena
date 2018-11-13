@@ -5,15 +5,17 @@ import businessPack.Pieces.Interfaces.ItypeKing;
 import businessPack.Piece;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.PlayerPiece;
 import javafx.scene.image.Image;
 
 public class King extends Piece {
     //atributos>>
     ItypeKing tpKing;
     //construtor>>
-    public King(ItypeKing tpKing, TypeHero tpHero, int x, int y, Image image) {
-        super(TypePiece.king, tpHero, 8, 1, x, y, image);
-        this.tpKing = tpKing;
+    public King( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
+        super(pPiece, tpHero, hp, damage, x, y, image);
+        tpPiece = TypePiece.King;
+        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
     //metodos>>
     @Override
