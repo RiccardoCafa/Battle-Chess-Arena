@@ -7,12 +7,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.ChooseCharacterController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
          <children>
-            <Button id="playerSelection" fx:id="characterSelection" layoutX="177.0" layoutY="133.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="336.0" prefWidth="446.0" style="-fx-border-style: none; -fx-padding: 5; -fx-border-width: 0; -fx-background-insets: 0;">
+            <Button id="playerSelection" fx:id="characterSelection" layoutX="177.0" layoutY="133.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#onClickButton" prefHeight="336.0" prefWidth="446.0" style="-fx-border-style: none; -fx-padding: 5; -fx-border-width: 0; -fx-background-insets: 0;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

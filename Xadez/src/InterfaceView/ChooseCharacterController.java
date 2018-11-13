@@ -20,11 +20,12 @@ public class ChooseCharacterController implements Initializable {
     Button characterSelection;
     @FXML
     Text heroName;
-    Image myImage;
-    ImageView myImageView;
-    int count = 0;
-    Image[] perso = new Image[5];
-    String[] heroNames = new String[5];
+    private Image myImage;
+    private ImageView myImageView;
+    private int count = 0;
+    private Image[] perso = new Image[5];
+    private String[] heroNames = new String[5];
+    private String name;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,5 +71,28 @@ public class ChooseCharacterController implements Initializable {
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
-    
+    @FXML
+    public void onClickButton(MouseEvent e){
+        switch(count){
+            case 0:
+                name = "Hue";
+                break;
+            case 1:
+                name = "Lapa";
+                break;
+            case 2:
+                name = "Czar";
+                break;
+            case 3:
+                name = "Mago";
+                break;
+            case 4:
+                name = "Pistoleiro";
+                break;
+        }
+        //funcao para pegar o player
+    }
+    public String getName(){
+        return name;
+    }
 }
