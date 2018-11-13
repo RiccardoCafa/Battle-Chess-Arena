@@ -7,21 +7,20 @@ import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.PlayerPiece;
-import javafx.scene.image.Image;
 
 public class Tower extends Piece {
     //atributos>>
     private ItypeTower tpTower;
     private ItypeTower defaultTower;
     //construtor>>
-    public Tower(PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
+    public Tower(PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
+        super(pPiece, tpHero, x, y);
         tpPiece = TypePiece.tower;
         tpTower = new DefaultTower();
         defaultTower = tpTower;
     }
-    public Tower(PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image, ItypeTower typeTower) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
+    public Tower(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypeTower typeTower) {
+        super(pPiece, tpHero, x, y);
         tpPiece = TypePiece.tower;
         tpTower = typeTower;
         defaultTower = tpTower;

@@ -1,10 +1,13 @@
 package InterfaceView;
 
+import businessPack.Table;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -15,7 +18,7 @@ public class InterfaceMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent rootLayout = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        Parent rootLayout = FXMLLoader.load(getClass().getResource("Game8x8.fxml"));
 /*
         this.primaryStage = primaryStage;
         FXMLLoader loader = new FXMLLoader();
@@ -30,5 +33,7 @@ public class InterfaceMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
+    
     
 }
