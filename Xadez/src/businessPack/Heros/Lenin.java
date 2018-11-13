@@ -9,7 +9,7 @@ import businessPack.Pieces.Tower;
 import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Lenin extends Hero {
@@ -26,7 +26,7 @@ public class Lenin extends Hero {
     }
     //metodos>>
     @Override
-    public void createArmy(Army army, int sentido,PlayerPiece jogador){
+    public void createArmy(Army army, int sentido,Who jogador){
         for(int k = 0;k<8;k++){
             //army.addPiece(new Peon(jogador, TypeHero.lenin, k, 10, 1, (int)(3.5 + sentido*2.5), LeninPeonImage));
         }

@@ -6,19 +6,19 @@ import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
+import extras.Who;
 
 public class Peon extends Piece {
     //atributos>>
     ItypePeon tpPeon;
     //construtor>>
-    public Peon(PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
+    public Peon(Who pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 2;
         damage = 1;
         tpPeon = new DefaultPeon();
     }
-    public Peon(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
+    public Peon(Who pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
         super(pPiece, tpHero, x, y);
         hp = 2;
         damage = 1;

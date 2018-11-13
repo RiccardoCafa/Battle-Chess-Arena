@@ -10,24 +10,19 @@ import businessPack.Pieces.Queen;
 import businessPack.Pieces.Sheriff.SheriffHorse;
 import businessPack.Pieces.Tower;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Sheriff extends Hero {
     //atributos>>
-    Image sheriffPeonImage;
-    Image sheriffBishopImage;
-    Image sheriffHorseImage;
-    Image sheriffTowerImage;
-    Image sheriffKingImage;
-    Image sheriffQueenImage;
     //construtor>>
     public Sheriff(Image image) {
         super(image);
+        tpHero = TypeHero.sheriff;
     }
     //metodos>>
     @Override
-    public void createArmy(Army army, int sentido,PlayerPiece jogador){
+    public void createArmy(Army army, int sentido,Who jogador){
         for(int i = 0; i < 8; i++) {
             army.addPiece(new Peon(jogador, TypeHero.sheriff, i, (int)(3.5 + sentido*2.5)));//peões
         }

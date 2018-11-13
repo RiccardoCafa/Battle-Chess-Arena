@@ -59,7 +59,11 @@ public class Table{
     }
     
     public Block getBlock(int x, int y){
-        return table[x][y];
+        if(0 <= x && x < m && 0 <= y && y < n){
+            return table[x][y];
+        }else{
+            return null;
+        }
     }
     
     public Block getBlock(Vetor vetor){

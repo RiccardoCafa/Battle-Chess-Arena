@@ -8,7 +8,7 @@ import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
+import extras.Who;
 import extras.Vetor;
 import java.net.URL;
 import java.util.List;
@@ -49,7 +49,7 @@ public class Game8x8Controller implements Initializable {
         player1 = new Player(1, new Lapa(null), 1);
         player1 = new Player(1, new Sheriff(null), 2);
         tab = new Table(8, 8, player1, player2);
-        Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 2, 3, new LapaTower(player1));
+        Tower t = new Tower(Who.player1, TypeHero.lapa, 2, 3, new LapaTower(player1));
         tab.getTable()[2][3] = new Block(t, 2, 3);
         MountArmyOnTable(tab);
     }    

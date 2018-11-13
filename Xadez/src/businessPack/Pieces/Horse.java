@@ -5,22 +5,22 @@ import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultHorse;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
+import extras.Who;
 
 public class Horse extends Piece {
     //atributos>>
     ItypeHorse tpHorse;
     //construtor>>
-    public Horse(PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Horse(Who player, TypeHero tpHero, int x, int y) {
+        super(player, tpHero, x, y);
         hp = 6;
-        damage = 1; 
+        damage = 1;
         tpHorse = new DefaultHorse();
     }
-    public Horse(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
-        super(pPiece, tpHero, x, y);
+    public Horse(Who player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
+        super(player, tpHero, x, y);
         hp = 6;
-        damage = 1; 
+        damage = 1;
         this.tpHorse = tpHorse;
     }
     //metodos>>
