@@ -12,6 +12,7 @@ public class Peon extends Piece {
     //atributos>>
     ItypePeon tpPeon;
     //construtor>>
+<<<<<<< HEAD
     public Peon(PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 2;
@@ -23,6 +24,12 @@ public class Peon extends Piece {
         hp = 2;
         damage = 1;
         this.tpPeon = tpPeon;
+=======
+    public Peon( PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
+        super(pPiece, tpHero, x, y);
+        tpPiece = TypePiece.peon;
+        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
+>>>>>>> master
     }
     //metodos>>
     @Override

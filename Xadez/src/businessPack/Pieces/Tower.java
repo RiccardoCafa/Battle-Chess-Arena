@@ -7,6 +7,7 @@ import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.PlayerPiece;
+import javafx.scene.image.Image;
 
 public class Tower extends Piece {
     //atributos>>
@@ -17,12 +18,25 @@ public class Tower extends Piece {
         hp = 10;
         damage = 1;
         tpTower = new DefaultTower();
+<<<<<<< HEAD
+=======
+        defaultTower = tpTower;
+        image = new Image("InterfaceView/imagens/lapaPieces/lapaTower.png", 58, 130, false, false);
+        
+>>>>>>> master
     }
     public Tower(PlayerPiece pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
         super(pPiece, tpHero, x, y);
+<<<<<<< HEAD
         hp = 10;
         damage = 1;
         this.tpTower = tpTower;
+=======
+        tpPiece = TypePiece.tower;
+        tpTower = typeTower;
+        defaultTower = tpTower;
+        image = new Image("InterfaceView/imagens/lapaPieces/lapaTower.png", 58, 130, false, false);
+>>>>>>> master
     }
     //metodos>>
     @Override

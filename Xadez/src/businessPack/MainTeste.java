@@ -23,7 +23,7 @@ public class MainTeste {
         Wizard wizard = new Wizard(null);
         //Criando o tabuleiro
         Table table = new Table(8, 8, p1, p2);
-        System.out.println("as");
+        
         Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 2, 3, new LapaTower(p1));
         table.getTable()[2][3] = new Block(t, 2, 3);
         Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 2, 1);
