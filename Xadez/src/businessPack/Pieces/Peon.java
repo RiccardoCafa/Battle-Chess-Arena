@@ -13,8 +13,8 @@ public class Peon extends Piece {
     //atributos>>
     ItypePeon tpPeon;
     //construtor>>
-    public Peon( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
+    public Peon( PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
+        super(pPiece, tpHero, x, y);
         tpPiece = TypePiece.peon;
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }

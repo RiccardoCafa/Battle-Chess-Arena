@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import extras.Vetor;
 
 public abstract class Piece {
+
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
@@ -76,5 +77,18 @@ public abstract class Piece {
     }
     public ArrayList<Block> getFreeWay() {
         return freeWay;
+    }
+     /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

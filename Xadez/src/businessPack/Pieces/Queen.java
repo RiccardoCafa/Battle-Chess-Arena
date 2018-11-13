@@ -13,7 +13,7 @@ public class Queen extends Piece {
     ItypeQueen tpQueen;
     //construtor>>
     public Queen( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
+        super(pPiece, tpHero, x, y);
         tpPiece = TypePiece.queen;
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
