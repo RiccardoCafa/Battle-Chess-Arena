@@ -3,6 +3,8 @@ package InterfaceView;
 import businessPack.Block;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Sheriff;
+import businessPack.Pieces.Bishop;
+import businessPack.Pieces.Horse;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
@@ -39,6 +41,7 @@ public class Game8x8Controller implements Initializable {
     
     Player player1;
     Player player2;
+    Player playing;
     
 //    Image whiteBlock = new Image("InterfaceView/imagens/blocoBranco.png", 62, 62, false, false );
 //    Image blackBlock = new Image("InterfaceView/imagens/blocoPreto.png", 62, 62, false, false );
@@ -49,11 +52,13 @@ public class Game8x8Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         player1 = new Player(1, new Lapa(null), 1);
-        player1 = new Player(1, new Sheriff(null), 2);
+        player2 = new Player(1, new Sheriff(null), 2);
+        playing = player1;
         tab = new Table(8, 8, player1, player2);
-
+        Bishop c = new Bishop(player1, TypeHero.lapa, 1, 4);
         Tower t = new Tower(player1, TypeHero.lapa, 2, 3, new LapaTower(player1));
         tab.getTable()[2][3].setPiece(t);
+        tab.getTable()[1][4].setPiece(c);
         MountArmyOnTable(tab);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }    
@@ -98,7 +103,7 @@ public class Game8x8Controller implements Initializable {
             if(!myBlock.isEmpty()) {
                 selectedVector = new Vetor(myBlock.getVetor());
                 movingPiece = true;
-                myBlock.colorChange(0);
+                //myBlock.colorChange(0, playing);
                 myBlock.getPiece().checkMove(tab);
                 possibleBlocks = myBlock.getPiece().getFreeWay();
                 showPossibleWays(possibleBlocks);
@@ -147,7 +152,7 @@ public class Game8x8Controller implements Initializable {
             return;
         }
         for(Block b : freeWay) {
-            b.colorChange(0);
+            b.colorChange(0, playing);
         }
     }
     
