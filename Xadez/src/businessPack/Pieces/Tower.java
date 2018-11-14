@@ -35,7 +35,7 @@ public class Tower extends Piece {
         updateHitWay(table);
     }
     public void updateImage() {
-        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Tower.png", 58, 130, false, false));  
+        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Tower.png", 58, 130, false, false));
     }
     //getset>>
     public void setTypeTower(ItypeTower tpTower){//muda o comportamento do checkMove()

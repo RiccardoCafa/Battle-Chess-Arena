@@ -35,7 +35,7 @@ public class Horse extends Piece {
         updateHitWay(table);
     }
     public void updateImage() {
-        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", 58, 130, false, false));  
+        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", 58, 130, false, false));
     }
     //getset>>
     public void setTypeHorse(ItypeHorse tpHorse){//muda o comportamento do checkMove()

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -55,8 +56,8 @@ public class Game8x8Controller implements Initializable {
         player2 = new Player(1, new Sheriff(null), 2);
         playing = player1;
         tab = new Table(8, 8, player1, player2);
-        Bishop c = new Bishop(player1, TypeHero.lapa, 1, 4);
-        Tower t = new Tower(player1, TypeHero.lapa, 2, 3, new LapaTower(player1));
+        Horse c = new Horse(player1, TypeHero.lenin, 1, 4);
+        Tower t = new Tower(player2, TypeHero.lapa, 2, 3, new LapaTower(player1));
         tab.getTable()[2][3].setPiece(t);
         tab.getTable()[1][4].setPiece(c);
         MountArmyOnTable(tab);
@@ -64,12 +65,12 @@ public class Game8x8Controller implements Initializable {
     }    
     
     public void MountArmyOnTable(Table tab) {
-        Image pieceImage = null;
+        ImageView pieceImage = null;
         
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if(!tab.getBlock(i, j).isEmpty()) {
-                    pieceImage = tab.getBlock(i, j).getPiece().getImage();
+                    pieceImage = tab.getBlock(i, j).getPiece();
                 }
                 gridPane.add(makeBloco(i, j, pieceImage), i, j);  
                 pieceImage = null;
@@ -77,21 +78,21 @@ public class Game8x8Controller implements Initializable {
         }
     }
     
-    public Pane makeBloco(int i, int j, Image pieceImg) {
+    public Pane makeBloco(int i, int j, ImageView pieceImg) {
         Pane bloco = new Pane();
         ImageView g;
         g = tab.getBlock(i, j);
-        g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
-            OnPieceClicked(e);
+        g.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                OnPieceClicked(e);
+            }
         });
         
         //g = white == true ? new ImageView(whiteBlock) : new ImageView(blackBlock);
         bloco.getChildren().add(g);
         if(pieceImg != null) {
-            ImageView p1 = new ImageView(pieceImg);
-            p1.setLayoutX(2.5);
-            p1.setLayoutY(-75);
-            bloco.getChildren().add(p1);
+            bloco.getChildren().add(pieceImg);
         }
          
         return bloco;
@@ -164,15 +165,6 @@ public class Game8x8Controller implements Initializable {
         }
     }
     
-//    public void OnBlockSelected() {
-//        
-//        if(tab.getBlock(selectedVector).isEmpty()) {
-//            System.out.println("Onde voce clicou não há peça");
-//        } else {
-//            System.out.println("Voce encontrou uma peça! Aqui estão as possíveis movimentações dela:");
-//            tab.getBlock(selectedVector).getPiece().checkMove(tab);
-//            possibleBlocks = tab.getBlock(selectedVector).getPiece().getFreeWay();
-//        }
-//    }
+
     
 }
