@@ -81,6 +81,22 @@ public class Vetor {
     public Vetor next(){
         return Vetor.sum(trend, x, y);
     }
+    public Vetor nex(){
+        return Vetor.sum(trend, x, y);
+    }
+    public Vetor getTrend(int x){
+        switch(x%9){
+            case  1: return new Vetor( 0, -1);
+            case  2: return new Vetor( 1, -1);
+            case  3: return new Vetor( 1,  0);
+            case  4: return new Vetor( 1,  1);// 8 1 2
+            case  5: return new Vetor( 0,  1);// 7 0 3
+            case  6: return new Vetor(-1,  1);// 6 5 4
+            case  7: return new Vetor( 1,  0);
+            case  8: return new Vetor(-1, -1);
+            default: return new Vetor( 0,  0);
+        }
+    }
     public void setTrend(int x){
         switch(x){
             case  1: trend = new Vetor( 0, -1);
