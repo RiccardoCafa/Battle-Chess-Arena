@@ -1,5 +1,6 @@
 package businessPack;
 
+import extras.BlockState;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
@@ -42,11 +43,11 @@ public abstract class Piece extends ImageView {
     public abstract void checkMove(Table table);//criação da freeWay
     
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
-        if(hitWay != null) hitWay.clear();
+        if(!hitWay.isEmpty()) hitWay.clear();
         for(Block block : freeWay){
-            //if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){
+            if(block.getBlockState(player) == BlockState.Enemy){
                 hitWay.add(block);
-            //}
+            }
         }
     }
     
@@ -59,6 +60,14 @@ public abstract class Piece extends ImageView {
     }
     public void setHP(int hp){
         this.hp = hp;
+        if(hp == 0){
+            alive = false;
+        }else{
+            alive = true;
+        }
+    }
+    public void hit(int damage, Table table){
+        hp -= damage;
         if(hp == 0){
             alive = false;
         }else{

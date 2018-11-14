@@ -14,13 +14,11 @@ public class Peon extends Piece {
     public Peon(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 2;
-        damage = 1;
         tpPeon = new DefaultPeon();
     }
     public Peon(Player pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
         super(pPiece, tpHero, x, y);
         hp = 2;
-        damage = 1;
         this.tpPeon = tpPeon;
     }
     //metodos>>

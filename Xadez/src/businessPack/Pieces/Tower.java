@@ -22,7 +22,6 @@ public class Tower extends Piece {
     public Tower(Player pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
         super(pPiece, tpHero, x, y);
         hp = 10;
-        damage = 1;
         this.tpTower = tpTower;
         updateImage();
     }

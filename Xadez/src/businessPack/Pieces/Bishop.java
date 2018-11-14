@@ -1,6 +1,5 @@
 package businessPack.Pieces;
 
-import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeBishop;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultBishop;
@@ -27,7 +26,7 @@ public class Bishop extends Piece {
         this.tpBishop = tpBishop;
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Bishop.png", 58, 130, false, false));  
         hp = 4;
-        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
+        this.tpBishop = tpBishop;
     }
     //metodos>>
     @Override
