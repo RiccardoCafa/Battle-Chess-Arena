@@ -6,7 +6,7 @@ public class Vetor {
     //atributos>>
     private int x;
     private int y;
-    private Vetor trend;//fluxo do vetor, registrando de onde veio
+    private int[] trend = new int[2];//fluxo do vetor, registrando de onde veio
     //construtor>>
 
     /**
@@ -17,18 +17,21 @@ public class Vetor {
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
-        trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+        trend[0] = 0;
+        trend[1] = 0;
     }
     public Vetor(Vetor vetor) {
         this.x = vetor.getX();
         this.y = vetor.getY();
-        trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+        trend[0] = 0;
+        trend[1] = 0;
     }
     public Vetor(int x, int y, Vetor versor) {
         this.x = x;
         this.y = y;
         if(versor.getX() >= -1 && versor.getX() <= 1 && versor.getY() >= -1 && versor.getX() <= 1){
-            trend = versor;
+            trend[0] = versor.getX();
+            trend[1] = versor.getY();
         } 
     }
     //metodos>>
@@ -56,8 +59,11 @@ public class Vetor {
         return new Vetor(x1 + vetor2.getX(),
                          y1 + vetor2.getY());
     }
+    public static Vetor sum(int x1, int y1, int x2, int y2) {
+        return new Vetor(x1 + x2, y1 + y2);
+    }
     public Vetor next(){
-        return Vetor.sum(trend, x, y);
+        return Vetor.sum(trend[0], trend[1], x, y);
     }
     //getset>>
     public int getX() {
@@ -91,15 +97,15 @@ public class Vetor {
     }
     public void setTrend(int x){
         switch(x%9){
-            case  1: trend = new Vetor( 0, -1);
-            case  2: trend = new Vetor( 1, -1);
-            case  3: trend = new Vetor( 1,  0);
-            case  4: trend = new Vetor( 1,  1);//  8 1 2
-            case  5: trend = new Vetor( 0,  1);// 7  0  3
-            case  6: trend = new Vetor(-1,  1);//  6 5 4
-            case  7: trend = new Vetor( 1,  0);
-            case  8: trend = new Vetor(-1, -1);
-            default: trend = new Vetor( 0,  0);
+            case  1: trend[0] =  0; trend[1] = -1;
+            case  2: trend[0] =  1; trend[1] = -1;
+            case  3: trend[0] =  1; trend[1] =  0;
+            case  4: trend[0] =  1; trend[1] =  1;//  8 1 2
+            case  5: trend[0] =  0; trend[1] =  1;// 7  0  3
+            case  6: trend[0] = -1; trend[1] =  1;//  6 5 4
+            case  7: trend[0] =  1; trend[1] =  0;
+            case  8: trend[0] = -1; trend[1] = -1;
+            default: trend[0] =  0; trend[1] =  0;
         }
     }
 }
