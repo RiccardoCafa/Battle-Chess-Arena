@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import extras.Vetor;
 
 public abstract class Piece {
+
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
@@ -13,31 +14,26 @@ public abstract class Piece {
     protected Image image;
     protected int hp;
     protected boolean alive;
-    protected int damage;
+    protected int damage = 1;
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     //construtor>>
-    protected Piece(PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image){
+    protected Piece(PlayerPiece pPiece, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
         this.player = pPiece;
         alive = true;
-        this.hp = hp;
-        this.damage = damage;
         vetor = new Vetor(x, y);
-        this.image = image;
     }
-    protected Piece(TypePiece tpPiece, TypeHero tpHero, int hp, int damage, Vetor vetor, Image image){
+    protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
         this.tpHero = tpHero;
         alive = true;
-        this.hp = hp;
-        this.damage = damage;
         this.vetor = vetor;
-        this.image = image;
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
+    
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         hitWay.clear();
         for(Block block : freeWay){
@@ -78,5 +74,21 @@ public abstract class Piece {
     }
     public PlayerPiece getPlayer() {
         return player;
+    }
+    public ArrayList<Block> getFreeWay() {
+        return freeWay;
+    }
+     /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

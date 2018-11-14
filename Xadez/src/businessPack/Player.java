@@ -13,7 +13,7 @@ public class Player {
     private int playingTurn;
     private int sentido;//se começa embaixo, -1; se começa em cima, 1
     //construtor>>
-    public Player(int sentido, Hero hero, int playingTurn,PlayerPiece jogador) {
+    public Player(int sentido, Hero hero, int playingTurn) {
         this.hero = hero;
         this.jogador = jogador;
         this.playingTurn = playingTurn;

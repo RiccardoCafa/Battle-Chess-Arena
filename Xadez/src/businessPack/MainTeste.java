@@ -20,20 +20,19 @@ public class MainTeste {
         Image leninImage = null;
         //Criando os players
         Player p1 = new Player(1, new Sheriff(sheriffImage), 1,Player1);
-        Player p2 = new Player(-1, new Lenin(leninImage), 2,Player2);
+        Player p2 = new Player(-1, new Sheriff(sheriffImage), 2,Player2);
         //Cirando os personagens dos players
         Lapa lapa = new Lapa(null);
         Wizard wizard = new Wizard(null);
         //Criando o tabuleiro
         Table table = new Table(8, 8, p1, p2);
-        System.out.println("as");
-        Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 2, 3, null, new DefaultTower());
+        Piece t = null;
         table.getTable()[2][3] = new Block(t, 2, 3);
-        Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 5, 5, 2, 1, null);
+        Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 2, 1);
         table.getTable()[2][1] = new Block(b, 2, 1);
-        Bishop b2 = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 5, 5, 6, 3, null);
+        Bishop b2 = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 6, 3);
         table.getTable()[6][3] = new Block(b2, 6, 3);
-        Bishop b1 = new Bishop(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 0, 3, null);
+        Bishop b1 = new Bishop(PlayerPiece.Player1, TypeHero.lapa, 0, 3);
         table.getTable()[0][3] = new Block(b1, 0, 3);
         t.checkMove(table);
         

@@ -6,15 +6,15 @@ import businessPack.Piece;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.PlayerPiece;
-import javafx.scene.image.Image;
 
 public class Bishop extends Piece {
     //atributos>>
     ItypeBishop tpBishop;
     //construtor>>
-    public Bishop( PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image) {
-        super(pPiece, tpHero, hp, damage, x, y, image);
+    public Bishop( PlayerPiece pPiece, TypeHero tpHero, int x, int y) {
+        super(pPiece, tpHero, x, y);
         tpPiece = TypePiece.bishop;
+        hp = 4;
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
     //metodos>>
