@@ -21,11 +21,11 @@ public class DefaultHorse implements ItypeHorse {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação da movimentação padrão do cavalo
         ArrayList<Block> freeWay = new ArrayList<>();
         int sinalX = -1, sinalY = -1, valorX = 1, valorY = 2;
+        Vetor vetorAdd;
         for(int i = 1; i <= 8; i++){
-            Vetor vetorAdd = Vetor.sum(vetor, sinalX*valorX, sinalY*valorY);
-            if((vetorAdd.getX() >= 0 && vetorAdd.getX() <= 7) &&
-                    vetorAdd.getY() >= 0 && vetorAdd.getY() <= 7){
-                freeWay.add(table.getBlock(vetorAdd));//adiciona todas as posições
+            vetorAdd = Vetor.sum(vetor, sinalX*valorX, sinalY*valorY);
+            if(vetorAdd.getX() >= 0 && vetorAdd.getX() <= 7 && vetorAdd.getY() >= 0 && vetorAdd.getY() <= 7){
+                freeWay.add(table.getBlock(vetorAdd));//adiciona todas as posições válidas
             }
             if(i%4 == 0){ sinalX *= -1; }//***************calculos
             if((i - 1)%2 == 0){ sinalY *= -1; }
@@ -63,10 +63,22 @@ public class DefaultHorse implements ItypeHorse {
                 }//*******************************************
             }
         }catch(NullPointerException e){ }
-        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);//setas de volta a origem
-        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
-        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
-        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
+        for(int i = 0; i < 4; i++){
+            try{
+                switch(i){
+                    case 0: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
+                        break;
+                    case 1: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
+                        break;
+                    case 2: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
+                        break;
+                    case 3: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
+                        break;
+                }
+            }catch(NullPointerException e){
+                
+            }
+        }
         for(Block block : freeWay){
             if(block.getBlockState(player) == BlockState.Friend){
                 freeWay.remove(block);//remove os blocos amigos
