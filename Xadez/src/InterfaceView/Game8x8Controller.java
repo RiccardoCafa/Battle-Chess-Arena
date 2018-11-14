@@ -2,10 +2,16 @@ package InterfaceView;
 
 import businessPack.Block;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
 import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Horse;
+import businessPack.Pieces.King;
 import businessPack.Pieces.Lapa.LapaTower;
+import businessPack.Pieces.Lenin.LeninBishop;
+import businessPack.Pieces.Lenin.LeninKing;
+import businessPack.Pieces.Lenin.LeninTower;
+import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Table;
@@ -52,14 +58,14 @@ public class Game8x8Controller implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        player1 = new Player(1, new Lapa(null), 1);
-        player2 = new Player(1, new Sheriff(null), 2);
+        player1 = new Player(1, new Lenin(null), 1);
+        player2 = new Player(-1, new Lapa(null), 2);
         playing = player1;
         tab = new Table(8, 8, player1, player2);
-        Horse c = new Horse(player1, TypeHero.lenin, 1, 4);
-        Tower t = new Tower(player2, TypeHero.lapa, 2, 3, new LapaTower(player1));
+        Bishop c = new Bishop(player1, TypeHero.lenin, 4, 4);
+        Tower t = new Tower(player2, TypeHero.lapa, 2, 3, new LapaTower(player2));
         tab.getTable()[2][3].setPiece(t);
-        tab.getTable()[1][4].setPiece(c);
+        tab.getTable()[4][4].setPiece(c);
         MountArmyOnTable(tab);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }    
