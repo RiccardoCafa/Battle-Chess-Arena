@@ -19,8 +19,8 @@ public class MainTeste {
         Image sheriffImage = null;
         Image leninImage = null;
         //Criando os players
-        Player p1 = new Player(1, new Sheriff(sheriffImage), 1,Player1);
-        Player p2 = new Player(-1, new Sheriff(sheriffImage), 2,Player2);
+        Player p1 = new Player(1, new Sheriff(sheriffImage), 1);
+        Player p2 = new Player(-1,new Lenin(leninImage), 2);
         //Cirando os personagens dos players
         Lapa lapa = new Lapa(null);
         Wizard wizard = new Wizard(null);

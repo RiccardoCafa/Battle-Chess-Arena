@@ -16,6 +16,10 @@ public class DefaultKing implements ItypeKing {
         vector.clear();
         anda(1, 0, vetor);
         anda(-1, 0, vetor);
+        anda(-1,1,vetor);
+        anda(1,-1,vetor);
+        anda(0,1,vetor);
+        anda(0,-1,vetor);
 //           if(table.getBlock(vetor.getX()-1,vetor.getY())==null||table.getBlock(vetor.getX()-1,  
 //                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
 //            vector.add(table.getBlock(vetor.getX()-1, vetor.getY()));
