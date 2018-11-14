@@ -1,6 +1,5 @@
 package businessPack.Pieces;
 
-import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeBishop;
 import businessPack.Piece;
 import businessPack.Player;
@@ -13,9 +12,8 @@ public class Bishop extends Piece {
     //construtor>>
     public Bishop(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
-        
         hp = 4;
-        //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
+        this.tpBishop = tpBishop;
     }
     //metodos>>
     @Override

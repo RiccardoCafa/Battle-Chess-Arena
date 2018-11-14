@@ -14,13 +14,11 @@ public class King extends Piece {
     public King(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 18;
-        damage = 1;
         tpKing = new DefaultKing();
     }
     public King(Player pPiece, TypeHero tpHero, int x, int y, ItypeKing tpKing) {
         super(pPiece, tpHero, x, y);
         hp = 18;
-        damage = 1;
         this.tpKing = tpKing;
     }
     //metodos>>

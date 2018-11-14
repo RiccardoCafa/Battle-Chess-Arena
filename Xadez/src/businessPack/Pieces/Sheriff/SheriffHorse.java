@@ -9,14 +9,30 @@ import extras.Compass;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class SheriffHorse implements ItypeHorse {
+public class SheriffHorse implements ItypeHorse, Pistol {
     //atributos>>
     Player player;
+    int charge = 1;
     //construtor>>
     public SheriffHorse(Player player){
         this.player = player;
     }
     //metodos>>
+    @Override
+    public void shoot(Table table, Vetor vetor) {
+        for(int iE = vetor.getX(); iE < 8; iE++){
+            if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
+                table.getBlock(iE, vetor.getY()).getPiece().hit(charge, table);
+                break;
+            }
+        }
+        for(int iW = vetor.getX(); iW >= 0; iW--){
+            if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
+                table.getBlock(iW, vetor.getY()).getPiece().hit(charge, table);
+                break;
+            }
+        }
+    }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação do cavalo especial do Sheriff
         ArrayList<Block> freeWay = new ArrayList<>();
@@ -70,4 +86,5 @@ public class SheriffHorse implements ItypeHorse {
         }
         return freeWay;
     }
+
 }

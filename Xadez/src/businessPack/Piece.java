@@ -62,6 +62,14 @@ public abstract class Piece extends ImageView {
             alive = true;
         }
     }
+    public void hit(int damage, Table table){
+        hp -= damage;
+        if(hp == 0){
+            alive = false;
+        }else{
+            alive = true;
+        }
+    }
     public boolean getLife(){
         return alive;
     }

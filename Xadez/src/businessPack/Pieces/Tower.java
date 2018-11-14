@@ -15,13 +15,11 @@ public class Tower extends Piece {
     public Tower(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 10;
-        damage = 1;
         tpTower = new DefaultTower();
     }
     public Tower(Player pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
         super(pPiece, tpHero, x, y);
         hp = 10;
-        damage = 1;
         this.tpTower = tpTower;
         image = new Image("InterfaceView/imagens/lapaPieces/lapaTower.png", 58, 130, false, false);
     }

@@ -14,7 +14,6 @@ public class Queen extends Piece {
     public Queen(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 8;
-        damage = 1;
         tpQueen = new DefaultQueen();
     }
     //metodos>>

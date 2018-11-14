@@ -3,9 +3,11 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeHorse;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultHorse;
+import businessPack.Pieces.Sheriff.SheriffHorse;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.Vetor;
 
 public class Horse extends Piece {
     //atributos>>
@@ -14,13 +16,11 @@ public class Horse extends Piece {
     public Horse(Player player, TypeHero tpHero, int x, int y) {
         super(player, tpHero, x, y);
         hp = 6;
-        damage = 1;
         tpHorse = new DefaultHorse(player);
     }
     public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
         super(player, tpHero, x, y);
         hp = 6;
-        damage = 1;
         this.tpHorse = tpHorse;
     }
     //metodos>>
