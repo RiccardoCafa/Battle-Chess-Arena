@@ -13,7 +13,7 @@ public class Bishop extends Piece {
     //construtor>>
     public Bishop(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
-        tpPiece = TypePiece.bishop;
+        
         hp = 4;
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
