@@ -4,6 +4,7 @@ import businessPack.TypePiece;
 import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultTower;
+import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.PlayerPiece;
@@ -25,6 +26,10 @@ public class Tower extends Piece {
         tpPiece = TypePiece.tower;
         tpTower = typeTower;
         defaultTower = tpTower;
+    }
+
+    public Tower(Player p1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

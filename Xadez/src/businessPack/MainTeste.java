@@ -5,6 +5,7 @@ import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
 import businessPack.Heros.Wizard;
 import businessPack.Pieces.Bishop;
+import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Tower;
 import extras.PlayerPiece;
@@ -26,7 +27,7 @@ public class MainTeste {
         //Criando o tabuleiro
         Table table = new Table(8, 8, p1, p2);
         System.out.println("as");
-        Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 2, 3, null, new LapaTower(p1));
+        Tower t = new Tower(PlayerPiece.Player1, TypeHero.lapa, 5, 5, 2, 3, null, new DefaultTower());
         table.getTable()[2][3] = new Block(t, 2, 3);
         Bishop b = new Bishop(PlayerPiece.Player2, TypeHero.wizard, 5, 5, 2, 1, null);
         table.getTable()[2][1] = new Block(b, 2, 1);
