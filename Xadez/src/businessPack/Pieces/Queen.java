@@ -6,6 +6,7 @@ import businessPack.Pieces.Default.DefaultQueen;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
+import javafx.scene.image.Image;
 
 public class Queen extends Piece {
     //atributos>>
@@ -15,18 +16,23 @@ public class Queen extends Piece {
         super(pPiece, tpHero, x, y);
         hp = 8;
         damage = 1;
-        tpQueen = new DefaultQueen();
+        tpQueen = new DefaultQueen(pPiece);
+        updateImage();
     }
     //metodos>>
     @Override
     public void checkMove(Table table) {
-        freeWay.clear();
-        table.clearTrend();
+        if(freeWay!=null)freeWay.clear();
+        //table.clearTrend();
         freeWay = tpQueen.IcheckMove(table, vetor);
-        updateHitWay(table);
+        //updateHitWay(table);
     }
     //getset>>
     public void setTypeQueen(ItypeQueen tpQueen){//muda o comportamento do checkMove()
         this.tpQueen = tpQueen;
+    }
+    public void updateImage() {
+        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Queen.png", 58, 130, false, false));
+        setMouseTransparent(true);
     }
 }

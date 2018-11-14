@@ -44,9 +44,9 @@ public abstract class Piece extends ImageView {
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         if(hitWay != null) hitWay.clear();
         for(Block block : freeWay){
-            if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){
+            //if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){
                 hitWay.add(block);
-            }
+            //}
         }
     }
     
