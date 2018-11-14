@@ -63,23 +63,18 @@ public class DefaultHorse implements ItypeHorse {
                 }//*******************************************
             }
         }catch(NullPointerException e){ }
-        for(int i = 0; i < 4; i++){
-            int aux[][] = new int[8][8];
-            try{
-                int x = aux[Vetor.sum(vetor, vetor.getVersor(Compass.NE)).getX()][Vetor.sum(vetor, vetor.getVersor(Compass.NE)).getY()];
-                switch(i){
-                    case 0:
-                        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
-                        break;
-                    case 1: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
-                        break;
-                    case 2: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
-                        break;
-                    case 3: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
-                        break;
-                }
-            }catch(NullPointerException e){
-                
+        for(int i = 2; i <= 8; i += 2){
+            
+            switch(i){
+                case 0:
+                    table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
+                    break;
+                case 1: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
+                    break;
+                case 2: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
+                    break;
+                case 3: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
+                    break;
             }
         }
         for(Block block : freeWay){

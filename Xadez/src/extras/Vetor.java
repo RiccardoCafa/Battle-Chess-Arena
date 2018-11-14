@@ -83,15 +83,15 @@ public class Vetor {
     }
     public void setTrend(int x){
         switch(x){
-            case  0: return new Vetor( 0, -1);
-            case  1: return new Vetor( 1, -1);
-            case  2: return new Vetor( 1,  0);
-            case  3: return new Vetor( 1,  1);
-            case  4: return new Vetor( 0,  1);
-            case  5: return new Vetor(-1,  1);
-            case  6: return new Vetor( 1,  0);
-            case  7: return new Vetor(-1, -1);
-            default: return new Vetor( 0,  0);
+            case  1: trend = new Vetor( 0, -1);
+            case  2: trend = new Vetor( 1, -1);
+            case  3: trend = new Vetor( 1,  0);
+            case  4: trend = new Vetor( 1,  1);// 8 1 2
+            case  5: trend = new Vetor( 0,  1);// 7   3
+            case  6: trend = new Vetor(-1,  1);// 6 5 4
+            case  7: trend = new Vetor( 1,  0);
+            case  8: trend = new Vetor(-1, -1);
+            default: trend = new Vetor( 0,  0);
         }
     }
 }
