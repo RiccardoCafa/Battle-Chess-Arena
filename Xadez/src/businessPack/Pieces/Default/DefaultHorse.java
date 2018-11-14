@@ -64,9 +64,12 @@ public class DefaultHorse implements ItypeHorse {
             }
         }catch(NullPointerException e){ }
         for(int i = 0; i < 4; i++){
+            int aux[][] = new int[8][8];
             try{
+                int x = aux[Vetor.sum(vetor, vetor.getVersor(Compass.NE)).getX()][Vetor.sum(vetor, vetor.getVersor(Compass.NE)).getY()];
                 switch(i){
-                    case 0: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
+                    case 0:
+                        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
                         break;
                     case 1: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
                         break;
