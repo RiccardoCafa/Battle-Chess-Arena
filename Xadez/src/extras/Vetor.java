@@ -6,7 +6,7 @@ public class Vetor {
     //atributos>>
     private int x;
     private int y;
-    private Compass trend;//fluxo do vetor, registrando de onde veio
+    private Vetor trend;//fluxo do vetor, registrando de onde veio
     //construtor>>
 
     /**
@@ -17,7 +17,7 @@ public class Vetor {
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
-        trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+        trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
     
     /**
@@ -27,20 +27,14 @@ public class Vetor {
     public Vetor(Vetor vetor) {
         this.x = vetor.getX();
         this.y = vetor.getY();
-        trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+        trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
-
-    /**
-     * Trend é um Enum Compass.
-     * 
-     * @param x
-     * @param y
-     * @param trend
-     */
-    public Vetor(int x, int y, Compass trend) {
+    public Vetor(int x, int y, Vetor versor) {
         this.x = x;
         this.y = y;
-        this.trend = trend;
+        if(versor.getX() >= -1 && versor.getX() <= 1 && versor.getY() >= -1 && versor.getX() <= 1){
+            trend = versor;
+        } 
     }
     //metodos>>
     public static Vetor subtract(Vetor vetor1, Vetor vetor2) {//subtrai dois vetores
@@ -84,29 +78,20 @@ public class Vetor {
             this.y = y;
         }
     }
-    public Compass getTrend(){
-        return trend;
+    public Vetor next(){
+        return Vetor.sum(trend, x, y);
     }
-    public Vetor getVersor(Compass trend){
-        switch(trend){
-            case  N: return new Vetor( 0, -1);
-            case NE: return new Vetor( 1, -1);
-            case  E: return new Vetor( 1,  0);
-            case SE: return new Vetor( 1,  1);
-            case  S: return new Vetor( 0,  1);
-            case SW: return new Vetor(-1,  1);
-            case  W: return new Vetor( 1,  0);
-            case NW: return new Vetor(-1, -1);
+    public void setTrend(int x){
+        switch(x){
+            case  0: return new Vetor( 0, -1);
+            case  1: return new Vetor( 1, -1);
+            case  2: return new Vetor( 1,  0);
+            case  3: return new Vetor( 1,  1);
+            case  4: return new Vetor( 0,  1);
+            case  5: return new Vetor(-1,  1);
+            case  6: return new Vetor( 1,  0);
+            case  7: return new Vetor(-1, -1);
             default: return new Vetor( 0,  0);
         }
-    }
-    public Vetor useTrend(Compass trend){
-        int xAux = x, yAux = y;
-        xAux += getVersor(trend).getX();
-        yAux += getVersor(trend).getY();
-        return new Vetor(xAux, yAux);
-    }
-    public void setTrend(Compass trend){
-        this.trend = trend;
     }
 }
