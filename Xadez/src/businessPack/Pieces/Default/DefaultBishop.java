@@ -19,7 +19,7 @@ public class DefaultBishop implements ItypeBishop {
             if(table.getBlock(i, j)== null){
                 vector.add(table.getBlock(i, j));
             }else{
-                if(table.getBlock(           i,            j).getPiece().getTpHero() !=
+                if(table.getBlock(i, j).getPiece().getTpHero() !=
                    table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
                     vector.add(table.getBlock(i, j));
                     break;

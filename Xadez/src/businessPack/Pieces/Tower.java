@@ -16,20 +16,24 @@ public class Tower extends Piece {
         super(pPiece, tpHero, x, y);
         hp = 10;
         tpTower = new DefaultTower();
+        updateImage();
     }
     public Tower(Player pPiece, TypeHero tpHero, int x, int y, ItypeTower tpTower) {
         super(pPiece, tpHero, x, y);
         hp = 10;
         this.tpTower = tpTower;
-        image = new Image("InterfaceView/imagens/lapaPieces/lapaTower.png", 58, 130, false, false);
+        updateImage();
     }
     //metodos>>
     @Override
     public void checkMove(Table table) {
-        freeWay.clear();
-        table.clearTrend();
+        if(freeWay != null) freeWay.clear();
+        //table.clearTrend();
         freeWay = tpTower.IcheckMove(table, vetor);
         updateHitWay(table);
+    }
+    public void updateImage() {
+        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Tower.png", 58, 130, false, false));
     }
     //getset>>
     public void setTypeTower(ItypeTower tpTower){//muda o comportamento do checkMove()

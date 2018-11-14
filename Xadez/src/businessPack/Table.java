@@ -80,6 +80,7 @@ public class Table{
     
     public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
         Piece tempB = table[piecePos.getX()][piecePos.getY()].getPiece();
+        tempB.setVetor(pieceDestination);
         table[piecePos.getX()][piecePos.getY()].setPiece(null);
         table[pieceDestination.getX()][pieceDestination.getY()].setPiece(tempB);
     }

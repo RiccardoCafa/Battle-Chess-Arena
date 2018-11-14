@@ -22,7 +22,11 @@ public class DefaultHorse implements ItypeHorse {
         ArrayList<Block> freeWay = new ArrayList<>();
         int sinalX = -1, sinalY = -1, valorX = 1, valorY = 2;
         for(int i = 1; i <= 8; i++){
-            freeWay.add(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)));//adiciona todas as posições
+            Vetor vetorAdd = Vetor.sum(vetor, sinalX*valorX, sinalY*valorY);
+            if((vetorAdd.getX() >= 0 && vetorAdd.getX() <= 7) &&
+                    vetorAdd.getY() >= 0 && vetorAdd.getY() <= 7){
+                freeWay.add(table.getBlock(vetorAdd));//adiciona todas as posições
+            }
             if(i%4 == 0){ sinalX *= -1; }//***************calculos
             if((i - 1)%2 == 0){ sinalY *= -1; }
             if(i%2 == 0){
