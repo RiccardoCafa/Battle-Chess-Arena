@@ -58,13 +58,19 @@ public class Game8x8Controller implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        player1 = new Player(1, new Lenin(null), 1);
-        player2 = new Player(-1, new Lapa(null), 2);
+        player1 = new Player(-1, new Lenin(null), 1);
+        player2 = new Player(1, new Lapa(null), 2);
         playing = player1;
         tab = new Table(8, 8, player1, player2);
         Bishop c = new Bishop(player1, TypeHero.lenin, 4, 4);
+        King k = new King(player1, TypeHero.lenin, 1, 0);
+        King kL = new King(player1, TypeHero.lenin, 4, 2, new LeninKing(player1));
+        Queen q = new Queen(player2, TypeHero.lapa, 5, 0);
         Tower t = new Tower(player2, TypeHero.lapa, 2, 3, new LapaTower(player2));
         tab.getTable()[2][3].setPiece(t);
+        tab.getTable()[1][0].setPiece(k);
+        tab.getTable()[4][2].setPiece(kL);
+        tab.getTable()[5][0].setPiece(q);
         tab.getTable()[4][4].setPiece(c);
         MountArmyOnTable(tab);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));

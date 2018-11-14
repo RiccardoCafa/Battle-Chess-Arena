@@ -4,17 +4,15 @@ import extras.BlockState;
 import extras.Who;
 import javafx.scene.image.Image;
 import extras.Vetor;
-import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 public class Block extends ImageView {
     //atributos>>
     private Piece piece;
     private Vetor vetor;
     private Image myImg;
-    private Image greenBlock = new Image("InterfaceView/imagens/blocoVerde.png", 62, 62, false, false );
-    private Image redBlock = new Image("InterfaceView/imagens/blocoVermelho.png", 62, 62, false, false );
+    private final Image greenBlock = new Image("InterfaceView/imagens/blocoVerde.png", 62, 62, false, false );
+    private final Image redBlock = new Image("InterfaceView/imagens/blocoVermelho.png", 62, 62, false, false );
     //private Image imgBlock;
     //construtor>>
     public Block(Piece piece, int x, int y, int color) { //0-white 1-black
@@ -44,9 +42,9 @@ public class Block extends ImageView {
     public BlockState getBlockState(Player playerLooking) {
         if(piece != null) {
             if(playerLooking.getPlayingTurn() == 1) {
-                return piece.getPlayer() == Who.player1 ? BlockState.Friend : BlockState.Enemy;
+                return piece.getPlayer() == Who.player2 ? BlockState.Friend : BlockState.Enemy;
             } else {
-                return piece.getPlayer() == Who.player2 ? BlockState.Enemy : BlockState.Friend;
+                return piece.getPlayer() == Who.player1 ? BlockState.Enemy : BlockState.Friend;
             }
         }
         return BlockState.Empty;
