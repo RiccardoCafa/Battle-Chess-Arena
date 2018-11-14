@@ -82,7 +82,7 @@ public class LapaTower implements ItypeTower {
         
         System.out.println();
         
-        return null;
+        return myMoves;
     }
     
     public void TakeLeftingBlocks(int xDirection, int yDirection, Vetor lastPos, int offSet) {

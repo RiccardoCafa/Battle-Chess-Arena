@@ -16,7 +16,8 @@ import businessPack.Pieces.Queen;
 
 
 import businessPack.Pieces.Tower;
-import extras.PlayerPiece;
+import businessPack.Player;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Huebr extends Hero {
@@ -36,9 +37,11 @@ public class Huebr extends Hero {
     
     ///HU3HU3HU3HU3 BRBRBRB
 
-    public void createArmy(Army army, int sentido, PlayerPiece jogador) {
+    @Override
+    public void createArmy(Army army, int sentido, Player jogador) {
+       
         /*
-        // PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image
+        // Who pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image
               for(int j = 0; j < 8; j++) {
             army.addPiece(new Peon(new huebrPeon(), true, (int)(3.5 + sentido*2.5), j, huebrPeonImage));//peões
         }
@@ -51,7 +54,8 @@ public class Huebr extends Hero {
         army.addPiece(new King(new DefaultKing(),     true, (int)(3.5 + sentido*3.5), 4, huebrKingImage));//rei
         army.addPiece(new Queen(new DefaultQueen(),   true, (int)(3.5 + sentido*3.5), 3, huebrQueenImage));//rainha
     */}
-}
+    }
+
 
     
 

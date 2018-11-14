@@ -1,19 +1,20 @@
 package businessPack;
 
-import extras.PlayerPiece;
 import javafx.scene.image.Image;
 
 public abstract class Hero {
     //atributos>>
-    private Image image;
+    protected Image image;
+    protected TypeHero tpHero;
     //construtor>>
     public Hero(Image image) {
         this.image = image;
+        
     }
     //metodos>>
-    public abstract void createArmy(Army army, int sentido,PlayerPiece jogador);
+    public abstract void createArmy(Army army, int sentido, Player player);
     //getset>>
-    public Image getIMage(){
+    public Image getImage(){
         return image;
     }
 }
