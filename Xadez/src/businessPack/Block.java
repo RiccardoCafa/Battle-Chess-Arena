@@ -51,6 +51,11 @@ public class Block extends ImageView {
         }
         return BlockState.Empty;
     }
+
+    /**
+     *
+     * @param color 0 for green 1 for red
+     */
     public void colorChange(int color) { //0-Green 1-red
         if(color == 0) {
             this.setImage(greenBlock);

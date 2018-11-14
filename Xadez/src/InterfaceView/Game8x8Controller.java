@@ -8,15 +8,14 @@ import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
-import extras.Who;
 import extras.Vetor;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -32,7 +31,7 @@ public class Game8x8Controller implements Initializable {
     Vetor myVector;
     Vetor selectedVector;
     
-    List<Block> possibleBlocks;
+    ArrayList<Block> possibleBlocks;
     
     boolean movingPiece = false;
     
@@ -41,10 +40,10 @@ public class Game8x8Controller implements Initializable {
     Player player1;
     Player player2;
     
-    Image whiteBlock = new Image("InterfaceView/imagens/blocoBranco.png", 62, 62, false, false );
-    Image blackBlock = new Image("InterfaceView/imagens/blocoPreto.png", 62, 62, false, false );
-    Image greenBlock = new Image("InterfaceView/imagens/blocoVerde.png", 62, 62, false, false );
-    Image redBlock = new Image("InterfaceView/imagens/blocoVermelho.png", 62, 62, false, false );
+//    Image whiteBlock = new Image("InterfaceView/imagens/blocoBranco.png", 62, 62, false, false );
+//    Image blackBlock = new Image("InterfaceView/imagens/blocoPreto.png", 62, 62, false, false );
+//    Image greenBlock = new Image("InterfaceView/imagens/blocoVerde.png", 62, 62, false, false );
+//    Image redBlock = new Image("InterfaceView/imagens/blocoVermelho.png", 62, 62, false, false );;
     //Image rei = new Image("InterfaceView/imagens/lapaPieces/lapaKing.png", 57, 130, false, false);
     
     @Override
@@ -61,15 +60,9 @@ public class Game8x8Controller implements Initializable {
     
     public void MountArmyOnTable(Table tab) {
         Image pieceImage = null;
-        boolean white;
         
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
-                if((i%2==0 && j%2==0) || (j%2!=0 && i%2!=0)) {
-                    white = true;
-                }else{
-                    white = false;
-                }
                 if(!tab.getBlock(i, j).isEmpty()) {
                     pieceImage = tab.getBlock(i, j).getPiece().getImage();
                 }
@@ -84,27 +77,9 @@ public class Game8x8Controller implements Initializable {
         ImageView g;
         g = tab.getBlock(i, j);
         g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
-            Block myBlock = (Block) e.getSource();
-            if(!movingPiece) {
-                if(!myBlock.isEmpty()) {
-                    selectedVector = new Vetor(myBlock.getVetor());
-                    movingPiece = true;
-                    myBlock.colorChange(0);
-                    System.out.println("Selected Piece");
-                } else {
-                    System.out.println("Nothing here");
-                }
-            } else {
-                if(myBlock.isEmpty()) {
-                    Vetor novaPos = new Vetor(myBlock.getVetor());
-                    MoveImage(selectedVector, novaPos);
-                    tab.MovePiece(selectedVector, novaPos);
-                    tab.getBlock(selectedVector).colorDefault();
-                    movingPiece = false;
-                    System.out.println("Moved Piece");
-                }
-            }
+            OnPieceClicked(e);
         });
+        
         //g = white == true ? new ImageView(whiteBlock) : new ImageView(blackBlock);
         bloco.getChildren().add(g);
         if(pieceImg != null) {
@@ -115,6 +90,33 @@ public class Game8x8Controller implements Initializable {
         }
          
         return bloco;
+    }
+    
+    public void OnPieceClicked(MouseEvent e) {
+        Block myBlock = (Block) e.getSource();
+        if(!movingPiece) {
+            if(!myBlock.isEmpty()) {
+                selectedVector = new Vetor(myBlock.getVetor());
+                movingPiece = true;
+                myBlock.colorChange(0);
+                myBlock.getPiece().checkMove(tab);
+                possibleBlocks = myBlock.getPiece().getFreeWay();
+                showPossibleWays(possibleBlocks);
+                System.out.println("Selected Piece");
+            } else {
+                System.out.println("Nothing here");
+            }
+        } else {
+            if(myBlock.isEmpty() && possibleBlocks.contains(myBlock)) {
+                Vetor novaPos = new Vetor(myBlock.getVetor());
+                MoveImage(selectedVector, novaPos);
+                tab.MovePiece(selectedVector, novaPos);
+                tab.getBlock(selectedVector).colorDefault();
+                movingPiece = false;
+                resetBlockTab();
+                System.out.println("Moved Piece");
+            }
+        }
     }
     
     public void MoveImage(Vetor source, Vetor dest) {
@@ -139,15 +141,33 @@ public class Game8x8Controller implements Initializable {
         destPane.getChildren().add(1, tempPane);
     }
     
-    public void OnBlockSelected() {
-        
-        if(tab.getBlock(selectedVector).isEmpty()) {
-            System.out.println("Onde voce clicou não há peça");
-        } else {
-            System.out.println("Voce encontrou uma peça! Aqui estão as possíveis movimentações dela:");
-            tab.getBlock(selectedVector).getPiece().checkMove(tab);
-            possibleBlocks = tab.getBlock(selectedVector).getPiece().getFreeWay();
+    public void showPossibleWays(ArrayList<Block> freeWay) {
+        if(freeWay == null) {
+            System.out.println("Lista vazia");
+            return;
+        }
+        for(Block b : freeWay) {
+            b.colorChange(0);
         }
     }
+    
+    public void resetBlockTab() {
+        for(int i = 0; i < Table.getN(); i++) {
+            for(int j = 0; j < Table.getM(); j++) {
+                tab.getBlock(i, j).colorDefault();
+            }
+        }
+    }
+    
+//    public void OnBlockSelected() {
+//        
+//        if(tab.getBlock(selectedVector).isEmpty()) {
+//            System.out.println("Onde voce clicou não há peça");
+//        } else {
+//            System.out.println("Voce encontrou uma peça! Aqui estão as possíveis movimentações dela:");
+//            tab.getBlock(selectedVector).getPiece().checkMove(tab);
+//            possibleBlocks = tab.getBlock(selectedVector).getPiece().getFreeWay();
+//        }
+//    }
     
 }
