@@ -7,7 +7,6 @@ import businessPack.Heros.Wizard;
 import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Tower;
-import extras.Who;
 import javafx.scene.image.Image;
 
 public class MainTeste {
