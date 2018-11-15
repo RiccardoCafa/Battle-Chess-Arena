@@ -44,6 +44,7 @@ public class DefaultHorse implements ItypeHorse {
                             break;
                         case -2://leste
               //              table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.E);
+//                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.W);
                             break;
                     }
                     switch(valorY){
@@ -52,6 +53,7 @@ public class DefaultHorse implements ItypeHorse {
                             break;
                         case -2://sul
                //             table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.S);
+//                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.N);
                             break;
                     }
                 }
@@ -77,6 +79,7 @@ public class DefaultHorse implements ItypeHorse {
                     break;
                 case 3:
                   //  table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
+//                    table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
                     break;
             }
         }

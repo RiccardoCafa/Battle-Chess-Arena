@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane prefHeight="760.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.Game8x8Controller">
-   <center>
-      <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="496.0" prefWidth="496.0" BorderPane.alignment="CENTER">
+
+<AnchorPane fx:id="background" prefHeight="677.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.Game8x8Controller">
+   <children>
+      <Pane prefHeight="750.0" prefWidth="1333.0">
+         <children>
+            <ImageView fitHeight="761.0" fitWidth="1333.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/fundoJogo.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="persoImage" fitHeight="420.0" fitWidth="520.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Personagens/lapa-01.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <GridPane fx:id="gridPane" layoutX="700.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="62.0" prefWidth="62.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="62.0" prefHeight="62.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-   </center>
-</BorderPane>
+   </children>
+</AnchorPane>

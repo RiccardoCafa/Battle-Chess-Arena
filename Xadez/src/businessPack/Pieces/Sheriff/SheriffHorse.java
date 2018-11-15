@@ -56,6 +56,7 @@ public class SheriffHorse implements ItypeHorse, Pistol {
                             break;
                         case -2://leste
            //                 table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.E);
+                            //table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.W);
                             break;
                     }
                     switch(valorY){
@@ -64,6 +65,7 @@ public class SheriffHorse implements ItypeHorse, Pistol {
                             break;
                         case -2://sul
              //               table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.S);
+                            //table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.N);
                             break;
                     }
                 }
@@ -78,7 +80,8 @@ public class SheriffHorse implements ItypeHorse, Pistol {
 //        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);//setas de volta a origem
 //        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
 //        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
-//        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);;
+//        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
+//        table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
         for(Block block : freeWay){
             if(block.getBlockState(player) == BlockState.Friend){
                 freeWay.remove(block);//remove os blocos amigos

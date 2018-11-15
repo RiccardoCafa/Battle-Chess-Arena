@@ -16,8 +16,8 @@ import javafx.scene.image.Image;
 public class Sheriff extends Hero {
     //atributos>>
     //construtor>>
-    public Sheriff(Image image) {
-        super(image);
+    public Sheriff() {
+        image = new Image(path + "pistoleiro-01.png", widthImg, heightImg, false, false);
         tpHero = TypeHero.sheriff;
     }
     //metodos>>
@@ -28,8 +28,8 @@ public class Sheriff extends Hero {
         }
         army.addPiece(new Bishop(player, TypeHero.sheriff, 2, (int)(3.5 + sentido*3.5)));//bispos
         army.addPiece(new Bishop(player, TypeHero.sheriff, 5, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new  Horse(player, TypeHero.sheriff, 1, (int)(3.5 + sentido*3.5), new SheriffHorse(player)));//cavalos
-        army.addPiece(new  Horse(player, TypeHero.sheriff, 6, (int)(3.5 + sentido*3.5), new SheriffHorse(player)));
+        army.addPiece(new  Horse(player, TypeHero.sheriff, 1, (int)(3.5 + sentido*3.5)));//cavalos
+        army.addPiece(new  Horse(player, TypeHero.sheriff, 6, (int)(3.5 + sentido*3.5)));
         army.addPiece(new  Tower(player, TypeHero.sheriff, 0, (int)(3.5 + sentido*3.5)));//torres
         army.addPiece(new  Tower(player, TypeHero.sheriff, 7, (int)(3.5 + sentido*3.5)));
         army.addPiece(new   King(player, TypeHero.sheriff, 4, (int)(3.5 + sentido*3.5)));//rei
