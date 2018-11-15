@@ -39,7 +39,7 @@ public class King extends Piece {
     private ItypeKing getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffKing();
+                return new SheriffKing(player);
             case lenin:
                 return new LeninKing(player);
             case wizard:

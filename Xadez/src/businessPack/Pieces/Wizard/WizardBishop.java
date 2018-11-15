@@ -14,7 +14,8 @@ public class WizardBishop implements ItypeBishop {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         return null;
     }
-    
-    
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

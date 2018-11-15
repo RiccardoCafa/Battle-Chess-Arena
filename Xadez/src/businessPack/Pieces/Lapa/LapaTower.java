@@ -187,6 +187,8 @@ public class LapaTower implements ItypeTower {
         }
         return newVetor;
     }
-    
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

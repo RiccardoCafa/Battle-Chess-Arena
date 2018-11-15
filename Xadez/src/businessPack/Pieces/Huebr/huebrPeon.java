@@ -22,6 +22,8 @@ public class huebrPeon implements ItypePeon {
         //implementação do peão especial do Huebr
         return null;
     }
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }
-    
-

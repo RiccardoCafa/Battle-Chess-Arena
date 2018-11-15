@@ -14,6 +14,8 @@ public class WizardKing implements ItypeKing {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         return null;
     }
-
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

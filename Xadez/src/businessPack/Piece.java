@@ -45,7 +45,9 @@ public abstract class Piece extends ImageView {
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
-    
+    public void hit(int damage){
+        setHP(hp - damage);
+    }
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
         if(hitWay != null) hitWay.clear();
@@ -65,19 +67,7 @@ public abstract class Piece extends ImageView {
     }
     public void setHP(int hp){
         this.hp = hp;
-        if(hp == 0){
-            alive = false;
-        }else{
-            alive = true;
-        }
-    }
-    public void hit(int damage, Table table){
-        hp -= damage;
-        if(hp == 0){
-            alive = false;
-        }else{
-            alive = true;
-        }
+        alive = (hp > 0);
     }
     public boolean getLife(){
         return alive;

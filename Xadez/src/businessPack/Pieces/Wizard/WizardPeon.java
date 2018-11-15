@@ -13,8 +13,8 @@ public class WizardPeon implements ItypePeon {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         return null;
     }
-
-
-    
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

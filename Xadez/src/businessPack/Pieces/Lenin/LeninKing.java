@@ -53,5 +53,8 @@ public class LeninKing implements ItypeKing {
         System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
         return newVetor;
     }
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

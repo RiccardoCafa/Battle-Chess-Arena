@@ -16,5 +16,8 @@ public class EnemyPeonLenin implements ItypePeon{
         vector.add(null);
         return vector;
     }
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

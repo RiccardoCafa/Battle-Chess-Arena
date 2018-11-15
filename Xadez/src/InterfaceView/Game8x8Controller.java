@@ -65,8 +65,8 @@ public class Game8x8Controller implements Initializable {
         playing = player1;
         tab = new Table(8, 8, player1, player2);
         Bishop c = new Bishop(player2, TypeHero.lenin, 4, 4);
-        King k = new King(player1, TypeHero.lapa, 1, 0);
-        King kL = new King(player1, TypeHero.lapa, 4, 2);
+        King  k = new  King(player1, TypeHero.lapa, 1, 0);
+        King kL = new  King(player1, TypeHero.lapa, 4, 2);
         Queen q = new Queen(player1, TypeHero.lapa, 5, 0);
         Tower t = new Tower(player1, TypeHero.lapa, 2, 3);
         Horse h = new Horse(player2, TypeHero.lenin, 6, 4);
@@ -188,7 +188,4 @@ public class Game8x8Controller implements Initializable {
             }
         }
     }
-    
-
-    
 }

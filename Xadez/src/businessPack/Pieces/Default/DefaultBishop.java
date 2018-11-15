@@ -18,6 +18,10 @@ public class DefaultBishop implements ItypeBishop {
     }
     //metodos>>
     @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
+    @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
        vector = new ArrayList<>();
         tab = table;

@@ -8,7 +8,7 @@ import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class SheriffHorse implements ItypeHorse, Pistol {
+public class SheriffHorse implements ItypeHorse {
     //atributos>>
     Player player;
     int charge = 1;
@@ -18,19 +18,23 @@ public class SheriffHorse implements ItypeHorse, Pistol {
     }
     //metodos>>
     @Override
-    public void shoot(Table table, Vetor vetor) {
-        for(int iE = vetor.getX(); iE < 8; iE++){
-            if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                table.getBlock(iE, vetor.getY()).getPiece().hit(charge, table);
-                break;
+    public Table reaction(Table table, Vetor vetor) {
+        if(charge != 0){
+            for(int iE = vetor.getX(); iE < Table.getM(); iE++){
+                if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
+                    table.getBlock(iE, vetor.getY()).getPiece().hit(charge);
+                    break;
+                }
             }
-        }
-        for(int iW = vetor.getX(); iW >= 0; iW--){
-            if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                table.getBlock(iW, vetor.getY()).getPiece().hit(charge, table);
-                break;
+            for(int iW = vetor.getX(); iW >= 0; iW--){
+                if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
+                    table.getBlock(iW, vetor.getY()).getPiece().hit(charge);
+                    break;
+                }
             }
-        }
+            charge--;
+        }else charge = 1;
+        return table;
     }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação do cavalo especial do Sheriff
@@ -74,5 +78,4 @@ public class SheriffHorse implements ItypeHorse, Pistol {
         }
         return freeWay;
     }
-
 }

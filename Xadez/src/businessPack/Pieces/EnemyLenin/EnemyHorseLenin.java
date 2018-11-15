@@ -64,5 +64,8 @@ public class EnemyHorseLenin implements ItypeHorse {
         }
         return vector;
     }
-    
+    @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

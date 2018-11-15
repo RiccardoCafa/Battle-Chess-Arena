@@ -17,6 +17,10 @@ public class DefaultHorse implements ItypeHorse {
     }
     //metodos>>
     @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
+    @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação da movimentação padrão do cavalo
         ArrayList<Block> freeWay = new ArrayList<>();
         int sinalX = -1, sinalY = -1, valorX = 1, valorY = 2;
@@ -58,4 +62,5 @@ public class DefaultHorse implements ItypeHorse {
         }
         return freeWay;
     }
+
 }

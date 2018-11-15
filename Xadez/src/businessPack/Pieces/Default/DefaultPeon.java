@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class DefaultPeon implements ItypePeon {
     //metodos>>
     @Override
+    public Table reaction(Table table, Vetor vetor) {
+        return table;
+    }
+    @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         //implementação da movimentação padrão do peão
         return null;
