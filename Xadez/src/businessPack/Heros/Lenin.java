@@ -22,8 +22,8 @@ public class Lenin extends Hero {
     Image LeninQueenImage;
     Image LeninHorseImage;
     //construtor>>
-    public Lenin(Image image) {
-        super(image);
+    public Lenin() {
+        image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
     }
     //metodos>>
     @Override

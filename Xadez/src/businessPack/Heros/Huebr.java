@@ -1,23 +1,8 @@
 package businessPack.Heros;
 
-import businessPack.Pieces.Huebr.huebrPeon;
 import businessPack.Army;
 import businessPack.Hero;
-import businessPack.Pieces.Bishop;
-import businessPack.Pieces.Default.DefaultBishop;
-import businessPack.Pieces.Default.DefaultHorse;
-import businessPack.Pieces.Default.DefaultKing;
-import businessPack.Pieces.Default.DefaultQueen;
-import businessPack.Pieces.Default.DefaultTower;
-import businessPack.Pieces.Horse;
-import businessPack.Pieces.King;
-import businessPack.Pieces.Peon;
-import businessPack.Pieces.Queen;
-
-
-import businessPack.Pieces.Tower;
 import businessPack.Player;
-import extras.Who;
 import javafx.scene.image.Image;
 
 public class Huebr extends Hero {
@@ -30,8 +15,8 @@ public class Huebr extends Hero {
     Image huebrQueenImage;
     //construtor>>
 
-    public Huebr(Image image) {
-        super(image);
+    public Huebr() {
+        image = new Image(path + "Huebr-01.png", widthImg, heightImg, false, false);
     }
     //metodos>>
     

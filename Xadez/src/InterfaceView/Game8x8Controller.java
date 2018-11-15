@@ -3,14 +3,10 @@ package InterfaceView;
 import businessPack.Block;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
-import businessPack.Heros.Sheriff;
 import businessPack.Pieces.Bishop;
-import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
 import businessPack.Pieces.Lapa.LapaTower;
-import businessPack.Pieces.Lenin.LeninBishop;
 import businessPack.Pieces.Lenin.LeninKing;
-import businessPack.Pieces.Lenin.LeninTower;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
@@ -19,7 +15,6 @@ import businessPack.TypeHero;
 import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -29,6 +24,12 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -36,6 +37,10 @@ public class Game8x8Controller implements Initializable {
 
     @FXML
     GridPane gridPane;
+    @FXML
+    AnchorPane background;
+    @FXML
+    ImageView persoImage;
     
     Vetor myVector;
     Vetor selectedVector;
@@ -50,23 +55,19 @@ public class Game8x8Controller implements Initializable {
     Player player2;
     Player playing;
     
-//    Image whiteBlock = new Image("InterfaceView/imagens/blocoBranco.png", 62, 62, false, false );
-//    Image blackBlock = new Image("InterfaceView/imagens/blocoPreto.png", 62, 62, false, false );
-//    Image greenBlock = new Image("InterfaceView/imagens/blocoVerde.png", 62, 62, false, false );
-//    Image redBlock = new Image("InterfaceView/imagens/blocoVermelho.png", 62, 62, false, false );;
-    //Image rei = new Image("InterfaceView/imagens/lapaPieces/lapaKing.png", 57, 130, false, false);
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        player1 = new Player(-1, new Lenin(null), 1);
-        player2 = new Player(1, new Lapa(null), 2);
+        background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        player1 = new Player(-1, new Lenin(), 1);
+        player2 = new Player(1, new Lapa(), 2);
         playing = player1;
         tab = new Table(8, 8, player1, player2);
-        Bishop c = new Bishop(player1, TypeHero.lenin, 4, 4);
-        King k = new King(player1, TypeHero.lenin, 1, 0);
-        King kL = new King(player1, TypeHero.lenin, 4, 2, new LeninKing(player1));
-        Queen q = new Queen(player2, TypeHero.lapa, 5, 0);
-        Tower t = new Tower(player2, TypeHero.lapa, 2, 3, new LapaTower(player2));
+        Bishop c = new Bishop(player2, TypeHero.lenin, 4, 4);
+        King k = new King(player1, TypeHero.lapa, 1, 0);
+        King kL = new King(player1, TypeHero.lapa, 4, 2);
+        Queen q = new Queen(player1, TypeHero.lapa, 5, 0);
+        Tower t = new Tower(player1, TypeHero.lapa, 2, 3);
         tab.getTable()[2][3].setPiece(t);
         tab.getTable()[1][0].setPiece(k);
         tab.getTable()[4][2].setPiece(kL);
@@ -94,11 +95,8 @@ public class Game8x8Controller implements Initializable {
         Pane bloco = new Pane();
         ImageView g;
         g = tab.getBlock(i, j);
-        g.addEventHandler(MouseEvent.MOUSE_RELEASED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                OnPieceClicked(e);
-            }
+        g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            OnPieceClicked(e);
         });
         
         //g = white == true ? new ImageView(whiteBlock) : new ImageView(blackBlock);
@@ -120,6 +118,7 @@ public class Game8x8Controller implements Initializable {
                 myBlock.getPiece().checkMove(tab);
                 possibleBlocks = myBlock.getPiece().getFreeWay();
                 showPossibleWays(possibleBlocks);
+                showPossibleEnemys(myBlock.getPiece().getHitWay(), myBlock.getPiece().getPlayer());
                 System.out.println("Selected Piece");
             } else {
                 System.out.println("Nothing here");
@@ -166,6 +165,16 @@ public class Game8x8Controller implements Initializable {
         }
         for(Block b : freeWay) {
             b.colorChange(0, playing);
+        }
+    }
+    
+    public void showPossibleEnemys(ArrayList<Block> hitWay, Player pAsking) {
+        if(hitWay == null) {
+            System.out.println("Lista vazia");
+            return;
+        }
+        for(Block b : hitWay) {
+            b.colorChange(1, pAsking);
         }
     }
     
