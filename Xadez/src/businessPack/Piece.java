@@ -1,47 +1,61 @@
 package businessPack;
 
-import extras.PlayerPiece;
+import extras.BlockState;
+import extras.Who;
 import java.util.ArrayList;
-import javafx.scene.image.Image;
 import extras.Vetor;
+import javafx.scene.image.ImageView;
 
-public abstract class Piece {
-
+public abstract class Piece extends ImageView {
     //atributos>>
     protected TypePiece tpPiece;
     protected TypeHero tpHero;
-    protected PlayerPiece player;
-    protected Image image;
+    protected Player player;
     protected int hp;
-    protected boolean alive;
     protected int damage = 1;
+    protected final float widhtImg = 26.5f;
+    protected final float heightImg = 60;
+    protected boolean alive;
+    protected String pathHero;
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     //construtor>>
-    protected Piece(PlayerPiece pPiece, TypeHero tpHero, int x, int y){
+    protected Piece(Player player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
-        this.player = pPiece;
+        this.player = player;
         alive = true;
         vetor = new Vetor(x, y);
+        pathHero = getHeroPath();
+        setPickOnBounds(true);
+        setMouseTransparent(true);
+        setLayoutX(20);
+        setLayoutY(0);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
         this.tpHero = tpHero;
         alive = true;
         this.vetor = vetor;
+        pathHero = getHeroPath();
+        setPickOnBounds(true);
+        setMouseTransparent(true);
+        setLayoutX(20);
+        setLayoutY(0);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
     
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
-        hitWay.clear();
+        hitWay = new ArrayList<>();
+        if(hitWay != null) hitWay.clear();
         for(Block block : freeWay){
-            if(table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero() != tpHero){
+            if(block.getBlockState(player) == BlockState.Enemy){
                 hitWay.add(block);
             }
         }
     }
+    
     //getset>>
     public TypePiece getPiece(){
         return tpPiece;
@@ -51,6 +65,14 @@ public abstract class Piece {
     }
     public void setHP(int hp){
         this.hp = hp;
+        if(hp == 0){
+            alive = false;
+        }else{
+            alive = true;
+        }
+    }
+    public void hit(int damage, Table table){
+        hp -= damage;
         if(hp == 0){
             alive = false;
         }else{
@@ -69,26 +91,37 @@ public abstract class Piece {
     public Vetor getVetor(){
         return vetor;
     }
+    public void setVetor(Vetor v){
+        this.vetor = v;
+    }
     public TypeHero getTpHero(){
         return tpHero;
     }
-    public PlayerPiece getPlayer() {
+    public Who getPlayerWho() {
+        return player.getWho();
+    }
+    public Player getPlayer() {
         return player;
     }
     public ArrayList<Block> getFreeWay() {
         return freeWay;
     }
-     /**
-     * @return the image
-     */
-    public Image getImage() {
-        return image;
+    public ArrayList<Block> getHitWay() {
+        return hitWay;
     }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(Image image) {
-        this.image = image;
+    private String getHeroPath() {
+        switch(tpHero) {
+            case huebr:
+                return "huebr";
+            case lapa:
+                return "lapa";
+            case lenin:
+                return "lenin";
+            case sheriff:
+                return "sheriff";
+            case wizard:
+                return "wizard";
+        }
+        return "huebr";
     }
 }

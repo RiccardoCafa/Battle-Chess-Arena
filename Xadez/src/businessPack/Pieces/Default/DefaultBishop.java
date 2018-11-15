@@ -3,70 +3,45 @@ package businessPack.Pieces.Default;
 import businessPack.Block;
 import businessPack.Table;
 import businessPack.Pieces.Interfaces.ItypeBishop;
+import businessPack.Player;
+import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
 public class DefaultBishop implements ItypeBishop {
+    Table tab;
+    ArrayList<Block> vector;
+    Player playing;
+    
+    public DefaultBishop(Player playing){
+        this.playing = playing;
+    }
     //metodos>>
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-        ArrayList<Block> vector;
-        vector = new ArrayList<>();
-        vector.clear();
-        // diagonais
-        //diagonal para cima e para a esquerda
-        for(int i = vetor.getX()-1, j = vetor.getY()-1;i<table.getM();i--,j--){
-            if(table.getBlock(i, j)== null){
-                vector.add(table.getBlock(i, j));
-            }else{
-                if(table.getBlock(           i,            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, j));
-                    break;
-                }
-                break;
-            }
-        }
-        //diagonal para cima e para a direita
-        for(int i = vetor.getX()+1, j = vetor.getY()-1;i<table.getM();i++,j--){
-            if(table.getBlock(i, j)== null){
-                vector.add(table.getBlock(i, j));
-            }else{
-                if(table.getBlock(           i,            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, j));
-                    break;
-                }
-            break;
-            }
-        } 
-
-        //diagonal para baixo e para a esquerda
-        for(int i = vetor.getX()-1, j = vetor.getY()+1;i<table.getM();i--,j++){
-            if(table.getBlock(i, j)== null){
-                vector.add(table.getBlock(i, j));
-            }else{
-                if(table.getBlock(           i,            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, j));
-                    break;
-                }
-                break;
-            }
-        }
-        //diagonal para baixo e para a direita
-        for(int i = vetor.getX()+1, j = vetor.getY()+1;i<table.getM();i++,j++){
-            if(table.getBlock(i, j)== null){
-                vector.add(table.getBlock(i, j));
-            }else{
-                if(table.getBlock(           i,            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, j));
-                    break;
-                }
-                break;
-            }
-        }
+       vector = new ArrayList<>();
+        tab = table;
+        moveInf(-1, 1, vetor);
+        moveInf(-1, -1, vetor);
+        moveInf(1, 1, vetor);
+        moveInf(1, -1, vetor);
         return vector;
+            }
+     public Vetor moveInf(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return vetor;
+        
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
+            vector.add(tab.getBlock(newVetor));
+            return newVetor;
+        }
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
+            vector.add(tab.getBlock(newVetor));
+            return moveInf(xDir, yDir, newVetor);
+        }
+        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+        return newVetor;
     }
 }

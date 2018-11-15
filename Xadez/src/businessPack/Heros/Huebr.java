@@ -1,22 +1,8 @@
 package businessPack.Heros;
 
-import businessPack.Pieces.Huebr.huebrPeon;
 import businessPack.Army;
 import businessPack.Hero;
-import businessPack.Pieces.Bishop;
-import businessPack.Pieces.Default.DefaultBishop;
-import businessPack.Pieces.Default.DefaultHorse;
-import businessPack.Pieces.Default.DefaultKing;
-import businessPack.Pieces.Default.DefaultQueen;
-import businessPack.Pieces.Default.DefaultTower;
-import businessPack.Pieces.Horse;
-import businessPack.Pieces.King;
-import businessPack.Pieces.Peon;
-import businessPack.Pieces.Queen;
-
-
-import businessPack.Pieces.Tower;
-import extras.PlayerPiece;
+import businessPack.Player;
 import javafx.scene.image.Image;
 
 public class Huebr extends Hero {
@@ -29,17 +15,17 @@ public class Huebr extends Hero {
     Image huebrQueenImage;
     //construtor>>
 
-    public Huebr(Image image) {
-        super(image);
+    public Huebr() {
+        image = new Image(path + "Huebr-01.png", widthImg, heightImg, false, false);
     }
     //metodos>>
     
     ///HU3HU3HU3HU3 BRBRBRB
 
     @Override
-    public void createArmy(Army army, int sentido, PlayerPiece jogador) {
+    public void createArmy(Army army, int sentido, Player jogador) {
         /*
-        // PlayerPiece pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image
+        // Who pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image
               for(int j = 0; j < 8; j++) {
             army.addPiece(new Peon(new huebrPeon(), true, (int)(3.5 + sentido*2.5), j, huebrPeonImage));//peões
         }

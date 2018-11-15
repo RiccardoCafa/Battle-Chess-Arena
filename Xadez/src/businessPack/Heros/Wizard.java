@@ -6,8 +6,9 @@ import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Peon;
 import businessPack.Pieces.Wizard.WizardBishop;
 import businessPack.Pieces.Wizard.WizardPeon;
+import businessPack.Player;
 import businessPack.TypeHero;
-import extras.PlayerPiece;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Wizard extends Hero {
@@ -20,12 +21,12 @@ public class Wizard extends Hero {
     Image wizardHorse;
     Image wizardTower;
     
-    public Wizard(Image image) {
-        super(image);
+    public Wizard() {
+        image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
     }
 
     @Override
-    public void createArmy(Army army, int sentido,PlayerPiece jogador) {
+    public void createArmy(Army army, int sentido, Player jogador) {
         for(int k = 0;k<8;k++){
             //army.addPiece(new Peon(jogador, TypeHero.wizard, k, 10, 1, (int)(3.5 + sentido*2.5), wizardPeon)); //peões
         }
