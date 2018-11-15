@@ -21,8 +21,8 @@ public class Wizard extends Hero {
     Image wizardHorse;
     Image wizardTower;
     
-    public Wizard(Image image) {
-        super(image);
+    public Wizard() {
+        image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
     }
 
     @Override

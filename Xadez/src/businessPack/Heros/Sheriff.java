@@ -16,8 +16,8 @@ import javafx.scene.image.Image;
 public class Sheriff extends Hero {
     //atributos>>
     //construtor>>
-    public Sheriff(Image image) {
-        super(image);
+    public Sheriff() {
+        image = new Image(path + "pistoleiro-01.png", widthImg, heightImg, false, false);
         tpHero = TypeHero.sheriff;
     }
     //metodos>>

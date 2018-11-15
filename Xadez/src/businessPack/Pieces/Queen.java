@@ -3,6 +3,10 @@ package businessPack.Pieces;
 import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultQueen;
+import businessPack.Pieces.Default.DefaultTower;
+import businessPack.Pieces.Interfaces.ItypeTower;
+import businessPack.Pieces.Lapa.LapaTower;
+import businessPack.Pieces.Sheriff.SheriffQueen;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -25,14 +29,22 @@ public class Queen extends Piece {
         if(freeWay!=null)freeWay.clear();
         //table.clearTrend();
         freeWay = tpQueen.IcheckMove(table, vetor);
-        //updateHitWay(table);
+        updateHitWay(table);
+    }
+    private ItypeQueen getHeroStrategy() {
+        switch(tpHero) {
+            case sheriff:
+                return new SheriffQueen();
+            default:
+                return new DefaultQueen(player);
+        }
     }
     //getset>>
     public void setTypeQueen(ItypeQueen tpQueen){//muda o comportamento do checkMove()
         this.tpQueen = tpQueen;
     }
     public void updateImage() {
-        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Queen.png", 58, 130, false, false));
+        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Queen.png", widhtImg, heightImg, false, false));
         setMouseTransparent(true);
     }
 }

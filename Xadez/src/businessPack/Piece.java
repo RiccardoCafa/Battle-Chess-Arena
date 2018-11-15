@@ -13,6 +13,8 @@ public abstract class Piece extends ImageView {
     protected Player player;
     protected int hp;
     protected int damage = 1;
+    protected final float widhtImg = 26.5f;
+    protected final float heightImg = 60;
     protected boolean alive;
     protected String pathHero;
     protected Vetor vetor;
@@ -25,9 +27,10 @@ public abstract class Piece extends ImageView {
         alive = true;
         vetor = new Vetor(x, y);
         pathHero = getHeroPath();
+        setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(2.5);
-        setLayoutY(-75);
+        setLayoutX(20);
+        setLayoutY(0);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
@@ -35,15 +38,17 @@ public abstract class Piece extends ImageView {
         alive = true;
         this.vetor = vetor;
         pathHero = getHeroPath();
+        setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(2.5);
-        setLayoutY(-75);
+        setLayoutX(20);
+        setLayoutY(0);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
     
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
-        if(!hitWay.isEmpty()) hitWay.clear();
+        hitWay = new ArrayList<>();
+        if(hitWay != null) hitWay.clear();
         for(Block block : freeWay){
             if(block.getBlockState(player) == BlockState.Enemy){
                 hitWay.add(block);
@@ -92,11 +97,17 @@ public abstract class Piece extends ImageView {
     public TypeHero getTpHero(){
         return tpHero;
     }
-    public Who getPlayer() {
+    public Who getPlayerWho() {
         return player.getWho();
+    }
+    public Player getPlayer() {
+        return player;
     }
     public ArrayList<Block> getFreeWay() {
         return freeWay;
+    }
+    public ArrayList<Block> getHitWay() {
+        return hitWay;
     }
     private String getHeroPath() {
         switch(tpHero) {

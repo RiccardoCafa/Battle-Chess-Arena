@@ -16,15 +16,15 @@ public class Horse extends Piece {
     public Horse(Player player, TypeHero tpHero, int x, int y) {
         super(player, tpHero, x, y);
         hp = 6;
-        tpHorse = new DefaultHorse(player);
+        tpHorse = getHeroStrategy();//new DefaultHorse(player);
         updateImage();
     }
-    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
-        super(player, tpHero, x, y);
-        hp = 6;
-        this.tpHorse = tpHorse;
-        updateImage();
-    }
+//    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
+//        super(player, tpHero, x, y);
+//        hp = 6;
+//        this.tpHorse = tpHorse;
+//        updateImage();
+//    }
     //metodos>>
     @Override
     public void checkMove(Table table) {
@@ -34,7 +34,15 @@ public class Horse extends Piece {
         updateHitWay(table);
     }
     public void updateImage() {
-        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", 58, 130, false, false));
+        setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", widhtImg, heightImg, false, false));
+    }
+    private ItypeHorse getHeroStrategy() {
+        switch(tpHero) {
+            case sheriff:
+                return new SheriffHorse(player);
+            default:
+                return new DefaultHorse(player);
+        }
     }
     //getset>>
     public void setTypeHorse(ItypeHorse tpHorse){//muda o comportamento do checkMove()

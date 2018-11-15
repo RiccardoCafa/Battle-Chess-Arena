@@ -17,7 +17,7 @@ public class Vetor {
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
-        trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+        //trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
     
     /**
