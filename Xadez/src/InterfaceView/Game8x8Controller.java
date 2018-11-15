@@ -4,6 +4,7 @@ import businessPack.Block;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Pieces.Bishop;
+import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Lenin.LeninKing;
@@ -68,11 +69,13 @@ public class Game8x8Controller implements Initializable {
         King kL = new King(player1, TypeHero.lapa, 4, 2);
         Queen q = new Queen(player1, TypeHero.lapa, 5, 0);
         Tower t = new Tower(player1, TypeHero.lapa, 2, 3);
+        Horse h = new Horse(player2, TypeHero.lenin, 6, 4);
         tab.getTable()[2][3].setPiece(t);
         tab.getTable()[1][0].setPiece(k);
         tab.getTable()[4][2].setPiece(kL);
         tab.getTable()[5][0].setPiece(q);
         tab.getTable()[4][4].setPiece(c);
+        tab.getTable()[6][4].setPiece(h);
         MountArmyOnTable(tab);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }    
