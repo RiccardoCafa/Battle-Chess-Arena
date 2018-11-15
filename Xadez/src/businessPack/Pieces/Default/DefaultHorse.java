@@ -40,18 +40,18 @@ public class DefaultHorse implements ItypeHorse {
                 if(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getBlockState(player) == BlockState.Enemy){
                     switch(valorX){
                         case +2://oeste
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.W);
+                //            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.W);
                             break;
                         case -2://leste
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.E);
+              //              table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.E);
                             break;
                     }
                     switch(valorY){
                         case +2://norte
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.N);
+                 //           table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.N);
                             break;
                         case -2://sul
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.S);
+               //             table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(Compass.S);
                             break;
                     }
                 }
@@ -67,13 +67,16 @@ public class DefaultHorse implements ItypeHorse {
             
             switch(i){
                 case 0:
-                    table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
+              //      table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NE))).getVetor().setTrend(Compass.SW);
                     break;
-                case 1: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
+                case 1:
+              //       table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SE))).getVetor().setTrend(Compass.NW);
                     break;
-                case 2: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
+                case 2: 
+                  //  table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.SW))).getVetor().setTrend(Compass.NE);
                     break;
-                case 3: table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
+                case 3:
+                  //  table.getBlock(Vetor.sum(vetor, vetor.getVersor(Compass.NW))).getVetor().setTrend(Compass.SE);
                     break;
             }
         }
