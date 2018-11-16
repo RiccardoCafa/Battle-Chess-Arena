@@ -3,80 +3,65 @@ package businessPack.Pieces.Lenin;
 import businessPack.Block;
 import businessPack.Table;
 import businessPack.Pieces.Interfaces.ItypeTower;
+import businessPack.Player;
+import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
 public class LeninTower implements ItypeTower {
+    Table tab;
+    ArrayList<Block> vector;
+    Player playing;
+    
+    public LeninTower(Player playing){
+        this.playing = playing;
+    }
     //metodos>>
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-         ArrayList<Block> vector;
         vector = new ArrayList<>();
-        vector.clear();
-        for(int i = vetor.getX()+1;i<table.getM();i++){
-            if(table.getBlock(i, vetor.getY())==null){
-                vector.add(table.getBlock(i, vetor.getY()));
-            }else{
-                if(table.getBlock(           i, vetor.getY()).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, vetor.getY()));
-                    break;
-                }
-                break;
-            }
-        }
-        for(int i = vetor.getX()-1;i<table.getM();i--){
-            if(table.getBlock(i, vetor.getY())==null){
-                vector.add(table.getBlock(i, vetor.getY()));
-            }else{
-                if(table.getBlock(           i, vetor.getY()).getPiece().getTpHero()!=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(i, vetor.getY()));
-                    break;
-                }
-                break;
-            }
-        }
-        for(int j = vetor.getY()+1;j<table.getN();j++){
-            if(table.getBlock(vetor.getX(), j)==null){
-                vector.add(table.getBlock(vetor.getX(), j));
-            }else{
-                if(table.getBlock(vetor.getX(),            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(vetor.getX(), j));
-                    break;
-                }
-            break;
-            }
-        }
-        for(int j = vetor.getY()-1;j<table.getN();j--){
-            if(table.getBlock(vetor.getX(), j)==null){
-                vector.add(table.getBlock(vetor.getX(), j));
-            }else{
-                if(table.getBlock(vetor.getX(),            j).getPiece().getTpHero() !=
-                   table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-                    vector.add(table.getBlock(vetor.getX(), j));
-                    break;
-                }
-                break;
-            }
-        }
-        if(table.getBlock(vetor.getX()+1,vetor.getY()+1)==null||table.getBlock(vetor.getX()+1,  
-                vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()+1, vetor.getY()+1));
-        }
-         if(table.getBlock(vetor.getX()-1,vetor.getY()-1)==null||table.getBlock(vetor.getX()-1,  
-                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()-1, vetor.getY()-1));
-        }
-          if(table.getBlock(vetor.getX()+1,vetor.getY()-1)==null||table.getBlock(vetor.getX()+1,  
-                vetor.getY()-1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()+1, vetor.getY()-1));
-        }
-           if(table.getBlock(vetor.getX()-1,vetor.getY()+1)==null||table.getBlock(vetor.getX()-1,  
-                vetor.getY()+1).getPiece().getTpHero() != table.getBlock(vetor.getX(), vetor.getY()).getPiece().getTpHero()){
-            vector.add(table.getBlock(vetor.getX()-1, vetor.getY()+1));
-        }
+        tab = table;
+        moveInf(1, 0, vetor);
+        moveInf(-1, 0, vetor);
+        move(-1, 1, vetor);
+        move(-1, -1, vetor);
+        moveInf(0, -1, vetor);
+        moveInf(0, 1, vetor); //infinito e além
+        move(1, 1, vetor);
+        move(1, -1, vetor);
         return vector;
     }
+    public void move(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return;
+        
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
+            vector.add(tab.getBlock(newVetor));
+            return;
+        }
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
+            vector.add(tab.getBlock(newVetor));
+        }
+        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+    }
+      public Vetor moveInf(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return vetor;
+        
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
+            vector.add(tab.getBlock(newVetor));
+            return newVetor;
+        }
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
+            vector.add(tab.getBlock(newVetor));
+            return moveInf(xDir, yDir, newVetor);
+        }
+        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+        return newVetor;
+    }
+
 }

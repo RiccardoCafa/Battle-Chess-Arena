@@ -6,7 +6,7 @@ public class Vetor {
     //atributos>>
     private int x;
     private int y;
-    private Compass trend;//fluxo do vetor, registrando de onde veio
+    private Vetor trend;//fluxo do vetor, registrando de onde veio
     //construtor>>
 
     /**
@@ -17,20 +17,24 @@ public class Vetor {
     public Vetor(int x, int y) {
         this.x = x;
         this.y = y;
-        trend = Compass.C;//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+        //trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
     }
-
+    
     /**
-     * Trend é um Enum Compass.
-     * 
-     * @param x
-     * @param y
-     * @param trend
+     *
+     * @param vetor
      */
-    public Vetor(int x, int y, Compass trend) {
+    public Vetor(Vetor vetor) {
+        this.x = vetor.getX();
+        this.y = vetor.getY();
+        trend = new Vetor(0, 0);//caso não haja necessidade de salvar a posição anterior, o trend será o centro "C"
+    }
+    public Vetor(int x, int y, Vetor versor) {
         this.x = x;
         this.y = y;
-        this.trend = trend;
+        if(versor.getX() >= -1 && versor.getX() <= 1 && versor.getY() >= -1 && versor.getX() <= 1){
+            trend = versor;
+        } 
     }
     //metodos>>
     public static Vetor subtract(Vetor vetor1, Vetor vetor2) {//subtrai dois vetores
@@ -74,10 +78,20 @@ public class Vetor {
             this.y = y;
         }
     }
-    public Compass getTrend(){
-        return trend;
+    public Vetor next(){
+        return Vetor.sum(trend, x, y);
     }
-    public void setTrend(Compass trend){
-        this.trend = trend;
+    public void setTrend(int x){
+        switch(x){
+            case  1: trend = new Vetor( 0, -1);
+            case  2: trend = new Vetor( 1, -1);
+            case  3: trend = new Vetor( 1,  0);
+            case  4: trend = new Vetor( 1,  1);// 8 1 2
+            case  5: trend = new Vetor( 0,  1);// 7   3
+            case  6: trend = new Vetor(-1,  1);// 6 5 4
+            case  7: trend = new Vetor( 1,  0);
+            case  8: trend = new Vetor(-1, -1);
+            default: trend = new Vetor( 0,  0);
+        }
     }
 }
