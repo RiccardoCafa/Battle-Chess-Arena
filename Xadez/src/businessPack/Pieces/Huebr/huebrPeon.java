@@ -11,10 +11,7 @@ import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
 
-/**
- *
- * @author patri
- */
+
 public class huebrPeon implements ItypePeon {
 
     @Override
