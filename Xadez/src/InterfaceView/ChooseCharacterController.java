@@ -8,10 +8,29 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 
-public class ChooseCharacterController implements Initializable {
 
+//String musicURL = "src/testemedia/dancing.mp3";
+//Media media = new Media(getClass().getResource("dancing.mp3").toString());
+//MediaPlayer starter = new MediaPlayer(media);
+
+
+
+
+public class ChooseCharacterController implements Initializable {
+    
+    Media musicLapa = new Media(getClass().getResource("Lapa.mp3").toString());
+    Media musicHUEBR = new Media(getClass().getResource("MUSICA_HUE_HUE_BR.mp3").toString());
+    Media musicWizard = new Media(getClass().getResource("Mago.mp3").toString());
+    Media musicPistoleiro = new Media(getClass().getResource("Pistoleiro.mp3").toString());
+    Media musicURSS = new Media(getClass().getResource("URSS.mp3").toString());
+    
+    MediaPlayer tocador = new MediaPlayer(musicHUEBR);
+    
+    
     @FXML
     Button setaEsq;
     @FXML
@@ -53,6 +72,7 @@ public class ChooseCharacterController implements Initializable {
     }
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
+       
         if(count == 0){
             count = 4;
         }else{
