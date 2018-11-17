@@ -3,11 +3,11 @@ package businessPack.Pieces.EnemyLenin;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypeHorse;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class EnemyHorseLenin implements ItypeHorse {
+public class EnemyHorseLenin implements ItypePiece {
 
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
@@ -65,7 +65,7 @@ public class EnemyHorseLenin implements ItypeHorse {
         return vector;
     }
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return table;
     }
 }

@@ -1,5 +1,6 @@
 package businessPack;
 
+import businessPack.Pieces.Interfaces.ItypePiece;
 import extras.BlockState;
 import extras.Who;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import javafx.scene.image.ImageView;
 public abstract class Piece extends ImageView {
     //atributos>>
     protected TypePiece tpPiece;
+    protected ItypePiece strategy;//agora o strategy vem de Piece
     protected TypeHero tpHero;
     protected Player player;
     protected int hp;
@@ -47,6 +49,9 @@ public abstract class Piece extends ImageView {
     public abstract void checkMove(Table table);//criação da freeWay
     public void hit(int damage){
         setHP(hp - damage);
+    }
+    public void reaction(Table table){
+        table = strategy.Ireaction(table, vetor);
     }
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();

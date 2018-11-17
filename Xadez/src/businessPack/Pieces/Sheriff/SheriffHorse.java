@@ -1,14 +1,14 @@
 package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypeHorse;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class SheriffHorse implements ItypeHorse {
+public class SheriffHorse implements ItypePiece {
     //atributos>>
     Player player;
     int charge = 1;
@@ -18,7 +18,7 @@ public class SheriffHorse implements ItypeHorse {
     }
     //metodos>>
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         if(charge != 0){
             for(int iE = vetor.getX(); iE < Table.getM(); iE++){
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){

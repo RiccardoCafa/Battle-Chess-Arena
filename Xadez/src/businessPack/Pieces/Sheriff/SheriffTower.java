@@ -2,12 +2,12 @@ package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Player;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.ItypePiece;
 
-public class SheriffTower implements ItypeTower {
+public class SheriffTower implements ItypePiece {
     //atributos>>
     Player player;
     int charge = 1;
@@ -17,7 +17,7 @@ public class SheriffTower implements ItypeTower {
     }
     //metodos>>
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return null;
     }
     @Override

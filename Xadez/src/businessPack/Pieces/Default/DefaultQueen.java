@@ -1,14 +1,14 @@
 package businessPack.Pieces.Default;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypeQueen;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class DefaultQueen implements ItypeQueen {
+public class DefaultQueen implements ItypePiece {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -18,7 +18,7 @@ public class DefaultQueen implements ItypeQueen {
     }
     //metodos>>
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return table;
     }
     @Override

@@ -2,13 +2,13 @@ package businessPack.Pieces.Default;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypeBishop;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class DefaultBishop implements ItypeBishop {
+public class DefaultBishop implements ItypePiece {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -18,7 +18,7 @@ public class DefaultBishop implements ItypeBishop {
     }
     //metodos>>
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return table;
     }
     @Override

@@ -1,13 +1,13 @@
 package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePeon;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class SheriffPeon implements ItypePeon {
+public class SheriffPeon implements ItypePiece {
     //atributos>>
     Player player;
     int charge = 1;
@@ -17,7 +17,7 @@ public class SheriffPeon implements ItypePeon {
     }
     //metodos>>
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return null;
     }
     @Override

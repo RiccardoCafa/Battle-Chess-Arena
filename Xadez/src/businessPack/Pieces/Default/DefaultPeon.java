@@ -1,15 +1,15 @@
 package businessPack.Pieces.Default;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePeon;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class DefaultPeon implements ItypePeon {
+public class DefaultPeon implements ItypePiece {
     //metodos>>
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return table;
     }
     @Override

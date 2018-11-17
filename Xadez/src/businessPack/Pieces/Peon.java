@@ -1,9 +1,9 @@
 package businessPack.Pieces;
 
-import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Pieces.Huebr.huebrPeon;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -11,12 +11,11 @@ import javafx.scene.image.Image;
 
 public class Peon extends Piece {
     //atributos>>
-    ItypePeon tpPeon;
     //construtor>>
     public Peon(Player pPiece, TypeHero tpHero, int x, int y) {
         super(pPiece, tpHero, x, y);
         hp = 2;
-        tpPeon = getHeroStrategy();//new DefaultPeon();
+        strategy = getHeroStrategy();//new DefaultPeon();
         updateImage();
     }
     /*public Peon(Player pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
@@ -30,13 +29,13 @@ public class Peon extends Piece {
     public void checkMove(Table table) {
         freeWay.clear();
         table.clearTrend();
-        freeWay = tpPeon.IcheckMove(table, vetor);
+        freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay(table);
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Peon.png", widhtImg, heightImg, false, false));
     }
-    private ItypePeon getHeroStrategy() {
+    private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case huebr:
                 return new huebrPeon();
@@ -45,7 +44,7 @@ public class Peon extends Piece {
         }
     }
     //getset>>
-    public void setTypePeon(ItypePeon tpPeon){//muda o comportamento do checkMove()
-        this.tpPeon = tpPeon;
+    public void setTypePeon(ItypePiece tpPeon){//muda o comportamento do checkMove()
+        strategy = tpPeon;
     }
 }

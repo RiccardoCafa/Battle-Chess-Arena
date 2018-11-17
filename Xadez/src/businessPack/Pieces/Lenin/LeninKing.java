@@ -2,14 +2,14 @@ package businessPack.Pieces.Lenin;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypeKing;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
 
-public class LeninKing implements ItypeKing {
+public class LeninKing implements ItypePiece {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -54,7 +54,7 @@ public class LeninKing implements ItypeKing {
         return newVetor;
     }
     @Override
-    public Table reaction(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return table;
     }
 }
