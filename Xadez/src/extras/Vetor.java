@@ -8,7 +8,6 @@ public class Vetor {
     private int y;
     private int[] trend = new int[2];//fluxo do vetor, registrando de onde veio
     //construtor>>
-
     /**
      *
      * @param x
