@@ -6,15 +6,17 @@ import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Lenin.LeninBishop;
 import businessPack.Pieces.Wizard.WizardBishop;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Bishop extends Piece {
     //atributos>>
     //construtor>>
-    public Bishop(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Bishop(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         strategy = getHeroStrategy();//new DefaultBishop(pPiece);  
         hp = 4;
         updateImage();
@@ -40,9 +42,9 @@ public class Bishop extends Piece {
             case wizard:
                 return new WizardBishop();
             case lenin:
-                return new LeninBishop(player);
+                return new LeninBishop(Players.getPlayer(player));
             default:
-                return new DefaultBishop(player);
+                return new DefaultBishop(Players.getPlayer(player));
         }
     }
     //getset>>

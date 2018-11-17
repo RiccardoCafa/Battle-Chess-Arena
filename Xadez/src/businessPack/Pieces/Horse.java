@@ -5,15 +5,17 @@ import businessPack.Pieces.Default.DefaultHorse;
 import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Sheriff.SheriffHorse;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Horse extends Piece {
     //atributos>>
     //construtor>>
-    public Horse(Player player, TypeHero tpHero, int x, int y) {
-        super(player, tpHero, x, y);
+    public Horse(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 6;
         strategy = getHeroStrategy();//new DefaultHorse(player);
         updateImage();
@@ -38,9 +40,9 @@ public class Horse extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffHorse(player);
+                return new SheriffHorse(Players.getPlayer(player));
             default:
-                return new DefaultHorse(player);
+                return new DefaultHorse(Players.getPlayer(player));
         }
     }
     //getset>>

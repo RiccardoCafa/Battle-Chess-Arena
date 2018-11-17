@@ -11,6 +11,7 @@ import businessPack.Pieces.Lenin.LeninKing;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Vetor;
@@ -62,14 +63,16 @@ public class Game8x8Controller implements Initializable {
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         player1 = new Player(-1, new Lenin(), 1);
         player2 = new Player(1, new Lapa(), 2);
+        Players.setPlayer1(player1);
+        Players.setPlayer2(player2);
         playing = player1;
         tab = new Table(8, 8, player1, player2);
-        Bishop c = new Bishop(player2, TypeHero.lenin, 4, 4);
-        King  k = new  King(player1, TypeHero.lapa, 1, 0);
-        King kL = new  King(player1, TypeHero.lapa, 4, 2);
-        Queen q = new Queen(player1, TypeHero.lapa, 5, 0);
-        Tower t = new Tower(player1, TypeHero.lapa, 2, 3);
-        Horse h = new Horse(player2, TypeHero.lenin, 6, 4);
+        Bishop c = new Bishop(player2.getWho(), TypeHero.lenin, 4, 4);
+        King  k = new  King(player1.getWho(), TypeHero.lapa, 1, 0);
+        King kL = new  King(player1.getWho(), TypeHero.lapa, 4, 2);
+        Queen q = new Queen(player1.getWho(), TypeHero.lapa, 5, 0);
+        Tower t = new Tower(player1.getWho(), TypeHero.lapa, 2, 3);
+        Horse h = new Horse(player2.getWho(), TypeHero.lenin, 6, 4);
         tab.getTable()[2][3].setPiece(t);
         tab.getTable()[1][0].setPiece(k);
         tab.getTable()[4][2].setPiece(kL);
@@ -78,8 +81,7 @@ public class Game8x8Controller implements Initializable {
         tab.getTable()[6][4].setPiece(h);
         MountArmyOnTable(tab);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
-    }    
-    
+    }
     public void MountArmyOnTable(Table tab) {
         ImageView pieceImage = null;
         

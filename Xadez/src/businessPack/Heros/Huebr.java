@@ -3,6 +3,7 @@ package businessPack.Heros;
 import businessPack.Army;
 import businessPack.Hero;
 import businessPack.Player;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Huebr extends Hero {
@@ -23,7 +24,7 @@ public class Huebr extends Hero {
     ///HU3HU3HU3HU3 BRBRBRB
 
     @Override
-    public void createArmy(Army army, int sentido, Player jogador) {
+    public void createArmy(Army army, int sentido, Who jogador) {
         /*
         // Who pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image
               for(int j = 0; j < 8; j++) {

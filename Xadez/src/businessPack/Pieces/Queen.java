@@ -10,15 +10,17 @@ import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Players;
+import extras.Who;
 
 public class Queen extends Piece {
     //atributos>>
     //construtor>>
-    public Queen(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Queen(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 8;
         damage = 1;
-        strategy = new DefaultQueen(pPiece);
+        strategy = getHeroStrategy();
         updateImage();
     }
     //metodos>>
@@ -32,9 +34,9 @@ public class Queen extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffQueen(player);
+                return new SheriffQueen(Players.getPlayer(player));
             default:
-                return new DefaultQueen(player);
+                return new DefaultQueen(Players.getPlayer(player));
         }
     }
     //getset>>

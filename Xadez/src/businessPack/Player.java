@@ -25,7 +25,7 @@ public class Player {
         if(sentido == 1) player = Who.player2;
         else player = Who.player1;
         this.playingTurn = playingTurn;
-        //hero.createArmy(army, sentido);
+        hero.createArmy(army, sentido, player);
         this.sentido = sentido;
     }
     //metodos>>

@@ -8,12 +8,14 @@ import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Players;
+import extras.Who;
 
 public class Tower extends Piece {
     //atributos>>
     //construtor>>
-    public Tower(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Tower(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 10;
         damage = 1;
         strategy = getHeroStrategy();//new DefaultTower(pPiece);
@@ -40,9 +42,9 @@ public class Tower extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case lapa:
-                return new LapaTower(player);
+                return new LapaTower(Players.getPlayer(player));
             default:
-                return new DefaultTower(player);
+                return new DefaultTower(Players.getPlayer(player));
         }
     }
     //getset>>

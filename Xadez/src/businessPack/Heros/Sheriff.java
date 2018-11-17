@@ -9,7 +9,9 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.TypeHero;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Sheriff extends Hero {
@@ -21,7 +23,8 @@ public class Sheriff extends Hero {
     }
     //metodos>>
     @Override
-    public void createArmy(Army army, int sentido, Player player){
+    public void createArmy(Army army, int sentido, Who player){
+        this.player = Players.getPlayer(player);
         for(int i = 0; i < 8; i++) {
             army.addPiece(new Peon(player, TypeHero.sheriff, i, (int)(3.5 + sentido*2.5)));//peões
         }

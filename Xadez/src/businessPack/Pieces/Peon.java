@@ -7,13 +7,14 @@ import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Peon extends Piece {
     //atributos>>
     //construtor>>
-    public Peon(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Peon(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 2;
         strategy = getHeroStrategy();//new DefaultPeon();
         updateImage();

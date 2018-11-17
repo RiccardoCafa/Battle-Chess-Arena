@@ -12,7 +12,7 @@ public abstract class Piece extends ImageView {
     protected TypePiece tpPiece;
     protected ItypePiece strategy;//agora o strategy vem de Piece
     protected TypeHero tpHero;
-    protected Player player;
+    protected Who player;
     protected int hp;
     protected int damage = 1;
     protected final float widhtImg = 26.5f;
@@ -23,7 +23,7 @@ public abstract class Piece extends ImageView {
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     //construtor>>
-    protected Piece(Player player, TypeHero tpHero, int x, int y){
+    protected Piece(Who player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
         this.player = player;
         alive = true;
@@ -57,7 +57,7 @@ public abstract class Piece extends ImageView {
         hitWay = new ArrayList<>();
         if(hitWay != null) hitWay.clear();
         for(Block block : freeWay){
-            if(block.getBlockState(player) == BlockState.Enemy){
+            if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
                 hitWay.add(block);
             }
         }
@@ -92,11 +92,11 @@ public abstract class Piece extends ImageView {
     public TypeHero getTpHero(){
         return tpHero;
     }
-    public Who getPlayerWho() {
-        return player.getWho();
+    public Who getWho() {
+        return player;
     }
     public Player getPlayer() {
-        return player;
+        return Players.getPlayer(player);
     }
     public ArrayList<Block> getFreeWay() {
         return freeWay;
@@ -117,6 +117,6 @@ public abstract class Piece extends ImageView {
             case wizard:
                 return "wizard";
         }
-        return "huebr";
+        return null;
     }
 }

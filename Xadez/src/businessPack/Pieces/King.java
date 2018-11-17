@@ -7,15 +7,17 @@ import businessPack.Pieces.Lenin.LeninKing;
 import businessPack.Pieces.Sheriff.SheriffKing;
 import businessPack.Pieces.Wizard.WizardKing;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class King extends Piece {
     //atributos>>
     //construtor>>
-    public King(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public King(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 18;
         damage = 1;
         strategy = getHeroStrategy();//new DefaultKing(player);
@@ -38,13 +40,13 @@ public class King extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffKing(player);
+                return new SheriffKing(Players.getPlayer(player));
             case lenin:
-                return new LeninKing(player);
+                return new LeninKing(Players.getPlayer(player));
             case wizard:
                 return new WizardKing();
             default:
-                return new DefaultKing(player);
+                return new DefaultKing(Players.getPlayer(player));
         }
     }
     //getset>>
