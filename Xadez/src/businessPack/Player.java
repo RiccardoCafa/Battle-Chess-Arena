@@ -40,4 +40,7 @@ public class Player {
     public Who getWho(){
         return player;
     }
+    public int getSentido(){
+        return sentido;
+    }
 }

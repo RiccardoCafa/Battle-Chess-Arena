@@ -7,7 +7,6 @@ import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
 import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
-import businessPack.Pieces.Sheriff.SheriffHorse;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.TypeHero;

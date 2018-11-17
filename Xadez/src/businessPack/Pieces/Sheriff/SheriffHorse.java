@@ -76,6 +76,26 @@ public class SheriffHorse implements ItypePiece {
                 table.getBlock(vetor.getTrend(i)).getVetor().setTrend(i + 4);//apontadores para a origem
             }
         }
+        int a = 3;
+        while(a > 0){//movimentos adicionais do cavalo do Sheriff
+            if(Table.isInside(vetor.getX(), vetor.getY() - a)){//norte
+                freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - a));
+                table.getBlock(vetor.getX(), vetor.getY() - a).getVetor().setTrend(5);
+            }
+            if(Table.isInside(vetor.getX(), vetor.getY() + a)){//sul
+                freeWay.add(table.getBlock(vetor.getX(), vetor.getY() + a));
+                table.getBlock(vetor.getX(), vetor.getY() + a).getVetor().setTrend(1);
+            }
+            if(Table.isInside(vetor.getX() + a, vetor.getY())){//leste
+                freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
+                table.getBlock(vetor.getX() + a, vetor.getY()).getVetor().setTrend(7);
+            }
+            if(Table.isInside(vetor.getX() - a, vetor.getY())){//oeste
+                freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
+                table.getBlock(vetor.getX() - a, vetor.getY()).getVetor().setTrend(3);
+            }
+            a--;
+        }
         return freeWay;
     }
 }
