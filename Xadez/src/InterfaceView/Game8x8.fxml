@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane fx:id="background" prefHeight="677.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.Game8x8Controller">
+<AnchorPane fx:id="background" prefHeight="677.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.GameCtrl">
    <children>
       <Pane prefHeight="750.0" prefWidth="1333.0">
          <children>
@@ -20,7 +19,7 @@
             </ImageView>
             <ImageView fx:id="persoImage" fitHeight="420.0" fitWidth="520.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Personagens/lapa-01.png" />
+                  <Image url="@Personagens/lenin-01.png" />
                </image>
             </ImageView>
          </children>

@@ -19,8 +19,16 @@ public class Players {
     //getset>>
     public static void setPlayer1(Player player){
         player1 = player;
+        if(player1 != null && player2 != null) {
+            player1.getHero().createArmy(player1.getArmy(), player1.getSentido(), Who.player1);
+            player2.getHero().createArmy(player2.getArmy(), player2.getSentido(), Who.player2);
+        }
     }
     public static void setPlayer2(Player player){
         player2 = player;
+        if(player1 != null && player2 != null) {
+            player1.getHero().createArmy(player1.getArmy(), player1.getSentido(), Who.player1);
+            player2.getHero().createArmy(player2.getArmy(), player2.getSentido(), Who.player2);
+        }
     }
 }
