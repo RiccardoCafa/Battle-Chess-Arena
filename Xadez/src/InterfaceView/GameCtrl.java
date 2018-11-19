@@ -90,7 +90,7 @@ public class GameCtrl implements Initializable {
         //Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, null);
-     
+        
         MountArmyOnTable(table);
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
