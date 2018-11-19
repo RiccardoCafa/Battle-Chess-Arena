@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.PathTransition;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -45,6 +47,11 @@ public class GameCtrl implements Initializable {
     AnchorPane background;
     @FXML
     ImageView persoImage;
+    @FXML
+    Pane paneRef;
+    
+    Pane myPane= null;
+    Pane destPane = null;
     
     Vetor myVector;
     Vetor selectedVector;
@@ -83,19 +90,19 @@ public class GameCtrl implements Initializable {
         table.getTable()[6][4].setPiece(h);*/
         player1 = new Player(-1, new Sheriff(), 1);
         player2 = new Player(1, new Lapa(), 2);
-        Players ps = new Players(player1, player2);
-        //Players.setPlayer1(player1);
-        //Players.setPlayer2(player2);
+        //Players ps = new Players(player1, player2);
+        Players.setPlayer1(player1);
+        Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, null);
         
-        MountArmyOnTable(table);
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 table.getBlock(i, j).setPiece(player1.getArmy().findPiece(i, j));
                 //table.getTable()[i][j].setPiece(player2.getArmy().findPiece(i, j));
             }
         }
+        MountArmyOnTable(table);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }
     public void MountArmyOnTable(Table tab) {
@@ -153,7 +160,8 @@ public class GameCtrl implements Initializable {
                 movingPiece = false;
                 resetBlockTab();
                 System.out.println("Moved Piece");
-            } else if(myBlock.getVetor() == selectedVector){
+            } else if(myBlock.getVetor().getX() == selectedVector.getX() &&
+                      myBlock.getVetor().getY() == selectedVector.getY()){
                 movingPiece = false;
                 resetBlockTab();
             }
@@ -162,11 +170,14 @@ public class GameCtrl implements Initializable {
     
     public void MoveImage(Vetor source, Vetor dest) {
         ObservableList<Node> childrens = gridPane.getChildren();
-        Pane myPane= null;
-        Pane destPane = null;
+        myPane= null;
+        destPane = null;
         PathTransition animate = new PathTransition();
         animate.setDuration(Duration.seconds(2));
-        Line line = new Line(source.getX(), source.getY(), dest.getX(), dest.getY());
+        System.out.println(paneRef.getWidth() + 32 + source.getX()*32);
+        System.out.println(paneRef.getHeight()+ 32 + source.getY()*32);
+        Line line = new Line(/*paneRef.getWidth() + 32 +*/ source.getX()*32,source.getY()*32,
+                            dest.getX()*32,dest.getY()*32);
         animate.setPath(line);
         for (Node p : childrens) {
             if(myPane == null && GridPane.getRowIndex(p) == source.getY() && GridPane.getColumnIndex(p) == source.getX()) {
@@ -183,8 +194,11 @@ public class GameCtrl implements Initializable {
         animate.setNode(myPane.getChildren().get(1));
         Node tempPane = myPane.getChildren().get(1);
         animate.play();
-        myPane.getChildren().remove(1);
-        destPane.getChildren().add(1, tempPane);
+        animate.onFinishedProperty().set((EventHandler<ActionEvent>) (ActionEvent event) -> {
+            myPane.getChildren().remove(1);
+            destPane.getChildren().add(1, tempPane);
+        }) ;
+        
     }
     
     public void showPossibleWays(ArrayList<Block> freeWay) {
