@@ -153,6 +153,9 @@ public class GameCtrl implements Initializable {
                 movingPiece = false;
                 resetBlockTab();
                 System.out.println("Moved Piece");
+            } else if(myBlock.getVetor() == selectedVector){
+                movingPiece = false;
+                resetBlockTab();
             }
         }
     }
@@ -161,6 +164,10 @@ public class GameCtrl implements Initializable {
         ObservableList<Node> childrens = gridPane.getChildren();
         Pane myPane= null;
         Pane destPane = null;
+        PathTransition animate = new PathTransition();
+        animate.setDuration(Duration.seconds(2));
+        Line line = new Line(source.getX(), source.getY(), dest.getX(), dest.getY());
+        animate.setPath(line);
         for (Node p : childrens) {
             if(myPane == null && GridPane.getRowIndex(p) == source.getY() && GridPane.getColumnIndex(p) == source.getX()) {
                 myPane = (Pane) p;
@@ -173,9 +180,10 @@ public class GameCtrl implements Initializable {
             }
         }
         if(myPane == null || destPane == null) return;
-        
+        animate.setNode(myPane.getChildren().get(1));
         Node tempPane = myPane.getChildren().get(1);
         myPane.getChildren().remove(1);
+        animate.play();
         destPane.getChildren().add(1, tempPane);
     }
     
