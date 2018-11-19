@@ -19,7 +19,7 @@
             </ImageView>
             <ImageView fx:id="persoImage" fitHeight="420.0" fitWidth="520.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Personagens/lapa-01.png" />
+                  <Image url="@Personagens/lenin-01.png" />
                </image>
             </ImageView>
          </children>

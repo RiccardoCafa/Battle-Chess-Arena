@@ -25,7 +25,8 @@ public class Player {
         if(sentido == 1) player = Who.player2;
         else player = Who.player1;
         this.playingTurn = playingTurn;
-        hero.createArmy(army, sentido, player);
+        army = new Army();
+        //hero.createArmy(army, sentido, player);
         this.sentido = sentido;
     }
     //metodos>>
@@ -42,5 +43,8 @@ public class Player {
     }
     public int getSentido(){
         return sentido;
+    }
+    public Hero getHero() {
+        return hero;
     }
 }
