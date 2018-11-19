@@ -41,7 +41,7 @@ public class Peon extends Piece {
             case huebr:
                 return new huebrPeon();
             default:
-                return new DefaultPeon();
+                return new DefaultPeon(player);
         }
     }
     //getset>>
