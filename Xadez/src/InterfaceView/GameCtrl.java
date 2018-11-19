@@ -173,9 +173,9 @@ public class GameCtrl implements Initializable {
         myPane= null;
         destPane = null;
         PathTransition animate = new PathTransition();
-        animate.setDuration(Duration.seconds(2));
+        animate.setDuration(Duration.seconds(1));
         System.out.println(paneRef.getWidth() + 32 + source.getX()*32);
-        System.out.println(paneRef.getHeight()+ 32 + source.getY()*32);
+        System.out.println(paneRef.getHeight() + 32 + source.getY()*32);
         Line line = new Line(/*paneRef.getWidth() + 32 +*/ source.getX()*32,source.getY()*32,
                             dest.getX()*32,dest.getY()*32);
         animate.setPath(line);
@@ -191,6 +191,7 @@ public class GameCtrl implements Initializable {
             }
         }
         if(myPane == null || destPane == null) return;
+        myPane.getChildren().get(1);
         animate.setNode(myPane.getChildren().get(1));
         Node tempPane = myPane.getChildren().get(1);
         animate.play();
