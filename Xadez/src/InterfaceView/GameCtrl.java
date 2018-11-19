@@ -81,21 +81,23 @@ public class GameCtrl implements Initializable {
         table.getTable()[1][0].setPiece(k);
         table.getTable()[4][2].setPiece(kL);
         table.getTable()[5][0].setPiece(q);
-        tab.getTable()[4][4].setPiece(c);
+        table.getTable()[4][4].setPiece(c);
         table.getTable()[6][4].setPiece(h);*/
         player1 = new Player(-1, new Sheriff(), 1);
-        player2 = new Player(1, new Sheriff(), 2);
-        Players.setPlayer1(player1);
-        Players.setPlayer2(player2);
+        player2 = new Player(1, new Lapa(), 2);
+        Players ps = new Players(player1, player2);
+        //Players.setPlayer1(player1);
+        //Players.setPlayer2(player2);
         playing = player1;
-        table = new Table(8, 8, player1, player2);
+        table = new Table(8, 8, player1, null);
+     
+        MountArmyOnTable(table);
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 table.getBlock(i, j).setPiece(player1.getArmy().findPiece(i, j));
-                table.getBlock(i, j).setPiece(player2.getArmy().findPiece(i, j));
+                //table.getTable()[i][j].setPiece(player2.getArmy().findPiece(i, j));
             }
         }
-        MountArmyOnTable(table);
         //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }
     public void MountArmyOnTable(Table tab) {
@@ -182,8 +184,8 @@ public class GameCtrl implements Initializable {
         if(myPane == null || destPane == null) return;
         animate.setNode(myPane.getChildren().get(1));
         Node tempPane = myPane.getChildren().get(1);
-        myPane.getChildren().remove(1);
         animate.play();
+        myPane.getChildren().remove(1);
         destPane.getChildren().add(1, tempPane);
     }
     
