@@ -37,6 +37,7 @@ public class Table{
     public void clearTrend(){
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
+         //       table[m][n].getVetor().setTrend(Compass.C);
                 table[m][n].getVetor().setTrend(0);
             }
         }

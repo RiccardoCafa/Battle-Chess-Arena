@@ -39,7 +39,11 @@ public class Block extends ImageView {
         return piece;
     }
     public void setPiece(Piece p){
-        this.piece = p;
+        try{
+            piece = p;
+        }catch(NullPointerException e){
+            piece = null;
+        }
     }
     public BlockState getBlockState(Player playerLooking) {
         if(piece != null) {

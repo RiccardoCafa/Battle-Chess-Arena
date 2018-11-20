@@ -21,12 +21,6 @@ public class Tower extends Piece {
         strategy = getHeroStrategy();//new DefaultTower(pPiece);
         updateImage();
     }
-    /*public Tower(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
-        hp = 10;
-        this.tpTower = tpTower;
-        updateImage();
-    }*/
     //metodos>>
     @Override
     public void checkMove(Table table) {

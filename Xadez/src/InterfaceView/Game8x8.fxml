@@ -46,5 +46,6 @@
             <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <Pane fx:id="paneRef" prefHeight="94.0" prefWidth="698.0" />
    </children>
 </AnchorPane>

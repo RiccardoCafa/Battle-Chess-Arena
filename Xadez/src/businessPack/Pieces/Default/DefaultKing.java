@@ -33,7 +33,6 @@ public class DefaultKing implements ItypePiece {
         move(0, 1, vetor);
         move(1, 1, vetor);
         move(1, -1, vetor);
-        
         return vector;
     }
     

@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Player;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -32,12 +33,14 @@ public class ChooseCharacterController implements Initializable {
     Button characterSelection;
     @FXML
     Text heroName;
-    private Image myImage;
-    private ImageView myImageView;
-    private int count = 0;
-    private Image[] perso = new Image[5];
-    private String[] heroNames = new String[5];
-    private String name;
+
+    Image myImage;
+    ImageView myImageView;
+    int count = 0;
+    Image[] perso = new Image[5];
+    String[] heroNames = new String[5];
+    Player p1,p2;
+    String name;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -102,7 +105,6 @@ public class ChooseCharacterController implements Initializable {
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
-
     public void onClickButton(MouseEvent e){
         switch(count){
             case 0:
