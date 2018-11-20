@@ -17,9 +17,9 @@ import java.util.ArrayList;
  */
 public class huebrPeon implements ItypePiece {
 
+
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-        //implementação do peão especial do Huebr
         return null;
     }
     @Override

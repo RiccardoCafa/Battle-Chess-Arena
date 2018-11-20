@@ -39,7 +39,8 @@ public class Huebr extends Hero {
         army.addPiece(new King(new DefaultKing(),     true, (int)(3.5 + sentido*3.5), 4, huebrKingImage));//rei
         army.addPiece(new Queen(new DefaultQueen(),   true, (int)(3.5 + sentido*3.5), 3, huebrQueenImage));//rainha
     */}
-}
+    }
+
 
     
 
