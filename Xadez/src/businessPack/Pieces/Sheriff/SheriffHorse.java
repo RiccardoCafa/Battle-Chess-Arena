@@ -77,22 +77,75 @@ public class SheriffHorse implements ItypePiece {
             }
         }
         int a = 3;
+        boolean findPieceN = false, findPieceS = false, findPieceE = false, findPieceW = false;
         while(a > 0){//movimentos adicionais do cavalo do Sheriff
             if(Table.isInside(vetor.getX(), vetor.getY() - a)){//norte
-                freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - a));
-                table.getBlock(vetor.getX(), vetor.getY() - a).getVetor().setTrend(5);
+                if(!findPieceN){
+                    switch(table.getBlock(vetor.getX(), vetor.getY() - a).getBlockState(player)){
+                        case Enemy:
+                            freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - a));
+                            findPieceN = true;
+                            table.getBlock(vetor.getX(), vetor.getY() - a).getVetor().setTrend(5);
+                            break;
+                        case Empty:
+                            freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - a));
+                            break;
+                        case Friend:
+                            findPieceN = true;
+                            break;
+                    }
+                }
             }
             if(Table.isInside(vetor.getX(), vetor.getY() + a)){//sul
-                freeWay.add(table.getBlock(vetor.getX(), vetor.getY() + a));
-                table.getBlock(vetor.getX(), vetor.getY() + a).getVetor().setTrend(1);
+                if(!findPieceS){
+                    switch(table.getBlock(vetor.getX(), vetor.getY() + a).getBlockState(player)){
+                        case Enemy:
+                            freeWay.add(table.getBlock(vetor.getX(), vetor.getY() + a));
+                            findPieceS = true;
+                            table.getBlock(vetor.getX(), vetor.getY() + a).getVetor().setTrend(1);
+                            break;
+                        case Empty:
+                            freeWay.add(table.getBlock(vetor.getX(), vetor.getY() + a));
+                            break;
+                        case Friend:
+                            findPieceS = true;
+                            break;
+                    }
+                }
             }
             if(Table.isInside(vetor.getX() + a, vetor.getY())){//leste
-                freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
-                table.getBlock(vetor.getX() + a, vetor.getY()).getVetor().setTrend(7);
+                if(!findPieceE){
+                    switch(table.getBlock(vetor.getX() + a, vetor.getY()).getBlockState(player)){
+                        case Enemy:
+                            freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
+                            findPieceE = true;
+                            table.getBlock(vetor.getX() + a, vetor.getY()).getVetor().setTrend(7);
+                            break;
+                        case Empty:
+                            freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
+                            break;
+                        case Friend:
+                            findPieceE = true;
+                            break;
+                    }
+                }
             }
             if(Table.isInside(vetor.getX() - a, vetor.getY())){//oeste
-                freeWay.add(table.getBlock(vetor.getX() - a, vetor.getY()));
-                table.getBlock(vetor.getX() - a, vetor.getY()).getVetor().setTrend(3);
+                if(!findPieceW){
+                    switch(table.getBlock(vetor.getX() - a, vetor.getY()).getBlockState(player)){
+                        case Enemy:
+                            freeWay.add(table.getBlock(vetor.getX() - a, vetor.getY()));
+                            findPieceW = true;
+                            table.getBlock(vetor.getX() - a, vetor.getY()).getVetor().setTrend(3);
+                            break;
+                        case Empty:
+                            freeWay.add(table.getBlock(vetor.getX() - a, vetor.getY()));
+                            break;
+                        case Friend:
+                            findPieceW = true;
+                            break;
+                    }
+                }
             }
             a--;
         }

@@ -76,7 +76,7 @@ public class Vetor {
             this.y = y;
         }
     }
-    public Vetor getTrend(int x){
+    public static Vetor getTrend(int x){
         switch(x%9){
             case  1: return new Vetor( 0, -1);
             case  2: return new Vetor( 1, -1);
@@ -101,5 +101,9 @@ public class Vetor {
             case  8: trend[0] = -1; trend[1] = -1;
             default: trend[0] =  0; trend[1] =  0;
         }
+    }
+    public void setTrend(Vetor versor){
+        trend[0] =  versor.getX();
+        trend[1] = versor.getY();
     }
 }

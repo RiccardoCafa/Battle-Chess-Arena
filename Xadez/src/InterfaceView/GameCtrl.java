@@ -66,48 +66,33 @@ public class GameCtrl implements Initializable {
     Player player2;
     Player playing;
     
+    public Player notPlaying(){
+        return playing.equals(player1) ? player2 : player1;
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        /*player1 = new Player(-1, new Lenin(), 1);
-        player2 = new Player(1, new Lapa(), 2);
+        player1 = new Player(1, new Sheriff(), 1);
+        player2 = new Player(-1, new Lenin(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, player2);
-        Bishop c = new Bishop(player2.getWho(), TypeHero.lenin, 4, 4);
-        King  k = new  King(player1.getWho(), TypeHero.lapa, 1, 0);
-        King kL = new  King(player1.getWho(), TypeHero.lapa, 4, 2);
-        Queen q = new Queen(player1.getWho(), TypeHero.lapa, 5, 0);
-        Tower t = new Tower(player1.getWho(), TypeHero.lapa, 2, 3);
-        Horse h = new Horse(player2.getWho(), TypeHero.lenin, 6, 4);
-        table.getTable()[2][3].setPiece(t);
-        table.getTable()[1][0].setPiece(k);
-        table.getTable()[4][2].setPiece(kL);
-        table.getTable()[5][0].setPiece(q);
-        table.getTable()[4][4].setPiece(c);
-        table.getTable()[6][4].setPiece(h);*/
-        player1 = new Player(-1, new Sheriff(), 1);
-        player2 = new Player(1, new Lapa(), 2);
-        //Players ps = new Players(player1, player2);
-        Players.setPlayer1(player1);
-        Players.setPlayer2(player2);
-        playing = player1;
-        table = new Table(8, 8, player1, null);
-        
-        for(int i = 0; i < Table.getM(); i++) {
-            for(int j = 0; j < Table.getN(); j++) {
+        for(int i = 0; i < Table.getM(); i++){
+            for(int j = 0; j < Table.getN(); j++){
                 table.getBlock(i, j).setPiece(player1.getArmy().findPiece(i, j));
-                //table.getTable()[i][j].setPiece(player2.getArmy().findPiece(i, j));
+                if(table.getBlock(i, j).getPiece() == null){
+                    table.getBlock(i, j).setPiece(player2.getArmy().findPiece(i, j));
+                }
             }
         }
         MountArmyOnTable(table);
-        //MoveImage(new Vetor(2, 3), new Vetor(5, 5));
     }
+    
     public void MountArmyOnTable(Table tab) {
         ImageView pieceImage = null;
-        
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if(!tab.getBlock(i, j).isEmpty()) {
@@ -138,15 +123,14 @@ public class GameCtrl implements Initializable {
     
     public void OnPieceClicked(MouseEvent e) {
         Block myBlock = (Block) e.getSource();
-        if(!movingPiece) {
-            if(!myBlock.isEmpty()) {
+        if(!movingPiece){//primeiro clique para escolher uma peça
+            if(!myBlock.isEmpty() || playing == myBlock.getPiece().getPlayer()){//se clicou num lugar com peça aliada
                 selectedVector = new Vetor(myBlock.getVetor());
                 movingPiece = true;
-                //myBlock.colorChange(0, playing);
                 myBlock.getPiece().checkMove(table);
                 possibleBlocks = myBlock.getPiece().getFreeWay();
                 showPossibleWays(possibleBlocks);
-                showPossibleEnemys(myBlock.getPiece().getHitWay(), myBlock.getPiece().getPlayer());
+                showPossibleEnemys(myBlock.getPiece().getHitWay(), notPlaying());
                 System.out.println("Selected Piece");
             } else {
                 System.out.println("Nothing here");
@@ -172,13 +156,13 @@ public class GameCtrl implements Initializable {
         ObservableList<Node> childrens = gridPane.getChildren();
         myPane= null;
         destPane = null;
-        PathTransition animate = new PathTransition();
-        animate.setDuration(Duration.seconds(1));
+        //PathTransition animate = new PathTransition();
+        //animate.setDuration(Duration.seconds(1));
         System.out.println(paneRef.getWidth() + 32 + source.getX()*32);
         System.out.println(paneRef.getHeight() + 32 + source.getY()*32);
-        Line line = new Line(/*paneRef.getWidth() + 32 +*/ source.getX()*32,source.getY()*32,
-                            dest.getX()*32,dest.getY()*32);
-        animate.setPath(line);
+        //Line line = new Line(/*paneRef.getWidth() + 32 +*/ source.getX()*32,source.getY()*32,
+        //                    dest.getX()*32,dest.getY()*32);
+        //animate.setPath(line);
         for (Node p : childrens) {
             if(myPane == null && GridPane.getRowIndex(p) == source.getY() && GridPane.getColumnIndex(p) == source.getX()) {
                 myPane = (Pane) p;
@@ -192,14 +176,13 @@ public class GameCtrl implements Initializable {
         }
         if(myPane == null || destPane == null) return;
         myPane.getChildren().get(1);
-        animate.setNode(myPane.getChildren().get(1));
+        //animate.setNode(myPane.getChildren().get(1));
         Node tempPane = myPane.getChildren().get(1);
-        animate.play();
-        animate.onFinishedProperty().set((EventHandler<ActionEvent>) (ActionEvent event) -> {
+        //animate.play();
+        //animate.onFinishedProperty().set((EventHandler<ActionEvent>) (ActionEvent event) -> {
             myPane.getChildren().remove(1);
             destPane.getChildren().add(1, tempPane);
-        }) ;
-        
+        //}) ;
     }
     
     public void showPossibleWays(ArrayList<Block> freeWay) {
