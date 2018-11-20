@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class InterfaceMain extends Application {
-    
+
     //private Stage primaryStage;
     
     @Override
