@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DefaultPeon implements ItypePiece {
     //metodos>>
-       Table tab;
+    Table tab;
     ArrayList<Block> vector;
     Player playing;
     
@@ -25,19 +25,15 @@ public class DefaultPeon implements ItypePiece {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         vector = new ArrayList<>();
         tab = table;
-        if(playing.getPlayingTurn()==1){
-             move(0, 1, vetor);
-             move(-1, 1,vetor);
-             move(1, 1,vetor);
-        }else{
-             move(0, -1, vetor);
-             move(1, -1,vetor);
-             move(-1, -1,vetor);
-        }
+        int sentid = playing.getSentido();
+        move(0, sentid, vetor);
+        move(-1, sentid,vetor);
+        move(1, sentid,vetor);
         //implementação da movimentação padrão do peão
-        return null;
+        return vector;
     }
-        public void move(int xDir, int yDir, Vetor vetor) {
+    
+    public void move(int xDir, int yDir, Vetor vetor) {
         //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
         Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
         int i = newVetor.getX(); int j = newVetor.getY();
@@ -45,12 +41,13 @@ public class DefaultPeon implements ItypePiece {
         
         if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
             vector.add(tab.getBlock(newVetor));
+            System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
             return;
         }
         if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
             vector.add(tab.getBlock(newVetor));
+            System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
         }
-        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
     }
 
 }

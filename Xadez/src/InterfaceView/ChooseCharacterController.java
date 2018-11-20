@@ -15,11 +15,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-
-//String musicURL = "src/testemedia/dancing.mp3";
-//Media media = new Media(getClass().getResource("dancing.mp3").toString());
-//MediaPlayer starter = new MediaPlayer(media);
-
 public class ChooseCharacterController implements Initializable {
     
     ArrayList<MediaPlayer> musicas = new ArrayList<>();  

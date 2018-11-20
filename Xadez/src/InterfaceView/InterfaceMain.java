@@ -13,7 +13,7 @@ public class InterfaceMain extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent rootLayout = FXMLLoader.load(getClass().getResource("ChooseCharacter.fxml"));
+        Parent rootLayout = FXMLLoader.load(getClass().getResource("Game8x8.fxml"));
 
         Scene scene = new Scene(rootLayout);
         primaryStage.setTitle("Battle Chess Arena Login!");

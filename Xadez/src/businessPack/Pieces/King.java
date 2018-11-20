@@ -6,7 +6,6 @@ import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Lenin.LeninKing;
 import businessPack.Pieces.Sheriff.SheriffKing;
 import businessPack.Pieces.Wizard.WizardKing;
-import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -23,12 +22,6 @@ public class King extends Piece {
         strategy = getHeroStrategy();//new DefaultKing(player);
         updateImage();
     }
-//    public King(Player pPiece, TypeHero tpHero, int x, int y, ItypeKing tpKing) {
-//        super(pPiece, tpHero, x, y);
-//        hp = 18;
-//        this.tpKing = tpKing;
-//        updateImage();
-//    }
     //metodos>>
     @Override
     public void checkMove(Table table) {
