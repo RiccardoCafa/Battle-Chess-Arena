@@ -1,6 +1,5 @@
 package businessPack;
 
-import extras.Compass;
 import extras.Vetor;
 import javafx.scene.image.Image;
 
@@ -38,6 +37,7 @@ public class Table{
     public void clearTrend(){
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
+         //       table[m][n].getVetor().setTrend(Compass.C);
                 table[m][n].getVetor().setTrend(0);
             }
         }
@@ -69,6 +69,12 @@ public class Table{
         }else{
             return null;
         }
+    }
+    public static boolean isInside(Vetor vetor){
+        return (vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n);
+    }
+    public static boolean isInside(int x, int y){
+        return (x >= 0 && x < m && y >= 0 && y < n);
     }
     public Block getBlock(Vetor vetor){
         if(vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n){

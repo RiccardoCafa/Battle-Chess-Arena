@@ -1,6 +1,5 @@
 package businessPack.Pieces;
 
-import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Pieces.Lapa.LapaTower;
@@ -8,46 +7,42 @@ import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
+import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Players;
+import extras.Who;
 
 public class Tower extends Piece {
     //atributos>>
-    private ItypeTower tpTower;
     //construtor>>
-    public Tower(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Tower(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 10;
         damage = 1;
-        tpTower = getHeroStrategy();//new DefaultTower(pPiece);
+        strategy = getHeroStrategy();//new DefaultTower(pPiece);
         updateImage();
     }
-    /*public Tower(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
-        hp = 10;
-        this.tpTower = tpTower;
-        updateImage();
-    }*/
     //metodos>>
     @Override
     public void checkMove(Table table) {
         if(freeWay != null) freeWay.clear();
         //table.clearTrend();
-        freeWay = tpTower.IcheckMove(table, vetor);
+        freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay(table);
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Tower.png",widhtImg, heightImg, false, false));
         setMouseTransparent(true);
     }
-    private ItypeTower getHeroStrategy() {
+    private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case lapa:
-                return new LapaTower(player);
+                return new LapaTower(Players.getPlayer(player));
             default:
-                return new DefaultTower(player);
+                return new DefaultTower(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeTower(ItypeTower tpTower){//muda o comportamento do checkMove()
-        this.tpTower = tpTower;
+    public void setTypeTower(ItypePiece tpTower){//muda o comportamento do checkMove()
+        strategy = tpTower;
     }
 }

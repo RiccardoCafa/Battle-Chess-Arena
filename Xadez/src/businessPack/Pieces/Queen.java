@@ -1,26 +1,26 @@
 package businessPack.Pieces;
 
-import businessPack.Pieces.Interfaces.ItypeQueen;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultQueen;
 import businessPack.Pieces.Default.DefaultTower;
-import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Sheriff.SheriffQueen;
 import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
+import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Players;
+import extras.Who;
 
 public class Queen extends Piece {
     //atributos>>
-    ItypeQueen tpQueen;
     //construtor>>
-    public Queen(Player pPiece, TypeHero tpHero, int x, int y) {
-        super(pPiece, tpHero, x, y);
+    public Queen(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 8;
         damage = 1;
-        tpQueen = new DefaultQueen(pPiece);
+        strategy = getHeroStrategy();
         updateImage();
     }
     //metodos>>
@@ -28,20 +28,20 @@ public class Queen extends Piece {
     public void checkMove(Table table) {
         if(freeWay!=null)freeWay.clear();
         //table.clearTrend();
-        freeWay = tpQueen.IcheckMove(table, vetor);
+        freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay(table);
     }
-    private ItypeQueen getHeroStrategy() {
+    private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffQueen();
+                return new SheriffQueen(Players.getPlayer(player));
             default:
-                return new DefaultQueen(player);
+                return new DefaultQueen(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeQueen(ItypeQueen tpQueen){//muda o comportamento do checkMove()
-        this.tpQueen = tpQueen;
+    public void setTypeQueen(ItypePiece tpQueen){//muda o comportamento do checkMove()
+        strategy = tpQueen;
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Queen.png", widhtImg, heightImg, false, false));

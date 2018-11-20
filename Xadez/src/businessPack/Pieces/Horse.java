@@ -1,22 +1,23 @@
 package businessPack.Pieces;
 
-import businessPack.Pieces.Interfaces.ItypeHorse;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultHorse;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Sheriff.SheriffHorse;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.Who;
 import javafx.scene.image.Image;
 
 public class Horse extends Piece {
     //atributos>>
-    ItypeHorse tpHorse;
     //construtor>>
-    public Horse(Player player, TypeHero tpHero, int x, int y) {
-        super(player, tpHero, x, y);
+    public Horse(Who who, TypeHero tpHero, int x, int y) {
+        super(who, tpHero, x, y);
         hp = 6;
-        tpHorse = getHeroStrategy();//new DefaultHorse(player);
+        strategy = getHeroStrategy();//new DefaultHorse(player);
         updateImage();
     }
 //    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
@@ -30,22 +31,22 @@ public class Horse extends Piece {
     public void checkMove(Table table) {
         if(freeWay!= null)freeWay.clear();
 //        table.clearTrend();
-        freeWay = tpHorse.IcheckMove(table, vetor);
+        freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay(table);
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", widhtImg, heightImg, false, false));
     }
-    private ItypeHorse getHeroStrategy() {
+    private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffHorse(player);
+                return new SheriffHorse(Players.getPlayer(player));
             default:
-                return new DefaultHorse(player);
+                return new DefaultHorse(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeHorse(ItypeHorse tpHorse){//muda o comportamento do checkMove()
-        this.tpHorse = tpHorse;
+    public void setTypeHorse(ItypePiece tpHorse){//muda o comportamento do checkMove()
+        strategy = tpHorse;
     }
 }
