@@ -1,6 +1,7 @@
 package InterfaceView;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,25 +12,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 
 //String musicURL = "src/testemedia/dancing.mp3";
 //Media media = new Media(getClass().getResource("dancing.mp3").toString());
 //MediaPlayer starter = new MediaPlayer(media);
 
-
-
-
 public class ChooseCharacterController implements Initializable {
     
-    Media musicLapa = new Media(getClass().getResource("Lapa.mp3").toString());
-    Media musicHUEBR = new Media(getClass().getResource("MUSICA_HUE_HUE_BR.mp3").toString());
-    Media musicWizard = new Media(getClass().getResource("Mago.mp3").toString());
-    Media musicPistoleiro = new Media(getClass().getResource("Pistoleiro.mp3").toString());
-    Media musicURSS = new Media(getClass().getResource("URSS.mp3").toString());
-    
-    MediaPlayer tocador = new MediaPlayer(musicHUEBR);
-    
+    ArrayList<MediaPlayer> musicas = new ArrayList<>();  
+    MediaPlayer musicaAtual;
     
     @FXML
     Button setaEsq;
@@ -48,6 +41,14 @@ public class ChooseCharacterController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String pathMusic = "InterfaceView/Sounds/";
+        musicas.add(new MediaPlayer(new Media(getClass().getResource("MUSICA HUE HUE BR.mp3").toString())));
+        musicas.add(new MediaPlayer(new Media(getClass().getResource("Lapa.mp3").toString())));
+        musicas.add(new MediaPlayer(new Media(getClass().getResource("URSS.mp3").toString())));
+        musicas.add(new MediaPlayer(new Media(getClass().getResource("Mago.mp3").toString())));
+        musicas.add(new MediaPlayer(new Media(getClass().getResource("Pistoleiro.mp3").toString())));
+        
+        musicaAtual = musicas.get(count);
         // TODO
         int resX = 446;
         int resY = 336;
@@ -72,22 +73,31 @@ public class ChooseCharacterController implements Initializable {
     }
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
-       
+        musicaAtual.stop();
         if(count == 0){
             count = 4;
         }else{
             count--;
         }
+        musicaAtual = musicas.get(count);
+        musicaAtual.setStartTime(Duration.ZERO);
+        musicaAtual.isAutoPlay();
+        musicaAtual.play();
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
+        musicaAtual.stop();
         if(count == 4){
             count = 0;
         }else{
             count++;
         }
+        musicaAtual = musicas.get(count);
+        musicaAtual.setStartTime(Duration.ZERO);
+        musicaAtual.isAutoPlay();
+        musicaAtual.play();
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
