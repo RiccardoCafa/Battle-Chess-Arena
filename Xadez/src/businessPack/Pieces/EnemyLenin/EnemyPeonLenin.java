@@ -12,8 +12,6 @@ public class EnemyPeonLenin implements ItypePiece{
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         ArrayList<Block> vector;
         vector = new ArrayList<>();
-        vector.clear();
-        vector.add(null);
         return vector;
     }
     @Override
