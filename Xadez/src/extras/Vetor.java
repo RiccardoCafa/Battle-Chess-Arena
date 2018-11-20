@@ -6,21 +6,24 @@ public class Vetor {
     //atributos>>
     private int x;
     private int y;
-    private int[] trend = new int[2];//fluxo do vetor, registrando de onde veio
+    private int[] trend;//fluxo do vetor, registrando de onde veio
     //construtor>>
     public Vetor(int x, int y) {
+        trend = new int[2];
         this.x = x;
         this.y = y;
         trend[0] = 0;
         trend[1] = 0;
     }
     public Vetor(Vetor vetor) {
+        trend = new int[2];
         this.x = vetor.getX();
         this.y = vetor.getY();
         trend[0] = 0;
         trend[1] = 0;
     }
     public Vetor(int x, int y, Vetor versor) {
+        trend = new int[2];
         this.x = x;
         this.y = y;
         if(versor.getX() >= -1 && versor.getX() <= 1 && versor.getY() >= -1 && versor.getX() <= 1){

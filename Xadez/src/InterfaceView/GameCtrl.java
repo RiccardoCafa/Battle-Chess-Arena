@@ -74,8 +74,8 @@ public class GameCtrl implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        player1 = new Player(1, new Sheriff(), 1);
-        player2 = new Player(-1, new Lenin(), 2);
+        player1 = new Player(-1, new Sheriff(), 1);
+        player2 = new Player(1, new Lenin(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
