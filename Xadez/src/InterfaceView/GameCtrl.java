@@ -11,10 +11,8 @@ import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +26,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class GameCtrl implements Initializable {
-
+    /*
+        REFERENCING ALL THE FXML OBJECTS
+    */
     @FXML
     GridPane gridPane;
     @FXML
@@ -40,15 +40,18 @@ public class GameCtrl implements Initializable {
     @FXML
     Pane pratoPieces;
     
-    Pane myPane= null;
-    Pane destPane = null;
-    
+    /*
+        DECLARING GAMECORE VARIAVABLES
+    */
     Vetor myVector;
     Vetor selectedVector;
     
     ArrayList<Block> possibleBlocks;
     
     boolean movingPiece = false;
+    boolean superPower = false;
+
+    int turn = 1;
     
     Table table;
     
@@ -64,12 +67,19 @@ public class GameCtrl implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        player1 = new Player(-1, new Sheriff(), 1);
-        player2 = new Player(1, new Lenin(), 2);
+        player1 = new Player(1, new Sheriff(), 1);
+        player2 = new Player(-1, new Lapa(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, player2);
+        
+        MountArmyOnTable(table);
+    }
+    
+    public void MountArmyOnTable(Table tab) {
+        ImageView pieceImage;
+        // Initializing the table with pieces from each army
         for(int i = 0; i < Table.getM(); i++){
             for(int j = 0; j < Table.getN(); j++){
                 if(table.getBlock(i, j).getPiece() == null){
@@ -80,11 +90,7 @@ public class GameCtrl implements Initializable {
                 }
             }
         }
-        MountArmyOnTable(table);
-    }
-    
-    public void MountArmyOnTable(Table tab) {
-        ImageView pieceImage = null;
+        // Initializing the interface with images of blocks and pieces.
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if(!tab.getBlock(i, j).isEmpty()) {
@@ -100,30 +106,30 @@ public class GameCtrl implements Initializable {
     }
     
     public ImageView makeBloco(int i, int j) {
-        //Pane bloco = new Pane();
+        // Pega um bloco do table, cria um evento pra ele e o add no gridpane
         ImageView g;
         g = table.getBlock(i, j);
         g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
             OnPieceClicked(e);
         });
-        
-        //g = white == true ? new ImageView(whiteBlock) : new ImageView(blackBlock);
-        //bloco.getChildren().add(g);
-        //if(pieceImg != null) {
-            //bloco.getChildren().add(pieceImg);
-        //}
          
         return g;
     }
     
-    public void OnPieceClicked(MouseEvent e) {
+    public void OnPieceClicked(MouseEvent e) { 
+        //Evento de click para os blocos
         Block myBlock = (Block) e.getSource();
         if(!movingPiece){//primeiro clique para escolher uma peça
-            if(!myBlock.isEmpty()){//se clicou num lugar com peça aliada
+            if(!myBlock.isEmpty()){
+                if(playing != myBlock.getPiece().getPlayer()) {
+                    System.out.println("Nao é seu turno babaca");
+                    return;
+                }
                 selectedVector = new Vetor(myBlock.getVetor());
                 myBlock.getPiece().checkMove(table);
                 possibleBlocks = myBlock.getPiece().getFreeWay();
                 if(possibleBlocks == null || possibleBlocks.isEmpty()) {
+                    // Caso o free way for vazio ou nulo, saia do evento
                     System.out.println("Saindo aqui vlw flw");
                     return;
                 }
@@ -135,7 +141,8 @@ public class GameCtrl implements Initializable {
                 System.out.println("Nothing here");
             }
         } else {
-            if(myBlock.isEmpty() ) { //&& possibleBlocks.contains(myBlock)
+            //Caso já tenha clicado uma vez, mexa essa peça
+            if(myBlock.isEmpty() ) {
                 Vetor novaPos = new Vetor(myBlock.getVetor());
                 MoveImage(selectedVector, novaPos);
                 table.MovePiece(selectedVector, novaPos);
@@ -152,11 +159,12 @@ public class GameCtrl implements Initializable {
     }
     
     public void MoveImage(Vetor source, Vetor dest) {
+        //Mexe a imagem na interface
         ImageView pieceToMove = table.getBlock(source).getPiece();
-        /*
-        pieceImage*/
         pieceToMove.setLayoutX((65*dest.getX()));
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
+        
+        //A little try to change depth by children index
 //        if(source.getY() < dest.getY()) {
 //            Vetor vetorBaixo = new Vetor(source.getX(), source.getY() + 1);
 //            if(vetorBaixo.getY() < 8) {

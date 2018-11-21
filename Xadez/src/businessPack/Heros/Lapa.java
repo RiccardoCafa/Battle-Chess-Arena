@@ -9,9 +9,12 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
+import businessPack.Players;
+import businessPack.Table;
 import extras.Who;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
+
 public class Lapa extends Hero {
     Image lapaTowerImage;
     Image lapaBishopImage;
@@ -19,6 +22,9 @@ public class Lapa extends Hero {
     Image lapaKingImage;
     Image lapaQueenImage;
     Image lapaHorseImage;
+    
+    int bigBig = 0;
+    
     public Lapa() {
         image = new Image(path + "lapa-01.png", widthImg, heightImg, false, false);
     }
@@ -40,4 +46,9 @@ public class Lapa extends Hero {
 
     
     //LapaGod
+
+    @Override
+    public void GameManager(Table tab, Players players) {
+        System.out.println("Lapa é bom demais, n precisa de poderes");
+    }
 }
