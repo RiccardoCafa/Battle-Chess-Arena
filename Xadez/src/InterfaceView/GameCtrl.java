@@ -8,6 +8,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import extras.BlockState;
 import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
@@ -78,8 +79,10 @@ public class GameCtrl implements Initializable {
         Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, player2);
-        if(player1.getHero().getHeroType() != TypeHero.lapa && player2.getHero().getHeroType() != TypeHero.lapa) {
+        if(playing.getHero().getHeroType() != TypeHero.lapa) {
             btnPower.setVisible(false);
+        } else { 
+            btnPower.setVisible(true);
         }
         MountArmyOnTable(table);
     }
@@ -126,6 +129,12 @@ public class GameCtrl implements Initializable {
     public void OnBlockClicked(MouseEvent e) { 
         //Evento de click para os blocos
         Block myBlock = (Block) e.getSource();
+        if(!myBlock.isEmpty() && myBlock.getBlockState(playing) == BlockState.Friend && selectedVector != null) {
+            if(selectedVector.getX() != myBlock.getVetor().getX() || selectedVector.getY() != myBlock.getVetor().getY()) {
+                resetBlockTab();
+                movingPiece = false;
+            } 
+        }
         Block firstBlock = null;
         if(!movingPiece && !superPower){//primeiro clique para escolher uma peça
             firstBlock = firstClick(myBlock);
@@ -159,11 +168,20 @@ public class GameCtrl implements Initializable {
                       myBlock.getVetor().getY() == selectedVector.getY() && !specialActive){
                 movingPiece = false;
                 resetBlockTab();
-            }
-        } else if(!movingPiece && superPower){
-            if(playing.getHero().getHeroType() == TypeHero.lapa && possibleBlocks.contains(myBlock)) { 
-                Lapa lapa = (Lapa) playing.getHero();
-                lapa.ExplodeBomb(table, new Vetor(myBlock.getVetor()));
+                System.out.println("Moved Piece");
+                selectedVector = null;
+                Players.passTurn();
+                playing.getHero().GameManager(table);
+                playing = Players.getTurn() == 1 ? player1 : player2;
+                if(playing.getHero().getHeroType() != TypeHero.lapa) {
+                    btnPower.setVisible(false);
+                } else { 
+                    btnPower.setVisible(true);
+                }
+            } else if(myBlock.getVetor().getX() == selectedVector.getX() &&
+                      myBlock.getVetor().getY() == selectedVector.getY()){
+                movingPiece = false;
+                selectedVector = null;
                 resetBlockTab();
                 superPower = false;
             }
@@ -172,24 +190,23 @@ public class GameCtrl implements Initializable {
     
     public Block firstClick(Block myBlock){
         if(!myBlock.isEmpty()){
-            if(playing != myBlock.getPiece().getPlayer()) {//caso seja selecionada uma peça que não pode mover
+            if(playing != myBlock.getPiece().getPlayer()) {
                 System.out.println("Nao é seu turno babaca");
-                return null;
+                return myBlock;
             }
             selectedVector = new Vetor(myBlock.getVetor());
             myBlock.getPiece().checkMove(table);
             possibleBlocks = myBlock.getPiece().getFreeWay();
-            possibleHits = myBlock.getPiece().getHitWay();
-            if(possibleBlocks == null || possibleBlocks.isEmpty()) {//caso não haja movimentos possiveis
+            if(possibleBlocks == null || possibleBlocks.isEmpty()) {
                 // Caso o free way for vazio ou nulo, saia do evento
                 System.out.println("Saindo aqui vlw flw");
-                return null;
+                return myBlock;
             }
             movingPiece = true;
             showPossibleWays(possibleBlocks);
-            showPossibleEnemys(possibleHits);
+            showPossibleEnemys(myBlock.getPiece().getHitWay());
             System.out.println("Selected Piece");
-        } else {//caso clique num bloco vazio
+        } else {
             System.out.println("Nothing here");
         }
         return myBlock;
@@ -239,12 +256,12 @@ public class GameCtrl implements Initializable {
             }
         }
     }
-    
+
     @FXML
     public void OnBtnPower(MouseEvent e) {
         // Lenin
         // Huebr
-        if(playing.getHero().getHeroType() == TypeHero.lapa) {
+        if(playing.getHero().getHeroType() == TypeHero.lapa && !movingPiece) {
             if(superPower) {
                 superPower = false;
                 resetBlockTab();

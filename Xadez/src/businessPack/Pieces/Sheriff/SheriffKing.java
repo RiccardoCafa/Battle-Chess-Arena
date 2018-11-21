@@ -22,6 +22,7 @@ public class SheriffKing implements ItypePiece {
     }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação do rei especial do Sheriff
-        return null;
+        ArrayList<Block> myList = new ArrayList<>();
+        return myList;
     }
 }

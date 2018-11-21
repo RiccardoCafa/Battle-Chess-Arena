@@ -24,9 +24,9 @@
                   <Image url="@Personagens/lenin-01.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnPower" layoutX="157.0" layoutY="219.0" mnemonicParsing="false" onMouseReleased="#OnBtnPower" prefHeight="72.0" prefWidth="208.0" text="Super Power" textAlignment="CENTER" textFill="#d30c0c">
+            <Button fx:id="btnPower" layoutX="159.0" layoutY="178.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="323.0" text="Super Power" textFill="RED">
                <font>
-                  <Font name="Century Schoolbook Bold" size="25.0" />
+                  <Font size="29.0" />
                </font>
             </Button>
          </children>

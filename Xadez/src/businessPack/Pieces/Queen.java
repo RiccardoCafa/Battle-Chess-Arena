@@ -29,7 +29,7 @@ public class Queen extends Piece {
         if(freeWay!=null)freeWay.clear();
         table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
-        updateHitWay(table);
+        updateHitWay();
     }
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {

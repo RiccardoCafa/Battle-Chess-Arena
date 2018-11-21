@@ -50,7 +50,6 @@ public class Lenin extends Hero {
     public void GameManager(Table tab) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
   
 
 }

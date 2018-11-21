@@ -6,6 +6,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.Table;
 import extras.Who;
 import javafx.scene.image.Image;
 
