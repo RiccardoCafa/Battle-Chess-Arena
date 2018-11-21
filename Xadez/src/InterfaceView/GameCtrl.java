@@ -59,6 +59,9 @@ public class GameCtrl implements Initializable {
     ArrayList<Block> possibleBlocks;
     
     boolean movingPiece = false;
+    boolean superPower = false;
+    
+    int turno = 1;
     
     Table table;
     
@@ -124,7 +127,11 @@ public class GameCtrl implements Initializable {
     public void OnPieceClicked(MouseEvent e) {
         Block myBlock = (Block) e.getSource();
         if(!movingPiece){//primeiro clique para escolher uma peça
-            if(!myBlock.isEmpty() || playing == myBlock.getPiece().getPlayer()){//se clicou num lugar com peça aliada
+            if(!myBlock.isEmpty()){//se clicou num lugar com peça aliada
+                if(playing != myBlock.getPiece().getPlayer()) {
+                    System.out.println("Nao é seu turno babaca");
+                    return;
+                }
                 selectedVector = new Vetor(myBlock.getVetor());
                 movingPiece = true;
                 myBlock.getPiece().checkMove(table);

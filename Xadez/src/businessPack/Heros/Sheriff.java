@@ -10,6 +10,7 @@ import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
+import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
 import javafx.scene.image.Image;
@@ -38,5 +39,10 @@ public class Sheriff extends Hero {
         army.addPiece(new   King(player, TypeHero.sheriff, 4, (int)(3.5 + sentido*3.5)));//rei
         army.addPiece(new  Queen(player, TypeHero.sheriff, 3, (int)(3.5 + sentido*3.5)));//rainha
 
+    }
+
+    @Override
+    public void GameManager(Table tab, Players players) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
