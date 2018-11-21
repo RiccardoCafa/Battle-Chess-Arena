@@ -132,7 +132,6 @@ public class GameCtrl implements Initializable {
             if(selectedVector.getX() != myBlock.getVetor().getX() || selectedVector.getY() != myBlock.getVetor().getY()) {
                 resetBlockTab();
                 movingPiece = false;
-                System.out.println("Cliquei em outra peça aliada");
             } 
         }
         if(!movingPiece && !superPower){//primeiro clique para escolher uma peça
@@ -144,7 +143,6 @@ public class GameCtrl implements Initializable {
                 selectedVector = new Vetor(myBlock.getVetor());
                 myBlock.getPiece().checkMove(table);
                 possibleBlocks = myBlock.getPiece().getFreeWay();
-                System.out.println("Peguei o free way dessa peça");
                 if(possibleBlocks == null || possibleBlocks.isEmpty()) {
                     // Caso o free way for vazio ou nulo, saia do evento
                     System.out.println("Saindo aqui vlw flw");
@@ -152,7 +150,6 @@ public class GameCtrl implements Initializable {
                 }
                 movingPiece = true;
                 showPossibleWays(possibleBlocks);
-                System.out.println("Mostrei o free way");
                 showPossibleEnemys(myBlock.getPiece().getHitWay());
                 System.out.println("Selected Piece");
             } else {
