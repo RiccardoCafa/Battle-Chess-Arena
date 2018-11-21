@@ -40,6 +40,7 @@ public class Horse extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
+                especial = true;
                 return new SheriffHorse(Players.getPlayer(player));
             default:
                 return new DefaultHorse(Players.getPlayer(player));

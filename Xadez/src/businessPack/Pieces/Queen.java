@@ -34,6 +34,7 @@ public class Queen extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case lenin:
+                especial = true;
                 return new SheriffQueen(Players.getPlayer(player));
             default:
                 return new DefaultQueen(Players.getPlayer(player));

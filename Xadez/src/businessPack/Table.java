@@ -1,6 +1,7 @@
 package businessPack;
 
 import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Table{
@@ -40,6 +41,13 @@ public class Table{
                 table[i][j].getVetor().setTrend(0);
             }
         }
+    }
+    public ArrayList<Block> blocksAround(Block block){
+        ArrayList<Block> listAux = new ArrayList<>();
+        for(int i = 1; i < 9; i++) {
+            listAux.add(table[(int) block.getX() + Vetor.getTrend(i).getX()][(int) block.getY() + Vetor.getTrend(i).getY()]);
+        }
+        return listAux;
     }
     //getset>>    
     /**
@@ -82,7 +90,6 @@ public class Table{
             return null;
         }
     }
-    
     public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
         Piece tempB = table[piecePos.getX()][piecePos.getY()].getPiece();
         tempB.setVetor(pieceDestination);

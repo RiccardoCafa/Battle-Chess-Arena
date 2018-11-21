@@ -40,6 +40,7 @@ public class Peon extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case huebr:
+                especial = true;
                 return new huebrPeon();
             default:
                 return new DefaultPeon(Players.getPlayer(player));

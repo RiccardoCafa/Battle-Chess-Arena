@@ -40,6 +40,7 @@ public class Bishop extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case wizard:
+                especial = true;
                 return new WizardBishop();
             case lenin:
                 return new LeninBishop(Players.getPlayer(player));

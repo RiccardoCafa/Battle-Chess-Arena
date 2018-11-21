@@ -18,6 +18,7 @@ public abstract class Piece extends ImageView {
     protected final float widhtImg = 60f;
     protected final float heightImg = 130;
     protected boolean alive;
+    protected boolean especial;
     protected String pathHero;
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
@@ -31,6 +32,7 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
+        especial = false;
 //        setLayoutX(20);
 //        setLayoutY(0);
     }
@@ -42,6 +44,7 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
+        especial = false;
 //        setLayoutX(20);
 //        setLayoutY(0);
     }
@@ -64,7 +67,18 @@ public abstract class Piece extends ImageView {
             }
         }
     }
-    
+    public ArrayList<Block> updateHitWay(Table table, ArrayList<Block> freeWay){//seleciona os vetores de freeWay que possui inimigos
+        hitWay = new ArrayList<>();
+        if(hitWay != null) hitWay.clear();
+        if(freeWay != null){
+            for(Block block : freeWay){
+                if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
+                    hitWay.add(block);
+                }
+            }
+        }
+        return hitWay;
+    }
     //getset>>
     public TypePiece getPiece(){
         return tpPiece;
@@ -76,7 +90,7 @@ public abstract class Piece extends ImageView {
         this.hp = hp;
         alive = (hp > 0);
     }
-    public boolean getLife(){
+    public boolean imAlive(){
         return alive;
     }
     public void setLife(boolean alive){
@@ -105,6 +119,9 @@ public abstract class Piece extends ImageView {
     }
     public ArrayList<Block> getHitWay() {
         return hitWay;
+    }
+    public boolean isSpecial(){
+        return especial;
     }
     private String getHeroPath() {
         switch(tpHero) {

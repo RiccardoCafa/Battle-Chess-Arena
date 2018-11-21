@@ -36,6 +36,7 @@ public class Tower extends Piece {
     private ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case lapa:
+                especial = true;
                 return new LapaTower(Players.getPlayer(player));
             default:
                 return new DefaultTower(Players.getPlayer(player));
