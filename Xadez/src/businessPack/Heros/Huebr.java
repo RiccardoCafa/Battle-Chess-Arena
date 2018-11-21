@@ -3,6 +3,9 @@ package businessPack.Heros;
 import businessPack.Army;
 import businessPack.Hero;
 import businessPack.Player;
+import businessPack.Players;
+import businessPack.Table;
+import businessPack.TypeHero;
 import extras.Who;
 import javafx.scene.image.Image;
 
@@ -14,10 +17,13 @@ public class Huebr extends Hero {
     Image huebrTowerImage;
     Image huebrKingImage;
     Image huebrQueenImage;
+    
+    boolean isHitted = false;
     //construtor>>
 
     public Huebr() {
         image = new Image(path + "Huebr-01.png", widthImg, heightImg, false, false);
+        tpHero = TypeHero.huebr;
     }
     //metodos>>
     
@@ -39,7 +45,12 @@ public class Huebr extends Hero {
         army.addPiece(new King(new DefaultKing(),     true, (int)(3.5 + sentido*3.5), 4, huebrKingImage));//rei
         army.addPiece(new Queen(new DefaultQueen(),   true, (int)(3.5 + sentido*3.5), 3, huebrQueenImage));//rainha
     */}
+
+    @Override
+    public void GameManager(Table tab) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+}
 
 
     

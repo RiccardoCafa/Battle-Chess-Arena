@@ -7,12 +7,15 @@ import businessPack.Heros.Sheriff;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
+import businessPack.TypeHero;
 import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +42,8 @@ public class GameCtrl implements Initializable {
     Pane paneRef;
     @FXML
     Pane pratoPieces;
+    @FXML
+    Button btnPower;
     
     /*
         DECLARING GAMECORE VARIAVABLES
@@ -50,8 +55,6 @@ public class GameCtrl implements Initializable {
     
     boolean movingPiece = false;
     boolean superPower = false;
-
-    int turn = 1;
     
     Table table;
     
@@ -68,13 +71,15 @@ public class GameCtrl implements Initializable {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         
-        player1 = new Player(1, new Sheriff(), 1);
-        player2 = new Player(-1, new Lapa(), 2);
+        player1 = new Player(-1, new Lapa(), 1);
+        player2 = new Player(1, new Sheriff(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, player2);
-        
+        if(player1.getHero().getHeroType() != TypeHero.lapa && player2.getHero().getHeroType() != TypeHero.lapa) {
+            btnPower.setVisible(false);
+        }
         MountArmyOnTable(table);
     }
     
@@ -101,7 +106,7 @@ public class GameCtrl implements Initializable {
                     pieceImage.setLayoutY(-75 + (65*j));
                 }
                 gridPane.add(makeBloco(i, j), i, j);
-                pieceImage = null;
+                //pieceImage = null;
             }
         }
     }
@@ -111,16 +116,16 @@ public class GameCtrl implements Initializable {
         ImageView g;
         g = table.getBlock(i, j);
         g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
-            OnPieceClicked(e);
+            OnBlockClicked(e);
         });
          
         return g;
     }
     
-    public void OnPieceClicked(MouseEvent e) { 
+    public void OnBlockClicked(MouseEvent e) { 
         //Evento de click para os blocos
         Block myBlock = (Block) e.getSource();
-        if(!movingPiece){//primeiro clique para escolher uma peça
+        if(!movingPiece && !superPower){//primeiro clique para escolher uma peça
             if(!myBlock.isEmpty()){
                 if(playing != myBlock.getPiece().getPlayer()) {
                     System.out.println("Nao é seu turno babaca");
@@ -136,14 +141,14 @@ public class GameCtrl implements Initializable {
                 }
                 movingPiece = true;
                 showPossibleWays(possibleBlocks);
-                showPossibleEnemys(myBlock.getPiece().getHitWay(), notPlaying());
+                showPossibleEnemys(myBlock.getPiece().getHitWay());
                 System.out.println("Selected Piece");
             } else {
                 System.out.println("Nothing here");
             }
-        } else {
+        } else if(movingPiece && !superPower){
             //Caso já tenha clicado uma vez, mexa essa peça
-            if(myBlock.isEmpty() ) {
+            if(myBlock.isEmpty() && possibleBlocks.contains(myBlock)) {
                 Vetor novaPos = new Vetor(myBlock.getVetor());
                 MoveImage(selectedVector, novaPos);
                 table.MovePiece(selectedVector, novaPos);
@@ -151,10 +156,20 @@ public class GameCtrl implements Initializable {
                 movingPiece = false;
                 resetBlockTab();
                 System.out.println("Moved Piece");
+                Players.passTurn();
+                playing.getHero().GameManager(table);
+                playing = Players.getTurn() == 1 ? player1 : player2;
             } else if(myBlock.getVetor().getX() == selectedVector.getX() &&
                       myBlock.getVetor().getY() == selectedVector.getY()){
                 movingPiece = false;
                 resetBlockTab();
+            }
+        } else if(!movingPiece && superPower){
+            if(playing.getHero().getHeroType() == TypeHero.lapa && possibleBlocks.contains(myBlock)) { 
+                Lapa lapa = (Lapa) playing.getHero();
+                lapa.ExplodeBomb(table, new Vetor(myBlock.getVetor()));
+                resetBlockTab();
+                superPower = false;
             }
         }
     }
@@ -164,6 +179,57 @@ public class GameCtrl implements Initializable {
         ImageView pieceToMove = table.getBlock(source).getPiece();
         pieceToMove.setLayoutX((65*dest.getX()));
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
+    }
+    
+    public void showPossibleWays(ArrayList<Block> freeWay) {
+        if(freeWay == null) {
+            System.out.println("Lista vazia");
+            return;
+        }
+        for(Block b : freeWay) {
+            b.colorChange(0);
+        }
+    }
+    
+    public void showPossibleEnemys(ArrayList<Block> hitWay) {
+        if(hitWay == null) {
+            System.out.println("Lista vazia");
+            return;
+        }
+        for(Block b : hitWay) {
+            b.colorChange(1);
+        }
+    }
+    
+    public void resetBlockTab() {
+        for(int i = 0; i < Table.getN(); i++) {
+            for(int j = 0; j < Table.getM(); j++) {
+                table.getBlock(i, j).colorDefault();
+            }
+        }
+    }
+    
+    @FXML
+    public void OnBtnPower(MouseEvent e) {
+        // Lenin
+        // Huebr
+        if(playing.getHero().getHeroType() == TypeHero.lapa) {
+            if(superPower) {
+                superPower = false;
+                resetBlockTab();
+            } else {
+                superPower = true;
+                Lapa lapa = (Lapa) playing.getHero();
+                possibleBlocks = lapa.getBombWays(table, playing);
+                showPossibleEnemys(possibleBlocks);
+            }
+            
+        }
+        //playing.getHero()
+    }
+}
+
+
         
         //A little try to change depth by children index
 //        if(source.getY() < dest.getY()) {
@@ -177,33 +243,3 @@ public class GameCtrl implements Initializable {
 //            pieceToMove.toFront();
 //            System.out.println("YO");
         //}
-    }
-    
-    public void showPossibleWays(ArrayList<Block> freeWay) {
-        if(freeWay == null) {
-            System.out.println("Lista vazia");
-            return;
-        }
-        for(Block b : freeWay) {
-            b.colorChange(0, playing);
-        }
-    }
-    
-    public void showPossibleEnemys(ArrayList<Block> hitWay, Player pAsking) {
-        if(hitWay == null) {
-            System.out.println("Lista vazia");
-            return;
-        }
-        for(Block b : hitWay) {
-            b.colorChange(1, pAsking);
-        }
-    }
-    
-    public void resetBlockTab() {
-        for(int i = 0; i < Table.getN(); i++) {
-            for(int j = 0; j < Table.getM(); j++) {
-                table.getBlock(i, j).colorDefault();
-            }
-        }
-    }
-}

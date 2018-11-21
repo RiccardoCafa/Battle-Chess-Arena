@@ -27,8 +27,8 @@ public class DefaultPeon implements ItypePiece {
         tab = table;
         int sentido = playing.getSentido();
         move(0, -sentido, vetor);
-        move(-1, -sentido,vetor);
-        move(1, -sentido,vetor);
+        checkForEnemy(-1, -sentido,vetor);
+        checkForEnemy(1, -sentido,vetor);
         //implementação da movimentação padrão do peão
         return vector;
     }
@@ -39,11 +39,6 @@ public class DefaultPeon implements ItypePiece {
         int i = newVetor.getX(); int j = newVetor.getY();
         if(i < 0 || i > 7 || j < 0 || j > 7) return;
         
-        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
-            vector.add(tab.getBlock(newVetor));
-            System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
-            return;
-        }
         if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
             vector.add(tab.getBlock(newVetor));
             System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
@@ -51,4 +46,18 @@ public class DefaultPeon implements ItypePiece {
         
     }
 
+    public void checkForEnemy(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return;
+        
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
+            vector.add(tab.getBlock(newVetor));
+            System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+            return;
+        }
+        
+    }
+    
 }

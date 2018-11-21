@@ -10,6 +10,7 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Player;
 import businessPack.Players;
+import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
 import javafx.scene.image.Image;
@@ -25,6 +26,7 @@ public class Lenin extends Hero {
     //construtor>>
     public Lenin() {
         image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
+        tpHero = TypeHero.lenin;
     }
 
     //metodos>>
@@ -42,6 +44,11 @@ public class Lenin extends Hero {
         army.addPiece(new Bishop(jogador , TypeHero.lenin, 5, (int)(3.5 + sentido*2.5)));
         army.addPiece(new Horse(jogador , TypeHero.lenin, 6, (int)(3.5 + sentido*2.5)));
         army.addPiece(new Tower(jogador , TypeHero.lenin, 7, (int)(3.5 + sentido*2.5)));
+    }
+
+    @Override
+    public void GameManager(Table tab) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   
