@@ -32,7 +32,7 @@ public class Peon extends Piece {
         if(freeWay != null) freeWay.clear();
 //        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
-        updateHitWay(table);
+        updateHitWay();
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Peon.png", widhtImg, heightImg, false, false));
