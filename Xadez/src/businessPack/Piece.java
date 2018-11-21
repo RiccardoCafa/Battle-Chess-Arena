@@ -56,9 +56,11 @@ public abstract class Piece extends ImageView {
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
         if(hitWay != null) hitWay.clear();
-        for(Block block : freeWay){
-            if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
-                hitWay.add(block);
+        if(freeWay != null){
+            for(Block block : freeWay){
+                if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
+                    hitWay.add(block);
+                }
             }
         }
     }

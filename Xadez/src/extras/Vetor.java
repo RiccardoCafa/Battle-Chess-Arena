@@ -94,15 +94,15 @@ public class Vetor {
     }
     public void setTrend(int x){
         switch(x%9){
-            case  1: trend[0] =  0; trend[1] = -1;
-            case  2: trend[0] =  1; trend[1] = -1;
-            case  3: trend[0] =  1; trend[1] =  0;
-            case  4: trend[0] =  1; trend[1] =  1;//  8 1 2
-            case  5: trend[0] =  0; trend[1] =  1;// 7  0  3
-            case  6: trend[0] = -1; trend[1] =  1;//  6 5 4
-            case  7: trend[0] =  1; trend[1] =  0;
-            case  8: trend[0] = -1; trend[1] = -1;
-            default: trend[0] =  0; trend[1] =  0;
+            case  1: trend[0] =  0; trend[1] = -1; break;
+            case  2: trend[0] =  1; trend[1] = -1; break;
+            case  3: trend[0] =  1; trend[1] =  0; break;
+            case  4: trend[0] =  1; trend[1] =  1; break;//  8 1 2
+            case  5: trend[0] =  0; trend[1] =  1; break;// 7  0  3
+            case  6: trend[0] = -1; trend[1] =  1; break;//  6 5 4
+            case  7: trend[0] =  1; trend[1] =  0; break;
+            case  8: trend[0] = -1; trend[1] = -1; break;
+            default: trend[0] =  0; trend[1] =  0; break;
         }
     }
     public void setTrend(Vetor versor){

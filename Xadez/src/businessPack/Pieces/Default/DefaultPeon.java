@@ -27,15 +27,20 @@ public class DefaultPeon implements ItypePiece {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         freeWay = new ArrayList<>();
         tab = table;
-        if(Table.isInside(vetor))
-        if(table.getBlock(vetor.getX(), vetor.getY() - sentido).getBlockState(player) == BlockState.Empty){
-            freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - sentido));
+        if(Table.isInside(vetor.getX(), vetor.getY() - sentido)){
+            if(table.getBlock(vetor.getX(), vetor.getY() - sentido).getBlockState(player) == BlockState.Empty){
+                freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - sentido));
+            }
         }
-        if(table.getBlock(vetor.getX() - sentido, vetor.getY() - sentido).getBlockState(player) == BlockState.Enemy){
-            freeWay.add(table.getBlock(vetor.getX() - sentido, vetor.getY() - sentido));
+        if(Table.isInside(vetor.getX() - sentido, vetor.getY() - sentido)){
+            if(table.getBlock(vetor.getX() - sentido, vetor.getY() - sentido).getBlockState(player) == BlockState.Enemy){
+                freeWay.add(table.getBlock(vetor.getX() - sentido, vetor.getY() - sentido));
+            }
         }
-        if(table.getBlock(vetor.getX() + sentido, vetor.getY() - sentido).getBlockState(player) == BlockState.Enemy){
-            freeWay.add(table.getBlock(vetor.getX() + sentido, vetor.getY() - sentido));
+        if(Table.isInside(vetor.getX() + sentido, vetor.getY() - sentido)){
+            if(table.getBlock(vetor.getX() + sentido, vetor.getY() - sentido).getBlockState(player) == BlockState.Enemy){
+                freeWay.add(table.getBlock(vetor.getX() + sentido, vetor.getY() - sentido));
+            }
         }
         return freeWay;
     }
