@@ -131,14 +131,8 @@ public class GameCtrl implements Initializable {
             firstBlock = firstClick(myBlock);
         } else if(movingPiece && !superPower){
             //Caso já tenha clicado uma vez, mexa essa peça
-            if(myBlock.isEmpty() && possibleBlocks.contains(myBlock)) {//caso seja um bloco vazio e valido para mover
-                Vetor novaPos = new Vetor(myBlock.getVetor());
-                MoveImage(selectedVector, novaPos);
-                table.MovePiece(selectedVector, novaPos);
-                table.getBlock(selectedVector).colorDefault();
-                movingPiece = false;
-                resetBlockTab();
-                System.out.println("Moved Piece");
+            if(myBlock.isEmpty() && possibleBlocks.contains(myBlock)){//caso seja um bloco vazio e valido para mover
+                moveAction(myBlock);
                 specialActive = false;
                 Players.passTurn();
                 playing.getHero().GameManager(table);
@@ -199,6 +193,16 @@ public class GameCtrl implements Initializable {
             System.out.println("Nothing here");
         }
         return myBlock;
+    }
+    
+    public void moveAction(Block myBlock){
+        Vetor novaPos = new Vetor(myBlock.getVetor());
+        MoveImage(selectedVector, novaPos);
+        table.MovePiece(selectedVector, novaPos);
+        table.getBlock(selectedVector).colorDefault();
+        movingPiece = false;
+        resetBlockTab();
+        System.out.println("Moved Piece");
     }
     
     public void MoveImage(Vetor source, Vetor dest) {
