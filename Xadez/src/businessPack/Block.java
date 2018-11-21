@@ -76,6 +76,7 @@ public class Block extends ImageView {
     /**
      *
      * @param color 0 for green 1 for red
+     * @param playerLooking
      */
     public void colorChange(int color) { //0-Green 1-red
         //BlockState bs = getBlockState(playerLooking);

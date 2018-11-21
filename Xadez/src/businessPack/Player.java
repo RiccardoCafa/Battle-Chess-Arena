@@ -15,6 +15,7 @@ public class Player {
     //construtor>>
     public Player(int sentido, Hero hero, int playingTurn) {
         this.hero = hero;
+        this.jogador = jogador;
         if(sentido == 1) player = Who.player2;
         else player = Who.player1;
         this.playingTurn = playingTurn;

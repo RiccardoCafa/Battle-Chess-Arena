@@ -1,8 +1,7 @@
-package businessPack.Heros;
-
-import businessPack.Table;
+package businessPack;
 
 public interface HeroManager {
     
     public void GameManager(Table tab);
+    
 }

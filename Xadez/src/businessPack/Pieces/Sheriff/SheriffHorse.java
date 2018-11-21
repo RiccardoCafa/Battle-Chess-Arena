@@ -72,8 +72,8 @@ public class SheriffHorse implements ItypePiece {
             }//*******************************************
         }
         for(int i = 2; i <= 8; i += 2){
-            if(Table.isInside(vetor.getTrend(i))){
-                table.getBlock(vetor.getTrend(i)).getVetor().setTrend(i + 4);//apontadores para a origem
+            if(Table.isInside(Vetor.getTrend(i))){
+                table.getBlock(Vetor.getTrend(i)).getVetor().setTrend(i + 4);//apontadores para a origem
             }
         }
         int a = 1;

@@ -26,7 +26,6 @@ public class Lenin extends Hero {
     //construtor>>
     public Lenin() {
         image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
-        tpHero = TypeHero.lenin;
     }
 
     //metodos>>
@@ -50,7 +49,6 @@ public class Lenin extends Hero {
     public void GameManager(Table tab) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
   
 
 }

@@ -13,7 +13,6 @@ import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -56,6 +55,8 @@ public class GameCtrl implements Initializable {
     
     boolean movingPiece = false;
     boolean superPower = false;
+
+    int turn = 1;
     
     Table table;
     
@@ -71,9 +72,8 @@ public class GameCtrl implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        
-        player1 = new Player(-1, new Lapa(), 1);
-        player2 = new Player(1, new Sheriff(), 2);
+        player1 = new Player(1, new Sheriff(), 1);
+        player2 = new Player(-1, new Lapa(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -109,7 +109,7 @@ public class GameCtrl implements Initializable {
                     pieceImage.setLayoutY(-75 + (65*j));
                 }
                 gridPane.add(makeBloco(i, j), i, j);
-                //pieceImage = null;
+                pieceImage = null;
             }
         }
     }
@@ -119,13 +119,13 @@ public class GameCtrl implements Initializable {
         ImageView g;
         g = table.getBlock(i, j);
         g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
-            OnBlockClicked(e);
+            OnPieceClicked(e);
         });
          
         return g;
     }
     
-    public void OnBlockClicked(MouseEvent e) { 
+    public void OnPieceClicked(MouseEvent e) { 
         //Evento de click para os blocos
         Block myBlock = (Block) e.getSource();
         if(!myBlock.isEmpty() && myBlock.getBlockState(playing) == BlockState.Friend && selectedVector != null) {
@@ -155,9 +155,9 @@ public class GameCtrl implements Initializable {
             } else {
                 System.out.println("Nothing here");
             }
-        } else if(movingPiece && !superPower){
+        } else {
             //Caso já tenha clicado uma vez, mexa essa peça
-            if(myBlock.isEmpty() && possibleBlocks.contains(myBlock)) {
+            if(myBlock.isEmpty() ) {
                 Vetor novaPos = new Vetor(myBlock.getVetor());
                 MoveImage(selectedVector, novaPos);
                 table.MovePiece(selectedVector, novaPos);
@@ -180,13 +180,6 @@ public class GameCtrl implements Initializable {
                 selectedVector = null;
                 resetBlockTab();
             }
-        } else if(!movingPiece && superPower){
-            if(playing.getHero().getHeroType() == TypeHero.lapa && possibleBlocks.contains(myBlock)) { 
-                Lapa lapa = (Lapa) playing.getHero();
-                lapa.ExplodeBomb(table, new Vetor(myBlock.getVetor()));
-                resetBlockTab();
-                superPower = false;
-            }
         }
     }
     
@@ -195,6 +188,19 @@ public class GameCtrl implements Initializable {
         ImageView pieceToMove = table.getBlock(source).getPiece();
         pieceToMove.setLayoutX((65*dest.getX()));
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
+        
+        //A little try to change depth by children index
+//        if(source.getY() < dest.getY()) {
+//            Vetor vetorBaixo = new Vetor(source.getX(), source.getY() + 1);
+//            if(vetorBaixo.getY() < 8) {
+//
+//            }
+//        }
+//        if(table.getBlock(source.getX(), source.getY() + 1).getPiece())
+//        //if(source.getY() < dest.getY()) {
+//            pieceToMove.toFront();
+//            System.out.println("YO");
+        //}
     }
     
     public void showPossibleWays(ArrayList<Block> freeWay) {
@@ -224,7 +230,6 @@ public class GameCtrl implements Initializable {
             }
         }
     }
-    
     @FXML
     public void OnBtnPower(MouseEvent e) {
         // Lenin
