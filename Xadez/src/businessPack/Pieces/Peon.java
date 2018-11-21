@@ -29,10 +29,10 @@ public class Peon extends Piece {
     //metodos>>
     @Override
     public void checkMove(Table table) {
-        if(freeWay != null) freeWay.clear();
-//        table.clearTrend();
+        if(freeWay!= null)freeWay.clear();
+        //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
-//        updateHitWay(table);
+        updateHitWay(table);
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Peon.png", widhtImg, heightImg, false, false));

@@ -10,6 +10,7 @@ import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
+import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
 import javafx.scene.image.Image;
@@ -28,7 +29,6 @@ public class Sheriff extends Hero {
         for(int i = 0; i < 8; i++) {
             army.addPiece(new Peon(player, TypeHero.sheriff, i, (int)(3.5 + sentido*2.5)));//peões
         }
-
         army.addPiece(new Bishop(player, TypeHero.sheriff, 2, (int)(3.5 + sentido*3.5)));//bispos
         army.addPiece(new Bishop(player, TypeHero.sheriff, 5, (int)(3.5 + sentido*3.5)));
         army.addPiece(new  Horse(player, TypeHero.sheriff, 1, (int)(3.5 + sentido*3.5)));//cavalos
@@ -38,5 +38,10 @@ public class Sheriff extends Hero {
         army.addPiece(new   King(player, TypeHero.sheriff, 4, (int)(3.5 + sentido*3.5)));//rei
         army.addPiece(new  Queen(player, TypeHero.sheriff, 3, (int)(3.5 + sentido*3.5)));//rainha
 
+    }
+
+    @Override
+    public void GameManager(Table tab, Players players) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

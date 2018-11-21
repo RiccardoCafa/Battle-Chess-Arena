@@ -27,7 +27,7 @@ public class Queen extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay!=null)freeWay.clear();
-        //table.clearTrend();
+        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay(table);
     }

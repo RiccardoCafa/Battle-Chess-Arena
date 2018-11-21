@@ -15,8 +15,8 @@ public abstract class Piece extends ImageView {
     protected Who player;
     protected int hp;
     protected int damage = 1;
-    protected final float widhtImg = 26.5f;
-    protected final float heightImg = 60;
+    protected final float widhtImg = 60f;
+    protected final float heightImg = 130;
     protected boolean alive;
     protected String pathHero;
     protected Vetor vetor;
@@ -31,8 +31,8 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(20);
-        setLayoutY(0);
+//        setLayoutX(20);
+//        setLayoutY(0);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
@@ -42,8 +42,8 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(20);
-        setLayoutY(0);
+//        setLayoutX(20);
+//        setLayoutY(0);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
@@ -56,9 +56,11 @@ public abstract class Piece extends ImageView {
     protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
         if(hitWay != null) hitWay.clear();
-        for(Block block : freeWay){
-            if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
-                hitWay.add(block);
+        if(freeWay != null){
+            for(Block block : freeWay){
+                if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
+                    hitWay.add(block);
+                }
             }
         }
     }

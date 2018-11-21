@@ -9,9 +9,12 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
+import businessPack.Players;
+import businessPack.Table;
 import extras.Who;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
+
 public class Lapa extends Hero {
     Image lapaTowerImage;
     Image lapaBishopImage;
@@ -19,6 +22,9 @@ public class Lapa extends Hero {
     Image lapaKingImage;
     Image lapaQueenImage;
     Image lapaHorseImage;
+    
+    int bigBig = 0;
+    
     public Lapa() {
         image = new Image(path + "lapa-01.png", widthImg, heightImg, false, false);
     }
@@ -28,16 +34,21 @@ public class Lapa extends Hero {
          for(int k = 0;k<8;k++){
             army.addPiece(new Peon(jogador, TypeHero.lapa, k,(int)(3.5 + sentido*2.5)));
         }
-        army.addPiece(new Tower(jogador, TypeHero.lapa, 0, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new Horse(jogador , TypeHero.lapa, 1, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new Bishop(jogador , TypeHero.lapa, 2, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new King(jogador , TypeHero.lapa, 3, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new Queen(jogador , TypeHero.lapa, 4, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new Bishop(jogador , TypeHero.lapa, 5, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new Horse(jogador , TypeHero.lapa, 6, (int)(3.5 + sentido*2.5)));
-        army.addPiece(new Tower(jogador , TypeHero.lapa, 7, (int)(3.5 + sentido*2.5)));
+        army.addPiece(new Tower(jogador, TypeHero.lapa, 0, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Horse(jogador , TypeHero.lapa, 1, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Bishop(jogador , TypeHero.lapa, 2, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new King(jogador , TypeHero.lapa, 3, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Queen(jogador , TypeHero.lapa, 4, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Bishop(jogador , TypeHero.lapa, 5, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Horse(jogador , TypeHero.lapa, 6, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Tower(jogador , TypeHero.lapa, 7, (int)(3.5 + sentido*3.5)));
     }
 
     
     //LapaGod
+
+    @Override
+    public void GameManager(Table tab, Players players) {
+        System.out.println("Lapa é bom demais, n precisa de poderes");
+    }
 }

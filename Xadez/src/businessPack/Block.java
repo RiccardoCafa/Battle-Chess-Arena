@@ -50,7 +50,7 @@ public class Block extends ImageView {
             if(playerLooking.getWho() == Who.player2) {
                 return piece.getWho() == Who.player2 ? BlockState.Friend : BlockState.Enemy;
             } else {
-                return piece.getWho() == Who.player1 ? BlockState.Enemy : BlockState.Friend;
+                return piece.getWho() == Who.player1 ? BlockState.Friend : BlockState.Enemy;
             }
         }
         return BlockState.Empty;
