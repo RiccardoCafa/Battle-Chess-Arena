@@ -69,7 +69,7 @@ public class ChooseCharacterController implements Initializable {
         myImageView = new ImageView(myImage);
         setaDir.setGraphic(myImageView);
         characterSelection.setGraphic(new ImageView(perso[0]));
-        
+        musicaAtual.play();
     }
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
