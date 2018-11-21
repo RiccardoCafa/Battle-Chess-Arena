@@ -41,7 +41,7 @@ public class Sheriff extends Hero {
     }
 
     @Override
-    public void GameManager(Table tab, Players players) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void GameManager(Table tab) {
+        return;
     }
 }

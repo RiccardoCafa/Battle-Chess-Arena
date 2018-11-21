@@ -53,14 +53,12 @@ public abstract class Piece extends ImageView {
     public void reaction(Table table){
         table = strategy.Ireaction(table, vetor);
     }
-    protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
+    protected void updateHitWay(){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
-        if(hitWay != null) hitWay.clear();
-        if(freeWay != null){
-            for(Block block : freeWay){
-                if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
-                    hitWay.add(block);
-                }
+        if(hitWay != null) hitWay.clear(); else return;
+        for(Block block : freeWay){
+            if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
+                hitWay.add(block);
             }
         }
     }

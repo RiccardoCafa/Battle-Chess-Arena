@@ -47,6 +47,23 @@ public class Block extends ImageView {
     }
     public BlockState getBlockState(Player playerLooking) {
         if(piece != null) {
+//            if(piece.vetor.getX() == vetor.getX() && piece.vetor.getY() == vetor.getY()) {
+//                return BlockState.ItsMeMario;
+//            }
+            if(playerLooking.getWho() == Who.player2) {
+                return piece.getWho() == Who.player2 ? BlockState.Friend : BlockState.Enemy;
+            } else {
+                return piece.getWho() == Who.player1 ? BlockState.Friend : BlockState.Enemy;
+            }
+        }
+        return BlockState.Empty;
+    }
+    public BlockState getBlockState(Player playerLooking, Block newBlock) {
+        if(piece != null) {
+            Piece p = newBlock.getPiece();
+            if(p.vetor.getX() == vetor.getX() && p.vetor.getY() == vetor.getY()) {
+                return BlockState.ItsMeMario;
+            }
             if(playerLooking.getWho() == Who.player2) {
                 return piece.getWho() == Who.player2 ? BlockState.Friend : BlockState.Enemy;
             } else {
@@ -61,7 +78,7 @@ public class Block extends ImageView {
      * @param color 0 for green 1 for red
      * @param playerLooking
      */
-    public void colorChange(int color, Player playerLooking) { //0-Green 1-red
+    public void colorChange(int color) { //0-Green 1-red
         //BlockState bs = getBlockState(playerLooking);
         //if(bs == BlockState.Friend) return;
         if(color == 0) {

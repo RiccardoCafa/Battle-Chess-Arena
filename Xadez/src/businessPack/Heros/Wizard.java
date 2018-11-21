@@ -7,6 +7,7 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Wizard.WizardBishop;
 import businessPack.Pieces.Wizard.WizardPeon;
 import businessPack.Player;
+import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
 import javafx.scene.image.Image;
@@ -39,4 +40,9 @@ public class Wizard extends Hero {
     }
   
     // contemplar o mago :)
+
+    @Override
+    public void GameManager(Table tab) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

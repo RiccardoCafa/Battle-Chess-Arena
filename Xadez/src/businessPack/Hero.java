@@ -20,4 +20,7 @@ public abstract class Hero implements HeroManager {
     public Image getImage(){
         return image;
     }
+    public TypeHero getHeroType() {
+        return tpHero;
+    }
 }

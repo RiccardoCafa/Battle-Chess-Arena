@@ -7,12 +7,15 @@ import businessPack.Heros.Sheriff;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
+import businessPack.TypeHero;
+import extras.BlockState;
 import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -39,6 +42,8 @@ public class GameCtrl implements Initializable {
     Pane paneRef;
     @FXML
     Pane pratoPieces;
+    @FXML
+    Button btnPower;
     
     /*
         DECLARING GAMECORE VARIAVABLES
@@ -73,7 +78,11 @@ public class GameCtrl implements Initializable {
         Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, player2);
-        
+        if(playing.getHero().getHeroType() != TypeHero.lapa) {
+            btnPower.setVisible(false);
+        } else { 
+            btnPower.setVisible(true);
+        }
         MountArmyOnTable(table);
     }
     
@@ -119,7 +128,13 @@ public class GameCtrl implements Initializable {
     public void OnPieceClicked(MouseEvent e) { 
         //Evento de click para os blocos
         Block myBlock = (Block) e.getSource();
-        if(!movingPiece){//primeiro clique para escolher uma peça
+        if(!myBlock.isEmpty() && myBlock.getBlockState(playing) == BlockState.Friend && selectedVector != null) {
+            if(selectedVector.getX() != myBlock.getVetor().getX() || selectedVector.getY() != myBlock.getVetor().getY()) {
+                resetBlockTab();
+                movingPiece = false;
+            } 
+        }
+        if(!movingPiece && !superPower){//primeiro clique para escolher uma peça
             if(!myBlock.isEmpty()){
                 if(playing != myBlock.getPiece().getPlayer()) {
                     System.out.println("Nao é seu turno babaca");
@@ -135,7 +150,7 @@ public class GameCtrl implements Initializable {
                 }
                 movingPiece = true;
                 showPossibleWays(possibleBlocks);
-                showPossibleEnemys(myBlock.getPiece().getHitWay(), notPlaying());
+                showPossibleEnemys(myBlock.getPiece().getHitWay());
                 System.out.println("Selected Piece");
             } else {
                 System.out.println("Nothing here");
@@ -150,9 +165,19 @@ public class GameCtrl implements Initializable {
                 movingPiece = false;
                 resetBlockTab();
                 System.out.println("Moved Piece");
+                selectedVector = null;
+                Players.passTurn();
+                playing.getHero().GameManager(table);
+                playing = Players.getTurn() == 1 ? player1 : player2;
+                if(playing.getHero().getHeroType() != TypeHero.lapa) {
+                    btnPower.setVisible(false);
+                } else { 
+                    btnPower.setVisible(true);
+                }
             } else if(myBlock.getVetor().getX() == selectedVector.getX() &&
                       myBlock.getVetor().getY() == selectedVector.getY()){
                 movingPiece = false;
+                selectedVector = null;
                 resetBlockTab();
             }
         }
@@ -184,17 +209,17 @@ public class GameCtrl implements Initializable {
             return;
         }
         for(Block b : freeWay) {
-            b.colorChange(0, playing);
+            b.colorChange(0);
         }
     }
     
-    public void showPossibleEnemys(ArrayList<Block> hitWay, Player pAsking) {
+    public void showPossibleEnemys(ArrayList<Block> hitWay) {
         if(hitWay == null) {
             System.out.println("Lista vazia");
             return;
         }
         for(Block b : hitWay) {
-            b.colorChange(1, pAsking);
+            b.colorChange(1);
         }
     }
     
@@ -205,4 +230,37 @@ public class GameCtrl implements Initializable {
             }
         }
     }
+    @FXML
+    public void OnBtnPower(MouseEvent e) {
+        // Lenin
+        // Huebr
+        if(playing.getHero().getHeroType() == TypeHero.lapa && !movingPiece) {
+            if(superPower) {
+                superPower = false;
+                resetBlockTab();
+            } else {
+                superPower = true;
+                Lapa lapa = (Lapa) playing.getHero();
+                possibleBlocks = lapa.getBombWays(table, playing);
+                showPossibleEnemys(possibleBlocks);
+            }
+            
+        }
+        //playing.getHero()
+    }
 }
+
+
+        
+        //A little try to change depth by children index
+//        if(source.getY() < dest.getY()) {
+//            Vetor vetorBaixo = new Vetor(source.getX(), source.getY() + 1);
+//            if(vetorBaixo.getY() < 8) {
+//
+//            }
+//        }
+//        if(table.getBlock(source.getX(), source.getY() + 1).getPiece())
+//        //if(source.getY() < dest.getY()) {
+//            pieceToMove.toFront();
+//            System.out.println("YO");
+        //}
