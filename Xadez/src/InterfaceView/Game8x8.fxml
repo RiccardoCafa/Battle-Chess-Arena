@@ -24,7 +24,7 @@
             </ImageView>
          </children>
       </Pane>
-      <GridPane fx:id="gridPane" layoutX="700.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">
+      <GridPane fx:id="gridPane" layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="62.0" />
@@ -46,6 +46,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="65.0" prefHeight="65.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <Pane fx:id="pratoPieces" layoutX="698.0" layoutY="94.0" mouseTransparent="true" prefHeight="520.0" prefWidth="520.0" />
       <Pane fx:id="paneRef" prefHeight="94.0" prefWidth="698.0" />
    </children>
 </AnchorPane>
