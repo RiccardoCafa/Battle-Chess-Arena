@@ -35,7 +35,7 @@ public class DefaultPeon implements ItypePiece {
              move(-1, -1,vetor);
         }
         //implementação da movimentação padrão do peão
-        return null;
+        return vector;
     }
         public void move(int xDir, int yDir, Vetor vetor) {
         //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
