@@ -39,14 +39,18 @@ public class Block extends ImageView {
         return piece;
     }
     public void setPiece(Piece p){
-        this.piece = p;
+        try{
+            piece = p;
+        }catch(NullPointerException e){
+            piece = null;
+        }
     }
     public BlockState getBlockState(Player playerLooking) {
         if(piece != null) {
             if(playerLooking.getWho() == Who.player2) {
-                return piece.getPlayerWho() == Who.player2 ? BlockState.Friend : BlockState.Enemy;
+                return piece.getWho() == Who.player2 ? BlockState.Friend : BlockState.Enemy;
             } else {
-                return piece.getPlayerWho() == Who.player1 ? BlockState.Enemy : BlockState.Friend;
+                return piece.getWho() == Who.player1 ? BlockState.Enemy : BlockState.Friend;
             }
         }
         return BlockState.Empty;

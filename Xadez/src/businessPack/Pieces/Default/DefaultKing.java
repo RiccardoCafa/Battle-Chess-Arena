@@ -1,14 +1,14 @@
 package businessPack.Pieces.Default;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypeKing;
+import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public class DefaultKing implements ItypeKing {
+public class DefaultKing implements ItypePiece {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -17,6 +17,10 @@ public class DefaultKing implements ItypeKing {
         this.playing = playing;
     }
     //metodos>>
+    @Override
+    public Table Ireaction(Table table, Vetor vetor) {
+        return table;
+    }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         vector = new ArrayList<>();

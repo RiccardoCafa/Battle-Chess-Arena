@@ -8,17 +8,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class InterfaceMain extends Application {
-    
-    private Stage primaryStage;
+
+    //private Stage primaryStage;
     
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent rootLayout = FXMLLoader.load(getClass().getResource("Game8x8.fxml"));
-/*
-        this.primaryStage = primaryStage;
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Menu.fxml"));
-        rootLayout = //loader.load();*/
         Scene scene = new Scene(rootLayout);
         primaryStage.setTitle("Battle Chess Arena Login!");
         primaryStage.setScene(scene);

@@ -1,18 +1,18 @@
 package businessPack.Pieces.Lapa;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypeTower;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.ItypePiece;
 
 /**
  *
  * @author ricca
  */
-public class LapaTower implements ItypeTower {
+public class LapaTower implements ItypePiece {
 
     Player player;
     int casasOffSet;
@@ -187,6 +187,8 @@ public class LapaTower implements ItypeTower {
         }
         return newVetor;
     }
-    
-    
+    @Override
+    public Table Ireaction(Table table, Vetor vetor) {
+        return table;
+    }
 }

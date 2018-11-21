@@ -9,6 +9,7 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
+import extras.Who;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
 public class Lapa extends Hero {
@@ -23,7 +24,7 @@ public class Lapa extends Hero {
     }
 
     @Override
-    public void createArmy(Army army, int sentido, Player jogador) {
+    public void createArmy(Army army, int sentido, Who jogador) {
          for(int k = 0;k<8;k++){
             army.addPiece(new Peon(jogador, TypeHero.lapa, k,(int)(3.5 + sentido*2.5)));
         }
