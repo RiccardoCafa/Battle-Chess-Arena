@@ -5,6 +5,7 @@ import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Pieces.Huebr.huebrPeon;
 import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
@@ -31,7 +32,7 @@ public class Peon extends Piece {
         if(freeWay != null) freeWay.clear();
 //        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
-//        updateHitWay(table);
+        updateHitWay(table);
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Peon.png", widhtImg, heightImg, false, false));
@@ -41,7 +42,7 @@ public class Peon extends Piece {
             case huebr:
                 return new huebrPeon();
             default:
-                return new DefaultPeon();
+                return new DefaultPeon(Players.getPlayer(player));
         }
     }
     //getset>>

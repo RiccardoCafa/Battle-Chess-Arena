@@ -31,8 +31,8 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(20);
-        setLayoutY(0);
+        setLayoutX(16);
+        setLayoutY(-16);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
@@ -42,8 +42,8 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(20);
-        setLayoutY(0);
+        setLayoutX(16);
+        setLayoutY(-16);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay

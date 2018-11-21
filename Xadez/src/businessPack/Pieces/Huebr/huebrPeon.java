@@ -15,13 +15,14 @@ import java.util.ArrayList;
 
 public class huebrPeon implements ItypePiece {
 
+
     @Override
-    public Table Ireaction(Table table, Vetor vetor) {
+    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         return null;
     }
 
     @Override
-    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
+    public Table Ireaction(Table table, Vetor vetor) {
         return null;
     }
 
