@@ -79,7 +79,7 @@ public abstract class Piece extends ImageView {
         return alive;
     }
     public void reaction(Table table){
-        table = strategy.Ireaction(table, vetor);
+        strategy.Ireaction(table, vetor);
     }
     protected void updateHitWay(){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();

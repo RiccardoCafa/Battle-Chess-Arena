@@ -127,16 +127,27 @@ public class GameCtrl implements Initializable {
         g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
             OnBlockClicked(e);
         });
+        g.addEventHandler(MouseEvent.MOUSE_ENTERED, (MouseEvent e) -> {
+            OnBlockEnter(e);
+        });
         return g;
     }
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
+        if(!actualBlock.isEmpty() &&                                 //se o bloco clicado não está vazio e
+            actualBlock.getBlockState(playing) == BlockState.Friend &&//clicar em uma peça aliada e
+           selectedVetor != null){                                   //ja tiver sido clicada uma peça
+            if(actualBlock != firstBlock){//se a peça clicada for outra aliada
+                resetBlockTab();
+                movingPiece = false;
+            }
+        }
         if(!movingPiece){//primeiro clique
             firstClick(actualBlock);
         }else{//segundo clique
-            if(actualBlock.equals(firstBlock)){//se o bloco é o mesmo clicado antes
-                if(!combo) return;
+            if(actualBlock == firstBlock){//se o bloco é o mesmo clicado antes
+                //if(!combo) return; //Não estava des-selecionando
                 firstBlock = null;
                 movingPiece = false;
                 selectedVetor = null;
@@ -300,6 +311,13 @@ public class GameCtrl implements Initializable {
         }*/
     }
     
+    @FXML
+    public void OnBlockEnter(MouseEvent e) {
+        Block blockOver = (Block) e.getSource();
+        if(blockOver.getPiece() != null)
+            System.out.println("Essa peça tem " + blockOver.getPiece().getHP());
+    }
+    
     public void firstClick(Block actualBlock){
         if(actualBlock.isEmpty()){//se o bloco está vazio
             firstBlock = null;
@@ -370,8 +388,32 @@ public class GameCtrl implements Initializable {
     
     public void moveImage(Vetor source, Vetor dest, ImageView pieceToMove) {
         //Mexe a imagem na interface
+        //int yCount = 1;
+        Vetor vet;
         pieceToMove.setLayoutX((65*dest.getX()));
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
+        int y = dest.getY() + 1;
+        while(y < Table.getN()) {
+            vet = new Vetor(dest.getX(), y);
+            if(table.getBlock(vet).isEmpty()) {
+                break;
+            }
+            pieceToMove = table.getBlock(vet).getPiece();
+            pieceToMove.toFront();
+            y++;
+        }
+        y = dest.getY() - 1;
+        while(y >= 0)  {
+            System.out.println("Entrei no y: " + y);
+            vet = new Vetor(dest.getX(), y);
+            if(table.getBlock(vet).isEmpty()) {
+                break;
+            }
+            System.out.println("Não está vazio: " + y);
+            pieceToMove = table.getBlock(vet).getPiece();
+            pieceToMove.toBack();
+            y--;
+        }
         /*try {
             Thread.sleep(2000);
         } catch (InterruptedException ex) {
@@ -389,7 +431,11 @@ public class GameCtrl implements Initializable {
             Logger.getLogger(GameCtrl.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }
-    
+    public void removeImage(Vetor source) {
+        ImageView pieceToRemove = table.getBlock(source);
+        pieceToRemove.setVisible(false);
+        pieceToRemove = null;
+    }
     public void showPossibleWays(ArrayList<Block> freeWay) {
         if(freeWay == null) {
             System.out.println("Lista vazia");
