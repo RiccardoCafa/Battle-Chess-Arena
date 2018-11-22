@@ -11,6 +11,7 @@ import businessPack.TypeHero;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Players;
+import businessPack.TypePiece;
 import extras.Who;
 
 public class Queen extends Piece {
@@ -21,6 +22,7 @@ public class Queen extends Piece {
         hp = 8;
         damage = 1;
         strategy = getHeroStrategy();
+        tpPiece = TypePiece.queen;
         updateImage();
     }
     //metodos>>
@@ -31,7 +33,8 @@ public class Queen extends Piece {
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
-    private ItypePiece getHeroStrategy() {
+    @Override
+    public ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case lenin:
                 especial = true;

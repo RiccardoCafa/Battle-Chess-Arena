@@ -79,7 +79,7 @@ public class GameCtrl implements Initializable {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         player1 = new Player(-1, new Lapa(), 1);
-        player2 = new Player(1, new Sheriff(), 2);
+        player2 = new Player(1, new Lenin(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -314,8 +314,7 @@ public class GameCtrl implements Initializable {
     @FXML
     public void OnBlockEnter(MouseEvent e) {
         Block blockOver = (Block) e.getSource();
-        if(blockOver.getPiece() != null)
-            System.out.println("Essa peça tem " + blockOver.getPiece().getHP());
+            //System.out.println("Essa peça tem " + blockOver.getPiece().getHP());
     }
     
     public void firstClick(Block actualBlock){

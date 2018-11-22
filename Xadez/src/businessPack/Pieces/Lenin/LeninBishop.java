@@ -30,6 +30,7 @@ public class LeninBishop implements ItypePiece{
         move(0, 1, vetor); //infinito e além
         moveInf(1, 1, vetor);
         moveInf(1, -1, vetor);
+        System.out.println("Eu sou lenin");
         return vector;
     }
     public void move(int xDir, int yDir, Vetor vetor) {

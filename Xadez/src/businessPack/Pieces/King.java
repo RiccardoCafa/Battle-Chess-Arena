@@ -8,6 +8,7 @@ import businessPack.Pieces.Wizard.WizardKing;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
 
@@ -19,6 +20,7 @@ public class King extends Piece {
         hp = 18;
         damage = 1;
         strategy = getHeroStrategy();//new DefaultKing(player);
+        tpPiece = TypePiece.king;
         updateImage();
     }
 //    public King(Player pPiece, TypeHero tpHero, int x, int y, ItypeKing tpKing) {
@@ -35,7 +37,8 @@ public class King extends Piece {
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
-    private ItypePiece getHeroStrategy() {
+    @Override
+    public ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
                 return new SheriffKing(Players.getPlayer(player));

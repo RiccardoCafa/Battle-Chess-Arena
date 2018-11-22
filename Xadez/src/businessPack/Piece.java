@@ -143,9 +143,15 @@ public abstract class Piece extends ImageView {
     public ArrayList<Block> getHitWay() {
         return hitWay;
     }
+    public void setStrategy(ItypePiece strategy){
+        this.strategy = strategy;
+    }
     public boolean isSpecial(){
         return especial;
     }
+    
+    public abstract ItypePiece getHeroStrategy();
+    
     private String getHeroPath() {
         switch(tpHero) {
             case huebr:
