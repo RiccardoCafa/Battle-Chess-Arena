@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DefaultPeon implements ItypePiece {
     //metodos>>
-       Table tab;
+   Table tab;
     ArrayList<Block> vector;
     Player playing;
     
@@ -25,19 +25,23 @@ public class DefaultPeon implements ItypePiece {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         vector = new ArrayList<>();
         tab = table;
-        if(playing.getPlayingTurn()==1){
-             move(0, 1, vetor);
-             move(-1, 1,vetor);
-             move(1, 1,vetor);
-        }else{
-             move(0, -1, vetor);
-             move(1, -1,vetor);
-             move(-1, -1,vetor);
-        }
-        //implementação da movimentação padrão do peão
+        move(0,-1*playing.getSentido(),vetor);
+        moveEnemy(1,-1*playing.getSentido(),vetor);
+        moveEnemy(-1,-1*playing.getSentido(),vetor);
         return vector;
     }
-        public void move(int xDir, int yDir, Vetor vetor) {
+    public void move(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return;
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
+            vector.add(tab.getBlock(newVetor));
+        }
+        //implementação da movimentação padrão do peão
+        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+    }
+    public void moveEnemy(int xDir, int yDir, Vetor vetor) {
         //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
         Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
         int i = newVetor.getX(); int j = newVetor.getY();
@@ -47,10 +51,6 @@ public class DefaultPeon implements ItypePiece {
             vector.add(tab.getBlock(newVetor));
             return;
         }
-        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
-            vector.add(tab.getBlock(newVetor));
-        }
         System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
     }
-
 }

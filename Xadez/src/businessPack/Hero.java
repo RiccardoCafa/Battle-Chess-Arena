@@ -1,9 +1,10 @@
 package businessPack;
 
+import businessPack.Heros.HeroManager;
 import extras.Who;
 import javafx.scene.image.Image;
 
-public abstract class Hero {
+public abstract class Hero implements HeroManager {
     //atributos>>
     protected Player player;
     protected Image image;
@@ -19,5 +20,8 @@ public abstract class Hero {
     //getset>>
     public Image getImage(){
         return image;
+    }
+    public TypeHero getHeroType() {
+        return tpHero;
     }
 }

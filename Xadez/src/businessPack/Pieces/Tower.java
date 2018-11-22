@@ -9,6 +9,7 @@ import businessPack.TypeHero;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Players;
+import businessPack.TypePiece;
 import extras.Who;
 
 public class Tower extends Piece {
@@ -19,6 +20,7 @@ public class Tower extends Piece {
         hp = 10;
         damage = 1;
         strategy = getHeroStrategy();//new DefaultTower(pPiece);
+        tpPiece = TypePiece.tower;
         updateImage();
     }
     //metodos>>
@@ -27,15 +29,17 @@ public class Tower extends Piece {
         if(freeWay != null) freeWay.clear();
         //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
-        updateHitWay(table);
+        updateHitWay();
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Tower.png",widhtImg, heightImg, false, false));
         setMouseTransparent(true);
     }
-    private ItypePiece getHeroStrategy() {
+    @Override
+    public ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case lapa:
+                especial = true;
                 return new LapaTower(Players.getPlayer(player));
             default:
                 return new DefaultTower(Players.getPlayer(player));

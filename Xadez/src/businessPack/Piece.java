@@ -15,13 +15,16 @@ public abstract class Piece extends ImageView {
     protected Who player;
     protected int hp;
     protected int damage = 1;
-    protected final float widhtImg = 26.5f;
-    protected final float heightImg = 60;
+    protected final float widhtImg = 60f;
+    protected final float heightImg = 130;
     protected boolean alive;
+    protected boolean especial;
     protected String pathHero;
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
+    protected ArrayList<Block> especialFreeWay;
+    protected ArrayList<Block> especialHitWay;
     //construtor>>
     protected Piece(Who player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
@@ -31,8 +34,9 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(20);
-        setLayoutY(0);
+        especial = false;
+//        setLayoutX(20);
+//        setLayoutY(0);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
@@ -42,27 +46,62 @@ public abstract class Piece extends ImageView {
         pathHero = getHeroPath();
         setPickOnBounds(true);
         setMouseTransparent(true);
-        setLayoutX(20);
-        setLayoutY(0);
+        especial = false;
+//        setLayoutX(20);
+//        setLayoutY(0);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
-    public void hit(int damage){
+    public void checkEspecialMove(Table table, Block tempLocation){
+        if(especial){
+            especialFreeWay = new ArrayList<>();
+            especialFreeWay.clear();
+            //table.clearTrend();
+            Block addBlock;
+            for(int i = 1; i < 9; i++){
+                try{
+                    addBlock = table.getBlock(tempLocation.getVetor().getX() + Vetor.getTrend(i).getX(),
+                                              tempLocation.getVetor().getY() + Vetor.getTrend(i).getY());
+                    if(addBlock.getBlockState(Players.getPlayer(player)) != BlockState.Friend)
+                        especialFreeWay.add(addBlock);
+                }catch(NullPointerException e){
+                    System.out.println("deu erro em " + i);
+                }
+            }
+            especialFreeWay = strategy.IcheckMove(table, vetor);
+            especialHitWay = updateHitWay(table, especialFreeWay);
+        }else{
+            especialFreeWay = null;
+        }
+    }
+    public boolean hit(int damage){
         setHP(hp - damage);
+        return alive;
     }
     public void reaction(Table table){
-        table = strategy.Ireaction(table, vetor);
+        strategy.Ireaction(table, vetor);
     }
-    protected void updateHitWay(Table table){//seleciona os vetores de freeWay que possui inimigos
+    protected void updateHitWay(){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
-        if(hitWay != null) hitWay.clear();
+        if(hitWay != null) hitWay.clear(); else return;
         for(Block block : freeWay){
             if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
                 hitWay.add(block);
             }
         }
     }
-    
+    public ArrayList<Block> updateHitWay(Table table, ArrayList<Block> freeWay){//seleciona os vetores de freeWay que possui inimigos
+        hitWay = new ArrayList<>();
+        if(hitWay != null) hitWay.clear();
+        if(freeWay != null){
+            for(Block block : freeWay){
+                if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
+                    hitWay.add(block);
+                }
+            }
+        }
+        return hitWay;
+    }
     //getset>>
     public TypePiece getPiece(){
         return tpPiece;
@@ -74,7 +113,7 @@ public abstract class Piece extends ImageView {
         this.hp = hp;
         alive = (hp > 0);
     }
-    public boolean getLife(){
+    public boolean imAlive(){
         return alive;
     }
     public void setLife(boolean alive){
@@ -104,6 +143,21 @@ public abstract class Piece extends ImageView {
     public ArrayList<Block> getHitWay() {
         return hitWay;
     }
+    public ArrayList<Block> getEspecialFreeWay() {
+        return especialFreeWay;
+    }
+    public ArrayList<Block> getEspecialHitWay() {
+        return especialHitWay;
+    }
+    public void setStrategy(ItypePiece strategy){
+        this.strategy = strategy;
+    }
+    public boolean isSpecial(){
+        return especial;
+    }
+    
+    public abstract ItypePiece getHeroStrategy();
+    
     private String getHeroPath() {
         switch(tpHero) {
             case huebr:

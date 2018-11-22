@@ -9,6 +9,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
 
@@ -19,6 +20,7 @@ public class Bishop extends Piece {
         super(who, tpHero, x, y);
         strategy = getHeroStrategy();//new DefaultBishop(pPiece);  
         hp = 4;
+        tpPiece = TypePiece.bishop;
         updateImage();
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
@@ -33,16 +35,16 @@ public class Bishop extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay!=null)freeWay.clear();
-//        table.clearTrend();
+        //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
-        updateHitWay(table);
+        updateHitWay();
     }
-    private ItypePiece getHeroStrategy() {
+    @Override
+    public ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case wizard:
+                especial = true;
                 return new WizardBishop();
-            case lenin:
-                return new LeninBishop(Players.getPlayer(player));
             default:
                 return new DefaultBishop(Players.getPlayer(player));
         }

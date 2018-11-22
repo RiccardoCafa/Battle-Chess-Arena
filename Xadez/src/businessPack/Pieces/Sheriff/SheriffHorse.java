@@ -20,15 +20,15 @@ public class SheriffHorse implements ItypePiece {
     @Override
     public Table Ireaction(Table table, Vetor vetor) {
         if(charge != 0){
-            for(int iE = vetor.getX(); iE < Table.getM(); iE++){
+            for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                    table.getBlock(iE, vetor.getY()).getPiece().hit(charge);
+                    table.getBlock(iE, vetor.getY()).hitPiece(charge);
                     break;
                 }
             }
-            for(int iW = vetor.getX(); iW >= 0; iW--){
+            for(int iW = vetor.getX() - 1; iW >= 0; iW--){
                 if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                    table.getBlock(iW, vetor.getY()).getPiece().hit(charge);
+                    table.getBlock(iW, vetor.getY()).hitPiece(charge);
                     break;
                 }
             }
@@ -72,8 +72,8 @@ public class SheriffHorse implements ItypePiece {
             }//*******************************************
         }
         for(int i = 2; i <= 8; i += 2){
-            if(Table.isInside(vetor.getTrend(i))){
-                table.getBlock(vetor.getTrend(i)).getVetor().setTrend(i + 4);//apontadores para a origem
+            if(Table.isInside(Vetor.getTrend(i))){
+                table.getBlock(Vetor.getTrend(i)).getVetor().setTrend(i + 4);//apontadores para a origem
             }
         }
         int a = 1;

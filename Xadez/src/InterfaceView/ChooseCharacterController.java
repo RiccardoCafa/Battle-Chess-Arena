@@ -44,26 +44,26 @@ public class ChooseCharacterController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String pathMusic = "InterfaceView/Sounds/";
-        musicas.add(new MediaPlayer(new Media(getClass().getResource("MUSICA HUE HUE BR.mp3").toString())));
-        musicas.add(new MediaPlayer(new Media(getClass().getResource("Lapa.mp3").toString())));
-        musicas.add(new MediaPlayer(new Media(getClass().getResource("URSS.mp3").toString())));
-        musicas.add(new MediaPlayer(new Media(getClass().getResource("Mago.mp3").toString())));
-        musicas.add(new MediaPlayer(new Media(getClass().getResource("Pistoleiro.mp3").toString())));
-        
-        musicaAtual = musicas.get(count);
+//        String pathMusic = "InterfaceView/Sounds/";
+//        musicas.add(new MediaPlayer(new Media(getClass().getResource("MUSICA HUE HUE BR.mp3").toString())));
+//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Lapa.mp3").toString())));
+//        musicas.add(new MediaPlayer(new Media(getClass().getResource("URSS.mp3").toString())));
+//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Mago.mp3").toString())));
+//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Pistoleiro.mp3").toString())));
+//        
+//        musicaAtual = musicas.get(count);
         // TODO
         int resX = 446;
         int resY = 336;
-        perso[0] = new Image("InterfaceView/huehuebr-01.png",resX, resY, false, false);
+        perso[0] = new Image("InterfaceView/Personagens/huehuebr-01.png",resX, resY, false, false);
         heroNames[0] = "Huehue br";
-        perso[1] = new Image("InterfaceView/lapa-01.png",resX, resY, false, false);
+        perso[1] = new Image("InterfaceView/Personagens/lapa-01.png",resX, resY, false, false);
         heroNames[1] = "Lapa";
-        perso[2] = new Image("InterfaceView/lenin-01.png",resX, resY, false, false);
+        perso[2] = new Image("InterfaceView/Personagens/lenin-01.png",resX, resY, false, false);
         heroNames[2] = "Czar Nicolau II";
-        perso[3] = new Image("InterfaceView/omago-01.png", resX, resY, false, false);
+        perso[3] = new Image("InterfaceView/Personagens/omago-01.png", resX, resY, false, false);
         heroNames[3] = "The Wizard";
-        perso[4] = new Image("InterfaceView/pistoleiro-01.png",resX, resY, false, false);
+        perso[4] = new Image("InterfaceView/Personagens/pistoleiro-01.png",resX, resY, false, false);
         heroNames[4] = "Gunslinger";
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
@@ -82,10 +82,10 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count--;
         }
-        musicaAtual = musicas.get(count);
-        musicaAtual.setStartTime(Duration.ZERO);
-        musicaAtual.isAutoPlay();
-        musicaAtual.play();
+//        musicaAtual = musicas.get(count);
+//        musicaAtual.setStartTime(Duration.ZERO);
+//        musicaAtual.isAutoPlay();
+//        musicaAtual.play();
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
@@ -97,10 +97,10 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count++;
         }
-        musicaAtual = musicas.get(count);
-        musicaAtual.setStartTime(Duration.ZERO);
-        musicaAtual.isAutoPlay();
-        musicaAtual.play();
+//        musicaAtual = musicas.get(count);
+//        musicaAtual.setStartTime(Duration.ZERO);
+//        musicaAtual.isAutoPlay();
+//        musicaAtual.play();
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
