@@ -23,6 +23,8 @@ public abstract class Piece extends ImageView {
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
+    protected ArrayList<Block> especialFreeWay;
+    protected ArrayList<Block> especialHitWay;
     //construtor>>
     protected Piece(Who player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
@@ -50,8 +52,31 @@ public abstract class Piece extends ImageView {
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
-    public void hit(int damage){
+    public void checkEspecialMove(Table table, Block tempLocation){
+        if(especial){
+            especialFreeWay = new ArrayList<>();
+            especialFreeWay.clear();
+            //table.clearTrend();
+            Block addBlock;
+            for(int i = 1; i < 9; i++){
+                try{
+                    addBlock = table.getBlock(tempLocation.getVetor().getX() + Vetor.getTrend(i).getX(),
+                                              tempLocation.getVetor().getY() + Vetor.getTrend(i).getY());
+                    if(addBlock.getBlockState(Players.getPlayer(player)) != BlockState.Friend)
+                        freeWay.add(addBlock);
+                }catch(NullPointerException e){
+                    System.out.println("deu erro em " + i);
+                }
+            }
+            freeWay = strategy.IcheckMove(table, vetor);
+            updateHitWay();
+        }else{
+            especialFreeWay = null;
+        }
+    }
+    public boolean hit(int damage){
         setHP(hp - damage);
+        return alive;
     }
     public void reaction(Table table){
         table = strategy.Ireaction(table, vetor);

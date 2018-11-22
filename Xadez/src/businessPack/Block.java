@@ -33,6 +33,14 @@ public class Block extends ImageView {
         return piece == null;
     }
     //getset>>
+    public boolean hitPiece(int damage){
+        if(piece != null){
+            if(!piece.hit(damage)){
+                piece = null;
+            }
+        }
+        return piece != null;//ainda está vivo
+    }
     public Vetor getVetor(){
         return vetor;
     }

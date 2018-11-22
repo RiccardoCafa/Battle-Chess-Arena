@@ -42,13 +42,6 @@ public class Table{
             }
         }
     }
-    public ArrayList<Block> blocksAround(Block block){
-        ArrayList<Block> listAux = new ArrayList<>();
-        for(int i = 1; i < 9; i++) {
-            listAux.add(table[(int) block.getX() + Vetor.getTrend(i).getX()][(int) block.getY() + Vetor.getTrend(i).getY()]);
-        }
-        return listAux;
-    }
     //getset>>    
     /**
      * 

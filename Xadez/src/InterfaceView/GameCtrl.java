@@ -13,6 +13,8 @@ import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -50,20 +52,23 @@ public class GameCtrl implements Initializable {
         DECLARING GAMECORE VARIAVABLES
     */
     Vetor myVector;
-    Vetor selectedVector;
+    Vetor selectedVetor;
     
     ArrayList<Block> possibleBlocks;
     ArrayList<Block> possibleHits;
     
     boolean movingPiece = false;
     boolean superPower = false;
-    boolean specialActive  = false;
+    boolean specialActive = false;
+    boolean combo = false;
     
     Table table;
     
     Player player1;
     Player player2;
     Player playing;
+    
+    Block firstBlock;
     
     public Player notPlaying(){
         return playing.equals(player1) ? player2 : player1;
@@ -109,67 +114,174 @@ public class GameCtrl implements Initializable {
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
                 }
-                gridPane.add(makeBloco(i, j), i, j);
+                gridPane.add(makeBlock(i, j), i, j);
                 //pieceImage = null;
             }
         }
     }
     
-    public ImageView makeBloco(int i, int j) {
+    public ImageView makeBlock(int i, int j) {
         // Pega um bloco do table, cria um evento pra ele e o add no gridpane
         ImageView g;
         g = table.getBlock(i, j);
         g.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
             OnBlockClicked(e);
         });
-         
         return g;
     }
     
-    public void OnBlockClicked(MouseEvent e) { 
-        //Evento de click para os blocos
-        Block myBlock = (Block) e.getSource();
-        if(!myBlock.isEmpty() && myBlock.getBlockState(playing) == BlockState.Friend && selectedVector != null) {
-            if(selectedVector.getX() != myBlock.getVetor().getX() || selectedVector.getY() != myBlock.getVetor().getY()) {
+    public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
+        Block actualBlock = (Block) e.getSource();//bloco clicado
+        if(!movingPiece){//primeiro clique
+            firstClick(actualBlock);
+        }else{//segundo clique
+            if(actualBlock.equals(firstBlock)){//se o bloco é o mesmo clicado antes
+                if(!combo) return;
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                possibleBlocks.clear();
+                possibleHits.clear();
+                resetBlockTab();
+            }else if(possibleBlocks.contains(actualBlock)){//se é possível se movimentar
+                externalMove(firstBlock, actualBlock, firstBlock.getPiece());
+                if(!possibleHits.contains(actualBlock)){//se é caminho livre
+                    externalMove(firstBlock, actualBlock, firstBlock.getPiece());
+                    internalMove(firstBlock, actualBlock);
+                    combo = false;
+                }else{//se há inimigo
+                    while(!actualBlock.isEmpty()){//enquanto não houver casa livre
+                        if(!firstBlock.getPiece().isSpecial()){//se a peça não for especial
+                            if(actualBlock.getBlockState(playing) == BlockState.Enemy){//se a casa atual possui inimigo
+                                actualBlock.getPiece().reaction(table);
+                                if(actualBlock.hitPiece(firstBlock.getPiece().getDamage())){//se ainda está viva
+                                    externalMove(actualBlock, table.getBlock(actualBlock.getVetor().next()), firstBlock.getPiece());
+                                    actualBlock = table.getBlock(actualBlock.getVetor().next());
+                                }
+                            }else{
+                                externalMove(actualBlock, table.getBlock(actualBlock.getVetor().next()), firstBlock.getPiece());
+                                actualBlock = table.getBlock(actualBlock.getVetor().next());
+                            }
+                        }else{//se a peça for especial
+                            showAlternativeMoves(actualBlock);
+                            combo = true;
+                            return;
+                        }
+                    }
+                    externalMove(firstBlock, actualBlock, firstBlock.getPiece());
+                    internalMove(firstBlock, actualBlock);
+                    Players.passTurn();
+                    playing.getHero().GameManager(table);
+                    playing = Players.getTurn() == 1 ? player1 : player2;
+                }
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                possibleBlocks.clear();
+                possibleHits.clear();
+                resetBlockTab();
+                Players.passTurn();
+                playing.getHero().GameManager(table);
+                playing = Players.getTurn() == 1 ? player1 : player2;
+            }else if(actualBlock.isEmpty()){
+                if(!combo) return;
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                possibleBlocks.clear();
+                possibleHits.clear();
+                resetBlockTab();
+            }else if(actualBlock.isEmpty() &&
+                     actualBlock.getPiece().getPlayer() == firstBlock.getPiece().getPlayer()){//se clicar num aliado
+                if(!combo) return;
+                firstClick(actualBlock);
+            }else{//se clicar num inimigo fora de alcance
+                if(!combo) return;
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                possibleBlocks.clear();
+                possibleHits.clear();
+                resetBlockTab();
+            }
+        }
+        
+        /*
+        if(!actualBlock.isEmpty() &&                                 //se o bloco clicado não está vazio e
+           actualBlock.getBlockState(playing) == BlockState.Friend &&//possuir uma peça aliada e
+           selectedVetor != null){                                   //ja tiver sido clicada uma peça
+            if(selectedVetor.getX() != actualBlock.getVetor().getX() ||
+               selectedVetor.getY() != actualBlock.getVetor().getY()){//se a peça clicada for outra aliada
                 resetBlockTab();
                 movingPiece = false;
-            } 
+            }else{
+                resetBlockTab();
+                movingPiece = false;
+                selectedVetor = null;
+            }
         }
-        Block firstBlock = null;
-        if(!movingPiece && !superPower){//primeiro clique para escolher uma peça
-            firstBlock = firstClick(myBlock);
-        } else if(movingPiece && !superPower){
-            //Caso já tenha clicado uma vez, mexa essa peça
-            if(myBlock.isEmpty() && possibleBlocks.contains(myBlock)){//caso seja um bloco vazio e valido para mover
-                moveAction(myBlock);
+        if(!movingPiece && !superPower){//se for o primeiro clique para escolher uma peça
+            firstBlock = actualBlock;
+            firstClick(actualBlock);
+        }else if(movingPiece && !superPower){//se já tenha clicado uma vez, mexa essa peça
+            if(!possibleBlocks.isEmpty() &&
+               possibleBlocks.contains(actualBlock)){//se o bloco está vazio e válido para mover
+                moveAction(actualBlock);
                 specialActive = false;
                 Players.passTurn();
                 playing.getHero().GameManager(table);
                 playing = Players.getTurn() == 1 ? player1 : player2;
-            }else if(possibleHits.contains(myBlock)){//caso seja um inimigo válido para atacar
-                myBlock.getPiece().reaction(table);
+            }else if(!possibleHits.isEmpty() &&
+                     possibleHits.contains(actualBlock)){//se o bloco possui um inimigo válido para atacar
+                actualBlock.getPiece().reaction(table);
                 if(firstBlock != null){
-                    myBlock.getPiece().hit(firstBlock.getPiece().getDamage());
                     specialActive = false;
-                    if(myBlock.getPiece().imAlive()){//caso a peça atingida não não morra
+                    if(actualBlock.hitPiece(firstBlock.getPiece().getDamage())){//caso a peça atingida não morra
+                        moveImage(firstBlock.getVetor(), actualBlock.getVetor());
+                        //table.MovePiece(firstBlock.getVetor(), actualBlock.getVetor());//!!!!!!!!!!!!!!!!!!!!
                         if(firstBlock.getPiece().isSpecial()){//caso a peça movida seja especial
                             specialActive = true;
                             possibleBlocks = table.blocksAround(firstBlock);
-                            possibleHits = myBlock.getPiece().updateHitWay(table, possibleBlocks);
+                            possibleHits = actualBlock.getPiece().updateHitWay(table, possibleBlocks);
                             resetBlockTab();
                             showPossibleWays(possibleBlocks);
                             showPossibleEnemys(possibleHits);
+                        }else{
+                            Block previousBlock = actualBlock;
+                            while(!table.getBlock(actualBlock.getVetor().next()).isEmpty()){//enquanto o próximo bloco não está vazio
+                                previousBlock = actualBlock;
+                                actualBlock = table.getBlock(actualBlock.getVetor().next());
+                                switch(actualBlock.getBlockState(playing)){
+                                    case Friend:
+                                        GameCtrl.this.moveImage(previousBlock.getVetor(), actualBlock.getVetor(), firstBlock.getPiece());
+                                        System.out.println("opa, amigao, bom te ver");
+                                        //table.MovePiece(actualBlock.getVetor(), firstBlock.getVetor());
+                                        break;
+                                    case Enemy:
+                                        actualBlock.getPiece().reaction(table);
+                                        GameCtrl.this.moveImage(previousBlock.getVetor(), actualBlock.getVetor(), firstBlock.getPiece());
+                                        System.out.println("shoryuken!");
+                                        if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){//se matou
+                                            table.MovePiece(actualBlock.getVetor(), firstBlock.getVetor());
+                                            System.out.println("fatality");
+                                        }
+                                    case Empty:
+                                        moveImage(firstBlock.getVetor(), actualBlock.getVetor());
+                                }
+                            }
                         }
-                        MoveImage(selectedVector, firstBlock.getPiece().getVetor().next());
-                        table.MovePiece(selectedVector, firstBlock.getPiece().getVetor().next());
+                    }else{
+                        moveImage(firstBlock.getVetor(), actualBlock.getVetor());
+                        table.MovePiece(firstBlock.getVetor(), actualBlock.getVetor());
+                        movingPiece = false;
                     }
                 }
-            }else if(myBlock.getVetor().getX() == selectedVector.getX() &&
-                      myBlock.getVetor().getY() == selectedVector.getY() && !specialActive){
+            }else if(actualBlock.getVetor().getX() == selectedVetor.getX() &&
+                      actualBlock.getVetor().getY() == selectedVetor.getY() && !specialActive){
                 movingPiece = false;
                 resetBlockTab();
                 System.out.println("Moved Piece");
-                selectedVector = null;
+                selectedVetor = null;
                 Players.passTurn();
                 playing.getHero().GameManager(table);
                 playing = Players.getTurn() == 1 ? player1 : player2;
@@ -178,55 +290,104 @@ public class GameCtrl implements Initializable {
                 } else { 
                     btnPower.setVisible(true);
                 }
-            } else if(myBlock.getVetor().getX() == selectedVector.getX() &&
-                      myBlock.getVetor().getY() == selectedVector.getY()){
+            } else if(actualBlock.getVetor().getX() == selectedVetor.getX() &&
+                      actualBlock.getVetor().getY() == selectedVetor.getY()){
                 movingPiece = false;
-                selectedVector = null;
+                selectedVetor = null;
                 resetBlockTab();
                 superPower = false;
             }
-        }
+        }*/
     }
     
-    public Block firstClick(Block myBlock){
-        if(!myBlock.isEmpty()){
-            if(playing != myBlock.getPiece().getPlayer()) {
+    public void firstClick(Block actualBlock){
+        if(actualBlock.isEmpty()){//se o bloco está vazio
+            firstBlock = null;
+            movingPiece = false;
+            selectedVetor = null;
+            resetBlockTab();
+            System.out.println("Nada aqui");
+        }else{//se há peça
+            if(playing != actualBlock.getPiece().getPlayer()){//se a peça desse bloco é do outro jogador
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
                 System.out.println("Nao é seu turno babaca");
-                return myBlock;
+            }else{//se a peça é sua
+                combo = false;
+                movingPiece = true;
+                firstBlock = actualBlock;
+                selectedVetor = new Vetor(actualBlock.getVetor());
+                showMoves(actualBlock);
             }
-            selectedVector = new Vetor(myBlock.getVetor());
-            myBlock.getPiece().checkMove(table);
-            possibleBlocks = myBlock.getPiece().getFreeWay();
-            if(possibleBlocks == null || possibleBlocks.isEmpty()) {
-                // Caso o free way for vazio ou nulo, saia do evento
-                System.out.println("Saindo aqui vlw flw");
-                return myBlock;
-            }
-            movingPiece = true;
-            showPossibleWays(possibleBlocks);
-            showPossibleEnemys(myBlock.getPiece().getHitWay());
-            System.out.println("Selected Piece");
-        } else {
-            System.out.println("Nothing here");
         }
-        return myBlock;
     }
     
-    public void moveAction(Block myBlock){
-        Vetor novaPos = new Vetor(myBlock.getVetor());
-        MoveImage(selectedVector, novaPos);
-        table.MovePiece(selectedVector, novaPos);
-        table.getBlock(selectedVector).colorDefault();
-        movingPiece = false;
+    public boolean showMoves(Block actualBlock){
+        actualBlock.getPiece().checkMove(table);
+        possibleBlocks = actualBlock.getPiece().getFreeWay();
+        if(possibleBlocks == null || possibleBlocks.isEmpty()){//se o freeWay for vazio ou nulo, saia do evento
+            firstBlock = null;
+            movingPiece = false;
+            selectedVetor = null;
+            resetBlockTab();
+            System.out.println("Saindo aqui vlw flw");
+            return false;
+        }else{
+            possibleHits = actualBlock.getPiece().getHitWay();
+            showPossibleWays(possibleBlocks);
+            showPossibleEnemys(possibleHits);
+            System.out.println("Selected Piece");
+            return true;
+        }
+    }
+    public void showAlternativeMoves(Block actualBlock){
+        firstBlock.getPiece().checkEspecialMove(table, actualBlock);
+        possibleBlocks = firstBlock.getPiece().getFreeWay();
+        if(possibleBlocks == null || possibleBlocks.isEmpty()){//se o freeWay for vazio ou nulo, saia do evento
+            System.out.println("Saindo aqui vlw flw, sou o cara");
+        }else{
+            actualBlock.getPiece().updateHitWay(table, possibleBlocks);
+            showPossibleWays(possibleBlocks);
+            showPossibleEnemys(possibleHits);
+            System.out.println("Selected Piece");
+        }
+    }
+    
+    public void internalMove(Block sourceBlock, Block destinyBlock){
+        table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
+        table.getBlock(selectedVetor).colorDefault();
+        movingPiece = false;//desabilita a movimentação
         resetBlockTab();
-        System.out.println("Moved Piece");
+        System.out.println("peça movida");
+    }
+    public void externalMove(Block sourceBlock, Block destinyBlock, ImageView pieceImage){
+        GameCtrl.this.moveImage(sourceBlock.getVetor(), destinyBlock.getVetor(), pieceImage);
+        //table.getBlock(selectedVetor).colorDefault();
+        //resetBlockTab();
+        System.out.println("peça aparentemente movida");
     }
     
-    public void MoveImage(Vetor source, Vetor dest) {
+    public void moveImage(Vetor source, Vetor dest, ImageView pieceToMove) {
+        //Mexe a imagem na interface
+        pieceToMove.setLayoutX((65*dest.getX()));
+        pieceToMove.setLayoutY(-75 + (65*dest.getY()));
+        /*try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GameCtrl.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+    }
+    public void moveImage(Vetor source, Vetor dest) {
         //Mexe a imagem na interface
         ImageView pieceToMove = table.getBlock(source).getPiece();
         pieceToMove.setLayoutX((65*dest.getX()));
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
+        /*try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GameCtrl.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
     
     public void showPossibleWays(ArrayList<Block> freeWay) {
