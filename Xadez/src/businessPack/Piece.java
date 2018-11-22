@@ -63,13 +63,13 @@ public abstract class Piece extends ImageView {
                     addBlock = table.getBlock(tempLocation.getVetor().getX() + Vetor.getTrend(i).getX(),
                                               tempLocation.getVetor().getY() + Vetor.getTrend(i).getY());
                     if(addBlock.getBlockState(Players.getPlayer(player)) != BlockState.Friend)
-                        freeWay.add(addBlock);
+                        especialFreeWay.add(addBlock);
                 }catch(NullPointerException e){
                     System.out.println("deu erro em " + i);
                 }
             }
-            freeWay = strategy.IcheckMove(table, vetor);
-            updateHitWay();
+            especialFreeWay = strategy.IcheckMove(table, vetor);
+            especialHitWay = updateHitWay(table, especialFreeWay);
         }else{
             especialFreeWay = null;
         }
@@ -142,6 +142,12 @@ public abstract class Piece extends ImageView {
     }
     public ArrayList<Block> getHitWay() {
         return hitWay;
+    }
+    public ArrayList<Block> getEspecialFreeWay() {
+        return especialFreeWay;
+    }
+    public ArrayList<Block> getEspecialHitWay() {
+        return especialHitWay;
     }
     public void setStrategy(ItypePiece strategy){
         this.strategy = strategy;

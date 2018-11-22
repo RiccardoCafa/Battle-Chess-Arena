@@ -76,7 +76,7 @@ public class GameCtrl implements Initializable {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         player1 = new Player(-1, new Lapa(), 1);
-        player2 = new Player(1, new Lenin(), 2);
+        player2 = new Player(1, new Sheriff(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -132,9 +132,10 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
-        if(!actualBlock.isEmpty() &&                                 //se o bloco clicado não está vazio e
-            actualBlock.getBlockState(playing) == BlockState.Friend &&//clicar em uma peça aliada e
-           selectedVetor != null){                                   //ja tiver sido clicada uma peça
+        if(!actualBlock.isEmpty() &&                                  //se o bloco clicado não está vazio e
+           actualBlock.getBlockState(playing) == BlockState.Friend &&//clicar em uma peça aliada e
+           selectedVetor != null){                                  //já tiver sido clicada uma peça
+            if(combo) return;
             if(actualBlock != firstBlock){//se a peça clicada for outra aliada
                 resetBlockTab();
                 movingPiece = false;
@@ -144,7 +145,7 @@ public class GameCtrl implements Initializable {
             firstClick(actualBlock);
         }else{//segundo clique
             if(actualBlock == firstBlock){//se o bloco é o mesmo clicado antes
-                //if(!combo) return; //Não estava des-selecionando
+                if(combo) return;
                 firstBlock = null;
                 movingPiece = false;
                 selectedVetor = null;
@@ -161,19 +162,34 @@ public class GameCtrl implements Initializable {
                     while(!actualBlock.isEmpty()){//enquanto não houver casa livre
                         if(!firstBlock.getPiece().isSpecial()){//se a peça não for especial
                             if(actualBlock.getBlockState(playing) == BlockState.Enemy){//se a casa atual possui inimigo
+                                System.out.println("inimigo encontrado");
                                 actualBlock.getPiece().reaction(table);
                                 if(actualBlock.hitPiece(firstBlock.getPiece().getDamage())){//se ainda está viva
+                                    System.out.println("inimigo não abatido");
                                     externalMove(actualBlock, table.getBlock(actualBlock.getVetor().next()), firstBlock.getPiece());
                                     actualBlock = table.getBlock(actualBlock.getVetor().next());
                                 }
-                            }else{
+                            }else{//se a casa atual não possui inimigo
                                 externalMove(actualBlock, table.getBlock(actualBlock.getVetor().next()), firstBlock.getPiece());
+                                removeImage(actualBlock.getVetor());
                                 actualBlock = table.getBlock(actualBlock.getVetor().next());
                             }
                         }else{//se a peça for especial
-                            showAlternativeMoves(actualBlock);
-                            combo = true;
-                            return;
+                            if(actualBlock.getBlockState(playing) == BlockState.Enemy){//se a casa atual possui inimigo
+                                actualBlock.getPiece().reaction(table);
+                                if(actualBlock.hitPiece(firstBlock.getPiece().getDamage())){//se ainda está viva
+                                    resetBlockTab();
+                                    showAlternativeMoves(actualBlock);
+                                    combo = true;
+                                    return;
+                                }else{//se a peça atingida morreu
+                                    combo = false;
+                                }
+                            }else{//se a casa atual está livre
+                                combo = false;
+                                externalMove(actualBlock, table.getBlock(actualBlock.getVetor().next()), firstBlock.getPiece());
+                                removeImage(actualBlock.getVetor());
+                            }
                         }
                     }
                     externalMove(firstBlock, actualBlock, firstBlock.getPiece());
@@ -181,6 +197,7 @@ public class GameCtrl implements Initializable {
                     Players.passTurn();
                     playing.getHero().GameManager(table);
                     playing = Players.getTurn() == 1 ? player1 : player2;
+                    return;
                 }
                 firstBlock = null;
                 movingPiece = false;
@@ -191,20 +208,20 @@ public class GameCtrl implements Initializable {
                 Players.passTurn();
                 playing.getHero().GameManager(table);
                 playing = Players.getTurn() == 1 ? player1 : player2;
-            }else if(actualBlock.isEmpty()){
-                if(!combo) return;
+            }else if(actualBlock.isEmpty()){//se está vazio
+                if(combo) return;
                 firstBlock = null;
                 movingPiece = false;
                 selectedVetor = null;
                 possibleBlocks.clear();
                 possibleHits.clear();
                 resetBlockTab();
-            }else if(actualBlock.isEmpty() &&
+            }else if(!actualBlock.isEmpty() &&
                      actualBlock.getPiece().getPlayer() == firstBlock.getPiece().getPlayer()){//se clicar num aliado
-                if(!combo) return;
+                if(combo) return;
                 firstClick(actualBlock);
             }else{//se clicar num inimigo fora de alcance
-                if(!combo) return;
+                if(combo) return;
                 firstBlock = null;
                 movingPiece = false;
                 selectedVetor = null;
@@ -357,11 +374,10 @@ public class GameCtrl implements Initializable {
     }
     public void showAlternativeMoves(Block actualBlock){
         firstBlock.getPiece().checkEspecialMove(table, actualBlock);
-        possibleBlocks = firstBlock.getPiece().getFreeWay();
-        if(possibleBlocks == null || possibleBlocks.isEmpty()){//se o freeWay for vazio ou nulo, saia do evento
+        possibleBlocks = firstBlock.getPiece().getEspecialFreeWay();
+        if(possibleBlocks == null){//se o freeWay for vazio ou nulo, saia do evento
             System.out.println("Saindo aqui vlw flw, sou o cara");
         }else{
-            actualBlock.getPiece().updateHitWay(table, possibleBlocks);
             showPossibleWays(possibleBlocks);
             showPossibleEnemys(possibleHits);
             System.out.println("Selected Piece");
@@ -376,7 +392,7 @@ public class GameCtrl implements Initializable {
         System.out.println("peça movida");
     }
     public void externalMove(Block sourceBlock, Block destinyBlock, ImageView pieceImage){
-        GameCtrl.this.moveImage(sourceBlock.getVetor(), destinyBlock.getVetor(), pieceImage);
+        GameCtrl.this.moveImage(sourceBlock.getVetor(), destinyBlock.getVetor(), pieceImage);//ta com algum problema
         //table.getBlock(selectedVetor).colorDefault();
         //resetBlockTab();
         System.out.println("peça aparentemente movida");
@@ -433,6 +449,7 @@ public class GameCtrl implements Initializable {
         pieceToRemove = null;
     }
     public void showPossibleWays(ArrayList<Block> freeWay) {
+        System.out.println("entrei em showPossibleWays");
         if(freeWay == null) {
             System.out.println("Lista vazia");
             return;
@@ -443,6 +460,7 @@ public class GameCtrl implements Initializable {
     }
     
     public void showPossibleEnemys(ArrayList<Block> hitWay) {
+        System.out.println("entrei em showPossibleEnemys");
         if(hitWay == null) {
             System.out.println("Lista vazia");
             return;
