@@ -1,12 +1,9 @@
 package businessPack.Heros;
 
 import businessPack.Army;
-import businessPack.Block;
 import businessPack.Hero;
 import businessPack.Piece;
 import businessPack.Pieces.Bishop;
-import businessPack.Pieces.Default.DefaultBishop;
-import businessPack.Pieces.Default.DefaultKing;
 import businessPack.Pieces.EnemyLenin.EnemyHorseLenin;
 import businessPack.Pieces.EnemyLenin.EnemyPeonLenin;
 import businessPack.Pieces.Horse;
@@ -22,7 +19,6 @@ import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.TypePiece;
-import static businessPack.TypePiece.peon;
 import extras.Who;
 import javafx.scene.image.Image;
 

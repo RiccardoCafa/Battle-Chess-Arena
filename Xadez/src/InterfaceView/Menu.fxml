@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.MenuController">
+<AnchorPane id="AnchorPane" fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.MenuController">
    <children>
-      <Button fx:id="QuitBtn" layoutX="245.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#onCloseClick" prefHeight="46.0" prefWidth="109.0" text="Sair" />
-      <Button fx:id="StartBtn" layoutX="245.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#onPlayClick" prefHeight="46.0" prefWidth="109.0" text="Jogar!" />
-      <Button fx:id="OptionBtn" layoutX="245.0" layoutY="216.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="109.0" text="Opções" />
-      <Label layoutX="173.0" layoutY="50.0" prefHeight="46.0" prefWidth="255.0" text="BATTLE CHESS ARENA">
-         <font>
-            <Font size="24.0" />
-         </font>
-         <textFill>
-            <RadialGradient centerX="0.5" centerY="0.46190476190476193" focusDistance="0.5813953488372094" radius="0.7325581395348837">
-               <stops>
-                  <Stop color="#ee1f18" />
-                  <Stop color="#221313" offset="1.0" />
-               </stops>
-            </RadialGradient>
-         </textFill>
-      </Label>
+      <ImageView fitHeight="677.0" fitWidth="1477.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/telaInicial.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="StartBtn" fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="339.0" onMouseClicked="#onPlayClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/buttons/JogarButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="452.0" onMouseClicked="#OnOptionClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/buttons/opcoesButton.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="QuitBtn" fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="566.0" onMouseClicked="#onCloseClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/buttons/sairButton.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
