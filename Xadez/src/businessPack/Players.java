@@ -36,4 +36,11 @@ public class Players {
     public static void passTurn() {
         turn = turn == 1 ? 2 : 1;
     }
+    public static Player getActualPlayer() {
+        if(turn == 1) {
+            return player2;
+        } else {
+            return player1;
+        }
+    }
 }

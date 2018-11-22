@@ -10,14 +10,12 @@ import java.util.ArrayList;
 
 public class DefaultPeon implements ItypePiece {
     //metodos>>
-    Table tab;
-    ArrayList<Block> freeWay;
-    Player player;
-    int sentido;
+   Table tab;
+    ArrayList<Block> vector;
+    Player playing;
     
-    public DefaultPeon(Player player){
-        this.player = player;
-        sentido = player.getSentido();
+    public DefaultPeon(Player playing){
+        this.playing = playing;
     }
     @Override
     public Table Ireaction(Table table, Vetor vetor) {
@@ -25,23 +23,33 @@ public class DefaultPeon implements ItypePiece {
     }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-        freeWay = new ArrayList<>();
+        vector = new ArrayList<>();
         tab = table;
-        if(Table.isInside(vetor.getX(), vetor.getY() - sentido)){
-            if(table.getBlock(vetor.getX(), vetor.getY() - sentido).getBlockState(player) == BlockState.Empty){
-                freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - sentido));
-            }
+        move(0,-1*playing.getSentido(),vetor);
+        moveEnemy(1,-1*playing.getSentido(),vetor);
+        moveEnemy(-1,-1*playing.getSentido(),vetor);
+        return vector;
+    }
+    public void move(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return;
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
+            vector.add(tab.getBlock(newVetor));
         }
-        if(Table.isInside(vetor.getX() - sentido, vetor.getY() - sentido)){
-            if(table.getBlock(vetor.getX() - sentido, vetor.getY() - sentido).getBlockState(player) == BlockState.Enemy){
-                freeWay.add(table.getBlock(vetor.getX() - sentido, vetor.getY() - sentido));
-            }
+        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+    }
+    public void moveEnemy(int xDir, int yDir, Vetor vetor) {
+        //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
+        Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
+        int i = newVetor.getX(); int j = newVetor.getY();
+        if(i < 0 || i > 7 || j < 0 || j > 7) return;
+        
+        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
+            vector.add(tab.getBlock(newVetor));
+            return;
         }
-        if(Table.isInside(vetor.getX() + sentido, vetor.getY() - sentido)){
-            if(table.getBlock(vetor.getX() + sentido, vetor.getY() - sentido).getBlockState(player) == BlockState.Enemy){
-                freeWay.add(table.getBlock(vetor.getX() + sentido, vetor.getY() - sentido));
-            }
-        }
-        return freeWay;
+        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
     }
 }

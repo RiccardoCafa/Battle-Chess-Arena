@@ -8,6 +8,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
 
@@ -19,6 +20,7 @@ public class Horse extends Piece {
         hp = 6;
         strategy = getHeroStrategy();//new DefaultHorse(player);
         updateImage();
+        tpPiece = TypePiece.horse;
     }
 //    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
 //        super(player, tpHero, x, y);
@@ -37,7 +39,8 @@ public class Horse extends Piece {
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", widhtImg, heightImg, false, false));
     }
-    private ItypePiece getHeroStrategy() {
+    @Override
+    public ItypePiece getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
                 especial = true;
