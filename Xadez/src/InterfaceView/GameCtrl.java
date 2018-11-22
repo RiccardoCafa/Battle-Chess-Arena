@@ -79,7 +79,7 @@ public class GameCtrl implements Initializable {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         player1 = new Player(-1, new Lapa(), 1);
-        player2 = new Player(1, new Lenin(), 2);
+        player2 = new Player(1, new Sheriff(), 2);
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -200,6 +200,7 @@ public class GameCtrl implements Initializable {
                     Players.passTurn();
                     playing.getHero().GameManager(table);
                     playing = Players.getTurn() == 1 ? player1 : player2;
+                    return;
                 }
                 firstBlock = null;
                 movingPiece = false;
@@ -376,11 +377,10 @@ public class GameCtrl implements Initializable {
     }
     public void showAlternativeMoves(Block actualBlock){
         firstBlock.getPiece().checkEspecialMove(table, actualBlock);
-        possibleBlocks = firstBlock.getPiece().getFreeWay();
-        if(possibleBlocks == null || possibleBlocks.isEmpty()){//se o freeWay for vazio ou nulo, saia do evento
+        possibleBlocks = firstBlock.getPiece().getEspecialFreeWay();
+        if(possibleBlocks == null){//se o freeWay for vazio ou nulo, saia do evento
             System.out.println("Saindo aqui vlw flw, sou o cara");
         }else{
-            actualBlock.getPiece().updateHitWay(table, possibleBlocks);
             showPossibleWays(possibleBlocks);
             showPossibleEnemys(possibleHits);
             System.out.println("Selected Piece");
