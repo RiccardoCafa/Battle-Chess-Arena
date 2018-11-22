@@ -4,6 +4,7 @@ import extras.BlockState;
 import extras.Who;
 import javafx.scene.image.Image;
 import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 
 public class Block extends ImageView {
@@ -32,6 +33,14 @@ public class Block extends ImageView {
         return piece == null;
     }
     //getset>>
+    public boolean hitPiece(int damage){
+        if(piece != null){
+            if(!piece.hit(damage)){
+                piece = null;
+            }
+        }
+        return piece != null;//ainda está vivo
+    }
     public Vetor getVetor(){
         return vetor;
     }
@@ -76,7 +85,6 @@ public class Block extends ImageView {
     /**
      *
      * @param color 0 for green 1 for red
-     * @param playerLooking
      */
     public void colorChange(int color) { //0-Green 1-red
         //BlockState bs = getBlockState(playerLooking);

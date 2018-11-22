@@ -3,6 +3,9 @@ package businessPack.Heros;
 import businessPack.Army;
 import businessPack.Hero;
 import businessPack.Player;
+import businessPack.Players;
+import businessPack.Table;
+import businessPack.TypeHero;
 import businessPack.Table;
 import extras.Who;
 import javafx.scene.image.Image;
@@ -15,10 +18,13 @@ public class Huebr extends Hero {
     Image huebrTowerImage;
     Image huebrKingImage;
     Image huebrQueenImage;
+    
+    boolean isHitted = false;
     //construtor>>
 
     public Huebr() {
         image = new Image(path + "Huebr-01.png", widthImg, heightImg, false, false);
+        tpHero = TypeHero.huebr;
     }
     //metodos>>
     

@@ -7,6 +7,7 @@ import businessPack.Pieces.Peon;
 import businessPack.Pieces.Wizard.WizardBishop;
 import businessPack.Pieces.Wizard.WizardPeon;
 import businessPack.Player;
+import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
@@ -24,6 +25,7 @@ public class Wizard extends Hero {
     
     public Wizard() {
         image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
+        tpHero = TypeHero.wizard;
     }
 
     @Override

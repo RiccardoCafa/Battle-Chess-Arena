@@ -1,5 +1,6 @@
 package businessPack;
 
+import businessPack.Heros.HeroManager;
 import extras.Who;
 import javafx.scene.image.Image;
 

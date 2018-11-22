@@ -1,16 +1,18 @@
 package businessPack;
 
 import extras.Vetor;
+import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Table{
     //atributos>>
     private Block[][] table;
+    private Block wait; 
     private static int m;
     private static int n;
     Image genericImage;//fiz apenas para não dar conflito nos argumentos que exigem imagens
     //construtor>>
-    public Table(int m, int n, Player p1, Player p2) {
+    public Table(int m, int n, Player p1, Player p2){
         this.m = m;
         this.n = n;
         table = new Block[m][n];//m = quantidade de linhas (relaciona-se com i); n = quantidade de colunas (relaciona-se com j)
@@ -69,6 +71,9 @@ public class Table{
             return null;
         }
     }
+    public void wait(Block block){
+        wait = block;
+    }
     public static boolean isInside(Vetor vetor){
         return (vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n);
     }
@@ -82,7 +87,6 @@ public class Table{
             return null;
         }
     }
-    
     public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
         Piece tempB = table[piecePos.getX()][piecePos.getY()].getPiece();
         tempB.setVetor(pieceDestination);
