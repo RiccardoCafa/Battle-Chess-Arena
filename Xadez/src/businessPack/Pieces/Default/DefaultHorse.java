@@ -56,8 +56,8 @@ public class DefaultHorse implements ItypePiece {
             }//*******************************************
         }
         for(int i = 2; i <= 8; i += 2){
-            if(Table.isInside(vetor.getTrend(i))){
-                table.getBlock(vetor.getTrend(i)).getVetor().setTrend(i + 4);//apontadores para a origem
+            if(Table.isInside(Vetor.sum(Vetor.getTrend(i), vetor))){
+                table.getBlock(Vetor.sum(Vetor.getTrend(i), vetor)).getVetor().setTrend(i + 4);//apontadores para a origem
             }
         }
         return freeWay;

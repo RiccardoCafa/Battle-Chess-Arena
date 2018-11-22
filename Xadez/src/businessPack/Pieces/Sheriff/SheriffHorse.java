@@ -22,13 +22,13 @@ public class SheriffHorse implements ItypePiece {
         if(charge != 0){
             for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                    table.getBlock(iE, vetor.getY()).getPiece().hit(charge);
+                    table.getBlock(iE, vetor.getY()).hitPiece(charge);
                     break;
                 }
             }
             for(int iW = vetor.getX() - 1; iW >= 0; iW--){
                 if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                    table.getBlock(iW, vetor.getY()).getPiece().hit(charge);
+                    table.getBlock(iW, vetor.getY()).hitPiece(charge);
                     break;
                 }
             }
