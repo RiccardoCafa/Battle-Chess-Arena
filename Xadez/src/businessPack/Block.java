@@ -34,12 +34,13 @@ public class Block extends ImageView {
     }
     //getset>>
     public boolean hitPiece(int damage){
+        boolean died = false;
         if(piece != null){
             if(!piece.hit(damage)){
-                piece = null;
+                died = true;
             }
         }
-        return piece != null;//ainda está vivo
+        return died;//ainda está vivo
     }
     public Vetor getVetor(){
         return vetor;
