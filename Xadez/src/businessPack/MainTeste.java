@@ -8,7 +8,6 @@ import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Pieces.Lapa.LapaTower;
 import businessPack.Pieces.Tower;
-import InterfaceView.ChooseCharacterController;
 import javafx.scene.image.Image;
 
 public class MainTeste {
@@ -17,7 +16,8 @@ public class MainTeste {
         Image lapaImage = null;
         Image leninImage = null;
         //Criando os players
-
+        Player p1 = new Player(1, new Lapa(), 1);
+        Player p2 = new Player(-1, new Lenin(), 2);
         //Cirando os personagens dos players
         Lapa lapa = new Lapa();
         Lenin lenin = new Lenin();
