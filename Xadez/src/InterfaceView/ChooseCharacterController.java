@@ -1,5 +1,10 @@
 package InterfaceView;
 
+import businessPack.Heros.Huebr;
+import businessPack.Heros.Lapa;
+import businessPack.Heros.Lenin;
+import businessPack.Heros.Sheriff;
+import businessPack.Heros.Wizard;
 import businessPack.Player;
 import java.net.URL;
 import java.util.ArrayList;
@@ -109,21 +114,46 @@ public class ChooseCharacterController implements Initializable {
         switch(count){
             case 0:
                 name = "Hue";
+                if(p1 != null){
+                    p2 = new Player(-1, new Huebr(), 2);
+                }else{
+                    p1 = new Player(1, new Huebr(), 1);
+                } 
                 break;
             case 1:
                 name = "Lapa";
+                   if(p1 != null){
+                    p2 = new Player(-1, new Lapa(), 2);
+                }else{
+                    p1 = new Player(1, new Lapa(), 1);
+                } 
                 break;
             case 2:
                 name = "Czar";
+                   if(p1 != null){
+                    p2 = new Player(-1, new Lenin(), 2);
+                }else{
+                    p1 = new Player(1, new Lenin(), 1);
+                } 
                 break;
             case 3:
-                name = "Mago";
+                name = "Mago";   if(p1 != null){
+                    p2 = new Player(-1, new Wizard(), 2);
+                }else{
+                    p1 = new Player(1, new Wizard(), 1);
+                } 
                 break;
             case 4:
                 name = "Pistoleiro";
+                   if(p1 != null){
+                    p2 = new Player(-1, new Sheriff(), 2);
+                }else{
+                    p1 = new Player(1, new Sheriff(), 1);
+                } 
                 break;
         }
         //funcao para pegar o player
+        
     }
     public String getName(){
         return name;
