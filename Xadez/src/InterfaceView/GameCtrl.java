@@ -1,6 +1,7 @@
 package InterfaceView;
 
 import businessPack.Block;
+import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
@@ -8,6 +9,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import static businessPack.TypeHero.lapa;
 import extras.BlockState;
 import extras.Vetor;
 import java.net.URL;
@@ -45,7 +47,7 @@ public class GameCtrl implements Initializable {
     @FXML
     Pane pratoPieces;
     @FXML
-    Button btnPower;
+    Button btnSuperPower;
     @FXML
     TextArea gameplayChat;
 //    @FXML
@@ -87,9 +89,9 @@ public class GameCtrl implements Initializable {
         playing = player1;
         table = new Table(8, 8, player1, player2);
         if(playing.getHero().getHeroType() != TypeHero.lapa) {
-            btnPower.setVisible(false);
+            btnSuperPower.setVisible(false);
         } else { 
-            btnPower.setVisible(true);
+            btnSuperPower.setVisible(true);
         }
         gameplayChat.appendText("[" + gameName + "] Bem-vindo ao Battle Chess Arena!\n");
         MountArmyOnTable(table);
@@ -144,6 +146,14 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
+        if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
+                && possibleBlocks.contains(actualBlock)) {
+            Lapa lapa = (Lapa) playing.getHero();
+            lapa.ExplodeBomb(table, actualBlock.getVetor(), this);
+            superPower = false;
+            resetBlockTab();
+            return;
+        }
         if(!combo && !actualBlock.isEmpty() &&                                  //se o bloco clicado não está vazio e
            actualBlock.getBlockState(playing) == BlockState.Friend &&//clicar em uma peça aliada e
            selectedVetor != null){                                  //já tiver sido clicada uma peça
@@ -176,6 +186,12 @@ public class GameCtrl implements Initializable {
                     */
                     if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
                         // Está vivo
+                        if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
+                            Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
+                            lapao.setBigBig(lapao.getBigBig() + 1);
+                            displayMessage(playing.getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
+                                    + lapao.getBigBig() + " bigbigs");
+                        }
                         if(!firstBlock.getPiece().isSpecial()){ // se a peça não for especial
                             Vetor lastPos = firstBlock.getPiece().getLastPosOf(actualBlock); // Pega a melhor posição para ficar
                             externalMove(firstBlock, table.getBlock(lastPos));
@@ -236,11 +252,11 @@ public class GameCtrl implements Initializable {
         playing.getHero().GameManager(table);
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
-        if(playing.getHero().getHeroType() != TypeHero.lapa ||
-                playing.getHero().getHeroType() != TypeHero.huebr) {
-            btnPower.setVisible(false);
+        if(playing.getHero() instanceof Lapa ||
+                playing.getHero() instanceof Huebr) {
+            btnSuperPower.setVisible(true);
         } else { 
-            btnPower.setVisible(true);
+            btnSuperPower.setVisible(false);
         }
         persoImage.setImage(playing.getHero().getImage());
         gameplayChat.appendText("[" + gameName + "] Vez de " + playing.getName() + "\n");
@@ -397,12 +413,21 @@ public class GameCtrl implements Initializable {
                 superPower = false;
                 resetBlockTab();
             } else {
-                superPower = true;
                 Lapa lapa = (Lapa) playing.getHero();
-                possibleBlocks = lapa.getBombWays(table, playing);
-                showPossibleEnemys(possibleBlocks);
+                if(lapa.getBigBig() == 5) {
+                    displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
+                    possibleBlocks = lapa.getBombWays(table, playing);
+                    showPossibleEnemys(possibleBlocks);
+                    superPower = true;
+                } else {
+                    displayMessage(gameName, "Lapa você está sem bigbig, precisa de mais alunos interessados!");
+                }
+                
             }
             
         }
+    }
+    public void displayMessage(String sender, String message) {
+        gameplayChat.appendText("[" + sender + "] " + message + "\n");
     }
 }

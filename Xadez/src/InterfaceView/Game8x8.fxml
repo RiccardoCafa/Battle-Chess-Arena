@@ -27,7 +27,7 @@
                   <Image url="@Personagens/lenin-01.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnPower" layoutX="415.0" layoutY="196.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="211.0" text="Super Power" textFill="RED">
+            <Button fx:id="btnSuperPower" layoutX="415.0" layoutY="196.0" mnemonicParsing="false" onMousePressed="#OnBtnPower" prefHeight="60.0" prefWidth="211.0" text="Super Power" textFill="RED">
                <font>
                   <Font size="29.0" />
                </font>
