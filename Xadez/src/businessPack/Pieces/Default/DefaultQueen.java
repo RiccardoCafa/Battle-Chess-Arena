@@ -49,7 +49,6 @@ public class DefaultQueen implements ItypePiece {
             vector.add(tab.getBlock(newVetor));
             return moveInf(xDir, yDir, newVetor);
         }
-        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
         return newVetor;
     }
 }

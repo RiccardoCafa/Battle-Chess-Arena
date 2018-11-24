@@ -38,7 +38,7 @@ public class DefaultPeon implements ItypePiece {
         if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
             vector.add(tab.getBlock(newVetor));
         }
-        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+        //System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
     }
     public void moveEnemy(int xDir, int yDir, Vetor vetor) {
         //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
@@ -50,6 +50,6 @@ public class DefaultPeon implements ItypePiece {
             vector.add(tab.getBlock(newVetor));
             return;
         }
-        System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
+        //System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
     }
 }

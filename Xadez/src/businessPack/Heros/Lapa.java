@@ -37,7 +37,7 @@ public class Lapa extends Hero {
     @Override
     public void createArmy(Army army, int sentido, Who jogador) {
         this.player = Players.getPlayer(jogador);
-        for(int k = 0;k<8;k++){
+        for(int k = 1;k<7;k++){
             army.addPiece(new Peon(jogador, TypeHero.lapa, k,(int)(3.5 + sentido*2.5)));
         }
         army.addPiece(new Tower(jogador, TypeHero.lapa, 0, (int)(3.5 + sentido*3.5)));
