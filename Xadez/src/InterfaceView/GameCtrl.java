@@ -95,7 +95,8 @@ public class GameCtrl implements Initializable {
         MountArmyOnTable(table);
         gameplayChat.appendText("[" + gameName + "] Os exércitos foram montados.\n");
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
-        // 65 (char) == A
+        persoImage.setImage(playing.getHero().getImage());
+// 65 (char) == A
     }
     
     public void MountArmyOnTable(Table tab) {
@@ -241,6 +242,7 @@ public class GameCtrl implements Initializable {
         } else { 
             btnPower.setVisible(true);
         }
+        persoImage.setImage(playing.getHero().getImage());
         gameplayChat.appendText("[" + gameName + "] Vez de " + playing.getName() + "\n");
     }
     
