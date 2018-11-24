@@ -21,6 +21,7 @@ public class Bishop extends Piece {
         strategy = getHeroStrategy();//new DefaultBishop(pPiece);  
         hp = 4;
         tpPiece = TypePiece.bishop;
+        pieceName = "Bispo";
         updateImage();
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }

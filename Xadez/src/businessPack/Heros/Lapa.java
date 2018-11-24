@@ -1,5 +1,6 @@
 package businessPack.Heros;
 
+import InterfaceView.GameCtrl;
 import businessPack.Army;
 import businessPack.Block;
 import businessPack.Hero;
@@ -27,7 +28,10 @@ public class Lapa extends Hero {
     Image lapaQueenImage;
     Image lapaHorseImage;
     
-    int bigBig = 0;
+    GameCtrl game;
+    Table tab;
+    
+    private int bigBig = 0;
     
     public Lapa() {
         tpHero = TypeHero.lapa;
@@ -60,8 +64,7 @@ public class Lapa extends Hero {
         ArrayList<Block> tempList = new ArrayList<>();
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
-                if(tab.getTable()[i][j].getBlockState(playing) == BlockState.Empty ||
-                    tab.getTable()[i][j].getBlockState(playing) == BlockState.Enemy) {
+                if(tab.getTable()[i][j].getBlockState(playing) == BlockState.Enemy) {
                     tempList.add(tab.getTable()[i][j]);
                 }
             }
@@ -69,33 +72,67 @@ public class Lapa extends Hero {
         return tempList;
     }
     
-    public void ExplodeBomb(Table tab, Vetor target) {
+    public void ExplodeBomb(Table tab, Vetor target, GameCtrl game) {
         //Substituir System.out.println por hit das peças
+        if(this.game == null) this.game = game;
+        if(this.tab == null) this.tab = tab;
+        
         if(!tab.getBlock(target).isEmpty()) {
-            System.out.println("-4HP " + target.getX() + " " + target.getY());
+            if(tab.getBlock(target).hitPiece(4)) {
+                game.removeImage(target);
+                game.displayMessage("Lapa", "Exterminou o(a) " + tab.getBlock(target).getPiece().getPieceName() +
+                            " adversária!");
+            }
         }
-        hitaDir(target, 1, 0);
+        hitaDir(target, 1, 0); // -2
         hitaDir(target, -1, 0);
         hitaDir(target, 0, 1);
         hitaDir(target, 0, -1);
-        hitaDir(target, 1, 1);
+        hitaDir(target, 1, 1); //-1
         hitaDir(target, 1, -1);
         hitaDir(target, -1, 1);
         hitaDir(target, -1, -1);
+        setBigBig(bigBig - 5);
     }
     
     public void hitaDir(Vetor target, int xDir, int yDir) {
         int xMax, yMax;
-        xMax = xDir == -1 ? 0 : Table.getM();
-        yMax = yDir == -1 ? 0 : Table.getN();
-        if((target.getX()+xDir) < xMax && (target.getY() + yDir) < yMax) {
-            if(xDir == 0 ^ yDir == 0) {
-                System.out.println("-2HP " + (target.getX()+xDir) + " " + (target.getY() + yDir));
+        //xMax = xDir == -1 ? 0 : Table.getM();
+        //yMax = yDir == -1 ? 0 : Table.getN();
+        if((target.getX()+xDir) > 0 && (target.getX()+xDir) < Table.getM() 
+                && (target.getY() + yDir) < Table.getN() && (target.getY() + yDir) > 0) {
+            Vetor newTarget = new Vetor(target.getX() + xDir, target.getY() + yDir);
+            if(tab.getBlock(newTarget).isEmpty()) 
+                    return;
+            if(xDir == 0 || yDir == 0) {
+                if(tab.getBlock(newTarget).hitPiece(2)) {
+                    game.removeImage(newTarget);
+                    game.displayMessage("Lapa", "Exterminou o(a) " + tab.getBlock(newTarget).getPiece().getPieceName() +
+                            " adversária!");
+                }
             } else {
-                System.out.println("-1HP " + (target.getX()+xDir) + " " + (target.getY() + yDir));
+                if(tab.getBlock(newTarget).hitPiece(1)) {
+                    game.removeImage(newTarget);
+                    game.displayMessage("Lapa", "Exterminou o(a) " + tab.getBlock(newTarget).getPiece().getPieceName() +
+                            " adversário(a)!");
+                }
             }
             
         }
+    }
+
+    /**
+     * @return the bigBig
+     */
+    public int getBigBig() {
+        return bigBig;
+    }
+
+    /**
+     * @param bigBig the bigBig to set
+     */
+    public void setBigBig(int bigBig) {
+        this.bigBig = bigBig;
     }
 
 }

@@ -20,6 +20,7 @@ public class Peon extends Piece {
         hp = 2;
         strategy = getHeroStrategy();//new DefaultPeon();
         tpPiece = TypePiece.peon;
+        pieceName = "Peão";
         updateImage();
     }
     /*public Peon(Player pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
