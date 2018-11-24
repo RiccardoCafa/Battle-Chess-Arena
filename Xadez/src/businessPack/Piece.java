@@ -23,6 +23,7 @@ public abstract class Piece extends ImageView {
     protected boolean alive;
     protected boolean especial;
     protected String pathHero;
+    protected String pieceName;
     protected Vetor vetor;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
@@ -206,6 +207,12 @@ public abstract class Piece extends ImageView {
     }
     public void setStrategy(ItypePiece strategy){
         this.strategy = strategy;
+    }
+    public String getPieceName() {
+        return pieceName;
+    }
+    public void setPieceName(String pieceName) {
+        this.pieceName = pieceName;
     }
     public boolean isSpecial(){
         return especial;

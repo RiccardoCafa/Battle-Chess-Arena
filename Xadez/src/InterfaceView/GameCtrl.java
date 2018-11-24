@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -44,6 +46,10 @@ public class GameCtrl implements Initializable {
     Pane pratoPieces;
     @FXML
     Button btnPower;
+    @FXML
+    TextArea gameplayChat;
+//    @FXML
+//    ScrollPane scroll;
     
     /*
         DECLARING GAMECORE VARIAVABLES
@@ -59,6 +65,8 @@ public class GameCtrl implements Initializable {
     boolean specialActive = false;
     boolean combo = false;
     
+    private String gameName = "System";
+    
     Table table;
     
     Player player1;
@@ -67,16 +75,13 @@ public class GameCtrl implements Initializable {
     
     Block firstBlock;
     
-    public Player notPlaying(){
-        return playing.equals(player1) ? player2 : player1;
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        player1 = new Player(-1, new Lapa(), 1);
-        player2 = new Player(1, new Lenin(), 2);
+        
+        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
+        player2 = new Player(1, new Lenin(), 2, "xXPlayer2Xx");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -86,7 +91,11 @@ public class GameCtrl implements Initializable {
         } else { 
             btnPower.setVisible(true);
         }
+        gameplayChat.appendText("[" + gameName + "] Bem-vindo ao Battle Chess Arena!\n");
         MountArmyOnTable(table);
+        gameplayChat.appendText("[" + gameName + "] Os exércitos foram montados.\n");
+        gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
+        // 65 (char) == A
     }
     
     public void MountArmyOnTable(Table tab) {
@@ -191,6 +200,9 @@ public class GameCtrl implements Initializable {
                     } else {
                         // Morreu o mizeravel
                         removeImage(actualBlock); // remove a imagem do mizere
+                        gameplayChat.appendText("[" + playing.getName() + "] acaba de aniquilar o(a) " + 
+                                                actualBlock.getPiece().getPieceName() + " de " + "[" +
+                                                Players.getAdversaryPlayer().getName() + "]\n");
                         externalMove(firstBlock, actualBlock); 
                         internalMove(firstBlock, actualBlock);
                     }
@@ -220,9 +232,16 @@ public class GameCtrl implements Initializable {
         possibleBlocks.clear();
         possibleHits.clear();
         resetBlockTab();
-        Players.passTurn();
         playing.getHero().GameManager(table);
+        Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
+        if(playing.getHero().getHeroType() != TypeHero.lapa ||
+                playing.getHero().getHeroType() != TypeHero.huebr) {
+            btnPower.setVisible(false);
+        } else { 
+            btnPower.setVisible(true);
+        }
+        gameplayChat.appendText("[" + gameName + "] Vez de " + playing.getName() + "\n");
     }
     
     @FXML
@@ -289,6 +308,14 @@ public class GameCtrl implements Initializable {
         table.getBlock(selectedVetor).colorDefault();
         movingPiece = false;//desabilita a movimentação
         resetBlockTab();
+        char letraSource, letraDest;
+        int numSource, numDest;
+        letraSource = (char) (65 + sourceBlock.getVetor().getX());
+        letraDest = (char) (65 + destinyBlock.getVetor().getX());
+        numDest = destinyBlock.getVetor().getY() + 1;
+        numSource = sourceBlock.getVetor().getY() + 1;
+        gameplayChat.appendText("[" + playing.getName() + "] Peça movida de " + letraSource + numSource +
+                " para a posição " + letraDest + numDest + "!\n");
     }
     public void externalMove(Block sourceBlock, Block destinyBlock){
         moveImage(sourceBlock.getVetor(), destinyBlock.getVetor());
@@ -362,6 +389,7 @@ public class GameCtrl implements Initializable {
     @FXML
     public void OnBtnPower(MouseEvent e) {
         // Huebr
+        if(combo) return;
         if(playing.getHero().getHeroType() == TypeHero.lapa && !movingPiece) {
             if(superPower) {
                 superPower = false;

@@ -43,4 +43,11 @@ public class Players {
             return player1;
         }
     }
+    public static Player getAdversaryPlayer() {
+        if(turn == 1) {
+            return player2;
+        } else {
+            return player1;
+        }
+    }
 }
