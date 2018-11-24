@@ -5,6 +5,9 @@ import extras.BlockState;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import javafx.scene.image.ImageView;
 
 public abstract class Piece extends ImageView {
@@ -74,9 +77,56 @@ public abstract class Piece extends ImageView {
             especialFreeWay = null;
         }
     }
-    public boolean hit(int damage){
-        setHP(hp - damage);
-        return alive;
+    public Vetor getLastPosOf(Block hitedBlock) {
+        
+        if(tpPiece == TypePiece.horse) {
+            return vetor;
+        }
+        
+        if(Math.abs(vetor.getX() - hitedBlock.getVetor().getX()) <= 1 &&
+            Math.abs(vetor.getY() - hitedBlock.getVetor().getY()) <= 1) {
+            return vetor;
+        }
+        
+        ArrayList<Block> tempFreeWay = new ArrayList<>();
+        tempFreeWay.addAll(freeWay);
+        //System.out.println("Tamanho de temp: " + tempFreeWay.size());
+        //System.out.println("Tamanho de freeWay: " + freeWay.size());
+        int indexOfEnemy = freeWay.indexOf(hitedBlock);
+        //System.out.println("Index encontrado em: " + indexOfEnemy);
+        for(Block b : hitWay) {
+            if(tempFreeWay.contains(b)) tempFreeWay.remove(b);
+        }
+        if(tempFreeWay.isEmpty()) {
+            System.out.println("temp vazio");
+            return getVetor();
+        }
+        indexOfEnemy--;
+        if(indexOfEnemy < 0) indexOfEnemy = 0;
+        //System.out.println("Pegando index do enemy");
+        return freeWay.get(indexOfEnemy).getVetor();
+    }
+    public ArrayList<Block> getSpecialMovesLikeJagger(Table tab, Vetor hitedPos) {
+        freeWay = new ArrayList<>();
+        JaggerMoves(tab, hitedPos, 1, 0);
+        JaggerMoves(tab, hitedPos, -1, 0);
+        JaggerMoves(tab, hitedPos, 0, 1);
+        JaggerMoves(tab, hitedPos, 0, -1);
+        JaggerMoves(tab, hitedPos, 1, 1);
+        JaggerMoves(tab, hitedPos, -1, 1);
+        JaggerMoves(tab, hitedPos, 1, -1);
+        JaggerMoves(tab, hitedPos, -1, -1);
+        return freeWay;
+    }
+    private void JaggerMoves(Table tab, Vetor hitedPos, int xDir, int yDir) {
+        Vetor vet = new Vetor(hitedPos.getX() + xDir, hitedPos.getY() + yDir);
+        Player maPlayer = Players.getPlayer(player);
+        if(Table.isInside(vet)) {
+            if(tab.getBlock(vet).getBlockState(maPlayer) == BlockState.Empty) {
+                freeWay.add(tab.getBlock(vet));
+                
+            }
+        }
     }
     public void reaction(Table table){
         strategy.Ireaction(table, vetor);
@@ -84,6 +134,7 @@ public abstract class Piece extends ImageView {
     protected void updateHitWay(){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
         if(hitWay != null) hitWay.clear(); else return;
+        if(freeWay == null) return;
         for(Block block : freeWay){
             if(block.getBlockState(Players.getPlayer(player)) == BlockState.Enemy){
                 hitWay.add(block);
@@ -109,7 +160,11 @@ public abstract class Piece extends ImageView {
     public int getHP(){
         return hp;
     }
-    public void setHP(int hp){
+    public boolean hit(int damage){
+        setHP(hp - damage);
+        return alive;
+    }
+    private void setHP(int hp){
         this.hp = hp;
         alive = (hp > 0);
     }
