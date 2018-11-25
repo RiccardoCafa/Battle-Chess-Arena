@@ -22,6 +22,7 @@ public class Bishop extends Piece {
         hp = 4;
         tpPiece = TypePiece.bishop;
         pieceName = "Bispo";
+        maxHp = hp;
         updateImage();
         //this.tpBishop = tpBishop; // Isso não faz sentido nenhum... (Ricc) 
     }
