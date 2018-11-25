@@ -21,6 +21,7 @@ public class Horse extends Piece {
         strategy = getHeroStrategy();//new DefaultHorse(player);
         updateImage();
         pieceName = "Cavalo";
+        maxHp = hp;
         tpPiece = TypePiece.horse;
     }
 //    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {

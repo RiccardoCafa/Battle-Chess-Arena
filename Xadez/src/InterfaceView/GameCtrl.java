@@ -5,6 +5,7 @@ import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
+import businessPack.Piece;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
@@ -118,8 +119,12 @@ public class GameCtrl implements Initializable {
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if(!tab.getBlock(i, j).isEmpty()) {
+                    //ImageView barra = new Image("InterfaceView/imagens/barraVerde.png");
                     pieceImage = tab.getBlock(i, j).getPiece();
+                    ImageView barraLife = tab.getBlock(i, j).getPiece().getLifeBar();
                     pratoPieces.getChildren().add(pieceImage);
+                    pratoPieces.getChildren().add(barraLife);
+                    tab.getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
                 }
@@ -127,6 +132,12 @@ public class GameCtrl implements Initializable {
                 //pieceImage = null;
             }
         }
+        /*
+        Barra de vida Informações
+            0 - 0 = LayoutX 0 / LayoutY -85
+            0 - 1 = LayoutX 65 / LayoutY -85
+            1 - 0 = LayoutX 0 / LayoutY -25
+        */
     }
     
     public ImageView makeBlock(int i, int j) {
@@ -210,6 +221,7 @@ public class GameCtrl implements Initializable {
                             }
                             resetBlockTab(); // Reseta os highlights
                             showPossibleWays(possibleBlocks); // Mostra o novo highlight
+                            externalMove(firstBlock, actualBlock);
                             combo = true; // Torna combo true
                             // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
                             //(isso provavelmente pode ocorrer com peças que pulam)
@@ -325,7 +337,11 @@ public class GameCtrl implements Initializable {
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(selectedVetor).colorDefault();
         movingPiece = false;//desabilita a movimentação
+        destinyBlock.getPiece().lifeBarRealocate();
         resetBlockTab();
+    }
+    public void externalMove(Block sourceBlock, Block destinyBlock){
+        moveImage(sourceBlock.getVetor(), destinyBlock.getVetor());
         char letraSource, letraDest;
         int numSource, numDest;
         letraSource = (char) (65 + sourceBlock.getVetor().getX());
@@ -334,9 +350,6 @@ public class GameCtrl implements Initializable {
         numSource = sourceBlock.getVetor().getY() + 1;
         gameplayChat.appendText("[" + playing.getName() + "] Peça movida de " + letraSource + numSource +
                 " para a posição " + letraDest + numDest + "!\n");
-    }
-    public void externalMove(Block sourceBlock, Block destinyBlock){
-        moveImage(sourceBlock.getVetor(), destinyBlock.getVetor());
     }
     
     public void moveImage(Vetor source, Vetor dest) {
@@ -354,6 +367,8 @@ public class GameCtrl implements Initializable {
                 break;
             }
             pieceToMove = table.getBlock(vet).getPiece();
+            Piece p = (Piece) pieceToMove;
+            p.lifeBarToFront();
             pieceToMove.toFront();
             y++;
         }
@@ -364,6 +379,8 @@ public class GameCtrl implements Initializable {
                 break;
             }
             pieceToMove = table.getBlock(vet).getPiece();
+            Piece p = (Piece) pieceToMove;
+            p.lifeBarToBack();
             pieceToMove.toBack();
             y--;
         }

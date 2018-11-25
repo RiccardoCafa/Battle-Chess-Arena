@@ -44,6 +44,8 @@ public class Lapa extends Hero {
         for(int k = 1;k<7;k++){
             army.addPiece(new Peon(jogador, TypeHero.lapa, k,(int)(3.5 + sentido*2.5)));
         }
+        army.addPiece(new Peon(jogador, TypeHero.lapa, 0, (int)(4 + sentido)));
+        army.addPiece(new Peon(jogador, TypeHero.lapa, 7, (int)(4 + sentido)));
         army.addPiece(new Tower(jogador, TypeHero.lapa, 0, (int)(3.5 + sentido*3.5)));
         army.addPiece(new Horse(jogador , TypeHero.lapa, 1, (int)(3.5 + sentido*3.5)));
         army.addPiece(new Bishop(jogador , TypeHero.lapa, 2, (int)(3.5 + sentido*3.5)));
