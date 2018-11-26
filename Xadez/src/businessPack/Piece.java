@@ -175,8 +175,8 @@ public abstract class Piece extends ImageView {
         lifeBar.toFront();
     }
     public void lifeBarToBack() {
-        lifeBarBg.toBack();
         lifeBar.toBack();
+        lifeBarBg.toBack();
     }
     public void lifeBarRealocate() {
         lifeBar.setLayoutX((65 * vetor.getX()) - (1 - ((float)hp/(float)maxHp))*30);
@@ -258,7 +258,11 @@ public abstract class Piece extends ImageView {
     public boolean isSpecial(){
         return especial;
     }
-    
+    public void removePiece() {
+        lifeBar.setVisible(false);
+        lifeBarBg.setVisible(false);
+        setVisible(false);
+    }
     public abstract ItypePiece getHeroStrategy();
     
     private String getHeroPath() {
