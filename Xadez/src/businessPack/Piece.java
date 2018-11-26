@@ -27,7 +27,8 @@ public abstract class Piece extends ImageView {
     protected String pathHero;
     protected String pieceName;
     protected Vetor vetor;
-    protected ImageView lifeBar;
+    private ImageView lifeBar;
+    private ImageView lifeBarBg; 
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     protected ArrayList<Block> especialFreeWay;
@@ -43,9 +44,12 @@ public abstract class Piece extends ImageView {
         setMouseTransparent(true);
         especial = false;
         lifeBar = new ImageView(new Image("InterfaceView/imagens/barraVerde.png", 60, 10, false, false));
+        lifeBarBg = new ImageView(new Image("InterfaceView/imagens/barraVermelha.png", 60, 10, false, false));
         lifeBar.setPreserveRatio(false);
         lifeBar.setFitWidth(60);
         lifeBar.setFitHeight(10);
+        lifeBarBg.setFitWidth(60);
+        lifeBarBg.setFitHeight(10);
 //        setLayoutX(20);
 //        setLayoutY(0);
     }
@@ -59,9 +63,12 @@ public abstract class Piece extends ImageView {
         setMouseTransparent(true);
         especial = false;
         lifeBar = new ImageView(new Image("InterfaceView/imagens/barraVerde.png", 60, 10, false, false));
+        lifeBarBg = new ImageView(new Image("InterfaceView/imagens/barraVermelha.png", 60, 10, false, false));
         lifeBar.setPreserveRatio(false);
         lifeBar.setFitWidth(60);
         lifeBar.setFitHeight(10);
+        lifeBarBg.setFitWidth(60);
+        lifeBarBg.setFitHeight(10);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
@@ -164,22 +171,23 @@ public abstract class Piece extends ImageView {
         return hitWay;
     }
     public void lifeBarToFront() {
+        lifeBarBg.toFront();
         lifeBar.toFront();
     }
     public void lifeBarToBack() {
+        lifeBarBg.toBack();
         lifeBar.toBack();
     }
     public void lifeBarRealocate() {
-        lifeBar.setLayoutX(65 * vetor.getX());
+        lifeBar.setLayoutX((65 * vetor.getX()) - (1 - ((float)hp/(float)maxHp))*30);
+        lifeBarBg.setLayoutX(65 * vetor.getX());
         lifeBar.setLayoutY(-90 + (65 * vetor.getY()));
         if(tpPiece == TypePiece.peon || tpPiece == TypePiece.horse || tpPiece == TypePiece.tower) {
             lifeBar.setLayoutY(lifeBar.getLayoutY() + 30);
         }
+        lifeBarBg.setLayoutY(lifeBar.getLayoutY());
     }
     public void lifeBarResize() {
-        System.out.println((float)hp/(float)maxHp);
-        System.out.println(hp + " " + maxHp);
-        System.out.println(lifeBar.getScaleX());
         lifeBar.setScaleX((float)hp / (float)maxHp);
     }
     //getset>>
@@ -192,9 +200,13 @@ public abstract class Piece extends ImageView {
     public ImageView getLifeBar() {
         return lifeBar;
     }
+    public ImageView getLifeBarBg() {
+        return lifeBarBg;
+    }
     public boolean hit(int damage){
         setHP(hp - damage);
         lifeBarResize();
+        lifeBarRealocate();
         return alive;
     }
     private void setHP(int hp){
@@ -242,9 +254,6 @@ public abstract class Piece extends ImageView {
     }
     public String getPieceName() {
         return pieceName;
-    }
-    public void setPieceName(String pieceName) {
-        this.pieceName = pieceName;
     }
     public boolean isSpecial(){
         return especial;

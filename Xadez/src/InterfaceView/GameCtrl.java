@@ -122,7 +122,9 @@ public class GameCtrl implements Initializable {
                     //ImageView barra = new Image("InterfaceView/imagens/barraVerde.png");
                     pieceImage = tab.getBlock(i, j).getPiece();
                     ImageView barraLife = tab.getBlock(i, j).getPiece().getLifeBar();
+                    ImageView barraLifeBg = tab.getBlock(i, j).getPiece().getLifeBarBg();
                     pratoPieces.getChildren().add(pieceImage);
+                    pratoPieces.getChildren().add(barraLifeBg);
                     pratoPieces.getChildren().add(barraLife);
                     tab.getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
