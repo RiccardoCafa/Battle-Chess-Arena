@@ -1,20 +1,16 @@
 package businessPack.Pieces.Wizard;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.Movement;
 
 
-public class WizardPeon implements ItypePiece {
+public class WizardPeon implements Movement {
 
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         return null;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }
 }

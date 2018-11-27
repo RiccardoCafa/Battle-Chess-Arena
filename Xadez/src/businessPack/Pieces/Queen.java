@@ -9,10 +9,11 @@ import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
+import businessPack.Pieces.Interfaces.Movement;
+import extras.Pistol;
 
 public class Queen extends Piece {
     //atributos>>
@@ -36,17 +37,19 @@ public class Queen extends Piece {
         updateHitWay();
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public Movement getHeroStrategy() {
         switch(tpHero) {
-            case sheriff:
+            case lenin:
                 especial = true;
-                return new SheriffQueen(Players.getPlayer(player));
+            case sheriff:
+                shoot = new SheriffQueen(Players.getPlayer(player));
+                return new DefaultQueen(Players.getPlayer(player));
             default:
                 return new DefaultQueen(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeQueen(ItypePiece tpQueen){//muda o comportamento do checkMove()
+    public void setTypeQueen(Movement tpQueen){//muda o comportamento do checkMove()
         strategy = tpQueen;
     }
     public void updateImage() {

@@ -7,10 +7,11 @@ import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
+import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Sheriff.SheriffTower;
 
 public class Tower extends Piece {
     //atributos>>
@@ -29,7 +30,6 @@ public class Tower extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay != null) freeWay.clear();
-        //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
@@ -38,17 +38,20 @@ public class Tower extends Piece {
         setMouseTransparent(true);
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public Movement getHeroStrategy() {
         switch(tpHero) {
             case lapa:
                 especial = true;
                 return new LapaTower(Players.getPlayer(player));
+            case sheriff:
+                shoot = new SheriffTower(Players.getPlayer(player));
+                return new DefaultTower(Players.getPlayer(player));
             default:
                 return new DefaultTower(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeTower(ItypePiece tpTower){//muda o comportamento do checkMove()
+    public void setTypeTower(Movement tpTower){//muda o comportamento do checkMove()
         strategy = tpTower;
     }
 }

@@ -1,13 +1,12 @@
 package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.Vetor;
-import java.util.ArrayList;
+import extras.Pistol;
 
-public class SheriffKing implements ItypePiece {
+public class SheriffKing implements Pistol {
     //atributos>>
     Player player;
     int charge = 2;
@@ -17,12 +16,14 @@ public class SheriffKing implements ItypePiece {
     }
     //metodos>>
     @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return null;
-    }
-    @Override
-    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação do rei especial do Sheriff
-        ArrayList<Block> myList = new ArrayList<>();
-        return myList;
+    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
+        if(charge != 0){
+            enemyBlock.hitPiece(charge);
+            System.out.println("sou matador de onça");
+            charge--;
+        }else{
+            if(charge < 2) charge++;
+        }
+        return false;
     }
 }

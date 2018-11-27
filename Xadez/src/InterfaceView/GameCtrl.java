@@ -67,6 +67,7 @@ public class GameCtrl implements Initializable {
     boolean superPower = false;
     boolean specialActive = false;
     boolean combo = false;
+    boolean sheriffTowerReaction;//sheriff power
     
     private String gameName = "System";
     
@@ -84,7 +85,7 @@ public class GameCtrl implements Initializable {
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         
         player1 = new Player(-1, new Lapa(), 1, "Riccardao");
-        player2 = new Player(1, new Lenin(), 2, "xXPlayer2Xx");
+        player2 = new Player(1, new Sheriff(), 2, "Rezendex");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -159,6 +160,7 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
+        if(sheriffTowerReaction) optionsOfShoot(actualBlock);//sheriff power
         if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
                 && possibleBlocks.contains(actualBlock)) {
             Lapa lapa = (Lapa) playing.getHero();
@@ -197,6 +199,7 @@ public class GameCtrl implements Initializable {
                     /*
                     HIT
                     */
+                    sheriffTowerReaction = actualBlock.getPiece().reaction(table, firstBlock);
                     if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
                         // Está vivo
                         if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
@@ -254,6 +257,10 @@ public class GameCtrl implements Initializable {
                 resetBlockTab();
             }
         }
+    }
+    
+    public void optionsOfShoot(Block actualBlock){
+        //implementar clique de tiro do sheriffTower
     }
     
     public void EndOfTurn() {

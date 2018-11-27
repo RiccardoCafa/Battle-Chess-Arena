@@ -1,14 +1,15 @@
 package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
+import extras.Pistol;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.Movement;
 
-public class SheriffHorse implements ItypePiece {
+public class SheriffHorse implements Movement, Pistol {
     //atributos>>
     Player player;
     int charge = 1;
@@ -18,7 +19,7 @@ public class SheriffHorse implements ItypePiece {
     }
     //metodos>>
     @Override
-    public Table Ireaction(Table table, Vetor vetor) {
+    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
         if(charge != 0){
             for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
@@ -32,9 +33,10 @@ public class SheriffHorse implements ItypePiece {
                     break;
                 }
             }
+            System.out.println("falou comigo? ¬_¬");
             charge--;
         }else charge = 1;
-        return table;
+        return false;
     }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação do cavalo especial do Sheriff
@@ -44,24 +46,6 @@ public class SheriffHorse implements ItypePiece {
             if(Table.isInside(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY))){
                 if(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getBlockState(player) != BlockState.Friend){
                     freeWay.add(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)));//adiciona todas as posições válidas
-                }
-                if(table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getBlockState(player) == BlockState.Enemy){
-                    switch(valorX){//apontadores dos blocos inimigos
-                        case +2://oeste
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(7);
-                            break;
-                        case -2://leste
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(3);
-                            break;
-                    }
-                    switch(valorY){
-                        case +2://norte
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(1);
-                            break;
-                        case -2://sul
-                            table.getBlock(Vetor.sum(vetor, sinalX*valorX, sinalY*valorY)).getVetor().setTrend(5);
-                            break;
-                    }
                 }
             }
             if(i%4 == 0){ sinalX *= -1; }//***************calculos
@@ -85,7 +69,6 @@ public class SheriffHorse implements ItypePiece {
                         case Enemy:
                             freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - a));
                             findPieceN = true;
-                            table.getBlock(vetor.getX(), vetor.getY() - a).getVetor().setTrend(5);
                             break;
                         case Empty:
                             freeWay.add(table.getBlock(vetor.getX(), vetor.getY() - a));
@@ -102,7 +85,6 @@ public class SheriffHorse implements ItypePiece {
                         case Enemy:
                             freeWay.add(table.getBlock(vetor.getX(), vetor.getY() + a));
                             findPieceS = true;
-                            table.getBlock(vetor.getX(), vetor.getY() + a).getVetor().setTrend(1);
                             break;
                         case Empty:
                             freeWay.add(table.getBlock(vetor.getX(), vetor.getY() + a));
@@ -119,7 +101,6 @@ public class SheriffHorse implements ItypePiece {
                         case Enemy:
                             freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
                             findPieceE = true;
-                            table.getBlock(vetor.getX() + a, vetor.getY()).getVetor().setTrend(7);
                             break;
                         case Empty:
                             freeWay.add(table.getBlock(vetor.getX() + a, vetor.getY()));
@@ -136,7 +117,6 @@ public class SheriffHorse implements ItypePiece {
                         case Enemy:
                             freeWay.add(table.getBlock(vetor.getX() - a, vetor.getY()));
                             findPieceW = true;
-                            table.getBlock(vetor.getX() - a, vetor.getY()).getVetor().setTrend(3);
                             break;
                         case Empty:
                             freeWay.add(table.getBlock(vetor.getX() - a, vetor.getY()));

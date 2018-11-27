@@ -5,9 +5,11 @@ import businessPack.Table;
 import businessPack.Player;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import extras.BlockState;
+import extras.Pistol;
+import businessPack.Pieces.Interfaces.Movement;
 
-public class SheriffTower implements ItypePiece {
+public class SheriffTower implements Pistol {
     //atributos>>
     Player player;
     int charge = 1;
@@ -17,11 +19,12 @@ public class SheriffTower implements ItypePiece {
     }
     //metodos>>
     @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return null;
-    }
-    @Override
-    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação da torre especial do Sheriff
-        return null;
+    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
+        if(charge != 0){
+            System.out.println("");
+            charge--;
+            return true;
+        }else charge = 1;
+        return false;
     }
 }

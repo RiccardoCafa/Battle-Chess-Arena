@@ -1,14 +1,13 @@
 package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
-import java.util.ArrayList;
+import extras.Pistol;
 
-public class SheriffPeon implements ItypePiece {
+public class SheriffPeon implements Pistol {
     //atributos>>
     Player player;
     int charge = 1;
@@ -18,20 +17,17 @@ public class SheriffPeon implements ItypePiece {
     }
     //metodos>>
     @Override
-    public Table Ireaction(Table table, Vetor vetor) {
+    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
         if(charge != 0){
-            for(int jN = vetor.getY(); Table.isInside(new Vetor(0, jN)); jN += player.getSentido()){
-                if(table.getBlock(jN, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                    table.getBlock(jN, vetor.getY()).getPiece().hit(charge);
+            for(int jN = vetor.getY(); Table.isInside(0, jN); jN -= player.getSentido()){
+                if(table.getBlock(vetor.getX(), jN).getBlockState(player) == BlockState.Enemy){
+                    table.getBlock(vetor.getX(), jN).getPiece().hit(charge);
                     break;
                 }
             }
+            System.out.println("eh na sola da bota, eh na palma da bota...");
             charge--;
         }else charge = 1;
-        return table;
-    }
-    @Override
-    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação do peão especial do Sheriff
-        return null;
+        return false;
     }
 }

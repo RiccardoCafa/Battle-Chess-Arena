@@ -97,4 +97,16 @@ public class Table{
     public void AttackManaging() {
         
     }
+    public Block callForSheriffKing(){//sheriff method
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(!table[i][j].isEmpty() &&
+                    table[i][j].getPiece().getTpHero() == TypeHero.sheriff &&
+                    table[i][j].getPiece().getTypePiece() == TypePiece.king){
+                    return table[i][j];
+                }
+            }
+        }
+        return null;
+    }
 }

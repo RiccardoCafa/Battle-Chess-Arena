@@ -3,7 +3,6 @@ package businessPack.Pieces;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Pieces.Huebr.huebrPeon;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
@@ -11,6 +10,9 @@ import businessPack.TypeHero;
 import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
+import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Sheriff.SheriffPeon;
+import extras.Pistol;
 
 public class Peon extends Piece {
     //atributos>>
@@ -42,17 +44,20 @@ public class Peon extends Piece {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Peon.png", widhtImg, heightImg, false, false));
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public Movement getHeroStrategy() {
         switch(tpHero) {
             case huebr:
                 especial = true;
                 return new huebrPeon();
+            case sheriff:
+                shoot = new SheriffPeon(Players.getPlayer(player));
+                return new DefaultPeon(Players.getPlayer(player));
             default:
                 return new DefaultPeon(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypePeon(ItypePiece tpPeon){//muda o comportamento do checkMove()
+    public void setTypePeon(Movement tpPeon){//muda o comportamento do checkMove()
         strategy = tpPeon;
     }
 }

@@ -6,9 +6,9 @@ import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Pieces.Interfaces.Movement;
 
-public class LeninTower implements ItypePiece {
+public class LeninTower implements Movement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -62,9 +62,5 @@ public class LeninTower implements ItypePiece {
         }
         System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
         return newVetor;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }
 }

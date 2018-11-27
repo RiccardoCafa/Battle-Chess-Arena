@@ -1,27 +1,30 @@
 package businessPack.Pieces.Sheriff;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Piece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.Vetor;
-import java.util.ArrayList;
+import extras.Pistol;
 
-public class SheriffQueen implements ItypePiece {
+public class SheriffQueen implements Pistol {
     //atributos>>
     Player player;
-    int charge = 2;
     //construtor>>
     public SheriffQueen(Player player){
         this.player = player;
     }
     //metodos>>
     @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return null;
-    }
-    @Override
-    public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação da rainha especial do Sheriff
-        return null;
+    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
+        Piece king;
+        try{
+            king = table.callForSheriffKing().getPiece();
+        }catch(NullPointerException e){
+            System.out.println("vc matou meu marido...");
+            return false;
+        }
+        king.reaction(table, enemyBlock);
+        return false;
     }
 }

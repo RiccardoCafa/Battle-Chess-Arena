@@ -1,7 +1,7 @@
 package businessPack;
 
-import businessPack.Pieces.Interfaces.ItypePiece;
 import extras.BlockState;
+import extras.Pistol;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
@@ -10,11 +10,12 @@ import java.util.Collections;
 import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import businessPack.Pieces.Interfaces.Movement;
 
 public abstract class Piece extends ImageView {
     //atributos>>
     protected TypePiece tpPiece;
-    protected ItypePiece strategy;//agora o strategy vem de Piece
+    protected Movement strategy;//agora o strategy vem de Piece
     protected TypeHero tpHero;
     protected Who player;
     protected int hp;
@@ -33,6 +34,7 @@ public abstract class Piece extends ImageView {
     protected ArrayList<Block> hitWay;
     protected ArrayList<Block> especialFreeWay;
     protected ArrayList<Block> especialHitWay;
+    protected Pistol shoot;//sheriff atribute
     //construtor>>
     protected Piece(Who player, TypeHero tpHero, int x, int y){
         this.tpHero = tpHero;
@@ -145,8 +147,11 @@ public abstract class Piece extends ImageView {
             }
         }
     }
-    public void reaction(Table table){
-        strategy.Ireaction(table, vetor);
+    public boolean reaction(Table table, Block enemyBlock){//sheriff method
+        if(tpHero == TypeHero.sheriff && tpPiece != TypePiece.bishop)
+            return shoot.Ireaction(table, vetor, enemyBlock);
+        else
+            return false;
     }
     protected void updateHitWay(){//seleciona os vetores de freeWay que possui inimigos
         hitWay = new ArrayList<>();
@@ -231,6 +236,9 @@ public abstract class Piece extends ImageView {
     public TypeHero getTpHero(){
         return tpHero;
     }
+    public TypePiece getTypePiece(){
+        return tpPiece;
+    }
     public Who getWho() {
         return player;
     }
@@ -249,7 +257,7 @@ public abstract class Piece extends ImageView {
     public ArrayList<Block> getEspecialHitWay() {
         return especialHitWay;
     }
-    public void setStrategy(ItypePiece strategy){
+    public void setStrategy(Movement strategy){
         this.strategy = strategy;
     }
     public String getPieceName() {
@@ -263,7 +271,7 @@ public abstract class Piece extends ImageView {
         lifeBarBg.setVisible(false);
         setVisible(false);
     }
-    public abstract ItypePiece getHeroStrategy();
+    public abstract Movement getHeroStrategy();
     
     private String getHeroPath() {
         switch(tpHero) {

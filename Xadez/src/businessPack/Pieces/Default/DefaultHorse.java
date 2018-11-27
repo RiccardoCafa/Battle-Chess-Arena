@@ -1,14 +1,14 @@
 package businessPack.Pieces.Default;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.Movement;
 
-public class DefaultHorse implements ItypePiece {
+public class DefaultHorse implements Movement {
     //atributos>>
     Player player;
     //construtor>>
@@ -16,10 +16,6 @@ public class DefaultHorse implements ItypePiece {
         this.player = player;
     }
     //metodos>>
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
-    }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {//implementação da movimentação padrão do cavalo
         ArrayList<Block> freeWay = new ArrayList<>();

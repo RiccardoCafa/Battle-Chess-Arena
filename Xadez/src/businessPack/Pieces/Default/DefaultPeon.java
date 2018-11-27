@@ -1,14 +1,14 @@
 package businessPack.Pieces.Default;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.Movement;
 
-public class DefaultPeon implements ItypePiece {
+public class DefaultPeon implements Movement {
     //metodos>>
    Table tab;
     ArrayList<Block> vector;
@@ -16,10 +16,6 @@ public class DefaultPeon implements ItypePiece {
     
     public DefaultPeon(Player playing){
         this.playing = playing;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {

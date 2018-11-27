@@ -2,15 +2,16 @@ package businessPack.Pieces;
 
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultKing;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Sheriff.SheriffKing;
 import businessPack.Pieces.Wizard.WizardKing;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.TypePiece;
+import extras.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
+import businessPack.Pieces.Interfaces.Movement;
 
 public class King extends Piece {
     //atributos>>
@@ -40,10 +41,11 @@ public class King extends Piece {
         updateHitWay();
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public Movement getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffKing(Players.getPlayer(player));
+                shoot = new SheriffKing(Players.getPlayer(player));
+                return new DefaultKing(Players.getPlayer(player));
             case wizard:
                 return new WizardKing();
             default:
@@ -51,7 +53,7 @@ public class King extends Piece {
         }
     }
     //getset>>
-    public void setTypeKing(ItypePiece tpKing){//muda o comportamento do checkMove()
+    public void setTypeKing(Movement tpKing){//muda o comportamento do checkMove()
         strategy = tpKing;
     }
     public void updateImage() {

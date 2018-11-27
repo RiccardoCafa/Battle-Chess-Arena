@@ -6,9 +6,9 @@ import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Pieces.Interfaces.Movement;
 
-public class DefaultTower implements ItypePiece {
+public class DefaultTower implements Movement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -17,10 +17,6 @@ public class DefaultTower implements ItypePiece {
         this.playing = playing;
     }
     //metodos>>
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
-    }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         vector = new ArrayList<>();
