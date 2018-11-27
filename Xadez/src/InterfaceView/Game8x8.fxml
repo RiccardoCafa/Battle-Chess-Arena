@@ -44,6 +44,11 @@
                   <Bloom threshold="1.0" />
                </effect>
             </ScrollPane>
+            <Button fx:id="PassTurn" layoutX="415.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#PassTurnOnClick" prefHeight="60.0" prefWidth="211.0" text="Pass Turn" textFill="RED">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
       <GridPane fx:id="gridPane" layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">

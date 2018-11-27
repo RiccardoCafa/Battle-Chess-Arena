@@ -51,6 +51,8 @@ public class GameCtrl implements Initializable {
     Button btnSuperPower;
     @FXML
     TextArea gameplayChat;
+    @FXML
+    Button PassTurn;
 //    @FXML
 //    ScrollPane scroll;
     
@@ -448,5 +450,8 @@ public class GameCtrl implements Initializable {
     }
     public void displayMessage(String sender, String message) {
         gameplayChat.appendText("[" + sender + "] " + message + "\n");
+    }
+    public void PassTurnOnClick(MouseEvent e){
+        EndOfTurn();
     }
 }

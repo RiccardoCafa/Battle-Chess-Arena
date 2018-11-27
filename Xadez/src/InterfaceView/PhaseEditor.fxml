@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1333.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="InterfaceView.PhaseEditorCtrl">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.PhaseEditorCtrl">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1333.0" pickOnBounds="true">
          <image>
@@ -30,7 +29,7 @@
                   <Font name="Segoe UI Black" size="17.0" />
                </font>
             </Label>
-            <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Nome da fase">
+            <TextField fx:id="nameInput" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" promptText="Nome da fase">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
@@ -43,12 +42,12 @@
                         <Font name="Segoe UI" size="26.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="p1Image" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true">
                      <image>
                         <Image url="@Personagens/huehuebr-01.png" />
                      </image>
                   </ImageView>
-                  <Slider max="5.0" maxHeight="-Infinity" maxWidth="-Infinity" min="1.0" prefWidth="120.0" value="1.0" />
+                  <Slider fx:id="p1Slider" max="5.0" maxHeight="-Infinity" maxWidth="-Infinity" min="1.0" prefWidth="120.0" value="1.0" />
                </children>
             </VBox>
             <Separator prefHeight="10.0" prefWidth="176.0" />
@@ -59,12 +58,12 @@
                         <Font name="Segoe UI" size="26.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="150.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="p2Image" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true">
                      <image>
                         <Image url="@Personagens/huehuebr-01.png" />
                      </image>
                   </ImageView>
-                  <Slider max="5.0" maxHeight="-Infinity" maxWidth="-Infinity" min="1.0" prefWidth="120.0" value="1.0" />
+                  <Slider fx:id="p2Slider" majorTickUnit="5.0" max="5.0" maxHeight="-Infinity" maxWidth="-Infinity" min="1.0" minorTickCount="1" prefWidth="120.0" snapToTicks="true" value="1.0" />
                </children>
             </VBox>
             <Separator prefHeight="10.0" prefWidth="176.0" />
@@ -79,14 +78,14 @@
                </font>
             </ToggleButton>
             <Separator prefHeight="10.0" prefWidth="176.0" />
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" text="Save">
+            <Button fx:id="saveBtn" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="80.0" text="Save">
                <font>
                   <Font name="Segoe UI Black" size="14.0" />
                </font>
             </Button>
          </children>
       </VBox>
-      <GridPane layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="520.0">
+      <GridPane fx:id="tabGrid" layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="520.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="65.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="65.0" prefWidth="100.0" />
