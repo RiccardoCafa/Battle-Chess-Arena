@@ -38,6 +38,13 @@ public class Players {
     }
     public static Player getActualPlayer() {
         if(turn == 1) {
+            return player1;
+        } else {
+            return player2;
+        }
+    }
+    public static Player getAdversaryPlayer() {
+        if(turn == 1) {
             return player2;
         } else {
             return player1;

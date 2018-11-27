@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -24,11 +27,23 @@
                   <Image url="@Personagens/lenin-01.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnPower" layoutX="159.0" layoutY="178.0" mnemonicParsing="false" prefHeight="94.0" prefWidth="323.0" text="Super Power" textFill="RED">
+            <Button fx:id="btnSuperPower" layoutX="415.0" layoutY="196.0" mnemonicParsing="false" onMousePressed="#OnBtnPower" prefHeight="60.0" prefWidth="211.0" text="Super Power" textFill="RED">
                <font>
                   <Font size="29.0" />
                </font>
             </Button>
+            <ScrollPane layoutX="9.0" layoutY="8.0" prefHeight="113.0" prefWidth="539.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="524.0">
+                     <children>
+                        <TextArea fx:id="gameplayChat" editable="false" prefHeight="109.0" prefWidth="520.0" promptText="Gameplay " wrapText="true" />
+                     </children>
+                  </AnchorPane>
+              </content>
+               <effect>
+                  <Bloom threshold="1.0" />
+               </effect>
+            </ScrollPane>
          </children>
       </Pane>
       <GridPane fx:id="gridPane" layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">

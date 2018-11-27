@@ -1,14 +1,16 @@
 package InterfaceView;
 
 import businessPack.Block;
+import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
-import businessPack.Heros.Wizard;
+import businessPack.Piece;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import static businessPack.TypeHero.lapa;
 import extras.BlockState;
 import extras.Vetor;
 import java.net.URL;
@@ -17,6 +19,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -44,7 +48,11 @@ public class GameCtrl implements Initializable {
     @FXML
     Pane pratoPieces;
     @FXML
-    Button btnPower;
+    Button btnSuperPower;
+    @FXML
+    TextArea gameplayChat;
+//    @FXML
+//    ScrollPane scroll;
     
     /*
         DECLARING GAMECORE VARIAVABLES
@@ -60,6 +68,8 @@ public class GameCtrl implements Initializable {
     boolean specialActive = false;
     boolean combo = false;
     
+    private String gameName = "System";
+    
     Table table;
     
     Player player1;
@@ -68,26 +78,29 @@ public class GameCtrl implements Initializable {
     
     Block firstBlock;
     
-    public Player notPlaying(){
-        return playing.equals(player1) ? player2 : player1;
-    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        player1 = new Player(-1, new Wizard(), 1);
-        player2 = new Player(1, new Lenin(), 2);
+
+        
+        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
+        player2 = new Player(1, new Lenin(), 2, "xXPlayer2Xx");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
         table = new Table(8, 8, player1, player2);
         if(playing.getHero().getHeroType() != TypeHero.lapa) {
-            btnPower.setVisible(false);
+            btnSuperPower.setVisible(false);
         } else { 
-            btnPower.setVisible(true);
+            btnSuperPower.setVisible(true);
         }
+        gameplayChat.appendText("[" + gameName + "] Bem-vindo ao Battle Chess Arena!\n");
         MountArmyOnTable(table);
+        gameplayChat.appendText("[" + gameName + "] Os exércitos foram montados.\n");
+        gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
+        persoImage.setImage(playing.getHero().getImage());
+// 65 (char) == A
     }
     
     public void MountArmyOnTable(Table tab) {
@@ -107,8 +120,14 @@ public class GameCtrl implements Initializable {
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if(!tab.getBlock(i, j).isEmpty()) {
+                    //ImageView barra = new Image("InterfaceView/imagens/barraVerde.png");
                     pieceImage = tab.getBlock(i, j).getPiece();
+                    ImageView barraLife = tab.getBlock(i, j).getPiece().getLifeBar();
+                    ImageView barraLifeBg = tab.getBlock(i, j).getPiece().getLifeBarBg();
                     pratoPieces.getChildren().add(pieceImage);
+                    pratoPieces.getChildren().add(barraLifeBg);
+                    pratoPieces.getChildren().add(barraLife);
+                    tab.getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
                 }
@@ -116,6 +135,12 @@ public class GameCtrl implements Initializable {
                 //pieceImage = null;
             }
         }
+        /*
+        Barra de vida Informações
+            0 - 0 = LayoutX 0 / LayoutY -85
+            0 - 1 = LayoutX 65 / LayoutY -85
+            1 - 0 = LayoutX 0 / LayoutY -25
+        */
     }
     
     public ImageView makeBlock(int i, int j) {
@@ -135,6 +160,14 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
+        if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
+                && possibleBlocks.contains(actualBlock)) {
+            Lapa lapa = (Lapa) playing.getHero();
+            lapa.ExplodeBomb(table, actualBlock.getVetor(), this);
+            superPower = false;
+            resetBlockTab();
+            return;
+        }
         if(!combo && !actualBlock.isEmpty() &&                                  //se o bloco clicado não está vazio e
            actualBlock.getBlockState(playing) == BlockState.Friend &&//clicar em uma peça aliada e
            selectedVetor != null){                                  //já tiver sido clicada uma peça
@@ -167,6 +200,12 @@ public class GameCtrl implements Initializable {
                     */
                     if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
                         // Está vivo
+                        if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
+                            Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
+                            lapao.setBigBig(lapao.getBigBig() + 1);
+                            displayMessage(playing.getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
+                                    + lapao.getBigBig() + " bigbigs");
+                        }
                         if(!firstBlock.getPiece().isSpecial()){ // se a peça não for especial
                             Vetor lastPos = firstBlock.getPiece().getLastPosOf(actualBlock); // Pega a melhor posição para ficar
                             externalMove(firstBlock, table.getBlock(lastPos));
@@ -185,6 +224,7 @@ public class GameCtrl implements Initializable {
                             }
                             resetBlockTab(); // Reseta os highlights
                             showPossibleWays(possibleBlocks); // Mostra o novo highlight
+                            externalMove(firstBlock, actualBlock);
                             combo = true; // Torna combo true
                             // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
                             //(isso provavelmente pode ocorrer com peças que pulam)
@@ -192,6 +232,9 @@ public class GameCtrl implements Initializable {
                     } else {
                         // Morreu o mizeravel
                         removeImage(actualBlock); // remove a imagem do mizere
+                        gameplayChat.appendText("[" + playing.getName() + "] acaba de aniquilar o(a) " + 
+                                                actualBlock.getPiece().getPieceName() + " de " + "[" +
+                                                Players.getAdversaryPlayer().getName() + "]\n");
                         externalMove(firstBlock, actualBlock); 
                         internalMove(firstBlock, actualBlock);
                     }
@@ -221,9 +264,17 @@ public class GameCtrl implements Initializable {
         possibleBlocks.clear();
         possibleHits.clear();
         resetBlockTab();
-        Players.passTurn();
         playing.getHero().GameManager(table);
+        Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
+        if(playing.getHero() instanceof Lapa ||
+                playing.getHero() instanceof Huebr) {
+            btnSuperPower.setVisible(true);
+        } else { 
+            btnSuperPower.setVisible(false);
+        }
+        persoImage.setImage(playing.getHero().getImage());
+        gameplayChat.appendText("[" + gameName + "] Vez de " + playing.getName() + "\n");
     }
     
     @FXML
@@ -289,10 +340,19 @@ public class GameCtrl implements Initializable {
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(selectedVetor).colorDefault();
         movingPiece = false;//desabilita a movimentação
+        destinyBlock.getPiece().lifeBarRealocate();
         resetBlockTab();
     }
     public void externalMove(Block sourceBlock, Block destinyBlock){
         moveImage(sourceBlock.getVetor(), destinyBlock.getVetor());
+        char letraSource, letraDest;
+        int numSource, numDest;
+        letraSource = (char) (65 + sourceBlock.getVetor().getX());
+        letraDest = (char) (65 + destinyBlock.getVetor().getX());
+        numDest = destinyBlock.getVetor().getY() + 1;
+        numSource = sourceBlock.getVetor().getY() + 1;
+        gameplayChat.appendText("[" + playing.getName() + "] Peça movida de " + letraSource + numSource +
+                " para a posição " + letraDest + numDest + "!\n");
     }
     
     public void moveImage(Vetor source, Vetor dest) {
@@ -310,6 +370,8 @@ public class GameCtrl implements Initializable {
                 break;
             }
             pieceToMove = table.getBlock(vet).getPiece();
+            Piece p = (Piece) pieceToMove;
+            p.lifeBarToFront();
             pieceToMove.toFront();
             y++;
         }
@@ -320,18 +382,20 @@ public class GameCtrl implements Initializable {
                 break;
             }
             pieceToMove = table.getBlock(vet).getPiece();
+            Piece p = (Piece) pieceToMove;
+            p.lifeBarToBack();
             pieceToMove.toBack();
             y--;
         }
     }
     public void removeImage(Vetor source) {
-        ImageView pieceToRemove = table.getBlock(source).getPiece();
-        pieceToRemove.setVisible(false);
+        Piece pieceToRemove = table.getBlock(source).getPiece();
+        pieceToRemove.removePiece();
         pieceToRemove = null;
     }
     public void removeImage(Block blockSource) {
-        ImageView pieceToRemove = blockSource.getPiece();
-        pieceToRemove.setVisible(false);
+        Piece pieceToRemove = blockSource.getPiece();
+        pieceToRemove.removePiece();
         pieceToRemove = null;
     }
     public void showPossibleWays(ArrayList<Block> freeWay) {
@@ -363,17 +427,27 @@ public class GameCtrl implements Initializable {
     @FXML
     public void OnBtnPower(MouseEvent e) {
         // Huebr
+        if(combo) return;
         if(playing.getHero().getHeroType() == TypeHero.lapa && !movingPiece) {
             if(superPower) {
                 superPower = false;
                 resetBlockTab();
             } else {
-                superPower = true;
                 Lapa lapa = (Lapa) playing.getHero();
-                possibleBlocks = lapa.getBombWays(table, playing);
-                showPossibleEnemys(possibleBlocks);
+                if(lapa.getBigBig() >= 5) {
+                    displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
+                    possibleBlocks = lapa.getBombWays(table, playing);
+                    showPossibleEnemys(possibleBlocks);
+                    superPower = true;
+                } else {
+                    displayMessage(gameName, "Lapa você está sem bigbig, precisa de mais alunos interessados!");
+                }
+                
             }
             
         }
+    }
+    public void displayMessage(String sender, String message) {
+        gameplayChat.appendText("[" + sender + "] " + message + "\n");
     }
 }
