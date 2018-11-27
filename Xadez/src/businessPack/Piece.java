@@ -258,7 +258,11 @@ public abstract class Piece extends ImageView {
     public boolean isSpecial(){
         return especial;
     }
-    
+    public void removePiece() {
+        lifeBar.setVisible(false);
+        lifeBarBg.setVisible(false);
+        setVisible(false);
+    }
     public abstract ItypePiece getHeroStrategy();
     
     private String getHeroPath() {

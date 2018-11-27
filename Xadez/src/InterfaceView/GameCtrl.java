@@ -390,13 +390,13 @@ public class GameCtrl implements Initializable {
         }
     }
     public void removeImage(Vetor source) {
-        ImageView pieceToRemove = table.getBlock(source).getPiece();
-        pieceToRemove.setVisible(false);
+        Piece pieceToRemove = table.getBlock(source).getPiece();
+        pieceToRemove.removePiece();
         pieceToRemove = null;
     }
     public void removeImage(Block blockSource) {
-        ImageView pieceToRemove = blockSource.getPiece();
-        pieceToRemove.setVisible(false);
+        Piece pieceToRemove = blockSource.getPiece();
+        pieceToRemove.removePiece();
         pieceToRemove = null;
     }
     public void showPossibleWays(ArrayList<Block> freeWay) {
@@ -435,7 +435,7 @@ public class GameCtrl implements Initializable {
                 resetBlockTab();
             } else {
                 Lapa lapa = (Lapa) playing.getHero();
-                if(lapa.getBigBig() == 5) {
+                if(lapa.getBigBig() >= 5) {
                     displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
                     possibleBlocks = lapa.getBombWays(table, playing);
                     showPossibleEnemys(possibleBlocks);
