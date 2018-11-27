@@ -8,10 +8,6 @@ import extras.Vetor;
 import java.util.ArrayList;
 import businessPack.Pieces.Interfaces.ItypePiece;
 
-/**
- *
- * @author ricca
- */
 public class LapaTower implements ItypePiece {
 
     Player player;

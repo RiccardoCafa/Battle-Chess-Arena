@@ -4,7 +4,6 @@ import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultKing;
 import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Sheriff.SheriffKing;
-import businessPack.Pieces.Wizard.WizardKing;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -42,8 +41,6 @@ public class King extends Piece {
         switch(tpHero) {
             case sheriff:
                 return new SheriffKing(Players.getPlayer(player));
-            case wizard:
-                return new WizardKing();
             default:
                 return new DefaultKing(Players.getPlayer(player));
         }
