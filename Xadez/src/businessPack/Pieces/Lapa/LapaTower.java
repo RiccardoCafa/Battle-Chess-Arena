@@ -22,7 +22,7 @@ public class LapaTower implements ItypePiece {
 
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
-        myMoves = new ArrayList<Block>();
+        myMoves = new ArrayList<>();
         Vetor lastPosition;
         int xOffSet, yOffSet;
         this.table = table;
@@ -46,7 +46,7 @@ public class LapaTower implements ItypePiece {
         System.out.println("Going down");
         lastPosition = LookForLast(0, 1, vetor);
         // Calcula quantas casas sobram
-                //xOffSet = Math.abs(lastPosition.getX() - vetor.getX());
+        //xOffSet = Math.abs(lastPosition.getX() - vetor.getX());
         yOffSet = Math.abs(lastPosition.getY() - vetor.getY());
         // Pega todas as casas restantes
         System.out.println("Looking for lefting blocks");
@@ -105,10 +105,12 @@ public class LapaTower implements ItypePiece {
         Vetor newVetor;
         int i = vetor.getX() + xDirection;
         int j = vetor.getY() + yDirection;
-        newVetor = new Vetor(i, j);
+        newVetor = new Vetor(i, j); // Cria um novo vetor
         int xMax = xDirection == 1 ? Table.getM() - 1 : 0;
         int yMax = yDirection == 1 ? Table.getN() - 1 : 0;
-        
+        // Checo se o vetor está dentro do tabuleiro (pode fazer do seu jeito)
+        // Checo também se num == 0
+        // São condicoes de parada
         if(xDirection == 0) {
             if(((yMax == 0 && j < yMax) || (yMax == Table.getN()-1 && j > yMax)) || num == 0) {
                 return vetor;
@@ -119,27 +121,28 @@ public class LapaTower implements ItypePiece {
             }
         }
         
+        // Checo se existe um inimigo na casa atual que estoua agora
         if(table.getBlock(i, j).getBlockState(player) == BlockState.Enemy) {
-            if(!myMoves.contains(table.getBlock(newVetor))) {
-                myMoves.add(table.getBlock(newVetor));
+            if(!myMoves.contains(table.getBlock(newVetor))) { // Se essa casa não está na lista
+                myMoves.add(table.getBlock(newVetor)); // Add na lista
                 System.out.println("Adicionado bloco na posição (enemy): " + newVetor.getX() + " " + newVetor.getY());
             }
-            return newVetor;
+            return newVetor; // C.P.
         }
-    
+        // Se for amigo, C.P.
         if(table.getBlock(i, j).getBlockState(player) == BlockState.Friend) {
             return vetor;
         }
-        
+        // Se for vazio, 
         if(table.getBlock(i, j).getBlockState(player) == BlockState.Empty) {
-            
+            // Se não tiver na lista
             if(!myMoves.contains(table.getBlock(newVetor))) {
-                myMoves.add(table.getBlock(newVetor));
+                myMoves.add(table.getBlock(newVetor)); // Adiciona na lista
                 System.out.println("Adicionado bloco na posição: " + newVetor.getX() + " " + newVetor.getY());
             }
-            if(num != 0)    
-                return LookForLast(xDirection, yDirection, newVetor, --num);
-            else return vetor;
+            if(num != 0) // Se num não for zero
+                return LookForLast(xDirection, yDirection, newVetor, --num); // Chamada recursiva
+            else return vetor; // num == 0 retorna C.P.
         }
         return newVetor;
     }
