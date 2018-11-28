@@ -504,6 +504,13 @@ public class GameCtrl implements Initializable {
             }
             
         }
+        
+        if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
+            Huebr huebr = (Huebr) playing.getHero();
+            huebr.setUsePower(true);
+            System.out.println("Power ativado");
+        }
+
     }
     public void displayMessage(String sender, String message) {
         gameplayChat.appendText("[" + sender + "] " + message + "\n");
