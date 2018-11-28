@@ -125,32 +125,32 @@
             <RowConstraints maxHeight="-Infinity" minHeight="130.0" prefHeight="130.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="peonImg" fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/lapaPieces/lapaPeon.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+            <ImageView fx:id="towerImg" fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
                   <Image url="@imagens/huebrPieces/huebrTower.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+            <ImageView fx:id="horseImg" fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@imagens/leninPieces/leninHorse.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+            <ImageView fx:id="bishopImg" fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
                   <Image url="@imagens/leninPieces/leninBishop.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+            <ImageView fx:id="queenImg" fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
                   <Image url="@imagens/sheriffPieces/sheriffQueen.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
+            <ImageView fx:id="kingImg" fitHeight="130.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5">
                <image>
                   <Image url="@imagens/huebrPieces/huebrKing.png" />
                </image>

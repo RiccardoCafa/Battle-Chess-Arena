@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 public class PhaseEditorCtrl implements Initializable {
@@ -35,10 +36,26 @@ public class PhaseEditorCtrl implements Initializable {
     @FXML
     GridPane tabGrid;
     @FXML
+    ImageView peonImg;
+    @FXML
+    ImageView horseImg;
+    @FXML
+    ImageView bishopImg;
+    @FXML
+    ImageView kingImg;
+    @FXML
+    ImageView queenImg;
+    @FXML
+    ImageView towerImg;
+    @FXML
     Button saveBtn;
     
     Image[] heroImages = new Image[5]; 
+    ImageView[] piecesImg = new ImageView[6];
     String phaseName;
+    
+    ImageView selectedPiece;
+    Thread heroChange = new Thread("HeroChanging");
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,6 +65,13 @@ public class PhaseEditorCtrl implements Initializable {
         heroImages[2] = new Image("InterfaceView/Personagens/lenin-01.png", width, heigth, false, false);
         heroImages[3] = new Image("InterfaceView/Personagens/omago-01.png", width, heigth, false, false);
         heroImages[4] = new Image("InterfaceView/Personagens/pistoleiro-01.png", width, heigth, false, false);
+        
+        piecesImg[0] = peonImg;
+        piecesImg[1] = towerImg;
+        piecesImg[2] = horseImg;
+        piecesImg[3] = bishopImg;
+        piecesImg[4] = queenImg;
+        piecesImg[5] = kingImg;
         
         p1Slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
@@ -65,20 +89,23 @@ public class PhaseEditorCtrl implements Initializable {
         
         saveBtn.addEventHandler(ActionEvent.ANY, (ActionEvent e) -> {
             try {
-                File fase = new File(nameInput.getText() + ".txt");
+                String tempPath = System.getProperty("java.io.tmpdir");
+                File fase = new File(tempPath, nameInput.getText() + ".txt");
                 FileWriter fw = new FileWriter(fase);
                 fw.write((int) p1Slider.getValue() + " " + (int)p2Slider.getValue());
                 System.out.println(fase.getCanonicalPath());
                 fw.close();
-//                PrintWriter writer = new PrintWriter(nameInput.getText() + ".txt", "UTF-8");
-//                writer.print();
-//                
-//                writer.close();
             } catch(Exception es) {
                 es.printStackTrace();
             } 
             
         });
+        
+        for(ImageView img : piecesImg) {
+            img.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+                selectedPiece = img;
+            });
+        }
     }    
     
 }

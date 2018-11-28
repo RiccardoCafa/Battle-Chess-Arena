@@ -15,7 +15,7 @@ public class InterfaceMain extends Application {
     public void start(Stage primaryStage) {
         Parent rootLayout = null;
         try {
-            rootLayout = FXMLLoader.load(getClass().getResource("Game8x8.fxml"));
+            rootLayout = FXMLLoader.load(getClass().getResource("PhaseEditor.fxml"));
             Scene scene = new Scene(rootLayout);
             primaryStage.setTitle("Battle Chess Arena Login!");
             primaryStage.setScene(scene);
