@@ -25,6 +25,7 @@ public class Huebr extends Hero {
     Image huebrKingImage;
     Image huebrQueenImage;
     private boolean usePower;
+    private int count = 0;
     
     boolean isHitted = false;
     //construtor>>
@@ -58,8 +59,12 @@ public class Huebr extends Hero {
      * @return the usePower
      */
     public boolean isUsePower() {
+        if(count <= 4){
+        count++;
         return usePower;
-    }
+        }
+        return usePower = false;
+}
 
     /**
      * @param usePower the usePower to set
