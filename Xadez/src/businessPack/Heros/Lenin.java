@@ -57,9 +57,7 @@ public class Lenin extends Hero {
     @Override
     public void GameManager(Table tab) {
         Player myPlayer = Players.getActualPlayer();
-        System.out.println(myPlayer.getHero() instanceof Lenin);
         Player enemyPlayer = Players.getPlayer(myPlayer.getWho() == Who.player1 ? Who.player2 : Who.player1);
-        System.out.println(enemyPlayer.getHero() instanceof Lenin);
         System.err.println("Estacao"+Estacao);
         Estacao--;
         if(Estacao == 0){

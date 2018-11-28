@@ -12,12 +12,14 @@ public class Player {
     private Who player;
     private int playingTurn;
     private int sentido;//se começa embaixo, -1; se começa em cima, 1
+    private String myName;
     //construtor>>
-    public Player(int sentido, Hero hero, int playingTurn) {
+    public Player(int sentido, Hero hero, int playingTurn, String myName) {
         this.hero = hero;
         if(sentido == 1) player = Who.player2;
         else player = Who.player1;
         this.playingTurn = playingTurn;
+        this.myName = myName;
         army = new Army();
         //hero.createArmy(army, sentido, player);
         this.sentido = sentido;
@@ -39,5 +41,11 @@ public class Player {
     }
     public Hero getHero() {
         return hero;
+    }
+    public String getName() {
+        return myName;
+    }
+    public void setName(String name) {
+        this.myName = name;
     }
 }

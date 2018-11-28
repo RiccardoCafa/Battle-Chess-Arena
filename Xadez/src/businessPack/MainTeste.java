@@ -16,8 +16,9 @@ public class MainTeste {
         Image lapaImage = null;
         Image leninImage = null;
         //Criando os players
-        Player p1 = new Player(1, new Lapa(), 1);
-        Player p2 = new Player(-1, new Lenin(), 2);
+
+        Player p1 = new Player(1, new Sheriff(), 1, "1");
+        Player p2 = new Player(-1, new Lenin(), 2, "2");
         //Cirando os personagens dos players
         Lapa lapa = new Lapa();
         Lenin lenin = new Lenin();

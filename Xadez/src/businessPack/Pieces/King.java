@@ -21,6 +21,8 @@ public class King extends Piece {
         damage = 1;
         strategy = getHeroStrategy();//new DefaultKing(player);
         tpPiece = TypePiece.king;
+        pieceName = "Rei";
+        maxHp = hp;
         updateImage();
     }
 //    public King(Player pPiece, TypeHero tpHero, int x, int y, ItypeKing tpKing) {

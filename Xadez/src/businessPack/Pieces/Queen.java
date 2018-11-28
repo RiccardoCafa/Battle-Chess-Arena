@@ -23,6 +23,8 @@ public class Queen extends Piece {
         damage = 1;
         strategy = getHeroStrategy();
         tpPiece = TypePiece.queen;
+        pieceName = "Rainha";
+        maxHp = hp;
         updateImage();
     }
     //metodos>>

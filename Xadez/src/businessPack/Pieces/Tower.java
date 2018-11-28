@@ -21,6 +21,8 @@ public class Tower extends Piece {
         damage = 1;
         strategy = getHeroStrategy();//new DefaultTower(pPiece);
         tpPiece = TypePiece.tower;
+        pieceName = "Torre";
+        maxHp = hp;
         updateImage();
     }
     //metodos>>
