@@ -4,11 +4,11 @@ import businessPack.Block;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 
 
-public class WizardKing implements Movement {
+public class WizardKing implements IMovement {
 
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {

@@ -6,10 +6,10 @@ import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 
-public class LeninKing implements Movement {
+public class LeninKing implements IMovement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;

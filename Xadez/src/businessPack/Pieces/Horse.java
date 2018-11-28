@@ -11,7 +11,7 @@ import businessPack.TypePiece;
 import extras.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 public class Horse extends Piece {
     //atributos>>
@@ -43,18 +43,18 @@ public class Horse extends Piece {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Horse.png", widhtImg, heightImg, false, false));
     }
     @Override
-    public Movement getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
                 especial = true;
                 shoot = new SheriffHorse(Players.getPlayer(player));
-                return (Movement) shoot;
+                return (IMovement) shoot;
             default:
                 return new DefaultHorse(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeHorse(Movement tpHorse){//muda o comportamento do checkMove()
+    public void setTypeHorse(IMovement tpHorse){//muda o comportamento do checkMove()
         strategy = tpHorse;
     }
 }

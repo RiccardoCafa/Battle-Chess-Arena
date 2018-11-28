@@ -11,7 +11,7 @@ import businessPack.TypePiece;
 import extras.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 public class King extends Piece {
     //atributos>>
@@ -41,7 +41,7 @@ public class King extends Piece {
         updateHitWay();
     }
     @Override
-    public Movement getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
                 shoot = new SheriffKing(Players.getPlayer(player));
@@ -53,7 +53,7 @@ public class King extends Piece {
         }
     }
     //getset>>
-    public void setTypeKing(Movement tpKing){//muda o comportamento do checkMove()
+    public void setTypeKing(IMovement tpKing){//muda o comportamento do checkMove()
         strategy = tpKing;
     }
     public void updateImage() {

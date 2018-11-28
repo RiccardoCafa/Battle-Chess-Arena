@@ -6,13 +6,13 @@ import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 /**
  *
  * @author ricca
  */
-public class LapaTower implements Movement {
+public class LapaTower implements IMovement {
 
     Player player;
     int casasOffSet;

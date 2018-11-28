@@ -12,8 +12,8 @@ import javafx.scene.image.Image;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
-import businessPack.Pieces.Interfaces.Movement;
 import extras.Pistol;
+import businessPack.Pieces.Interfaces.IMovement;
 
 public class Queen extends Piece {
     //atributos>>
@@ -37,7 +37,7 @@ public class Queen extends Piece {
         updateHitWay();
     }
     @Override
-    public Movement getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case lenin:
                 especial = true;
@@ -49,7 +49,7 @@ public class Queen extends Piece {
         }
     }
     //getset>>
-    public void setTypeQueen(Movement tpQueen){//muda o comportamento do checkMove()
+    public void setTypeQueen(IMovement tpQueen){//muda o comportamento do checkMove()
         strategy = tpQueen;
     }
     public void updateImage() {

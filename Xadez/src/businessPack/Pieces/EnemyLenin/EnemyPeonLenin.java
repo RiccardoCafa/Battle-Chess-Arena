@@ -6,8 +6,8 @@ import businessPack.Player;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
-public class EnemyPeonLenin implements Movement{
+import businessPack.Pieces.Interfaces.IMovement;
+public class EnemyPeonLenin implements IMovement{
 
     Player playing;
     

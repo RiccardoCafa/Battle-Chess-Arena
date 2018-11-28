@@ -7,9 +7,9 @@ import extras.BlockState;
 import extras.Vetor;
 import extras.Pistol;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
-public class SheriffHorse implements Movement, Pistol {
+public class SheriffHorse implements IMovement, Pistol {
     //atributos>>
     Player player;
     int charge = 1;

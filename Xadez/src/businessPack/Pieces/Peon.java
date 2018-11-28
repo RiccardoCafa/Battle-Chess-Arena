@@ -10,9 +10,9 @@ import businessPack.TypeHero;
 import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.Movement;
 import businessPack.Pieces.Sheriff.SheriffPeon;
 import extras.Pistol;
+import businessPack.Pieces.Interfaces.IMovement;
 
 public class Peon extends Piece {
     //atributos>>
@@ -44,7 +44,7 @@ public class Peon extends Piece {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "Peon.png", widhtImg, heightImg, false, false));
     }
     @Override
-    public Movement getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case huebr:
                 especial = true;
@@ -57,7 +57,7 @@ public class Peon extends Piece {
         }
     }
     //getset>>
-    public void setTypePeon(Movement tpPeon){//muda o comportamento do checkMove()
+    public void setTypePeon(IMovement tpPeon){//muda o comportamento do checkMove()
         strategy = tpPeon;
     }
 }

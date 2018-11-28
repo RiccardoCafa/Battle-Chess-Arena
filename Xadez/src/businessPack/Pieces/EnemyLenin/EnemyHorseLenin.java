@@ -7,9 +7,9 @@ import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
-public class EnemyHorseLenin implements Movement {
+public class EnemyHorseLenin implements IMovement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;

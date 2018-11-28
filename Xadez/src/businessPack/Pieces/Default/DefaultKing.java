@@ -6,9 +6,9 @@ import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
-public class DefaultKing implements Movement {
+public class DefaultKing implements IMovement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;

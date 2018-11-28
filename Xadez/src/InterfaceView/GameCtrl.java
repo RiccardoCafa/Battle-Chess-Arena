@@ -6,16 +6,21 @@ import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
 import businessPack.Piece;
+import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
-import static businessPack.TypeHero.lapa;
 import extras.BlockState;
 import extras.Vetor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -32,6 +37,11 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.util.Duration;
 
 public class GameCtrl implements Initializable {
     /*
@@ -79,12 +89,14 @@ public class GameCtrl implements Initializable {
     
     Block firstBlock;
     
+    Piece pieceMovingImage;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         
-        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
+        player1 = new Player(-1, new Lapa(), 1, "Lasagna");
         player2 = new Player(1, new Sheriff(), 2, "Rezendex");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
@@ -160,7 +172,10 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
-        if(sheriffTowerReaction) optionsOfShoot(actualBlock);//sheriff power
+        if(sheriffTowerReaction){//sheriff power
+            sheriffTowerShoot(actualBlock);
+            return;
+        }
         if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
                 && possibleBlocks.contains(actualBlock)) {
             Lapa lapa = (Lapa) playing.getHero();
@@ -191,15 +206,28 @@ public class GameCtrl implements Initializable {
             }else if(possibleBlocks.contains(actualBlock)){//se é possível se movimentar
                 //externalMove(firstBlock, actualBlock);
                 if(!possibleHits.contains(actualBlock)){//se é caminho livre, ou seja, não há inimigos
-                    externalMove(firstBlock, actualBlock);
-                    internalMove(firstBlock, actualBlock);
+                    if(combo){
+                        externalMove(firstBlock, actualBlock);
+                        internalMove(firstBlock, actualBlock);
+                        combo = false;
+                    }else{
+                        externalMove(firstBlock, actualBlock);
+                        internalMove(firstBlock, actualBlock);
+                    }
                     EndOfTurn();
-                    combo = false;
                 }else if(actualBlock.getBlockState(playing) == BlockState.Enemy){//se há inimigo
                     /*
                     HIT
                     */
-                    sheriffTowerReaction = actualBlock.getPiece().reaction(table, firstBlock);
+                    if(actualBlock.getPiece().reaction(table, firstBlock)){
+                        sheriffTowerReaction = true;
+                        Tower sheriffTower = (Tower) actualBlock.getPiece();
+                        possibleHits = sheriffTower.getSheriffTowerHitWay(table);
+                        resetBlockTab();
+                        showPossibleWays(null);
+                        showPossibleEnemys(possibleHits);
+                        return;
+                    }
                     if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
                         // Está vivo
                         if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
@@ -228,6 +256,7 @@ public class GameCtrl implements Initializable {
                             showPossibleWays(possibleBlocks); // Mostra o novo highlight
                             externalMove(firstBlock, actualBlock);
                             combo = true; // Torna combo true
+                            pieceMovingImage = firstBlock.getPiece();
                             // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
                             //(isso provavelmente pode ocorrer com peças que pulam)
                         }
@@ -237,7 +266,7 @@ public class GameCtrl implements Initializable {
                         gameplayChat.appendText("[" + playing.getName() + "] acaba de aniquilar o(a) " + 
                                                 actualBlock.getPiece().getPieceName() + " de " + "[" +
                                                 Players.getAdversaryPlayer().getName() + "]\n");
-                        externalMove(firstBlock, actualBlock); 
+                        externalMove(firstBlock, actualBlock);
                         internalMove(firstBlock, actualBlock);
                     }
                     if(!combo) {
@@ -259,8 +288,11 @@ public class GameCtrl implements Initializable {
         }
     }
     
-    public void optionsOfShoot(Block actualBlock){
-        //implementar clique de tiro do sheriffTower
+    public void sheriffTowerShoot(Block actualBlock){//sheriff method
+        if(!possibleHits.contains(actualBlock)) return;
+        actualBlock.hitPiece(1);
+        sheriffTowerReaction = false;
+        resetBlockTab();
     }
     
     public void EndOfTurn() {
@@ -365,7 +397,8 @@ public class GameCtrl implements Initializable {
         // Pega a peça que está no source
         ImageView pieceToMove = table.getBlock(source).getPiece();
         // Movimenta essa peça
-        pieceToMove.setLayoutX((65*dest.getX()));
+        animation(source, dest, pieceToMove);
+        pieceToMove.setLayoutX(65*dest.getX());
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
         // Faz uma iteração para colocar as crianças da hierarquia em ordem no pane
         Vetor vet;
@@ -392,6 +425,25 @@ public class GameCtrl implements Initializable {
             p.lifeBarToBack();
             pieceToMove.toBack();
             y--;
+        }
+    }
+    public void animation(Vetor source, Vetor destiny, ImageView image){
+        int deltaX = destiny.getX() - source.getX();
+        int deltaY = destiny.getY() - source.getY();
+        TranslateTransition anim = new TranslateTransition();
+        for(int i = 1; i <= 3; i++){
+            switch(i){
+                case 1: anim = new TranslateTransition(Duration.millis(1000), image); break;
+                case 2: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBar()); break;
+                case 3: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBarBg()); break;
+            }
+            anim.setFromX(-65*deltaX);
+            anim.setFromY(-65*deltaY);
+            anim.setToX(0);
+            anim.setToY(0);
+            anim.setCycleCount(1);
+            anim.setAutoReverse(true);
+            anim.play();
         }
     }
     public void removeImage(Vetor source) {

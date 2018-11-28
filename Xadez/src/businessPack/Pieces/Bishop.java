@@ -11,7 +11,7 @@ import businessPack.TypeHero;
 import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 public class Bishop extends Piece {
     //atributos>>
@@ -42,7 +42,7 @@ public class Bishop extends Piece {
         updateHitWay();
     }
     @Override
-    public Movement getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case wizard:
                 especial = true;
@@ -52,7 +52,7 @@ public class Bishop extends Piece {
         }
     }
     //getset>>
-    public void setTypeBishop(Movement tpBishop){//muda o comportamento do checkMove()
+    public void setTypeBishop(IMovement tpBishop){//muda o comportamento do checkMove()
         strategy = tpBishop;
     }
     public void updateImage() {

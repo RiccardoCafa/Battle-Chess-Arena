@@ -1,5 +1,6 @@
 package businessPack.Pieces;
 
+import businessPack.Block;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Pieces.Lapa.LapaTower;
@@ -10,11 +11,13 @@ import javafx.scene.image.Image;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
-import businessPack.Pieces.Interfaces.Movement;
 import businessPack.Pieces.Sheriff.SheriffTower;
+import businessPack.Pieces.Interfaces.IMovement;
+import java.util.ArrayList;
 
 public class Tower extends Piece {
     //atributos>>
+    ArrayList<Block> sheriffTowerHitWay;
     //construtor>>
     public Tower(Who who, TypeHero tpHero, int x, int y) {
         super(who, tpHero, x, y);
@@ -38,7 +41,7 @@ public class Tower extends Piece {
         setMouseTransparent(true);
     }
     @Override
-    public Movement getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case lapa:
                 especial = true;
@@ -50,8 +53,13 @@ public class Tower extends Piece {
                 return new DefaultTower(Players.getPlayer(player));
         }
     }
+    public ArrayList<Block> getSheriffTowerHitWay(Table table){
+        if(tpHero == TypeHero.sheriff)
+            return ((SheriffTower)shoot).sheriffTowerHitWay(table, vetor);
+        return null;
+    }
     //getset>>
-    public void setTypeTower(Movement tpTower){//muda o comportamento do checkMove()
+    public void setTypeTower(IMovement tpTower){//muda o comportamento do checkMove()
         strategy = tpTower;
     }
 }

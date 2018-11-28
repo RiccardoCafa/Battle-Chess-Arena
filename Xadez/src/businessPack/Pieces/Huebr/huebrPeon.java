@@ -10,10 +10,10 @@ import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
 
 
-public class huebrPeon implements Movement {
+public class huebrPeon implements IMovement {
 
 
     @Override

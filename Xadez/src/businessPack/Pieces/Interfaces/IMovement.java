@@ -5,6 +5,6 @@ import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
 
-public interface Movement {
+public interface IMovement {
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor);
 }

@@ -10,12 +10,14 @@ import java.util.Collections;
 import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import businessPack.Pieces.Interfaces.Movement;
+import businessPack.Pieces.Interfaces.IMovement;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
 
 public abstract class Piece extends ImageView {
     //atributos>>
     protected TypePiece tpPiece;
-    protected Movement strategy;//agora o strategy vem de Piece
+    protected IMovement strategy;//agora o strategy vem de Piece
     protected TypeHero tpHero;
     protected Who player;
     protected int hp;
@@ -257,7 +259,7 @@ public abstract class Piece extends ImageView {
     public ArrayList<Block> getEspecialHitWay() {
         return especialHitWay;
     }
-    public void setStrategy(Movement strategy){
+    public void setStrategy(IMovement strategy){
         this.strategy = strategy;
     }
     public String getPieceName() {
@@ -271,7 +273,7 @@ public abstract class Piece extends ImageView {
         lifeBarBg.setVisible(false);
         setVisible(false);
     }
-    public abstract Movement getHeroStrategy();
+    public abstract IMovement getHeroStrategy();
     
     private String getHeroPath() {
         switch(tpHero) {
