@@ -46,7 +46,7 @@ public class Peon extends Piece {
         switch(tpHero) {
             case huebr:
                 especial = true;
-                return new huebrPeon();
+                return new huebrPeon(Players.getPlayer(player));
             default:
                 return new DefaultPeon(Players.getPlayer(player));
         }

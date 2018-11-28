@@ -84,7 +84,7 @@ public class GameCtrl implements Initializable {
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         
         player1 = new Player(-1, new Lapa(), 1, "Riccardao");
-        player2 = new Player(1, new Lenin(), 2, "xXPlayer2Xx");
+        player2 = new Player(1, new Huebr(), 2, "xXPlayer2Xx");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -445,6 +445,13 @@ public class GameCtrl implements Initializable {
             }
             
         }
+        
+        if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
+            Huebr huebr = (Huebr) playing.getHero();
+            huebr.setUsePower(true);
+            System.out.println("Power ativado");
+        }
+
     }
     public void displayMessage(String sender, String message) {
         gameplayChat.appendText("[" + sender + "] " + message + "\n");
