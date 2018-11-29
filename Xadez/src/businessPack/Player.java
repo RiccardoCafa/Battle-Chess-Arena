@@ -1,4 +1,5 @@
 package businessPack;
+import businessPack.Heros.Lenin;
 import extras.Who;
 
 /**
