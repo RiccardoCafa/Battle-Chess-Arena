@@ -2,6 +2,12 @@ package businessPack.Heros;
 
 import businessPack.Army;
 import businessPack.Hero;
+import businessPack.Pieces.Bishop;
+import businessPack.Pieces.Horse;
+import businessPack.Pieces.King;
+import businessPack.Pieces.Peon;
+import businessPack.Pieces.Queen;
+import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
@@ -18,38 +24,61 @@ public class Huebr extends Hero {
     Image huebrTowerImage;
     Image huebrKingImage;
     Image huebrQueenImage;
+    private boolean usePower;
+    private int count = 0;
     
     boolean isHitted = false;
     //construtor>>
 
     public Huebr() {
-        image = new Image(path + "Huebr-01.png", widthImg, heightImg, false, false);
+        image = new Image(path + "huehuebr-01.png", widthImg, heightImg, false, false);
         tpHero = TypeHero.huebr;
+        
     }
     //metodos>>
     
     ///HU3HU3HU3HU3 BRBRBRB
 
     @Override
-    public void createArmy(Army army, int sentido, Who jogador) {
-        /*
-        // Who pPiece, TypeHero tpHero, int hp, int damage, int x, int y, Image image
-              for(int j = 0; j < 8; j++) {
-            army.addPiece(new Peon(new huebrPeon(), true, (int)(3.5 + sentido*2.5), j, huebrPeonImage));//peões
+    public void createArmy(Army army, int sentido, Who jogador){
+        this.player = Players.getPlayer(jogador);
+        for(int k = 0;k<8;k++){
+            army.addPiece(new Peon(jogador, TypeHero.huebr, k,(int)(3.5 + sentido*2.5)));
         }
-        army.addPiece(new Bishop(new DefaultBishop(), true, (int)(3.5 + sentido*3.5), 2, huebrBishopImage));//bispos
-        army.addPiece(new Bishop(new DefaultBishop(), true, (int)(3.5 + sentido*3.5), 5, huebrBishopImage));
-        army.addPiece(new Horse(new DefaultHorse(),   true, (int)(3.5 + sentido*3.5), 1, huebrHorseImage));//cavalos
-        army.addPiece(new Horse(new DefaultHorse(),   true, (int)(3.5 + sentido*3.5), 6, huebrHorseImage));
-        army.addPiece(new Tower(new DefaultTower(),   true, (int)(3.5 + sentido*3.5), 0, huebrTowerImage));//torres
-        army.addPiece(new Tower(new DefaultTower(),   true, (int)(3.5 + sentido*3.5), 7, huebrTowerImage));
-        army.addPiece(new King(new DefaultKing(),     true, (int)(3.5 + sentido*3.5), 4, huebrKingImage));//rei
-        army.addPiece(new Queen(new DefaultQueen(),   true, (int)(3.5 + sentido*3.5), 3, huebrQueenImage));//rainha
-    */}
+        army.addPiece(new Tower(jogador, TypeHero.huebr, 0, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Horse(jogador , TypeHero.huebr, 1, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Bishop(jogador , TypeHero.huebr, 2, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new King(jogador , TypeHero.huebr, 3, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Queen(jogador , TypeHero.huebr, 4, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Bishop(jogador , TypeHero.huebr, 5, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Horse(jogador , TypeHero.huebr, 6, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Tower(jogador , TypeHero.huebr, 7, (int)(3.5 + sentido*3.5)));
+    }
+
+    /**
+     * @return the usePower
+     */
+    public boolean isUsePower() {
+        if(count <= 4){
+        count++;
+        return usePower;
+        }
+        return usePower = false;
+}
+
+    /**
+     * @param usePower the usePower to set
+     */
+    public void setUsePower(boolean usePower) {
+        this.usePower = usePower;
+    }
 
     @Override
     public void GameManager(Table tab) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(isUsePower()){
+            Players.passTurn();
+            setUsePower(false);
+        }
     }
 }
 
