@@ -5,6 +5,7 @@ import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
+import businessPack.Heros.Wizard;
 import businessPack.Piece;
 import businessPack.Player;
 import businessPack.Players;
@@ -82,8 +83,9 @@ public class GameCtrl implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+
         
-        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
+        player1 = new Player(-1, new Wizard(), 1, "Riccardao");
         player2 = new Player(1, new Huebr(), 2, "xXPlayer2Xx");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
