@@ -82,15 +82,9 @@ public class GameCtrl implements Initializable {
     
     Block firstBlock;
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //rb = ResourceBundle.getBundle("ChooseCharacter");
-        background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-
-        player1 = (Player) rb.getObject("p1");
-        player2 = (Player) rb.getObject("p2");
-
+    public void gameCtrl(Player p1, Player p2) {
+        this.player1 = p1;
+        this.player2 = p2;
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -105,6 +99,13 @@ public class GameCtrl implements Initializable {
         gameplayChat.appendText("[" + gameName + "] Os exércitos foram montados.\n");
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
         persoImage.setImage(playing.getHero().getImage());
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        
 // 65 (char) == A
     }
     

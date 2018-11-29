@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -73,14 +74,6 @@ public class ChooseCharacterController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        String pathMusic = "InterfaceView/Sounds/";
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("MUSICA HUE HUE BR.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Lapa.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Lenin.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Mago.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Sheriff.mp3").toString())));
-//        
-//        musicaAtual = musicas.get(count);
         // TODO
         int resX = 446;
         int resY = 336;
@@ -147,7 +140,7 @@ public class ChooseCharacterController implements Initializable {
 
                     } 
                 }else{
-                    p1 = new Player(-1, new Huebr(), 1, name1);
+                    p1 = new Player(1, new Huebr(), 1, name1);
                 } 
                 break;
             case 1:
@@ -160,7 +153,7 @@ public class ChooseCharacterController implements Initializable {
 
                     }
                 }else{
-                     p1 = new Player(-1, new Lapa(), 1, name1);
+                     p1 = new Player(1, new Lapa(), 1, name1);
                 } 
                 break;
             case 2:
@@ -173,7 +166,7 @@ public class ChooseCharacterController implements Initializable {
 
                     }
                 }else{
-                         p1 = new Player(-1, new Lenin(), 1, name1);
+                         p1 = new Player(1, new Lenin(), 1, name1);
                 } 
                 break;
             case 3:
@@ -186,7 +179,7 @@ public class ChooseCharacterController implements Initializable {
 
                     }
                 }else{
-                        p1 = new Player(-1, new Wizard(), 1, name1);
+                        p1 = new Player(1, new Wizard(), 1, name1);
                 } 
                 break;
             case 4:
@@ -198,7 +191,7 @@ public class ChooseCharacterController implements Initializable {
                         JOptionPane.showMessageDialog(null, "personagem ja selecionado");
                     }
                 }else{
-                        p1 = new Player(-1, new Sheriff(), 1, name1);
+                        p1 = new Player(1, new Sheriff(), 1, name1);
                 } 
                 break;
         }
@@ -212,19 +205,11 @@ public class ChooseCharacterController implements Initializable {
       private void LoadScene(String sceneName){
         try{
             System.out.println("loading");
-            ResourceBundle rb = new ResourceBundle() {
-                @Override
-                protected Object handleGetObject(String key) {
-                    return null;
-                }
-
-                @Override
-                public Enumeration<String> getKeys() {
-                    return null;
-                }
-            };
-            Parent loader = FXMLLoader.load(getClass().getResource(sceneName));
-            Scene eltonJhon = new Scene(loader);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+            Parent rooter = loader.load();
+            GameCtrl gameCtrl = loader.getController();
+            gameCtrl.gameCtrl(p1, p2);
+            Scene eltonJhon = new Scene(rooter);
             Stage stage = new Stage();
             
             stage.setTitle("Choose Your Character!");
