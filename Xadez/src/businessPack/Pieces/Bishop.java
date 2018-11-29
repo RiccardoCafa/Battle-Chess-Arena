@@ -46,7 +46,7 @@ public class Bishop extends Piece {
         switch(tpHero) {
             case wizard:
                 especial = true;
-                return new WizardBishop();
+                return new WizardBishop(Players.getPlayer(player));
             default:
                 return new DefaultBishop(Players.getPlayer(player));
         }

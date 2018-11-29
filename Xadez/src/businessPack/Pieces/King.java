@@ -3,7 +3,6 @@ package businessPack.Pieces;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultKing;
 import businessPack.Pieces.Sheriff.SheriffKing;
-import businessPack.Pieces.Wizard.WizardKing;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -54,8 +53,6 @@ public class King extends Piece {
                 bullet[1].setFitWidth(13);
                 bullet[1].setFitHeight(30);
                 return new DefaultKing(Players.getPlayer(player));
-            case wizard:
-                return new WizardKing();
             default:
                 return new DefaultKing(Players.getPlayer(player));
         }
