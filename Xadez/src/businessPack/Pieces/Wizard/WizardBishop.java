@@ -124,21 +124,21 @@ public class WizardBishop implements ItypePiece {
     
     public void pickSideBlocks(int xDir, int yDir, Vetor ultPos,int missC){
         int sides = 0;
-        if(xDir != 0){
-            do{
-                behindBlocks(1,1,ultPos); 
+        if(yDir != 0 && xDir != 0){
+        while(sides<missC){
+            behindBlocks(1,1,ultPos); 
                 behindBlocks(1,-1,ultPos);
                 sides++;
-               ultPos.setX(ultPos.getX() + (-1 * xDir));
-            }while(sides<missC);
-            
-        }else if(yDir != 0){
-            do{
                 behindBlocks(-1, 1, ultPos);
                 behindBlocks(-1,-1,ultPos);
-                sides++;
-                ultPos.setY(ultPos.getY() + (-1 * yDir));
-            }while(sides<missC);
+                ultPos.setX(ultPos.getX() + (-1 * xDir));
+               ultPos.setY(ultPos.getY() + (-1 * yDir));
+        }
+            
+        }else if(xDir != 0){
+         while(sides<missC){
+             System.out.println("DO not going there");
+         }
             
         }
     }  
