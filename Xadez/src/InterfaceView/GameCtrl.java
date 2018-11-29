@@ -5,6 +5,7 @@ import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
+import businessPack.Heros.Wizard;
 import businessPack.Piece;
 import businessPack.Player;
 import businessPack.Players;
@@ -85,7 +86,7 @@ public class GameCtrl implements Initializable {
 
         
         player1 = new Player(-1, new Lapa(), 1, "Riccardao");
-        player2 = new Player(1, new Lenin(), 2, "xXPlayer2Xx");
+        player2 = new Player(1, new Wizard(), 2, "ComunaGatão");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;

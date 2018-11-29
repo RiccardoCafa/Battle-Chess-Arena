@@ -48,7 +48,7 @@ public class Wizard extends Hero {
 //        army.addPiece(new Horse(jogador , TypeHero.wizard, 6, (int)(3.5 + sentido*3.5)));
 //        army.addPiece(new Tower(jogador , TypeHero.wizard, 7, (int)(3.5 + sentido*3.5)));
 //                            
-        army.addPiece(new Bishop(jogador, TypeHero.wizard, 0,(int)(3.5 + sentido*2.5)));
+        army.addPiece(new Bishop(jogador, TypeHero.wizard, 4,(int)(3.5 + sentido*2.5)));
 
                             
     }
