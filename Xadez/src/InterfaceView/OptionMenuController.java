@@ -17,9 +17,9 @@ import javax.swing.JOptionPane;
 
 public class OptionMenuController implements Initializable {
     @FXML
-    Button Back;
+    Button QuitBtn;
     @FXML
-    AnchorPane Pane;
+    AnchorPane rootPane;
     private Stage primaryStage;
     
     @Override
@@ -28,7 +28,7 @@ public class OptionMenuController implements Initializable {
     }
     @FXML
     public void onBackClick(MouseEvent e){
-        primaryStage = (Stage) Pane.getScene().getWindow();
+        primaryStage = (Stage) rootPane.getScene().getWindow();
         LoadScene("Menu.fxml");
         primaryStage.close();
     }

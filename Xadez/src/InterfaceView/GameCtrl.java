@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Army;
 import businessPack.Block;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
@@ -83,12 +84,13 @@ public class GameCtrl implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //rb = ResourceBundle.getBundle("ChooseCharacter");
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 
-        
-        player1 = new Player(-1, new Wizard(), 1, "Riccardao");
-        player2 = new Player(1, new Huebr(), 2, "xXPlayer2Xx");
+        player1 = (Player) rb.getObject("p1");
+        player2 = (Player) rb.getObject("p2");
+
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -104,6 +106,10 @@ public class GameCtrl implements Initializable {
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
         persoImage.setImage(playing.getHero().getImage());
 // 65 (char) == A
+    }
+    
+    public void SetVars(String s){
+        this.gameName = s;
     }
     
     public void MountArmyOnTable(Table tab) {
