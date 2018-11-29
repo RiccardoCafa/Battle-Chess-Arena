@@ -6,11 +6,13 @@ import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
 import businessPack.Piece;
+import businessPack.Pieces.King;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.TypePiece;
 import extras.BlockState;
 import extras.Vetor;
 import java.net.URL;
@@ -89,6 +91,8 @@ public class GameCtrl implements Initializable {
     
     Block firstBlock;
     
+    Tower sheriffTower;
+    
     Piece pieceMovingImage;
     
     @Override
@@ -139,6 +143,21 @@ public class GameCtrl implements Initializable {
                     pratoPieces.getChildren().add(pieceImage);
                     pratoPieces.getChildren().add(barraLifeBg);
                     pratoPieces.getChildren().add(barraLife);
+                    /*if(tab.getBlock(i, j).getPiece().getTpHero() == TypeHero.sheriff){//sheriff bullets
+                        switch(tab.getBlock(i, j).getPiece().getTypePiece()){
+                            case tower: case horse: case  peon:
+                                ImageView bullet1 = tab.getBlock(i, j).getPiece().getBullet1();
+                                pratoPieces.getChildren().add(bullet1);
+                                bullet1.setLayoutX(0);
+                                bullet1.setLayoutY(80);
+                            case king:
+                                ImageView bullet2 = ((King)tab.getBlock(i, j).getPiece()).getBullet2();
+                                pratoPieces.getChildren().add(bullet2);
+                                bullet2.setLayoutX(17);
+                                bullet2.setLayoutY(80);
+                                break;
+                        }
+                    }*/
                     tab.getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
@@ -174,6 +193,7 @@ public class GameCtrl implements Initializable {
         Block actualBlock = (Block) e.getSource();//bloco clicado
         if(sheriffTowerReaction){//sheriff power
             sheriffTowerShoot(actualBlock);
+            EndOfTurn();
             return;
         }
         if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
@@ -221,7 +241,7 @@ public class GameCtrl implements Initializable {
                     */
                     if(actualBlock.getPiece().reaction(table, firstBlock)){
                         sheriffTowerReaction = true;
-                        Tower sheriffTower = (Tower) actualBlock.getPiece();
+                        sheriffTower = (Tower) actualBlock.getPiece();
                         possibleHits = sheriffTower.getSheriffTowerHitWay(table);
                         resetBlockTab();
                         showPossibleWays(null);
@@ -254,7 +274,7 @@ public class GameCtrl implements Initializable {
                             }
                             resetBlockTab(); // Reseta os highlights
                             showPossibleWays(possibleBlocks); // Mostra o novo highlight
-                            externalMove(firstBlock, actualBlock);
+                            //externalMove(firstBlock, actualBlock);
                             combo = true; // Torna combo true
                             pieceMovingImage = firstBlock.getPiece();
                             // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
@@ -289,8 +309,10 @@ public class GameCtrl implements Initializable {
     }
     
     public void sheriffTowerShoot(Block actualBlock){//sheriff method
-        if(!possibleHits.contains(actualBlock)) return;
+        if(possibleHits.isEmpty() || !possibleHits.contains(actualBlock)) return;
         actualBlock.hitPiece(1);
+        if(sheriffTower!=null)sheriffTower.hit(1);
+        sheriffTower = null;
         sheriffTowerReaction = false;
         resetBlockTab();
     }

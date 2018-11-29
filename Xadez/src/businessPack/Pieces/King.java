@@ -12,6 +12,8 @@ import extras.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.IMovement;
+import businessPack.Pieces.Sheriff.SheriffTower;
+import javafx.scene.image.ImageView;
 
 public class King extends Piece {
     //atributos>>
@@ -45,6 +47,12 @@ public class King extends Piece {
         switch(tpHero) {
             case sheriff:
                 shoot = new SheriffKing(Players.getPlayer(player));
+                bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+                bullet[0].setFitWidth(13);
+                bullet[0].setFitHeight(30);
+                bullet[1] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+                bullet[1].setFitWidth(13);
+                bullet[1].setFitHeight(30);
                 return new DefaultKing(Players.getPlayer(player));
             case wizard:
                 return new WizardKing();
@@ -58,5 +66,8 @@ public class King extends Piece {
     }
     public void updateImage() {
         setImage(new Image("InterfaceView/imagens/" + pathHero + "Pieces/" + pathHero + "King.png", widhtImg, heightImg, false, false));
+    }
+    public ImageView getBullet2(){
+        return bullet[1];
     }
 }

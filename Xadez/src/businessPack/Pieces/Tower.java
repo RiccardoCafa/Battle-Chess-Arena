@@ -14,6 +14,7 @@ import extras.Who;
 import businessPack.Pieces.Sheriff.SheriffTower;
 import businessPack.Pieces.Interfaces.IMovement;
 import java.util.ArrayList;
+import javafx.scene.image.ImageView;
 
 public class Tower extends Piece {
     //atributos>>
@@ -48,6 +49,9 @@ public class Tower extends Piece {
                 return new LapaTower(Players.getPlayer(player));
             case sheriff:
                 shoot = new SheriffTower(Players.getPlayer(player));
+                bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+                bullet[0].setFitWidth(13);
+                bullet[0].setFitHeight(30);
                 return new DefaultTower(Players.getPlayer(player));
             default:
                 return new DefaultTower(Players.getPlayer(player));

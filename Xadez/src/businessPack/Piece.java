@@ -31,7 +31,8 @@ public abstract class Piece extends ImageView {
     protected String pieceName;
     protected Vetor vetor;
     private ImageView lifeBar;
-    private ImageView lifeBarBg; 
+    private ImageView lifeBarBg;
+    protected ImageView[] bullet = new ImageView[2];
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     protected ArrayList<Block> especialFreeWay;
@@ -209,6 +210,9 @@ public abstract class Piece extends ImageView {
     }
     public ImageView getLifeBarBg() {
         return lifeBarBg;
+    }
+    public ImageView getBullet1(){
+        return bullet[1];
     }
     public boolean hit(int damage){
         setHP(hp - damage);

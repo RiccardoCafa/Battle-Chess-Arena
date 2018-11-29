@@ -27,13 +27,13 @@ public class SheriffTower implements Pistol {
     }
     public ArrayList<Block> sheriffTowerHitWay(Table table, Vetor vetor){
         ArrayList<Block> hitWay = new ArrayList<>();
-        for(int jN = 0; jN > vetor.getY(); jN--){
+        for(int jN = 0; jN < vetor.getY(); jN++){
             if(table.getBlock(vetor.getX(), jN).getBlockState(player) == BlockState.Enemy){
                 hitWay.add(table.getBlock(vetor.getX(), jN));
                 break;
             }
         }
-        for(int jS = Table.getN() - 1; jS < vetor.getY(); jS++){
+        for(int jS = Table.getN() - 1; jS > vetor.getY(); jS--){
             if(table.getBlock(vetor.getX(), jS).getBlockState(player) == BlockState.Enemy){
                 hitWay.add(table.getBlock(vetor.getX(), jS));
                 break;
@@ -53,5 +53,4 @@ public class SheriffTower implements Pistol {
         }
         return hitWay;
     }
-    
 }

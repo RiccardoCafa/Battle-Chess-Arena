@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import businessPack.Pieces.Sheriff.SheriffPeon;
 import extras.Pistol;
 import businessPack.Pieces.Interfaces.IMovement;
+import javafx.scene.image.ImageView;
 
 public class Peon extends Piece {
     //atributos>>
@@ -51,6 +52,9 @@ public class Peon extends Piece {
                 return new huebrPeon(Players.getPlayer(player));
             case sheriff:
                 shoot = new SheriffPeon(Players.getPlayer(player));
+                bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+                bullet[0].setFitWidth(13);
+                bullet[0].setFitHeight(30);
                 return new DefaultPeon(Players.getPlayer(player));
             default:
                 return new DefaultPeon(Players.getPlayer(player));
