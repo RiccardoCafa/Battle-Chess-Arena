@@ -13,14 +13,15 @@ import javafx.scene.image.Image;
 public class MainTeste {
     public static void main(String[] args) {
         //Pegando imagens
-        Image sheriffImage = null;
+        Image lapaImage = null;
         Image leninImage = null;
         //Criando os players
+
         Player p1 = new Player(1, new Sheriff(), 1, "1");
         Player p2 = new Player(-1, new Lenin(), 2, "2");
         //Cirando os personagens dos players
         Lapa lapa = new Lapa();
-        Wizard wizard = new Wizard();
+        Lenin lenin = new Lenin();
         //Criando o tabuleiro
         Table table = new Table(8, 8, p1, p2);
         
