@@ -48,7 +48,7 @@ public class WizardBishop implements ItypePiece {
     public Table Ireaction(Table table, Vetor vetor) {
         return table;
     }   
-    
+    // função que reconhece se há inimigos ou amigos
     public Vetor behindBlocks(int xGo, int yGo, Vetor vet, int num){
         int i = vet.getX() + xGo;
         int j = vet.getY() + yGo;
@@ -62,8 +62,9 @@ public class WizardBishop implements ItypePiece {
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 //adicionado na posição auxVetor.getx e na auxVetor.getY
-            return auxVetor;
+            return vet;
             }
+            return auxVetor;
         }
         // checa se tem amigos
         if(tab.getBlock(i,j).getBlockState(playing) == BlockState.Friend){
@@ -82,9 +83,8 @@ public class WizardBishop implements ItypePiece {
 
     }
     
-    //mesma função sem o num para a condição de parada
+    //função behind blocks com a condição de parada
     public Vetor behindBlocks(int xGo,int yGo, Vetor vet){
-        
         int i = vet.getX() + xGo;
         int j = vet.getY() + yGo;
         Vetor auxVetor = new Vetor(i, j);
@@ -99,10 +99,10 @@ public class WizardBishop implements ItypePiece {
         if(tab.getBlock(i, j).getBlockState(playing) == BlockState.Enemy){
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
-                return auxVetor;
                 //adicionado na posição auxVetor.getx e na auxVetor.getY
+                return vet;
             }
-           
+            return auxVetor;
         }
         // checa se tem amigos
         System.out.println("there is a friend here");
@@ -121,18 +121,21 @@ public class WizardBishop implements ItypePiece {
         return vet;
     }
  
+   
     
+    
+     
     public void pickSideBlocks(int xDir, int yDir, Vetor ultPos,int missC){
         int sides = 0;
         if(yDir != 0 && xDir != 0){
         while(sides<missC){
             behindBlocks(1,1,ultPos); 
                 behindBlocks(1,-1,ultPos);
-                sides++;
                 behindBlocks(-1, 1, ultPos);
                 behindBlocks(-1,-1,ultPos);
                 ultPos.setX(ultPos.getX() + (-1 * xDir));
                ultPos.setY(ultPos.getY() + (-1 * yDir));
+               sides++;
         }
             
         }else if(xDir != 0){

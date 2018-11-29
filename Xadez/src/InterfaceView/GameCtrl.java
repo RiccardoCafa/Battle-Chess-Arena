@@ -85,8 +85,7 @@ public class GameCtrl implements Initializable {
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
 
         
-        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
-
+        player1 = new Player(-1, new Wizard(), 1, "Riccardao");
         player2 = new Player(1, new Huebr(), 2, "xXPlayer2Xx");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
