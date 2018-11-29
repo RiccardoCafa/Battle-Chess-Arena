@@ -81,11 +81,13 @@ public class GameCtrl implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        rb = ResourceBundle.getBundle("ChooseCharacterController");
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        
-        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
-        player2 = new Player(1, new Huebr(), 2, "xXPlayer2Xx");
+        player1 = (Player) rb.getObject("p1");
+        player2 = (Player) rb.getObject("p2");
+        //player1 = new Player(-1, new Lapa(), 1, "Riccardao");
+        //player2 = new Player(1, new Huebr(), 2, "xXPlayer2Xx");
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
