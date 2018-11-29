@@ -14,6 +14,7 @@ import static businessPack.TypeHero.wizard;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -211,15 +212,28 @@ public class ChooseCharacterController implements Initializable {
       private void LoadScene(String sceneName){
         try{
             System.out.println("loading");
+            ResourceBundle rb = new ResourceBundle() {
+                @Override
+                protected Object handleGetObject(String key) {
+                    return null;
+                }
+
+                @Override
+                public Enumeration<String> getKeys() {
+                    return null;
+                }
+            };
             Parent loader = FXMLLoader.load(getClass().getResource(sceneName));
             Scene eltonJhon = new Scene(loader);
             Stage stage = new Stage();
+            
             stage.setTitle("Choose Your Character!");
             stage.setScene(eltonJhon);
             stage.show();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");
+            e.printStackTrace();
         }
     }
       @FXML
