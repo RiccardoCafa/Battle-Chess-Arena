@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Army;
 import businessPack.Block;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
