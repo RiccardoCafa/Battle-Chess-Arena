@@ -9,16 +9,13 @@ import businessPack.Pieces.King;
 import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
-import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import extras.Who;
-import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Sheriff extends Hero {
-    //atributos>>
     //construtor>>
     public Sheriff(){
         image = new Image(path + "pistoleiro-01.png", widthImg, heightImg, false, false);
@@ -27,7 +24,6 @@ public class Sheriff extends Hero {
     //metodos>>
     @Override
     public void createArmy(Army army, int sentido, Who player){
-        Piece sheriffPiece;
         this.player = Players.getPlayer(player);
         for(int i = 0; i < 8; i++){
             army.addPiece(new Peon(player, TypeHero.sheriff, i, (int)(3.5 + sentido*2.5)));//peões

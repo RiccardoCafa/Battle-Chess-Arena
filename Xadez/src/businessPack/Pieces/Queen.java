@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
-import extras.Pistol;
+import businessPack.Pieces.Sheriff.Pistol;
 import businessPack.Pieces.Interfaces.IMovement;
 
 public class Queen extends Piece {
@@ -32,12 +32,11 @@ public class Queen extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay!=null)freeWay.clear();
-        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
     @Override
-    public IMovement getHeroStrategy() {
+    public IMovement getHeroStrategy(){
         switch(tpHero) {
             case lenin:
                 especial = true;

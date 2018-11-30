@@ -38,9 +38,10 @@ public class Block extends ImageView {
         if(piece != null){
             if(!piece.hit(damage)){
                 died = true;
+                setPiece(null);
             }
         }
-        return died;//ainda está vivo
+        return died;//está morto ou não?
     }
     public Vetor getVetor(){
         return vetor;

@@ -1,7 +1,7 @@
 package businessPack;
 
 import extras.BlockState;
-import extras.Pistol;
+import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
@@ -62,8 +62,6 @@ public abstract class Piece extends ImageView {
         bullet[1] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
         bullet[1].setFitWidth(13);
         bullet[1].setFitHeight(30);
-//        setLayoutX(20);
-//        setLayoutY(0);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
@@ -91,28 +89,6 @@ public abstract class Piece extends ImageView {
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
-    public void checkEspecialMove(Table table, Block tempLocation){
-        if(especial){
-            especialFreeWay = new ArrayList<>();
-            especialFreeWay.clear();
-            //table.clearTrend();
-            Block addBlock;
-            for(int i = 1; i < 9; i++){
-                try{
-                    addBlock = table.getBlock(tempLocation.getVetor().getX() + Vetor.getTrend(i).getX(),
-                                              tempLocation.getVetor().getY() + Vetor.getTrend(i).getY());
-                    if(addBlock.getBlockState(Players.getPlayer(player)) != BlockState.Friend)
-                        especialFreeWay.add(addBlock);
-                }catch(NullPointerException e){
-                    System.out.println("deu erro em " + i);
-                }
-            }
-            especialFreeWay = strategy.IcheckMove(table, vetor);
-            especialHitWay = updateHitWay(table, especialFreeWay);
-        }else{
-            especialFreeWay = null;
-        }
-    }
     public void recharge(){ }
     public Vetor getLastPosOf(Block hitedBlock) {
         
@@ -165,9 +141,9 @@ public abstract class Piece extends ImageView {
             }
         }
     }
-    public boolean reaction(Table table, Block enemyBlock, boolean protectQueen){//sheriff method
+    public boolean reaction(Table table, Block enemyBlock){//sheriff method
         if(tpHero == TypeHero.sheriff && tpPiece != TypePiece.bishop)
-            return shoot.reaction(table, vetor, enemyBlock, protectQueen);
+            return shoot.reaction(table, vetor, enemyBlock);
         else
             return false;
     }

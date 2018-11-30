@@ -8,7 +8,7 @@ import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.TypePiece;
-import extras.Pistol;
+import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.IMovement;
@@ -26,17 +26,10 @@ public class Horse extends Piece {
         maxHp = hp;
         tpPiece = TypePiece.horse;
     }
-//    public Horse(Player player, TypeHero tpHero, int x, int y, ItypeHorse tpHorse) {
-//        super(player, tpHero, x, y);
-//        hp = 6;
-//        this.tpHorse = tpHorse;
-//        updateImage();
-//    }
     //metodos>>
     @Override
     public void checkMove(Table table) {
         if(freeWay != null) freeWay.clear();
-        //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }

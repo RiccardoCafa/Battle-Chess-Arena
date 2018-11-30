@@ -197,10 +197,9 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
-        if(sheriffTowerReaction){//sheriff power
+        if(sheriffTowerReaction || !combo){//sheriff power
             sheriffTowerShoot(actualBlock);
-            EndOfTurn();
-            return;
+            if(combo) return;
         }
         if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
                 && possibleBlocks.contains(actualBlock)) {
@@ -244,54 +243,62 @@ public class GameCtrl implements Initializable {
                     /*
                     HIT
                     */
-                    if(actualBlock.getPiece().reaction(table, firstBlock, false)){
-                        sheriffTowerReaction = true;
-                        sheriffTower = (Tower) actualBlock.getPiece();
-                        possibleHits = sheriffTower.getSheriffTowerHitWay(table);
-                        resetBlockTab();
-                        showPossibleWays(null);
-                        showPossibleEnemys(possibleHits);
-                        return;
+                    if(!combo){//se não for combo
+                        if(actualBlock.getPiece().reaction(table, firstBlock)){//se a reação é da SheriffTower
+                            if(possibleHits.size() != 1){//ativa a opção de escolha da reação da SheriffTower
+                                sheriffTower = (Tower) actualBlock.getPiece();//guarda a peça
+                                possibleHits = sheriffTower.getSheriffTowerHitWay(table);//mostra as opções de tiro
+                                sheriffTowerReaction = true;
+                                resetBlockTab();
+                                showPossibleWays(null);
+                                showPossibleEnemys(possibleHits);
+                                return;
+                            }else{ }
+                        }
                     }
-                    if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
-                        // Está vivo
-                        if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
-                            Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
-                            lapao.setBigBig(lapao.getBigBig() + 1);
-                            displayMessage(playing.getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
-                                    + lapao.getBigBig() + " bigbigs");
-                        }
-                        if(!firstBlock.getPiece().isSpecial()){ // se a peça não for especial
-                            Vetor lastPos = firstBlock.getPiece().getLastPosOf(actualBlock); // Pega a melhor posição para ficar
-                            externalMove(firstBlock, table.getBlock(lastPos));
-                            internalMove(firstBlock, table.getBlock(lastPos));
+                    sheriffTower = null;
+                    sheriffTowerReaction = false;
+                    if(!firstBlock.isEmpty()){//se a reação não matou o atacante
+                        if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
+                            // Está vivo
+                            if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
+                                Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
+                                lapao.setBigBig(lapao.getBigBig() + 1);
+                                displayMessage(playing.getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
+                                        + lapao.getBigBig() + " bigbigs");
+                            }
+                            if(!firstBlock.getPiece().isSpecial()){ // se a peça não for especial
+                                Vetor lastPos = firstBlock.getPiece().getLastPosOf(actualBlock); // Pega a melhor posição para ficar
+                                externalMove(firstBlock, table.getBlock(lastPos));
+                                internalMove(firstBlock, table.getBlock(lastPos));
+                            } else {
+                                possibleBlocks = firstBlock.getPiece().getSpecialMovesLikeJagger(table, actualBlock.getVetor()); // Pega o novo free way
+                                if(possibleBlocks.isEmpty()) {
+                                    EndOfTurn();
+                                    return;
+                                }
+                                if(possibleBlocks.size() == 1) {
+                                    externalMove(firstBlock, possibleBlocks.get(0));
+                                    internalMove(firstBlock, possibleBlocks.get(0));
+                                    EndOfTurn();
+                                    return;
+                                }
+                                resetBlockTab(); // Reseta os highlights
+                                showPossibleWays(possibleBlocks); // Mostra o novo highlight
+                                combo = true; // Torna combo true
+                                pieceMovingImage = firstBlock.getPiece();
+                                // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
+                                //(isso provavelmente pode ocorrer com peças que pulam)
+                            }
                         } else {
-                            possibleBlocks = firstBlock.getPiece().getSpecialMovesLikeJagger(table, actualBlock.getVetor()); // Pega o novo free way
-                            if(possibleBlocks.isEmpty()) {
-                                EndOfTurn();
-                                return;
-                            }
-                            if(possibleBlocks.size() == 1) {
-                                externalMove(firstBlock, possibleBlocks.get(0));
-                                internalMove(firstBlock, possibleBlocks.get(0));
-                                EndOfTurn();
-                                return;
-                            }
-                            resetBlockTab(); // Reseta os highlights
-                            showPossibleWays(possibleBlocks); // Mostra o novo highlight
-                            combo = true; // Torna combo true
-                            pieceMovingImage = firstBlock.getPiece();
-                            // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
-                            //(isso provavelmente pode ocorrer com peças que pulam)
+                            // Morreu o mizeravel
+                            //gameplayChat.appendText("[" + playing.getName() + "] acaba de aniquilar o(a) " + 
+                            //                        actualBlock.getPiece().getPieceName() + " de " + "[" +
+                            //                        Players.getAdversaryPlayer().getName() + "]\n");
+                            removeImage(actualBlock); // remove a imagem do mizere
+                            externalMove(firstBlock, actualBlock);
+                            internalMove(firstBlock, actualBlock);
                         }
-                    } else {
-                        // Morreu o mizeravel
-                        removeImage(actualBlock); // remove a imagem do mizere
-                        gameplayChat.appendText("[" + playing.getName() + "] acaba de aniquilar o(a) " + 
-                                                actualBlock.getPiece().getPieceName() + " de " + "[" +
-                                                Players.getAdversaryPlayer().getName() + "]\n");
-                        externalMove(firstBlock, actualBlock);
-                        internalMove(firstBlock, actualBlock);
                     }
                     if(!combo) {
                         EndOfTurn(); // Se não tiver combo, passa o turno
@@ -312,13 +319,48 @@ public class GameCtrl implements Initializable {
         }
     }
     
-    public void sheriffTowerShoot(Block actualBlock){//sheriff method
-        if(possibleHits.isEmpty() || !possibleHits.contains(actualBlock)) return;
+    public void sheriffTowerShoot(Block actualBlock){//clique extra do tiro da SheriffTower
+        if(!possibleHits.contains(actualBlock)) return;//o bloco clicado não está dentre as opções
         sheriffTower.realShoot(table, actualBlock);
-        if(sheriffTower != null) sheriffTower.hit(1);
+        sheriffTowerReaction = false;//desativa a reação
+        Block sheriffTowerBlock = table.getBlock(sheriffTower);
+        if(!firstBlock.isEmpty()){//se a reação não matou o atacante
+            //ataque inimigo pós-reação
+            if(!sheriffTowerBlock.hitPiece(firstBlock.getPiece().getDamage())){//se a peça atingida está viva
+                if(firstBlock.getPiece().getTpHero() == TypeHero.lapa){//se a peça atacante é de Lapa
+                    Lapa lapa = (Lapa) Players.getActualPlayer().getHero();
+                    lapa.setBigBig(lapa.getBigBig() + 1);
+                    displayMessage(playing.getName(),
+                                   "Acaba de receber 1 bigbig! Agora ele tem " + lapa.getBigBig() + " bigbigs");
+                }
+                if(!firstBlock.getPiece().isSpecial()){//se a peça atacante não for especial
+                    Vetor lastPos = firstBlock.getPiece().getLastPosOf(sheriffTowerBlock);//fica na melhor posição disponível
+                    externalMove(firstBlock, table.getBlock(lastPos));
+                    internalMove(firstBlock, table.getBlock(lastPos));
+                }else{//se a peça atacante é especial
+                    possibleBlocks = firstBlock.getPiece().getSpecialMovesLikeJagger(table, sheriffTowerBlock.getVetor());//exibe o novo freeWay
+                    if(possibleBlocks.isEmpty()){//se não há lugar para ficar
+                        EndOfTurn();
+                        return;
+                    }
+                    if(possibleBlocks.size() == 1){//se só há uma posição disponível
+                        externalMove(firstBlock, possibleBlocks.get(0));
+                        internalMove(firstBlock, possibleBlocks.get(0));
+                        EndOfTurn();
+                        return;
+                    }
+                    resetBlockTab();//reseta os highlights
+                    showPossibleWays(possibleBlocks);//mostra o novo highlight
+                    combo = true;//Torna combo true (no próximo clique, irá pular a reação da SheriffTower)
+                    pieceMovingImage = firstBlock.getPiece();
+                }
+            }else{//se a peça atingida morreu
+                removeImage(sheriffTowerBlock);//remove a imagem do atingido
+                externalMove(firstBlock, sheriffTowerBlock);
+                internalMove(firstBlock, sheriffTowerBlock);
+            }
+        }
         sheriffTower = null;
-        sheriffTowerReaction = false;
-        resetBlockTab();
     }
     
     public void EndOfTurn() {
@@ -389,17 +431,6 @@ public class GameCtrl implements Initializable {
             return true;
         }
     }
-    public void showAlternativeMoves(Block actualBlock){
-        firstBlock.getPiece().checkEspecialMove(table, actualBlock);
-        possibleBlocks = firstBlock.getPiece().getEspecialFreeWay();
-        if(possibleBlocks == null){//se o freeWay for vazio ou nulo, saia do evento
-            //System.out.println("Saindo aqui vlw flw, sou o cara");
-        }else{
-            showPossibleWays(possibleBlocks);
-            showPossibleEnemys(possibleHits);
-        }
-    }
-    
     public void internalMove(Block sourceBlock, Block destinyBlock){
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(selectedVetor).colorDefault();
@@ -479,10 +510,12 @@ public class GameCtrl implements Initializable {
         pieceToRemove.removePiece();
         pieceToRemove = null;
     }
-    public void removeImage(Block blockSource) {
-        Piece pieceToRemove = blockSource.getPiece();
-        pieceToRemove.removePiece();
-        pieceToRemove = null;
+    public void removeImage(Block blockSource){
+        try{
+            Piece pieceToRemove = blockSource.getPiece();
+            pieceToRemove.removePiece();
+            pieceToRemove = null;
+        }catch(NullPointerException e){ }
     }
     public void showPossibleWays(ArrayList<Block> freeWay) {
         if(freeWay == null) {

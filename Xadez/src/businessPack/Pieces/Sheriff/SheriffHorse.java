@@ -5,46 +5,56 @@ import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
-import extras.Pistol;
 import java.util.ArrayList;
 import businessPack.Pieces.Interfaces.IMovement;
 import javafx.scene.image.ImageView;
 
-public class SheriffHorse implements IMovement, Pistol {
+public class SheriffHorse extends PistolSound implements IMovement, Pistol {
     //atributos>>
     Player player;
     ImageView bullet1;
     int charge = 1;
+    boolean discharging;//descarregando o pente
     //construtor>>
     public SheriffHorse(Player player, ImageView bullet1){
         this.player = player;
         this.bullet1 = bullet1;
+        discharging = true;
     }
     //metodos>>
     @Override
-    public void recharge(){
-        if(charge < 1) charge++;
+    public void recharge(){//recarga
+        if(charge < 1){
+            charge++;
+            playRechargeSound();
+        }
         bullet1.setVisible(true);
     }
     @Override
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen){
-        if(charge != 0){
-            for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){//reação do SheriffHorse
+        if(charge == 0) discharging = false;//zerou o pente, carregue-o
+        if(charge == 1) discharging = true;//pente completo, descarregue-o
+        if(discharging){//se está apto a descarregar o pente
+            for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){//procura a primeira peça inimiga ao Leste
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
                     table.getBlock(iE, vetor.getY()).hitPiece(charge);
+                    bullet1.setVisible(false);
+                    charge--;
+                    playShootSound();
                     break;
                 }
             }
-            for(int iW = vetor.getX() - 1; iW >= 0; iW--){
+            for(int iW = vetor.getX() - 1; iW >= 0; iW--){//procura a primeira peça inimiga ao Oeste
                 if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
                     table.getBlock(iW, vetor.getY()).hitPiece(charge);
+                    bullet1.setVisible(false);
+                    if(charge != 0) charge--;
+                    playShootSound();
                     break;
                 }
             }
             System.out.println("falou comigo? ¬_¬");
-            bullet1.setVisible(false);
-            charge--;
-        }else recharge();
+        }else recharge();//pente vazio, comece a encher
         return false;
     }
     @Override

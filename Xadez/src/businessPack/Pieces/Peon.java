@@ -11,7 +11,7 @@ import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Sheriff.SheriffPeon;
-import extras.Pistol;
+import businessPack.Pieces.Sheriff.Pistol;
 import businessPack.Pieces.Interfaces.IMovement;
 import javafx.scene.image.ImageView;
 
@@ -27,17 +27,10 @@ public class Peon extends Piece {
         maxHp = hp;
         updateImage();
     }
-    /*public Peon(Player pPiece, TypeHero tpHero, int x, int y, ItypePeon tpPeon) {
-        super(pPiece, tpHero, x, y);
-        hp = 2;
-        this.tpPeon = tpPeon;
-        updateImage();
-    }*/
     //metodos>>
     @Override
     public void checkMove(Table table) {
         if(freeWay!= null)freeWay.clear();
-        //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }

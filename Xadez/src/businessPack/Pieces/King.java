@@ -7,7 +7,7 @@ import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.TypePiece;
-import extras.Pistol;
+import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Interfaces.IMovement;
@@ -27,12 +27,6 @@ public class King extends Piece {
         maxHp = hp;
         updateImage();
     }
-//    public King(Player pPiece, TypeHero tpHero, int x, int y, ItypeKing tpKing) {
-//        super(pPiece, tpHero, x, y);
-//        hp = 18;
-//        this.tpKing = tpKing;
-//        updateImage();
-//    }
     //metodos>>
     @Override
     public void checkMove(Table table) {

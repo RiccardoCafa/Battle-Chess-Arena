@@ -64,6 +64,20 @@ public class Table{
             return null;
         }
     }
+    public Block getBlock(Vetor vetor){
+        if(vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n){
+            return table[vetor.getX()][vetor.getY()];
+        }else{
+            return null;
+        }
+    }
+    public Block getBlock(Piece piece){
+        if(piece.getX() >= 0 && piece.getX() < m && piece.getY() >= 0 && piece.getY() < n){
+            return table[(int)piece.getX()][(int)piece.getY()];
+        }else{
+            return null;
+        }
+    }
     public void wait(Block block){
         wait = block;
     }
@@ -73,13 +87,6 @@ public class Table{
     public static boolean isInside(int x, int y){
         return (x >= 0 && x < m && y >= 0 && y < n);
     }
-    public Block getBlock(Vetor vetor){
-        if(vetor.getX() >= 0 && vetor.getX() < m && vetor.getY() >= 0 && vetor.getY() < n){
-            return table[vetor.getX()][vetor.getY()];
-        }else{
-            return null;
-        }
-    }
     public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
         Piece tempB = table[piecePos.getX()][piecePos.getY()].getPiece();
         tempB.setVetor(pieceDestination);
@@ -88,16 +95,16 @@ public class Table{
     }
     
     public void AttackManaging(){ }
-    public Block callForSheriffKing(){//sheriff method
+    public Block callForSheriffKing(){//onde está o SheriffKing?
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
-                if(!table[i][j].isEmpty() &&
-                    table[i][j].getPiece().getTpHero() == TypeHero.sheriff &&
-                    table[i][j].getPiece().getTypePiece() == TypePiece.king){
+                if(!table[i][j].isEmpty() &&                                   //se o bloco não está vazio e
+                    table[i][j].getPiece().getTpHero() == TypeHero.sheriff && //pertence ao Sheriff e
+                    table[i][j].getPiece().getTypePiece() == TypePiece.king){//é um King
                     return table[i][j];
                 }
             }
         }
-        return null;
+        return null;//não há SheriffKing
     }
 }
