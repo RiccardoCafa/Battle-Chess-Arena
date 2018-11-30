@@ -29,14 +29,28 @@
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
             </Text>
-            <TextField fx:id="names1" layoutX="172.0" layoutY="539.0" onKeyPressed="#onEnterClick" />
-            <TextField fx:id="names2" layoutX="474.0" layoutY="539.0" onKeyPressed="#onEnterClick2" />
-            <Text layoutX="172.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
+            <TextField fx:id="names1" layoutX="314.0" layoutY="546.0" onKeyPressed="#onEnterClick" prefHeight="25.0" prefWidth="183.0" />
+            <Text fx:id="PlayerName1" layoutX="14.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
                <font>
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
             </Text>
-            <Text layoutX="474.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
+            <Text fx:id="PlayerName2" layoutX="633.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
+               <font>
+                  <Font name="Segoe UI Italic" size="28.0" />
+               </font>
+            </Text>
+            <Text fx:id="HeroPlayer1" layoutX="14.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
+               <font>
+                  <Font name="Segoe UI Italic" size="28.0" />
+               </font>
+            </Text>
+            <Text fx:id="HeroPlayer2" layoutX="645.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
+               <font>
+                  <Font name="Segoe UI Italic" size="28.0" />
+               </font>
+            </Text>
+            <Text layoutX="104.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Digite o nome do player 1 e depois o player 2 " textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="591.5078151971102">
                <font>
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
