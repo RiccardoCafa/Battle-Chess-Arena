@@ -58,13 +58,19 @@ public class ChooseCharacterController implements Initializable {
     @FXML
     TextField names1;
     @FXML
-    TextField names2;
+    Text PlayerName1;
+    @FXML
+    Text PlayerName2;
+    @FXML
+    Text HeroPlayer1;
+    @FXML
+    Text HeroPlayer2;
     
     private Stage primaryStage;
 
     Image myImage;
     ImageView myImageView;
-    int count = 0;
+    int count = 0,cont = 0;
     Image[] perso = new Image[5];
     String[] heroNames = new String[5];
     Player p1,p2;
@@ -132,6 +138,7 @@ public class ChooseCharacterController implements Initializable {
                 if(p1 != null){
                     if(p1.getHero().getHeroType() != huebr){
                         p2 = new Player(-1, new Huebr(), 2,name2);
+                        HeroPlayer2.setText("Huebr");
                     }else{
                         
                         JOptionPane.showMessageDialog(null, "personagem ja selecionado");
@@ -139,6 +146,7 @@ public class ChooseCharacterController implements Initializable {
                     } 
                 }else{
                     p1 = new Player(1, new Huebr(), 1, name1);
+                    HeroPlayer1.setText("Huebr");
                 } 
                 break;
             case 1:
@@ -146,12 +154,14 @@ public class ChooseCharacterController implements Initializable {
                    if(p1 != null){
                     if(p1.getHero().getHeroType() != lapa){
                         p2 = new Player(-1, new Lapa(), 2,name2);
+                        HeroPlayer2.setText("Lapa");
                     }else{
                         JOptionPane.showMessageDialog(null, "personagem ja selecionado");
 
                     }
                 }else{
                      p1 = new Player(1, new Lapa(), 1, name1);
+                     HeroPlayer1.setText("Lapa");
                 } 
                 break;
             case 2:
@@ -159,12 +169,14 @@ public class ChooseCharacterController implements Initializable {
                    if(p1 != null){
                         if(p1.getHero().getHeroType() != lenin){
                             p2 = new Player(-1, new Lenin(), 2,name2);
+                            HeroPlayer2.setText("Lenin");
                         }else{
                         JOptionPane.showMessageDialog(null, "personagem ja selecionado");
 
                     }
                 }else{
                          p1 = new Player(1, new Lenin(), 1, name1);
+                         HeroPlayer1.setText("Lenin");
                 } 
                 break;
             case 3:
@@ -172,12 +184,14 @@ public class ChooseCharacterController implements Initializable {
                 if(p1 != null){
                    if(p1.getHero().getHeroType() != wizard){
                         p2 = new Player(-1, new Wizard(), 2,name2);
+                        HeroPlayer2.setText("Wizard");
                     }else{
                         JOptionPane.showMessageDialog(null, "personagem ja selecionado");
 
                     }
                 }else{
                         p1 = new Player(1, new Wizard(), 1, name1);
+                        HeroPlayer1.setText("Wizard");
                 } 
                 break;
             case 4:
@@ -185,11 +199,13 @@ public class ChooseCharacterController implements Initializable {
                    if(p1 != null){
                    if(p1.getHero().getHeroType() != sheriff){
                         p2 = new Player(-1, new Sheriff(), 2,name2);
+                        HeroPlayer2.setText("Sheriff");
                     }else{
                         JOptionPane.showMessageDialog(null, "personagem ja selecionado");
                     }
                 }else{
                         p1 = new Player(1, new Sheriff(), 1, name1);
+                        HeroPlayer1.setText("Sheriff");
                 } 
                 break;
         }
@@ -222,23 +238,27 @@ public class ChooseCharacterController implements Initializable {
       @FXML
       public void onEnterClick(KeyEvent e){
           if(e.getCode() == KeyCode.ENTER){
-              if("".equals(names1.getText())){
+              if(cont == 0){
+                if("".equals(names1.getText())){
                    System.out.println(name1);
-              }else{
+                   cont++;
+                }else{
                   name1 = names1.getText();
                   System.out.println(name1);
-              }  
-          }
-      }
-      @FXML
-      public void onEnterClick2(KeyEvent e){
-          if(e.getCode() == KeyCode.ENTER){
-              if(" ".equals(names2.getText())){
-                    System.out.println(name2);
+                  PlayerName1.setText(name1);
+                  cont++;
+                }     
               }else{
-                  name2 = names2.getText(); 
+                  if("".equals(names1.getText())){
+                   System.out.println(name2);
+              }else{
+                  name2 = names1.getText();
                   System.out.println(name2);
-              }  
+                  PlayerName2.setText(name2);
+              }
+              }
+              
           }
       }
+
 }
