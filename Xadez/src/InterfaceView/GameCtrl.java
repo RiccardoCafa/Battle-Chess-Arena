@@ -244,7 +244,7 @@ public class GameCtrl implements Initializable {
                     /*
                     HIT
                     */
-                    if(actualBlock.getPiece().reaction(table, firstBlock)){
+                    if(actualBlock.getPiece().reaction(table, firstBlock, false)){
                         sheriffTowerReaction = true;
                         sheriffTower = (Tower) actualBlock.getPiece();
                         possibleHits = sheriffTower.getSheriffTowerHitWay(table);
@@ -313,9 +313,8 @@ public class GameCtrl implements Initializable {
     }
     
     public void sheriffTowerShoot(Block actualBlock){//sheriff method
-        sheriffTower.realShoot(table, actualBlock);
         if(possibleHits.isEmpty() || !possibleHits.contains(actualBlock)) return;
-        actualBlock.hitPiece(sheriffTower.getCharge());
+        sheriffTower.realShoot(table, actualBlock);
         if(sheriffTower != null) sheriffTower.hit(1);
         sheriffTower = null;
         sheriffTowerReaction = false;

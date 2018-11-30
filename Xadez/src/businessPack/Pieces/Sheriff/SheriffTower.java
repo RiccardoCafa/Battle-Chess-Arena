@@ -27,12 +27,8 @@ public class SheriffTower implements Pistol {
         bullet1.setVisible(true);
     }
     @Override
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
-        if(charge != 0){
-            bullet1.setVisible(false);
-            charge--;
-            return true;
-        }
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen){
+        if(charge != 0) return true;
         return false;
     }
     public ArrayList<Block> sheriffTowerHitWay(Table table, Vetor vetor){
@@ -68,7 +64,7 @@ public class SheriffTower implements Pistol {
             enemyBlock.hitPiece(charge);
             bullet1.setVisible(false);
             charge--;
-        }
+        }else recharge();
     }
     //getset>>
     public int getCharge(){

@@ -165,9 +165,9 @@ public abstract class Piece extends ImageView {
             }
         }
     }
-    public boolean reaction(Table table, Block enemyBlock){//sheriff method
+    public boolean reaction(Table table, Block enemyBlock, boolean protectQueen){//sheriff method
         if(tpHero == TypeHero.sheriff && tpPiece != TypePiece.bishop)
-            return shoot.reaction(table, vetor, enemyBlock);
+            return shoot.reaction(table, vetor, enemyBlock, protectQueen);
         else
             return false;
     }

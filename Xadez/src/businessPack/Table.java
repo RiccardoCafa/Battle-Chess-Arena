@@ -36,13 +36,6 @@ public class Table{
         }*/
     }
     //metodos>>
-    public void clearTrend(){
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                table[i][j].getVetor().setTrend(0);
-            }
-        }
-    }
     //getset>>    
     /**
      * 
@@ -94,9 +87,7 @@ public class Table{
         table[pieceDestination.getX()][pieceDestination.getY()].setPiece(tempB);
     }
     
-    public void AttackManaging() {
-        
-    }
+    public void AttackManaging(){ }
     public Block callForSheriffKing(){//sheriff method
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){

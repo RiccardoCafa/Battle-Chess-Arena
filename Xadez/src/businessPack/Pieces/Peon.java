@@ -58,10 +58,6 @@ public class Peon extends Piece {
                 return new DefaultPeon(Players.getPlayer(player));
         }
     }
-    @Override
-    public void recharge(){
-        shoot.recharge();
-    }
     //getset>>
     public void setTypePeon(IMovement tpPeon){//muda o comportamento do checkMove()
         strategy = tpPeon;

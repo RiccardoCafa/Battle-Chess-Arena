@@ -37,7 +37,6 @@ public class King extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay!=null) freeWay.clear();
-        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
@@ -52,10 +51,6 @@ public class King extends Piece {
             default:
                 return new DefaultKing(Players.getPlayer(player));
         }
-    }
-    @Override
-    public void recharge(){
-        shoot.recharge();
     }
     //getset>>
     public void setTypeKing(IMovement tpKing){//muda o comportamento do checkMove()

@@ -29,14 +29,14 @@ public class SheriffKing implements Pistol {
         if(charge == 2) bullet2.setVisible(true);
     }
     @Override
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen){
         if(charge != 0){
             enemyBlock.hitPiece(charge);
             System.out.println("sou matador de onça");
             if(charge == 1) bullet1.setVisible(false);
             if(charge == 2) bullet2.setVisible(false);
             charge--;
-        }
+        }else if(!protectQueen) recharge();
         return false;
     }
 }

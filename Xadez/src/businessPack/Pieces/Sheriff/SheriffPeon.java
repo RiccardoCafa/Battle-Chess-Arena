@@ -25,7 +25,7 @@ public class SheriffPeon implements Pistol {
         bullet1.setVisible(true);
     }
     @Override
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen){
         if(charge != 0){
             for(int jN = vetor.getY(); Table.isInside(0, jN); jN -= player.getSentido()){
                 if(table.getBlock(vetor.getX(), jN).getBlockState(player) == BlockState.Enemy){
@@ -36,7 +36,7 @@ public class SheriffPeon implements Pistol {
                 }
             }
             System.out.println("eh na sola da bota, eh na palma da bota...");
-        }
+        }else recharge();
         return false;
     }
 }

@@ -27,7 +27,7 @@ public class SheriffHorse implements IMovement, Pistol {
         bullet1.setVisible(true);
     }
     @Override
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen){
         if(charge != 0){
             for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
@@ -44,7 +44,7 @@ public class SheriffHorse implements IMovement, Pistol {
             System.out.println("falou comigo? ¬_¬");
             bullet1.setVisible(false);
             charge--;
-        }
+        }else recharge();
         return false;
     }
     @Override

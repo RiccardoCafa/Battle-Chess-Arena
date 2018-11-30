@@ -55,10 +55,6 @@ public class Horse extends Piece {
                 return new DefaultHorse(Players.getPlayer(player));
         }
     }
-    @Override
-    public void recharge(){
-        shoot.recharge();
-    }
     //getset>>
     public void setTypeHorse(IMovement tpHorse){//muda o comportamento do checkMove()
         strategy = tpHorse;

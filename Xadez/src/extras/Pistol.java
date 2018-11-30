@@ -6,6 +6,6 @@ import javafx.scene.image.ImageView;
 
 public interface Pistol {
     //metodos>>
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock);
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen);
     public void recharge();
 }

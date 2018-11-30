@@ -19,7 +19,7 @@ public class SheriffQueen implements Pistol {
     @Override
     public void recharge(){ }
     @Override
-    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock, boolean protectQueen){
         Piece king;
         try{
             king = table.callForSheriffKing().getPiece();
@@ -27,7 +27,7 @@ public class SheriffQueen implements Pistol {
             System.out.println("vc matou meu marido...");
             return false;
         }
-        king.reaction(table, enemyBlock);
+        king.reaction(table, enemyBlock, true);
         return false;
     }
 }

@@ -55,10 +55,6 @@ public class Tower extends Piece {
                 return new DefaultTower(Players.getPlayer(player));
         }
     }
-    @Override
-    public void recharge(){
-        shoot.recharge();
-    }
     public void realShoot(Table table, Block enemyBlock){
         ((SheriffTower)shoot).realShoot(table, enemyBlock);
     }
