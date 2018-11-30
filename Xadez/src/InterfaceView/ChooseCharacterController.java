@@ -14,7 +14,9 @@ import static businessPack.TypeHero.wizard;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.ResourceBundle;
+import java.util.Vector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -70,14 +72,6 @@ public class ChooseCharacterController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        String pathMusic = "InterfaceView/Sounds/";
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("MUSICA HUE HUE BR.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Lapa.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("URSS.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Mago.mp3").toString())));
-//        musicas.add(new MediaPlayer(new Media(getClass().getResource("Pistoleiro.mp3").toString())));
-//        
-//        musicaAtual = musicas.get(count);
         // TODO
         int resX = 446;
         int resY = 336;
@@ -117,7 +111,7 @@ public class ChooseCharacterController implements Initializable {
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
-        //musicaAtual.stop();
+
         if(count == 4){
             count = 0;
         }else{
@@ -139,11 +133,12 @@ public class ChooseCharacterController implements Initializable {
                     if(p1.getHero().getHeroType() != huebr){
                         p2 = new Player(-1, new Huebr(), 2,name2);
                     }else{
-                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
-                        //escrever na tela
+                        
+                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
+
                     } 
                 }else{
-                    p1 = new Player(1, new Huebr(), 1,name1);
+                    p1 = new Player(1, new Huebr(), 1, name1);
                 } 
                 break;
             case 1:
@@ -152,10 +147,11 @@ public class ChooseCharacterController implements Initializable {
                     if(p1.getHero().getHeroType() != lapa){
                         p2 = new Player(-1, new Lapa(), 2,name2);
                     }else{
-                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
+                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
+
                     }
                 }else{
-                    p1 = new Player(1, new Lapa(), 1,name1);
+                     p1 = new Player(1, new Lapa(), 1, name1);
                 } 
                 break;
             case 2:
@@ -164,10 +160,11 @@ public class ChooseCharacterController implements Initializable {
                         if(p1.getHero().getHeroType() != lenin){
                             p2 = new Player(-1, new Lenin(), 2,name2);
                         }else{
-                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
+                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
+
                     }
                 }else{
-                    p1 = new Player(1, new Lenin(), 1,name1);
+                         p1 = new Player(1, new Lenin(), 1, name1);
                 } 
                 break;
             case 3:
@@ -176,10 +173,11 @@ public class ChooseCharacterController implements Initializable {
                    if(p1.getHero().getHeroType() != wizard){
                         p2 = new Player(-1, new Wizard(), 2,name2);
                     }else{
-                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
+                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
+
                     }
                 }else{
-                    p1 = new Player(1, new Wizard(), 1,name1);
+                        p1 = new Player(1, new Wizard(), 1, name1);
                 } 
                 break;
             case 4:
@@ -188,10 +186,10 @@ public class ChooseCharacterController implements Initializable {
                    if(p1.getHero().getHeroType() != sheriff){
                         p2 = new Player(-1, new Sheriff(), 2,name2);
                     }else{
-                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
+                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
                     }
                 }else{
-                    p1 = new Player(1, new Sheriff(), 1,name1);
+                        p1 = new Player(1, new Sheriff(), 1, name1);
                 } 
                 break;
         }
@@ -205,15 +203,20 @@ public class ChooseCharacterController implements Initializable {
       private void LoadScene(String sceneName){
         try{
             System.out.println("loading");
-            Parent loader = FXMLLoader.load(getClass().getResource(sceneName));
-            Scene eltonJhon = new Scene(loader);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+            Parent rooter = loader.load();
+            GameCtrl gameCtrl = loader.getController();
+            gameCtrl.gameCtrl(p1, p2);
+            Scene eltonJhon = new Scene(rooter);
             Stage stage = new Stage();
+            
             stage.setTitle("Choose Your Character!");
             stage.setScene(eltonJhon);
             stage.show();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");
+            e.printStackTrace();
         }
     }
       @FXML
@@ -238,7 +241,4 @@ public class ChooseCharacterController implements Initializable {
               }  
           }
       }
-//    public String getName(){
-//        return name;
-//    }
 }

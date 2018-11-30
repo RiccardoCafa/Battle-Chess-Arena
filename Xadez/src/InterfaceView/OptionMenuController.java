@@ -36,10 +36,10 @@ public class OptionMenuController implements Initializable {
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource(scene));
             Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Choose Your Character!");
-            stage.setScene(new Scene(root1));
-            stage.show();
+            Stage aroldo = new Stage();
+            aroldo.setTitle("Choose Your Character!");
+            aroldo.setScene(new Scene(root1));
+            aroldo.show();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");

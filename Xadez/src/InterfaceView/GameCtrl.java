@@ -6,6 +6,7 @@ import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
+import businessPack.Heros.Wizard;
 import businessPack.Piece;
 import businessPack.Player;
 import businessPack.Players;
@@ -52,6 +53,8 @@ public class GameCtrl implements Initializable {
     Button btnSuperPower;
     @FXML
     TextArea gameplayChat;
+    @FXML
+    Button PassTurn;
 //    @FXML
 //    ScrollPane scroll;
     
@@ -79,13 +82,9 @@ public class GameCtrl implements Initializable {
     
     Block firstBlock;
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        
-        player1 = new Player(-1, new Lapa(), 1, "Riccardao");
-        player2 = new Player(1, new Lenin(), 2, "xXPlayer2Xx");
+    public void gameCtrl(Player p1, Player p2) {
+        this.player1 = p1;
+        this.player2 = p2;
         Players.setPlayer1(player1);
         Players.setPlayer2(player2);
         playing = player1;
@@ -100,7 +99,18 @@ public class GameCtrl implements Initializable {
         gameplayChat.appendText("[" + gameName + "] Os exércitos foram montados.\n");
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
         persoImage.setImage(playing.getHero().getImage());
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoJogo.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        
 // 65 (char) == A
+    }
+    
+    public void SetVars(String s){
+        this.gameName = s;
     }
     
     public void MountArmyOnTable(Table tab) {
@@ -446,8 +456,18 @@ public class GameCtrl implements Initializable {
             }
             
         }
+        
+        if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
+            Huebr huebr = (Huebr) playing.getHero();
+            huebr.setUsePower(true);
+            System.out.println("Power ativado");
+        }
+
     }
     public void displayMessage(String sender, String message) {
         gameplayChat.appendText("[" + sender + "] " + message + "\n");
+    }
+    public void PassTurnOnClick(MouseEvent e){
+        EndOfTurn();
     }
 }
