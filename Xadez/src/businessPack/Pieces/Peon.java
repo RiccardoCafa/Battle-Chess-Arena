@@ -51,14 +51,16 @@ public class Peon extends Piece {
                 especial = true;
                 return new huebrPeon(Players.getPlayer(player));
             case sheriff:
-                shoot = new SheriffPeon(Players.getPlayer(player));
-                bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-                bullet[0].setFitWidth(13);
-                bullet[0].setFitHeight(30);
+                shoot = new SheriffPeon(Players.getPlayer(player), bullet[0]);
+                bullet[0].setVisible(true);
                 return new DefaultPeon(Players.getPlayer(player));
             default:
                 return new DefaultPeon(Players.getPlayer(player));
         }
+    }
+    @Override
+    public void recharge(){
+        shoot.recharge();
     }
     //getset>>
     public void setTypePeon(IMovement tpPeon){//muda o comportamento do checkMove()

@@ -8,18 +8,26 @@ import extras.Vetor;
 import extras.Pistol;
 import java.util.ArrayList;
 import businessPack.Pieces.Interfaces.IMovement;
+import javafx.scene.image.ImageView;
 
 public class SheriffHorse implements IMovement, Pistol {
     //atributos>>
     Player player;
+    ImageView bullet1;
     int charge = 1;
     //construtor>>
-    public SheriffHorse(Player player){
+    public SheriffHorse(Player player, ImageView bullet1){
         this.player = player;
+        this.bullet1 = bullet1;
     }
     //metodos>>
     @Override
-    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
+    public void recharge(){
+        if(charge < 1) charge++;
+        bullet1.setVisible(true);
+    }
+    @Override
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
         if(charge != 0){
             for(int iE = vetor.getX() + 1; iE < Table.getM(); iE++){
                 if(table.getBlock(iE, vetor.getY()).getBlockState(player) == BlockState.Enemy){
@@ -34,8 +42,9 @@ public class SheriffHorse implements IMovement, Pistol {
                 }
             }
             System.out.println("falou comigo? ¬_¬");
+            bullet1.setVisible(false);
             charge--;
-        }else charge = 1;
+        }
         return false;
     }
     @Override

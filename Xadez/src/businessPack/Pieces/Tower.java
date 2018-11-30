@@ -48,14 +48,19 @@ public class Tower extends Piece {
                 especial = true;
                 return new LapaTower(Players.getPlayer(player));
             case sheriff:
-                shoot = new SheriffTower(Players.getPlayer(player));
-                bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-                bullet[0].setFitWidth(13);
-                bullet[0].setFitHeight(30);
+                shoot = new SheriffTower(Players.getPlayer(player), bullet[0]);
+                bullet[0].setVisible(true);
                 return new DefaultTower(Players.getPlayer(player));
             default:
                 return new DefaultTower(Players.getPlayer(player));
         }
+    }
+    @Override
+    public void recharge(){
+        shoot.recharge();
+    }
+    public void realShoot(Table table, Block enemyBlock){
+        ((SheriffTower)shoot).realShoot(table, enemyBlock);
     }
     public ArrayList<Block> getSheriffTowerHitWay(Table table){
         if(tpHero == TypeHero.sheriff)
@@ -65,5 +70,8 @@ public class Tower extends Piece {
     //getset>>
     public void setTypeTower(IMovement tpTower){//muda o comportamento do checkMove()
         strategy = tpTower;
+    }
+    public int getCharge(){
+        return ((SheriffTower)shoot).getCharge();
     }
 }

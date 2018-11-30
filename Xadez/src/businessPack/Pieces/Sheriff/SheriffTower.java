@@ -7,22 +7,32 @@ import extras.Vetor;
 import java.util.ArrayList;
 import extras.BlockState;
 import extras.Pistol;
+import javafx.scene.image.ImageView;
 
 public class SheriffTower implements Pistol {
     //atributos>>
     Player player;
-    int charge = 1;
+    ImageView bullet1;
+    int charge;
     //construtor>>
-    public SheriffTower(Player player){
+    public SheriffTower(Player player, ImageView bullet1){
         this.player = player;
+        this.bullet1 = bullet1;
+        charge = 1;
     }
     //metodos>>
     @Override
-    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
+    public void recharge(){
+        if(charge < 1) charge++;
+        bullet1.setVisible(true);
+    }
+    @Override
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
         if(charge != 0){
+            bullet1.setVisible(false);
             charge--;
             return true;
-        }else charge = 1;
+        }
         return false;
     }
     public ArrayList<Block> sheriffTowerHitWay(Table table, Vetor vetor){
@@ -52,5 +62,16 @@ public class SheriffTower implements Pistol {
             }
         }
         return hitWay;
+    }
+    public void realShoot(Table table, Block enemyBlock){
+        if(charge != 0){
+            enemyBlock.hitPiece(charge);
+            bullet1.setVisible(false);
+            charge--;
+        }
+    }
+    //getset>>
+    public int getCharge(){
+        return charge;
     }
 }

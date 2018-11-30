@@ -40,10 +40,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.util.Duration;
 
 public class GameCtrl implements Initializable {
@@ -141,24 +138,22 @@ public class GameCtrl implements Initializable {
                     pieceImage = tab.getBlock(i, j).getPiece();
                     ImageView barraLife = tab.getBlock(i, j).getPiece().getLifeBar();
                     ImageView barraLifeBg = tab.getBlock(i, j).getPiece().getLifeBarBg();
+                    ImageView bullet1 = tab.getBlock(i, j).getPiece().getBullet(1);
+                    ImageView bullet2 = tab.getBlock(i, j).getPiece().getBullet(2);
                     pratoPieces.getChildren().add(pieceImage);
                     pratoPieces.getChildren().add(barraLifeBg);
                     pratoPieces.getChildren().add(barraLife);
-                    /*if(tab.getBlock(i, j).getPiece().getTpHero() == TypeHero.sheriff){//sheriff bullets
+                    if(tab.getBlock(i, j).getPiece().getTpHero() == TypeHero.sheriff){//sheriff bullets
                         switch(tab.getBlock(i, j).getPiece().getTypePiece()){
                             case tower: case horse: case  peon:
-                                ImageView bullet1 = tab.getBlock(i, j).getPiece().getBullet1();
                                 pratoPieces.getChildren().add(bullet1);
-                                bullet1.setLayoutX(0);
-                                bullet1.setLayoutY(80);
-                            case king:
-                                ImageView bullet2 = ((King)tab.getBlock(i, j).getPiece()).getBullet2();
-                                pratoPieces.getChildren().add(bullet2);
-                                bullet2.setLayoutX(17);
-                                bullet2.setLayoutY(80);
                                 break;
+                            case king:
+                                pratoPieces.getChildren().add(bullet1);
+                                pratoPieces.getChildren().add(bullet2);
                         }
-                    }*/
+                    }
+                    tab.getBlock(i, j).getPiece().bulletViewConfig();
                     tab.getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
@@ -225,7 +220,6 @@ public class GameCtrl implements Initializable {
                 possibleHits.clear();
                 resetBlockTab();
             }else if(possibleBlocks.contains(actualBlock)){//se é possível se movimentar
-                //externalMove(firstBlock, actualBlock);
                 if(!possibleHits.contains(actualBlock)){//se é caminho livre, ou seja, não há inimigos
                     if(combo){
                         externalMove(firstBlock, actualBlock);
@@ -275,7 +269,6 @@ public class GameCtrl implements Initializable {
                             }
                             resetBlockTab(); // Reseta os highlights
                             showPossibleWays(possibleBlocks); // Mostra o novo highlight
-                            //externalMove(firstBlock, actualBlock);
                             combo = true; // Torna combo true
                             pieceMovingImage = firstBlock.getPiece();
                             // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
@@ -310,9 +303,10 @@ public class GameCtrl implements Initializable {
     }
     
     public void sheriffTowerShoot(Block actualBlock){//sheriff method
+        sheriffTower.realShoot(table, actualBlock);
         if(possibleHits.isEmpty() || !possibleHits.contains(actualBlock)) return;
-        actualBlock.hitPiece(1);
-        if(sheriffTower!=null)sheriffTower.hit(1);
+        actualBlock.hitPiece(sheriffTower.getCharge());
+        if(sheriffTower != null) sheriffTower.hit(1);
         sheriffTower = null;
         sheriffTowerReaction = false;
         resetBlockTab();
@@ -454,11 +448,13 @@ public class GameCtrl implements Initializable {
         int deltaX = destiny.getX() - source.getX();
         int deltaY = destiny.getY() - source.getY();
         TranslateTransition anim = new TranslateTransition();
-        for(int i = 1; i <= 3; i++){
+        for(int i = 1; i <= 4; i++){
             switch(i){
                 case 1: anim = new TranslateTransition(Duration.millis(1000), image); break;
                 case 2: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBar()); break;
                 case 3: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBarBg()); break;
+                case 4: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getBullet(1)); break;
+                case 5: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getBullet(2)); break;
             }
             anim.setFromX(-65*deltaX);
             anim.setFromY(-65*deltaY);

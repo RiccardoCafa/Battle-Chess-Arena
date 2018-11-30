@@ -32,7 +32,7 @@ public abstract class Piece extends ImageView {
     protected Vetor vetor;
     private ImageView lifeBar;
     private ImageView lifeBarBg;
-    protected ImageView[] bullet = new ImageView[2];
+    protected ImageView[] bullet;
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     protected ArrayList<Block> especialFreeWay;
@@ -55,6 +55,13 @@ public abstract class Piece extends ImageView {
         lifeBar.setFitHeight(10);
         lifeBarBg.setFitWidth(60);
         lifeBarBg.setFitHeight(10);
+        bullet = new ImageView[2];
+        bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+        bullet[0].setFitWidth(13);
+        bullet[0].setFitHeight(30);
+        bullet[1] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+        bullet[1].setFitWidth(13);
+        bullet[1].setFitHeight(30);
 //        setLayoutX(20);
 //        setLayoutY(0);
     }
@@ -74,6 +81,13 @@ public abstract class Piece extends ImageView {
         lifeBar.setFitHeight(10);
         lifeBarBg.setFitWidth(60);
         lifeBarBg.setFitHeight(10);
+        bullet = new ImageView[2];
+        bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+        bullet[0].setFitWidth(13);
+        bullet[0].setFitHeight(30);
+        bullet[1] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
+        bullet[1].setFitWidth(13);
+        bullet[1].setFitHeight(30);
     }
     //metodos>>
     public abstract void checkMove(Table table);//criação da freeWay
@@ -99,6 +113,7 @@ public abstract class Piece extends ImageView {
             especialFreeWay = null;
         }
     }
+    public void recharge(){ }
     public Vetor getLastPosOf(Block hitedBlock) {
         
         if(tpPiece == TypePiece.horse) {
@@ -152,7 +167,7 @@ public abstract class Piece extends ImageView {
     }
     public boolean reaction(Table table, Block enemyBlock){//sheriff method
         if(tpHero == TypeHero.sheriff && tpPiece != TypePiece.bishop)
-            return shoot.Ireaction(table, vetor, enemyBlock);
+            return shoot.reaction(table, vetor, enemyBlock);
         else
             return false;
     }
@@ -194,9 +209,25 @@ public abstract class Piece extends ImageView {
             lifeBar.setLayoutY(lifeBar.getLayoutY() + 30);
         }
         lifeBarBg.setLayoutY(lifeBar.getLayoutY());
+        bulletViewConfig();
     }
     public void lifeBarResize() {
         lifeBar.setScaleX((float)hp / (float)maxHp);
+    }
+    public void bulletViewConfig(){
+        bullet[0].setLayoutX(00 + 65*vetor.getX());
+        bullet[0].setLayoutY(30 + 65*vetor.getY());
+        bullet[0].toFront();
+        bullet[1].setLayoutX(17 + 65*vetor.getX());
+        bullet[1].setLayoutY(30 + 65*vetor.getY());
+        bullet[1].toFront();
+    }
+    public void removePiece() {
+        lifeBar.setVisible(false);
+        lifeBarBg.setVisible(false);
+        bullet[0].setVisible(false);
+        bullet[1].setVisible(false);
+        setVisible(false);
     }
     //getset>>
     public TypePiece getPiece(){
@@ -211,13 +242,19 @@ public abstract class Piece extends ImageView {
     public ImageView getLifeBarBg() {
         return lifeBarBg;
     }
-    public ImageView getBullet1(){
-        return bullet[1];
+    public ImageView getBullet(int i){
+        try{
+            return bullet[i - 1];
+        }catch(ArrayIndexOutOfBoundsException e){
+            return null;
+        }
     }
     public boolean hit(int damage){
         setHP(hp - damage);
+        if(!alive) removePiece();
         lifeBarResize();
         lifeBarRealocate();
+        bulletViewConfig();
         return alive;
     }
     private void setHP(int hp){
@@ -271,11 +308,6 @@ public abstract class Piece extends ImageView {
     }
     public boolean isSpecial(){
         return especial;
-    }
-    public void removePiece() {
-        lifeBar.setVisible(false);
-        lifeBarBg.setVisible(false);
-        setVisible(false);
     }
     public abstract IMovement getHeroStrategy();
     

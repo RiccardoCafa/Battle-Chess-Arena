@@ -6,6 +6,7 @@ import businessPack.Player;
 import businessPack.Table;
 import extras.Vetor;
 import extras.Pistol;
+import javafx.scene.image.ImageView;
 
 public class SheriffQueen implements Pistol {
     //atributos>>
@@ -16,7 +17,9 @@ public class SheriffQueen implements Pistol {
     }
     //metodos>>
     @Override
-    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock){
+    public void recharge(){ }
+    @Override
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock){
         Piece king;
         try{
             king = table.callForSheriffKing().getPiece();

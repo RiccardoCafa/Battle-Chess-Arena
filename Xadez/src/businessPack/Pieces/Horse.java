@@ -48,14 +48,16 @@ public class Horse extends Piece {
         switch(tpHero) {
             case sheriff:
                 especial = true;
-                shoot = new SheriffHorse(Players.getPlayer(player));
-                bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-                bullet[0].setFitWidth(13);
-                bullet[0].setFitHeight(30);
+                shoot = new SheriffHorse(Players.getPlayer(player), bullet[0]);
+                bullet[0].setVisible(true);
                 return (IMovement) shoot;
             default:
                 return new DefaultHorse(Players.getPlayer(player));
         }
+    }
+    @Override
+    public void recharge(){
+        shoot.recharge();
     }
     //getset>>
     public void setTypeHorse(IMovement tpHorse){//muda o comportamento do checkMove()

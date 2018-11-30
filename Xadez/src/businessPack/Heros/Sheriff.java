@@ -59,15 +59,10 @@ public class Sheriff extends Hero {
         bulletPieces.add(sheriffPiece);
         army.addPiece(sheriffPiece);//rainha
     }
-    public void recharge(){
-        for(Piece piece : bulletPieces){
-            
-        }
-    }
     @Override
     public void GameManager(Table tab) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("IIIIAHHHHH Sheriff Power");
-        return;
+        for(Piece piece : bulletPieces){
+            piece.recharge();
+        }
     }
 }

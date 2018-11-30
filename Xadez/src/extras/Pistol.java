@@ -2,7 +2,10 @@ package extras;
 
 import businessPack.Block;
 import businessPack.Table;
+import javafx.scene.image.ImageView;
 
 public interface Pistol {
-    public boolean Ireaction(Table table, Vetor vetor, Block enemyBlock);
+    //metodos>>
+    public boolean reaction(Table table, Vetor vetor, Block enemyBlock);
+    public void recharge();
 }
