@@ -28,11 +28,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
 
@@ -104,7 +102,7 @@ public class ChooseCharacterController implements Initializable {
     }
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
-        musicaAtual.stop();
+        //musicaAtual.stop();
         if(count == 0){
             count = 4;
         }else{
@@ -119,7 +117,7 @@ public class ChooseCharacterController implements Initializable {
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
-        musicaAtual.stop();
+        //musicaAtual.stop();
         if(count == 4){
             count = 0;
         }else{
@@ -139,61 +137,61 @@ public class ChooseCharacterController implements Initializable {
                 //name = "Hue";
                 if(p1 != null){
                     if(p1.getHero().getHeroType() != huebr){
-                        p2 = new Player(-1, new Huebr(), 2);
+                        p2 = new Player(-1, new Huebr(), 2,name2);
                     }else{
-                        
+                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
                         //escrever na tela
                     } 
                 }else{
-                    p1 = new Player(1, new Huebr(), 1);
+                    p1 = new Player(1, new Huebr(), 1,name1);
                 } 
                 break;
             case 1:
                 //name = "Lapa";
                    if(p1 != null){
                     if(p1.getHero().getHeroType() != lapa){
-                        p2 = new Player(-1, new Lapa(), 2);
+                        p2 = new Player(-1, new Lapa(), 2,name2);
                     }else{
-                        
+                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
                     }
                 }else{
-                    p1 = new Player(1, new Lapa(), 1);
+                    p1 = new Player(1, new Lapa(), 1,name1);
                 } 
                 break;
             case 2:
                 //name = "Czar";
                    if(p1 != null){
                         if(p1.getHero().getHeroType() != lenin){
-                            p2 = new Player(-1, new Lenin(), 2);
+                            p2 = new Player(-1, new Lenin(), 2,name2);
                         }else{
-                        
+                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
                     }
                 }else{
-                    p1 = new Player(1, new Lenin(), 1);
+                    p1 = new Player(1, new Lenin(), 1,name1);
                 } 
                 break;
             case 3:
                 //name = "Mago"; 
                 if(p1 != null){
                    if(p1.getHero().getHeroType() != wizard){
-                        p2 = new Player(-1, new Wizard(), 2);
+                        p2 = new Player(-1, new Wizard(), 2,name2);
                     }else{
-                        
+                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
                     }
                 }else{
-                    p1 = new Player(1, new Wizard(), 1);
+                    p1 = new Player(1, new Wizard(), 1,name1);
                 } 
                 break;
             case 4:
                 //name = "Pistoleiro";
                    if(p1 != null){
                    if(p1.getHero().getHeroType() != sheriff){
-                        p2 = new Player(-1, new Sheriff(), 2);
+                        p2 = new Player(-1, new Sheriff(), 2,name2);
                     }else{
-                        
+                        JOptionPane.showMessageDialog(null, "Personagem ja escolhido");
                     }
                 }else{
-                    p1 = new Player(1, new Sheriff(), 1);
+                    p1 = new Player(1, new Sheriff(), 1,name1);
                 } 
                 break;
         }
