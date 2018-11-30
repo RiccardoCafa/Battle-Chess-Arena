@@ -43,7 +43,6 @@ public class OptionMenuController implements Initializable {
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");
-            e.printStackTrace();
         }
     }
 }
