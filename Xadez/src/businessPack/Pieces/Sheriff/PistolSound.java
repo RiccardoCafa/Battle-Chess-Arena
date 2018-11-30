@@ -6,18 +6,16 @@ import javafx.scene.media.MediaPlayer;
 
 public class PistolSound {
     //atributos>>
-    private String[] paths = {
-        new File("src/businessPack/Pieces/Sheriff/rechargeSound.mp3").getAbsolutePath(),
-        new File("src/businessPack/Pieces/Sheriff/shootSound.mp3").getAbsolutePath()
-    };
+//    private String[] paths = {
+//        new File("src/businessPack/Pieces/Sheriff/rechargeSound.mp3").getAbsolutePath(),
+//        new File("src/businessPack/Pieces/Sheriff/shootSound.mp3").getAbsolutePath()
+//    };
     Media[] sounds = {
-        new Media(new File(paths[0]).toURI().toString()),
-        new Media(new File(paths[1]).toURI().toString())};
-        //new Media(getClass().getResource("rechargeSound.mp3").toString()),
-        //new Media(getClass().getResource("shootSound.mp3").toString())};
-    MediaPlayer[] soundBox = {
-        new MediaPlayer(sounds[0]), new MediaPlayer(sounds[1])};
+        new Media(getClass().getResource("rechargeSound.mp3").toString()),
+        new Media(getClass().getResource("shootSound.mp3").toString())};
+    MediaPlayer sound1 = new MediaPlayer(sounds[0]);
+    MediaPlayer sound2 = new MediaPlayer(sounds[1]);
     //metodos>>
-    public void playRechargeSound(){ soundBox[0].play(); }
-    public void playShootSound(){ soundBox[1].play(); }
+    public void playRechargeSound(){ sound1.play(); }
+    public void playShootSound(){ sound2.play(); }
 }
