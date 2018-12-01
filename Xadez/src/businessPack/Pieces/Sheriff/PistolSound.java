@@ -5,12 +5,23 @@ import javafx.scene.media.MediaPlayer;
 
 public class PistolSound {
     //atributos>>
-    Media rec = new Media(getClass().getResource("rechargeSound.mp3").toString());
-    Media shoot = new Media(getClass().getResource("shootSound.mp3").toString());
-    MediaPlayer shootSound = new MediaPlayer(shoot);
-    MediaPlayer recharge = new MediaPlayer(rec);
-    
+    Media rechargeSound;
+    Media shootSound;
+    MediaPlayer rechargePlayer;
+    MediaPlayer shootPlayer;
+    //construtor>>
+    public PistolSound(){
+        rechargeSound = new Media(getClass().getResource("rechargeSound.mp3").toString());
+        shootSound = new Media(getClass().getResource("shootSound.mp3").toString());
+        
+    }
     //metodos>>
-    public void playRechargeSound(){ recharge.play(); }
-    public void playShootSound(){ shootSound.play(); }
+    public void playRechargeSound(){
+        rechargePlayer = new MediaPlayer(rechargeSound);
+        rechargePlayer.play();
+    }
+    public void playShootSound(){
+        shootPlayer = new MediaPlayer(shootSound);
+        shootPlayer.play();
+    }
 }

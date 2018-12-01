@@ -197,9 +197,10 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
-        if(sheriffTowerReaction && !combo){//sheriff power
+
+        if(sheriffTowerReaction){//sheriff power
             sheriffTowerShoot(actualBlock);
-            if(combo) return;
+            return;
         }
         if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
                 && possibleBlocks.contains(actualBlock)) {
@@ -243,17 +244,14 @@ public class GameCtrl implements Initializable {
                     /*
                     HIT
                     */
-                    if(!combo){//se não for combo
-                        if(actualBlock.getPiece().reaction(table, firstBlock)){//se a reação é da SheriffTower
-                            if(possibleHits.size() != 1){//ativa a opção de escolha da reação da SheriffTower
-                                sheriffTower = (Tower) actualBlock.getPiece();//guarda a peça
-                                possibleHits = sheriffTower.getSheriffTowerHitWay(table);//mostra as opções de tiro
-                                sheriffTowerReaction = true;
-                                resetBlockTab();
-                                showPossibleWays(null);
-                                showPossibleEnemys(possibleHits);
-                                return;
-                            }else{ }
+                    if(actualBlock.getPiece().reaction(table, firstBlock)){//se a reação é da SheriffTower
+                        if(possibleHits.size() > 1){//ativa a opção de escolha da reação da SheriffTower
+                            sheriffTower = (Tower) actualBlock.getPiece();//guarda a peça
+                            sheriffTowerReaction = true;
+                            possibleHits = sheriffTower.getSheriffTowerHitWay(table);//mostra as opções de tiro
+                            resetBlockTab();
+                            showPossibleEnemys(possibleHits);
+                            return;
                         }
                     }
                     sheriffTower = null;
@@ -319,11 +317,21 @@ public class GameCtrl implements Initializable {
         }
     }
     
+    Block sheriffTowerBlock;
     public void sheriffTowerShoot(Block actualBlock){//clique extra do tiro da SheriffTower
-        if(!possibleHits.contains(actualBlock)) return;//o bloco clicado não está dentre as opções
-        sheriffTower.realShoot(table, actualBlock);
-        sheriffTowerReaction = false;//desativa a reação
-        Block sheriffTowerBlock = table.getBlock(sheriffTower);
+        if(!combo){//se não se trata de uma reação a uma peça especial
+            if(!possibleHits.contains(actualBlock)) return;//o bloco clicado não está dentre as opções
+            sheriffTower.realShoot(table, actualBlock);
+            sheriffTowerBlock = table.getBlock(sheriffTower);
+        }else{//se a peça inimiga é especial, já foi atingida, não morreu, e agora precisa se mover
+            if(possibleBlocks.contains(actualBlock)){//se clicou num bloco válido
+                externalMove(firstBlock, actualBlock);
+                internalMove(firstBlock, actualBlock);
+                combo = false;
+                sheriffTowerReaction = false;//desativa a reação
+                EndOfTurn();
+            }else return;
+        }
         if(!firstBlock.isEmpty()){//se a reação não matou o atacante
             //ataque inimigo pós-reação
             if(!sheriffTowerBlock.hitPiece(firstBlock.getPiece().getDamage())){//se a peça atingida está viva
@@ -334,16 +342,21 @@ public class GameCtrl implements Initializable {
                                    "Acaba de receber 1 bigbig! Agora ele tem " + lapa.getBigBig() + " bigbigs");
                 }
                 if(!firstBlock.getPiece().isSpecial()){//se a peça atacante não for especial
+                    sheriffTowerReaction = false;//desativa a reação
                     Vetor lastPos = firstBlock.getPiece().getLastPosOf(sheriffTowerBlock);//fica na melhor posição disponível
                     externalMove(firstBlock, table.getBlock(lastPos));
                     internalMove(firstBlock, table.getBlock(lastPos));
                 }else{//se a peça atacante é especial
                     possibleBlocks = firstBlock.getPiece().getSpecialMovesLikeJagger(table, sheriffTowerBlock.getVetor());//exibe o novo freeWay
                     if(possibleBlocks.isEmpty()){//se não há lugar para ficar
+                        sheriffTower = null;
+                        sheriffTowerBlock = null;
                         EndOfTurn();
                         return;
                     }
                     if(possibleBlocks.size() == 1){//se só há uma posição disponível
+                        sheriffTower = null;
+                        sheriffTowerBlock = null;
                         externalMove(firstBlock, possibleBlocks.get(0));
                         internalMove(firstBlock, possibleBlocks.get(0));
                         EndOfTurn();
@@ -351,16 +364,18 @@ public class GameCtrl implements Initializable {
                     }
                     resetBlockTab();//reseta os highlights
                     showPossibleWays(possibleBlocks);//mostra o novo highlight
-                    combo = true;//Torna combo true (no próximo clique, irá pular a reação da SheriffTower)
+                    combo = true;//Torna combo true (no próximo clique, irá pular as ações do início deste método)
                     pieceMovingImage = firstBlock.getPiece();
                 }
             }else{//se a peça atingida morreu
-                removeImage(sheriffTowerBlock);//remove a imagem do atingido
                 externalMove(firstBlock, sheriffTowerBlock);
                 internalMove(firstBlock, sheriffTowerBlock);
+                removeImage(sheriffTowerBlock);//remove a imagem do atingido
+                sheriffTower = null;
+                sheriffTowerBlock = null;
+                sheriffTowerReaction = false;
             }
-        }
-        sheriffTower = null;
+        }else sheriffTowerReaction = false;//desativa a reação
     }
     
     public void EndOfTurn() {

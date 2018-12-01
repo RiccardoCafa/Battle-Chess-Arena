@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import extras.BlockState;
 import javafx.scene.image.ImageView;
 
-public class SheriffTower extends PistolSound implements Pistol{
+public class SheriffTower implements Pistol{
     //atributos>>
     Player player;
     ImageView bullet1;
@@ -26,7 +26,7 @@ public class SheriffTower extends PistolSound implements Pistol{
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            playRechargeSound();
+            pistolSounds.playRechargeSound();
         }
         bullet1.setVisible(true);
     }
@@ -74,7 +74,7 @@ public class SheriffTower extends PistolSound implements Pistol{
         enemyBlock.hitPiece(charge);
         bullet1.setVisible(false);//bala usada
         charge--;
-        playShootSound();
+        pistolSounds.playShootSound();
     }
     //getset>>
     public int getCharge(){//retorna o dano que se pode causar

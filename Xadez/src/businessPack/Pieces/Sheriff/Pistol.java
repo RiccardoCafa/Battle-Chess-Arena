@@ -5,6 +5,8 @@ import businessPack.Table;
 import extras.Vetor;
 
 public interface Pistol {
+    //atributos>>
+    PistolSound pistolSounds = new PistolSound();
     //metodos>>
     public boolean reaction(Table table, Vetor vetor, Block enemyBlock);
     public void recharge();
