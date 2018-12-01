@@ -46,9 +46,11 @@ public class SheriffHorse implements IMovement, Pistol {
             }
             for(int iW = vetor.getX() - 1; iW >= 0; iW--){//procura a primeira peça inimiga ao Oeste
                 if(table.getBlock(iW, vetor.getY()).getBlockState(player) == BlockState.Enemy){
-                    table.getBlock(iW, vetor.getY()).hitPiece(charge);
-                    bullet1.setVisible(false);
-                    if(charge != 0) charge--;
+                    if(charge != 0){
+                        table.getBlock(iW, vetor.getY()).hitPiece(charge);
+                        bullet1.setVisible(false);
+                        charge--;
+                    }else table.getBlock(iW, vetor.getY()).hitPiece(1);
                     pistolSounds.playShootSound();
                     break;
                 }
