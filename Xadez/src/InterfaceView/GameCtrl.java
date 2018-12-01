@@ -197,7 +197,7 @@ public class GameCtrl implements Initializable {
     
     public void OnBlockClicked(MouseEvent e){//evento de click para os blocos
         Block actualBlock = (Block) e.getSource();//bloco clicado
-        if(sheriffTowerReaction || !combo){//sheriff power
+        if(sheriffTowerReaction && !combo){//sheriff power
             sheriffTowerShoot(actualBlock);
             if(combo) return;
         }
