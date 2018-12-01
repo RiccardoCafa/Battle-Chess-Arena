@@ -6,7 +6,7 @@ import businessPack.Table;
 import extras.Vetor;
 import javafx.scene.image.ImageView;
 
-public class SheriffKing extends PistolSound implements Pistol{
+public class SheriffKing implements Pistol{
     //atributos>>
     Player player;
     ImageView bullet1;
@@ -25,7 +25,7 @@ public class SheriffKing extends PistolSound implements Pistol{
     public void recharge(){//recarga
         if(charge < 2){
             charge++;
-            playRechargeSound();
+            pistolSounds.playRechargeSound();
         }
         if(charge == 1) bullet1.setVisible(true);
         if(charge == 2) bullet2.setVisible(true);
@@ -40,7 +40,7 @@ public class SheriffKing extends PistolSound implements Pistol{
             if(charge == 1) bullet1.setVisible(false);//última bala do pente usada 
             if(charge == 2) bullet2.setVisible(false);//bala usada
             charge--;
-            playShootSound();
+            pistolSounds.playShootSound();
         }else recharge();//pente vazio, comece a encher
         return false;
     }

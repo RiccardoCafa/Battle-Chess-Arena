@@ -7,7 +7,7 @@ import extras.BlockState;
 import extras.Vetor;
 import javafx.scene.image.ImageView;
 
-public class SheriffPeon extends PistolSound implements Pistol{
+public class SheriffPeon implements Pistol{
     //atributos>>
     Player player;
     ImageView bullet1;
@@ -24,7 +24,7 @@ public class SheriffPeon extends PistolSound implements Pistol{
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            playRechargeSound();
+            pistolSounds.playRechargeSound();
         }
         bullet1.setVisible(true);
     }
@@ -38,7 +38,7 @@ public class SheriffPeon extends PistolSound implements Pistol{
                     table.getBlock(vetor.getX(), j).hitPiece(charge);
                     bullet1.setVisible(false);//bala usada
                     charge--;
-                    playShootSound();
+                    pistolSounds.playShootSound();
                     break;
                 }
             }

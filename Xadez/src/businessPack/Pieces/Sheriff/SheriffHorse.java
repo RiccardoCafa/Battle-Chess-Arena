@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import businessPack.Pieces.Interfaces.IMovement;
 import javafx.scene.image.ImageView;
 
-public class SheriffHorse extends PistolSound implements IMovement, Pistol {
+public class SheriffHorse implements IMovement, Pistol {
     //atributos>>
     Player player;
     ImageView bullet1;
@@ -26,7 +26,7 @@ public class SheriffHorse extends PistolSound implements IMovement, Pistol {
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            playRechargeSound();
+            pistolSounds.playRechargeSound();
         }
         bullet1.setVisible(true);
     }
@@ -40,7 +40,7 @@ public class SheriffHorse extends PistolSound implements IMovement, Pistol {
                     table.getBlock(iE, vetor.getY()).hitPiece(charge);
                     bullet1.setVisible(false);
                     charge--;
-                    playShootSound();
+                    pistolSounds.playShootSound();
                     break;
                 }
             }
@@ -49,7 +49,7 @@ public class SheriffHorse extends PistolSound implements IMovement, Pistol {
                     table.getBlock(iW, vetor.getY()).hitPiece(charge);
                     bullet1.setVisible(false);
                     if(charge != 0) charge--;
-                    playShootSound();
+                    pistolSounds.playShootSound();
                     break;
                 }
             }
