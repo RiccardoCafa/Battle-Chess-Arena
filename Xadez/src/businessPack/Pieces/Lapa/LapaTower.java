@@ -6,9 +6,13 @@ import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Pieces.Interfaces.IMovement;
 
-public class LapaTower implements ItypePiece {
+/**
+ *
+ * @author ricca
+ */
+public class LapaTower implements IMovement {
 
     Player player;
     int casasOffSet;
@@ -185,9 +189,5 @@ public class LapaTower implements ItypePiece {
             return LookForLast(xDirection, yDirection, newVetor);
         }
         return newVetor;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }
 }

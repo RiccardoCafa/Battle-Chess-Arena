@@ -9,10 +9,11 @@ import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
+import businessPack.Pieces.Sheriff.Pistol;
+import businessPack.Pieces.Interfaces.IMovement;
 
 public class Queen extends Piece {
     //atributos>>
@@ -31,22 +32,23 @@ public class Queen extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay!=null)freeWay.clear();
-        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public IMovement getHeroStrategy(){
         switch(tpHero) {
-            case sheriff:
+            case lenin:
                 especial = true;
-                return new SheriffQueen(Players.getPlayer(player));
+            case sheriff:
+                shoot = new SheriffQueen(Players.getPlayer(player));
+                return new DefaultQueen(Players.getPlayer(player));
             default:
                 return new DefaultQueen(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeQueen(ItypePiece tpQueen){//muda o comportamento do checkMove()
+    public void setTypeQueen(IMovement tpQueen){//muda o comportamento do checkMove()
         strategy = tpQueen;
     }
     public void updateImage() {

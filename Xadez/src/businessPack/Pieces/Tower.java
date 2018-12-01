@@ -1,5 +1,6 @@
 package businessPack.Pieces;
 
+import businessPack.Block;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultTower;
 import businessPack.Pieces.Lapa.LapaTower;
@@ -7,13 +8,17 @@ import businessPack.Player;
 import businessPack.Table;
 import businessPack.TypeHero;
 import javafx.scene.image.Image;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Players;
 import businessPack.TypePiece;
 import extras.Who;
+import businessPack.Pieces.Sheriff.SheriffTower;
+import businessPack.Pieces.Interfaces.IMovement;
+import java.util.ArrayList;
+import javafx.scene.image.ImageView;
 
 public class Tower extends Piece {
     //atributos>>
+    ArrayList<Block> sheriffTowerHitWay;
     //construtor>>
     public Tower(Who who, TypeHero tpHero, int x, int y) {
         super(who, tpHero, x, y);
@@ -29,7 +34,6 @@ public class Tower extends Piece {
     @Override
     public void checkMove(Table table) {
         if(freeWay != null) freeWay.clear();
-        //table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
@@ -38,17 +42,32 @@ public class Tower extends Piece {
         setMouseTransparent(true);
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case lapa:
                 especial = true;
                 return new LapaTower(Players.getPlayer(player));
+            case sheriff:
+                shoot = new SheriffTower(Players.getPlayer(player), bullet[0]);
+                bullet[0].setVisible(true);
+                return new DefaultTower(Players.getPlayer(player));
             default:
                 return new DefaultTower(Players.getPlayer(player));
         }
     }
+    public void realShoot(Table table, Block enemyBlock){
+        ((SheriffTower)shoot).realShoot(table, enemyBlock);
+    }
+    public ArrayList<Block> getSheriffTowerHitWay(Table table){
+        if(tpHero == TypeHero.sheriff)
+            return ((SheriffTower)shoot).sheriffTowerHitWay(table, vetor);
+        return null;
+    }
     //getset>>
-    public void setTypeTower(ItypePiece tpTower){//muda o comportamento do checkMove()
+    public void setTypeTower(IMovement tpTower){//muda o comportamento do checkMove()
         strategy = tpTower;
+    }
+    public int getCharge(){
+        return ((SheriffTower)shoot).getCharge();
     }
 }

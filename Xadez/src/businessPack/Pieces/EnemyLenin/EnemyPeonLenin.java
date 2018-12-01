@@ -2,12 +2,12 @@
 package businessPack.Pieces.EnemyLenin;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import businessPack.Table;
 import extras.Vetor;
 import java.util.ArrayList;
-public class EnemyPeonLenin implements ItypePiece{
+import businessPack.Pieces.Interfaces.IMovement;
+public class EnemyPeonLenin implements IMovement{
 
     Player playing;
     
@@ -21,9 +21,5 @@ public class EnemyPeonLenin implements ItypePiece{
         vector = new ArrayList<>();
         //vector.add(null);
         return vector;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }
 }

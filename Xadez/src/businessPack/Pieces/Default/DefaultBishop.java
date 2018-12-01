@@ -2,13 +2,13 @@ package businessPack.Pieces.Default;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.IMovement;
 
-public class DefaultBishop implements ItypePiece {
+public class DefaultBishop implements IMovement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -17,10 +17,6 @@ public class DefaultBishop implements ItypePiece {
         this.playing = playing;
     }
     //metodos>>
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
-    }
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
        vector = new ArrayList<>();

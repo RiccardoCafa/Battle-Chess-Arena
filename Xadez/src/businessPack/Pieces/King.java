@@ -2,14 +2,17 @@ package businessPack.Pieces;
 
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultKing;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Pieces.Sheriff.SheriffKing;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.TypePiece;
+import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import javafx.scene.image.Image;
+import businessPack.Pieces.Interfaces.IMovement;
+import businessPack.Pieces.Sheriff.SheriffTower;
+import javafx.scene.image.ImageView;
 
 public class King extends Piece {
     //atributos>>
@@ -24,31 +27,27 @@ public class King extends Piece {
         maxHp = hp;
         updateImage();
     }
-//    public King(Player pPiece, TypeHero tpHero, int x, int y, ItypeKing tpKing) {
-//        super(pPiece, tpHero, x, y);
-//        hp = 18;
-//        this.tpKing = tpKing;
-//        updateImage();
-//    }
     //metodos>>
     @Override
     public void checkMove(Table table) {
         if(freeWay!=null) freeWay.clear();
-        table.clearTrend();
         freeWay = strategy.IcheckMove(table, vetor);
         updateHitWay();
     }
     @Override
-    public ItypePiece getHeroStrategy() {
+    public IMovement getHeroStrategy() {
         switch(tpHero) {
             case sheriff:
-                return new SheriffKing(Players.getPlayer(player));
+                shoot = new SheriffKing(Players.getPlayer(player), bullet[0], bullet[1]);
+                bullet[0].setVisible(true);
+                bullet[1].setVisible(true);
+                return new DefaultKing(Players.getPlayer(player));
             default:
                 return new DefaultKing(Players.getPlayer(player));
         }
     }
     //getset>>
-    public void setTypeKing(ItypePiece tpKing){//muda o comportamento do checkMove()
+    public void setTypeKing(IMovement tpKing){//muda o comportamento do checkMove()
         strategy = tpKing;
     }
     public void updateImage() {

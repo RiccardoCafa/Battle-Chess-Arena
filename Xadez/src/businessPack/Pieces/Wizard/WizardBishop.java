@@ -1,16 +1,14 @@
 package businessPack.Pieces.Wizard;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Pieces.Interfaces.IMovement;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
 
-
-
-public class WizardBishop implements ItypePiece {
+public class WizardBishop implements IMovement {
     
     Table tab;
     ArrayList<Block> vect;
@@ -43,10 +41,6 @@ public class WizardBishop implements ItypePiece {
         missX = Math.abs(ultPos.getX() - vetor.getX());
         pickSideBlocks(1,1,ultPos,missX);
         return vect;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }   
     // função que reconhece se há inimigos ou amigos
     public Vetor behindBlocks(int xGo, int yGo, Vetor vet, int num){
@@ -145,5 +139,4 @@ public class WizardBishop implements ItypePiece {
             
         }
     }  
-      
 }

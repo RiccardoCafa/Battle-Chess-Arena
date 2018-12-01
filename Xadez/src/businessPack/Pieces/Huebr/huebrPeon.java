@@ -6,15 +6,16 @@
 package businessPack.Pieces.Huebr;
 
 import businessPack.Block;
-import businessPack.Pieces.Interfaces.ItypePiece;
+import businessPack.Pieces.Interfaces.ItypePeon;
 import businessPack.Player;
 import businessPack.Table;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.IMovement;
 
 
-public class huebrPeon implements ItypePiece {
+public class huebrPeon implements IMovement {
     Player player;
     ArrayList<Block> freeWay;
     Table tab;
@@ -25,12 +26,6 @@ public class huebrPeon implements ItypePiece {
         this.player = player;
         sentido = player.getSentido();   
     }
-
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
-    }
-
     @Override
     public ArrayList<Block> IcheckMove(Table table, Vetor vetor) {
         vector = new ArrayList<>();

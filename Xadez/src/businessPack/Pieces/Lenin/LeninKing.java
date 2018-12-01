@@ -2,14 +2,14 @@ package businessPack.Pieces.Lenin;
 
 import businessPack.Block;
 import businessPack.Table;
-import businessPack.Pieces.Interfaces.ItypePiece;
 import businessPack.Player;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
+import businessPack.Pieces.Interfaces.IMovement;
 
 
-public class LeninKing implements ItypePiece {
+public class LeninKing implements IMovement {
     Table tab;
     ArrayList<Block> vector;
     Player playing;
@@ -52,9 +52,5 @@ public class LeninKing implements ItypePiece {
         }
         System.out.println("Adicinado na posicao: " + newVetor.getX() + " " + newVetor.getY());
         return newVetor;
-    }
-    @Override
-    public Table Ireaction(Table table, Vetor vetor) {
-        return table;
     }
 }
