@@ -163,7 +163,7 @@ public class GameCtrl implements Initializable {
                                 pratoPieces.getChildren().add(bullet2);
                         }
                     }
-                    tab.getBlock(i, j).getPiece().bulletViewConfig();
+                    //tab.getBlock(i, j).getPiece().bulletViewConfig();
                     tab.getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
@@ -451,6 +451,14 @@ public class GameCtrl implements Initializable {
         table.getBlock(selectedVetor).colorDefault();
         movingPiece = false;//desabilita a movimentação
         destinyBlock.getPiece().lifeBarRealocate();
+        for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
+            if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
+                table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToFront();
+        }
+        for(int j = destinyBlock.getVetor().getY() - 1; j >= 0; j--){
+            if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
+                table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToBack();
+        }
         resetBlockTab();
     }
     public void externalMove(Block sourceBlock, Block destinyBlock){
@@ -472,32 +480,6 @@ public class GameCtrl implements Initializable {
         animation(source, dest, pieceToMove);
         pieceToMove.setLayoutX(65*dest.getX());
         pieceToMove.setLayoutY(-75 + (65*dest.getY()));
-        // Faz uma iteração para colocar as crianças da hierarquia em ordem no pane
-        Vetor vet;
-        int y = dest.getY() + 1;
-        while(y < Table.getN()) {
-            vet = new Vetor(dest.getX(), y);
-            if(table.getBlock(vet).isEmpty()) {
-                break;
-            }
-            pieceToMove = table.getBlock(vet).getPiece();
-            Piece p = (Piece) pieceToMove;
-            p.lifeBarToFront();
-            pieceToMove.toFront();
-            y++;
-        }
-        y = dest.getY() - 1;
-        while(y >= 0)  {
-            vet = new Vetor(dest.getX(), y);
-            if(table.getBlock(vet).isEmpty()) {
-                break;
-            }
-            pieceToMove = table.getBlock(vet).getPiece();
-            Piece p = (Piece) pieceToMove;
-            p.lifeBarToBack();
-            pieceToMove.toBack();
-            y--;
-        }
     }
     public void animation(Vetor source, Vetor destiny, ImageView image){
         int deltaX = destiny.getX() - source.getX();
@@ -513,8 +495,10 @@ public class GameCtrl implements Initializable {
             }
             anim.setFromX(-65*deltaX);
             anim.setFromY(-65*deltaY);
+            anim.setFromZ(source.getY());
             anim.setToX(0);
             anim.setToY(0);
+            anim.setToZ(destiny.getY());
             anim.setCycleCount(1);
             anim.setAutoReverse(true);
             anim.play();
