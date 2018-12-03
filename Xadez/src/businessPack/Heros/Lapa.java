@@ -1,6 +1,7 @@
 package businessPack.Heros;
 
 import InterfaceView.GameCtrl;
+import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Block;
 import businessPack.Hero;
@@ -28,10 +29,12 @@ public class Lapa extends Hero {
     Image lapaQueenImage;
     Image lapaHorseImage;
     
-    GameCtrl game;
+    GameManager game;
     Table tab;
     
-    private int bigBig = 0;
+    private boolean jaFoiLapa = false;
+    
+    private int bigBig = 10;
     
     public Lapa() {
         tpHero = TypeHero.lapa;
@@ -59,11 +62,13 @@ public class Lapa extends Hero {
 
     @Override
     public void GameManager(Table tab) {
+        jaFoiLapa = false;
         System.out.println("Lapa é bom demais, n precisa de poderes");
     }
     
     public ArrayList<Block> getBombWays(Table tab, Player playing) {
         ArrayList<Block> tempList = new ArrayList<>();
+        if(jaFoiLapa) return tempList;
         for(int i = 0; i < Table.getM(); i++) {
             for(int j = 0; j < Table.getN(); j++) {
                 if(tab.getTable()[i][j].getBlockState(playing) == BlockState.Enemy) {
@@ -74,15 +79,15 @@ public class Lapa extends Hero {
         return tempList;
     }
     
-    public void ExplodeBomb(Table tab, Vetor target, GameCtrl game) {
+    public void ExplodeBomb(Table tab, Vetor target, GameManager game) {
         //Substituir System.out.println por hit das peças
         if(this.game == null) this.game = game;
         if(this.tab == null) this.tab = tab;
         
         if(!tab.getBlock(target).isEmpty()) {
+            String pieceName = tab.getBlock(target).getPiece().getPieceName();
             if(tab.getBlock(target).hitPiece(4)) {
-                game.removeImage(target);
-                game.displayMessage("Lapa", "Exterminou o(a) " + tab.getBlock(target).getPiece().getPieceName() +
+                game.displayMessage("Lapa", "Exterminou o(a) " + pieceName +
                             " adversária!");
             }
         }
@@ -95,6 +100,7 @@ public class Lapa extends Hero {
         hitaDir(target, -1, 1);
         hitaDir(target, -1, -1);
         setBigBig(bigBig - 5);
+        jaFoiLapa = true;
     }
     
     public void hitaDir(Vetor target, int xDir, int yDir) {
@@ -106,16 +112,17 @@ public class Lapa extends Hero {
             Vetor newTarget = new Vetor(target.getX() + xDir, target.getY() + yDir);
             if(tab.getBlock(newTarget).isEmpty()) 
                     return;
+            String pieceName = tab.getBlock(newTarget).getPiece().getPieceName();
             if(xDir == 0 || yDir == 0) {
                 if(tab.getBlock(newTarget).hitPiece(2)) {
-                    game.removeImage(newTarget);
-                    game.displayMessage("Lapa", "Exterminou o(a) " + tab.getBlock(newTarget).getPiece().getPieceName() +
+                    //game.removeImage(newTarget);
+                    game.displayMessage("Lapa", "Exterminou o(a) " + pieceName +
                             " adversária!");
                 }
             } else {
                 if(tab.getBlock(newTarget).hitPiece(1)) {
-                    game.removeImage(newTarget);
-                    game.displayMessage("Lapa", "Exterminou o(a) " + tab.getBlock(newTarget).getPiece().getPieceName() +
+                    //game.removeImage(newTarget);
+                    game.displayMessage("Lapa", "Exterminou o(a) " + pieceName +
                             " adversário(a)!");
                 }
             }

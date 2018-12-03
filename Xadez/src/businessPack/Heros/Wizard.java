@@ -79,13 +79,8 @@ public class Wizard extends Hero {
     }
     
     //método que procura os peões no tabuleiro
-    public boolean searchPeons(Table tab){
-       int achou = 0;
-       while(achou == 0){
-           return true;
-       }
+    public boolean searchPeons(Table tab, Vetor pos){
        return false;
-        
     }
 
     public void wallCross(Table tab, Vetor target, ArrayList<Block> wall){
@@ -95,15 +90,9 @@ public class Wizard extends Hero {
         tab.getBlock(target).hitPiece(burnBlock);
             
        }else if(tab.getBlock(target).getBlockState(player) == BlockState.Friend){
-            
-           
-           
+           //cura a peça, tirando -1 de vida hausasuaushshua
+           tab.getBlock(target).hitPiece(-1);
         }
-        
-        
-        
-        
-        
         
     }
     

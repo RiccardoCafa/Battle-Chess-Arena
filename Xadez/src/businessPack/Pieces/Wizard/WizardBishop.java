@@ -83,13 +83,12 @@ public class WizardBishop implements IMovement {
         int j = vet.getY() + yGo;
         Vetor auxVetor = new Vetor(i, j);
         //condições de parada
-        System.out.println("If is rigth?");
         if(j < 0 || j > 7 || i < 0 || i > 7){
             return vet;
         }
         //verificar a existencia de inimigos
         
-        System.out.println("There is a enemy here?");
+        
         if(tab.getBlock(i, j).getBlockState(playing) == BlockState.Enemy){
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
@@ -99,7 +98,7 @@ public class WizardBishop implements IMovement {
             return auxVetor;
         }
         // checa se tem amigos
-        System.out.println("there is a friend here");
+        
         if(tab.getBlock(i,j).getBlockState(playing) == BlockState.Friend){
             return vet;
             
