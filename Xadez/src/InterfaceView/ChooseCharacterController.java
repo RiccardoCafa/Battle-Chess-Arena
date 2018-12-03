@@ -30,9 +30,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
 
@@ -78,6 +80,7 @@ public class ChooseCharacterController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         // TODO
         int resX = 446;
         int resY = 336;
@@ -108,7 +111,7 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count--;
         }
-//        musicaAtual = musicas.get(count);
+//        musicaAtual = musicas.get(count);;;
 //        musicaAtual.setStartTime(Duration.ZERO);
 //        musicaAtual.isAutoPlay();
 //        musicaAtual.play();
@@ -127,7 +130,7 @@ public class ChooseCharacterController implements Initializable {
 //        musicaAtual.setStartTime(Duration.ZERO);
 //        musicaAtual.isAutoPlay();
 //        musicaAtual.play();
-        heroName.setText(heroNames[count]);
+//        heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
@@ -260,5 +263,4 @@ public class ChooseCharacterController implements Initializable {
               
           }
       }
-
 }
