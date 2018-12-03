@@ -82,7 +82,7 @@ public class Table{
                                 gameCtrl.addToPiecesPane(bullet2);
                         }
                     }
-                    getBlock(i, j).getPiece().bulletViewConfig();
+                    //getBlock(i, j).getPiece().bulletViewConfig();
                     getBlock(i, j).getPiece().lifeBarRealocate();
                     pieceImage.setLayoutX((65*i));
                     pieceImage.setLayoutY(-75 + (65*j));
