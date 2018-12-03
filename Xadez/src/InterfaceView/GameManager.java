@@ -278,7 +278,7 @@ public class GameManager {
         movingPiece = false;
         selectedVetor = null;
         if(possibleBlocks != null) possibleBlocks.clear();
-        possibleHits.clear();
+        if(possibleHits != null) possibleHits.clear();
         resetBlockTab();
         playing.getHero().GameManager(table);
         Players.passTurn();

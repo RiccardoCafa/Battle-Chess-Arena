@@ -37,6 +37,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import InterfaceView.sounds.HeroesMusics;
 
 
 //String musicURL = "src/testemedia/dancing.mp3";
@@ -70,7 +71,6 @@ public class ChooseCharacterController implements Initializable {
     Text HeroPlayer2;
     
     private Stage primaryStage;
-
     Image myImage;
     ImageView myImageView;
     int count = 0,cont = 0;
@@ -79,6 +79,10 @@ public class ChooseCharacterController implements Initializable {
     String[] heroNames = new String[5];
     Player p1,p2;
     String name1 = "player1",name2 = "player2";
+
+
+    private HeroesMusics music = new HeroesMusics();
+
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,11 +107,13 @@ public class ChooseCharacterController implements Initializable {
         myImageView = new ImageView(myImage);
         setaDir.setGraphic(myImageView);
         characterSelection.setGraphic(new ImageView(perso[0]));
+        //music.setMusicsON();
         
     }
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
         //musicaAtual.stop();
+        //music.playMusic(count);
         if(count == 0){
             count = 4;
         }else{
@@ -130,6 +136,7 @@ public class ChooseCharacterController implements Initializable {
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
+        //music.playMusic(count);
         if(count == 4){
             count = 0;
         }else{

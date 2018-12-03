@@ -24,20 +24,20 @@ public class WizardBishop implements IMovement {
         tab = table;
         int missX, missY;
         Vetor ultPos;
-        
-        ultPos = behindBlocks(-1,1,vetor); //checar superior esquerda
+         
+        ultPos = behindBlocks(-1,1,vetor); //checar inferior esquerda
         missY = Math.abs(ultPos.getY() - vetor.getY());//calcular o que sobra
         pickSideBlocks(-1,1,ultPos,missY);//redirecionar
         
-        ultPos = behindBlocks(-1,-1, vetor);//checar superior direita
+        ultPos = behindBlocks(-1,-1, vetor);//checar superior esquerda
         missY =  Math.abs(ultPos.getY() - vetor.getY());
         pickSideBlocks(-1,-1,ultPos,missY);
         
-        ultPos = behindBlocks(1,-1,vetor);//checar inferior direita
+        ultPos = behindBlocks(1,-1,vetor);//checar superior direita
         missX = Math.abs(ultPos.getX() - vetor.getX());
         pickSideBlocks(1,-1,ultPos,missX);
         
-        ultPos = behindBlocks(1,1,vetor); // checar inferior esquerda
+        ultPos = behindBlocks(1,1,vetor); // checar inferior direita
         missX = Math.abs(ultPos.getX() - vetor.getX());
         pickSideBlocks(1,1,ultPos,missX);
         return vect;
@@ -48,7 +48,7 @@ public class WizardBishop implements IMovement {
         int j = vet.getY() + yGo;
         Vetor auxVetor = new Vetor(i, j);
         //condições de parada
-        if(j < 0 || j > 7 || i < 0 || i > 7 || num == 0){
+        if(j < 0 || j > 7 || i < 0 || i > 7 || num <= 0){
             return vet;
         }
         //verificar a existencia de inimigos
@@ -56,7 +56,6 @@ public class WizardBishop implements IMovement {
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 //adicionado na posição auxVetor.getx e na auxVetor.getY
-            return vet;
             }
             return auxVetor;
         }
@@ -73,7 +72,8 @@ public class WizardBishop implements IMovement {
             }
         }
         // condição de parada com o num
-            return behindBlocks(xGo,yGo, vet, num--);
+        num--;
+        return behindBlocks(xGo,yGo, vet, num);
 
     }
     
@@ -93,7 +93,6 @@ public class WizardBishop implements IMovement {
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 //adicionado na posição auxVetor.getx e na auxVetor.getY
-                return vet;
             }
             return auxVetor;
         }
@@ -101,17 +100,16 @@ public class WizardBishop implements IMovement {
         
         if(tab.getBlock(i,j).getBlockState(playing) == BlockState.Friend){
             return vet;
-            
         }
         // checa se está vazio
         if(tab.getBlock(i, j).getBlockState(playing) == BlockState.Empty){
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 // se ele não existe, adiciiona na lista
-                return behindBlocks(xGo,yGo,auxVetor);
             }
+            
         }
-        return vet;
+        return behindBlocks(xGo,yGo,auxVetor);
     }
  
    
@@ -120,20 +118,29 @@ public class WizardBishop implements IMovement {
      
     public void pickSideBlocks(int xDir, int yDir, Vetor ultPos,int missC){
         int sides = 0;
-        if(yDir != 0 && xDir != 0){
-        while(sides<missC){
-            behindBlocks(1,1,ultPos); 
-                behindBlocks(1,-1,ultPos);
-                behindBlocks(-1, 1, ultPos);
-                behindBlocks(-1,-1,ultPos);
+        if((yDir == -1 && xDir != -1) || (yDir == 1 && xDir ==1)){
+            while(sides<=missC){ 
+                behindBlocks(1,-1,ultPos,sides);
+                behindBlocks(-1, 1, ultPos,sides);
                 ultPos.setX(ultPos.getX() + (-1 * xDir));
-               ultPos.setY(ultPos.getY() + (-1 * yDir));
-               sides++;
-        }
-            
-        }else if(xDir != 0){
-         while(sides<missC){
-             System.out.println("DO not going there");
+                ultPos.setY(ultPos.getY() + (-1 * yDir));
+                System.out.println("-1 -1 / 1 1");
+                System.out.println("faltando " + sides + " posicoes");
+                System.out.println("Posicao encontrada: " + ultPos.getX() + " " + ultPos.getY());
+                sides++;
+            }
+
+        }else if((yDir == -1 && xDir == 1)|| (yDir == 1 && xDir == -1)){
+         while(sides<=missC){
+            behindBlocks(1,1,ultPos,sides); 
+            behindBlocks(-1,-1,ultPos,sides);
+            ultPos.setX(ultPos.getX() + (-1 * xDir));
+            ultPos.setY(ultPos.getY() + (-1 * yDir));
+            System.out.println("-1 1 / 1 -1");
+            System.out.println("faltando " + sides + " posicoes");
+            System.out.println("Posicao encontrada: " + ultPos.getX() + " " + ultPos.getY());
+            sides++;
+
          }
             
         }
