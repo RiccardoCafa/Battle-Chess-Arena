@@ -40,18 +40,18 @@ public class Wizard extends Hero {
     @Override
     public void createArmy(Army army, int sentido, Who jogador) {
         this.player = Players.getPlayer(jogador);
-        for( int k = 0 ; k < 8; k++ ){
-            army.addPiece(new Peon(jogador, TypeHero.wizard, k,(int)(3.5 + sentido*2.5)));
-        }
-        army.addPiece(new Tower(jogador, TypeHero.wizard, 0, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Horse(jogador , TypeHero.wizard, 1, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Bishop(jogador , TypeHero.wizard, 2, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new King(jogador , TypeHero.wizard, 3, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Queen(jogador , TypeHero.wizard, 4, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Bishop(jogador , TypeHero.wizard, 5, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Horse(jogador , TypeHero.wizard, 6, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Tower(jogador , TypeHero.wizard, 7, (int)(3.5 + sentido*3.5)));
-                            
+//        for( int k = 0 ; k < 8; k++ ){
+//            army.addPiece(new Peon(jogador, TypeHero.wizard, k,(int)(3.5 + sentido*2.5)));
+//        }
+//        army.addPiece(new Tower(jogador, TypeHero.wizard, 0, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new Horse(jogador , TypeHero.wizard, 1, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new Bishop(jogador , TypeHero.wizard, 2, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new King(jogador , TypeHero.wizard, 3, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new Queen(jogador , TypeHero.wizard, 4, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new Bishop(jogador , TypeHero.wizard, 5, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new Horse(jogador , TypeHero.wizard, 6, (int)(3.5 + sentido*3.5)));
+//        army.addPiece(new Tower(jogador , TypeHero.wizard, 7, (int)(3.5 + sentido*3.5)));
+//                            
         army.addPiece(new Bishop(jogador, TypeHero.wizard, 4,(int)(3.5 + sentido*2.5)));
 
                             
@@ -84,13 +84,13 @@ public class Wizard extends Hero {
     }
 
     public void wallCross(Table tab, Vetor target, ArrayList<Block> wall){
-        int burnBlock = 3 - 2; 
+        int burnBlock =  1; 
     if(tab.getBlock(target).getBlockState(player) == BlockState.Enemy){
         //da dano na peça inimiga que estiver na barreira   
         tab.getBlock(target).hitPiece(burnBlock);
             
        }else if(tab.getBlock(target).getBlockState(player) == BlockState.Friend){
-           //cura a peça, tirando -1 de vida hausasuaushshua
+           //cura a peça
            tab.getBlock(target).hitPiece(-1);
         }
         
