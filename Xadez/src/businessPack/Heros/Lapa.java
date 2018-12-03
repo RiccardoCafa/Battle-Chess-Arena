@@ -1,6 +1,7 @@
 package businessPack.Heros;
 
 import InterfaceView.GameCtrl;
+import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Block;
 import businessPack.Hero;
@@ -28,7 +29,7 @@ public class Lapa extends Hero {
     Image lapaQueenImage;
     Image lapaHorseImage;
     
-    GameCtrl game;
+    GameManager game;
     Table tab;
     
     private int bigBig = 0;
@@ -74,7 +75,7 @@ public class Lapa extends Hero {
         return tempList;
     }
     
-    public void ExplodeBomb(Table tab, Vetor target, GameCtrl game) {
+    public void ExplodeBomb(Table tab, Vetor target, GameManager game) {
         //Substituir System.out.println por hit das peças
         if(this.game == null) this.game = game;
         if(this.tab == null) this.tab = tab;
