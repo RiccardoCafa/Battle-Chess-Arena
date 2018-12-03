@@ -59,8 +59,7 @@ public class Huebr extends Hero {
      * @return the usePower
      */
     public boolean isUsePower() {
-        if(count <= 4){
-        count++;
+        if(count <= 2){
         return usePower;
         }
         return usePower = false;
@@ -77,6 +76,7 @@ public class Huebr extends Hero {
     public void GameManager(Table tab) {
         if(isUsePower()){
             Players.passTurn();
+            count++;
             setUsePower(false);
         }
     }

@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Hero;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
@@ -73,6 +74,7 @@ public class ChooseCharacterController implements Initializable {
     Image myImage;
     ImageView myImageView;
     int count = 0,cont = 0;
+    int countAnt = -1;
     Image[] perso = new Image[5];
     String[] heroNames = new String[5];
     Player p1,p2;
@@ -111,30 +113,58 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count--;
         }
+
 //        musicaAtual = musicas.get(count);;;
 //        musicaAtual.setStartTime(Duration.ZERO);
 //        musicaAtual.isAutoPlay();
 //        musicaAtual.play();
         heroName.setText(heroNames[count]);
         characterSelection.setGraphic(new ImageView(perso[count]));
+
+        if(countAnt == count) {
+            count--;
+            if(count<0) count = 4;
+        }
+        changeCharImage();
+
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
-
         if(count == 4){
             count = 0;
         }else{
             count++;
         }
+        if(countAnt == count) {
+            count++;
+            if(count > 4) count = 0;
+        }
+        changeCharImage();
 //        musicaAtual = musicas.get(count);
 //        musicaAtual.setStartTime(Duration.ZERO);
 //        musicaAtual.isAutoPlay();
 //        musicaAtual.play();
+
 //        heroName.setText(heroNames[count]);
+
+        
+    }
+    
+    public void changeCharImage() {
+        heroName.setText(heroNames[count]);
+
         characterSelection.setGraphic(new ImageView(perso[count]));
     }
     @FXML
     public void onClickButton(MouseEvent e){
+        System.out.println(name1);
+        System.out.println(name2);
+        
+        if(!setName()) {
+            JOptionPane.showMessageDialog(null, "Nomes iguais!");
+            return;
+        }
+        
         switch(count){
             case 0:
                 //name = "Hue";
@@ -212,6 +242,11 @@ public class ChooseCharacterController implements Initializable {
                 } 
                 break;
         }
+        countAnt = count;
+        count++;
+        if(count > 4) count = 0;
+        changeCharImage();
+        names1.setText("");
         //funcao para pegar o player
         if(p1 != null && p2 != null){
             primaryStage = (Stage) background.getScene().getWindow();
@@ -238,6 +273,7 @@ public class ChooseCharacterController implements Initializable {
             e.printStackTrace();
         }
     }
+
       @FXML
       public void onEnterClick(KeyEvent e){
           if(e.getCode() == KeyCode.ENTER){
@@ -263,4 +299,25 @@ public class ChooseCharacterController implements Initializable {
               
           }
       }
+
+    public boolean setName() {
+        if(cont == 0){
+            if(!names1.getText().equals("")){
+              name1 = names1.getText();
+              PlayerName1.setText(name1);
+            }
+            cont++;
+        }else{
+            if(!names1.getText().equals("")){
+                name2 = names1.getText();
+                if(name1.compareToIgnoreCase(name2) == 0) {
+                    return false;
+                }
+                PlayerName2.setText(name2);
+            }
+        }
+        return true;
+    }
+
+
 }

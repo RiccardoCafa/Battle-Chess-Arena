@@ -1,8 +1,14 @@
 package businessPack;
 
+import InterfaceView.GameCtrl;
+import InterfaceView.GameManager;
 import extras.Vetor;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javax.swing.JOptionPane;
 
 public class Table{
     //atributos>>
@@ -11,6 +17,7 @@ public class Table{
     private static int m;
     private static int n;
     Image genericImage;//fiz apenas para não dar conflito nos argumentos que exigem imagens
+    GameCtrl gameCtrl;
     //construtor>>
     public Table(int m, int n, Player p1, Player p2){
         this.m = m;
@@ -26,16 +33,65 @@ public class Table{
                 }
             }
         }
-        /*for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
-                table[i][j] = new Block(p1.getArmy().findPiece(i, j), i, j);
-                if(p1.getArmy().findPiece(i, j) != null){
-                    table[i][j] = new Block(p2.getArmy().findPiece(i, j), i, j);
-                }
-            }
-        }*/
+    }
+    public void setGameCtrl(GameCtrl gameCtrl) {
+        this.gameCtrl = gameCtrl;
     }
     //metodos>>
+    public void initTable(Player player1, Player player2) {
+        for(int i = 0; i < Table.getM(); i++){
+            for(int j = 0; j < Table.getN(); j++){
+                if(getBlock(i, j).getPiece() == null){
+                    getBlock(i, j).setPiece(player1.getArmy().findPiece(i, j));
+                }
+                if(getBlock(i, j).getPiece() == null){
+                    getBlock(i, j).setPiece(player2.getArmy().findPiece(i, j));
+                }
+            }
+        }
+        try {
+            putImagesOnTable();
+        } catch (NullPointerException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Um erro inesperado ocorreu!", "Erro 001", 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void putImagesOnTable() {
+        ImageView pieceImage;
+        for(int i = 0; i < Table.getM(); i++) {
+            for(int j = 0; j < Table.getN(); j++) {
+                if(!getBlock(i, j).isEmpty()) {
+                    //ImageView barra = new Image("InterfaceView/imagens/barraVerde.png");
+                    pieceImage = getBlock(i, j).getPiece();
+                    ImageView barraLife = getBlock(i, j).getPiece().getLifeBar();
+                    ImageView barraLifeBg = getBlock(i, j).getPiece().getLifeBarBg();
+                    ImageView bullet1 = getBlock(i, j).getPiece().getBullet(1);
+                    ImageView bullet2 = getBlock(i, j).getPiece().getBullet(2);
+                    gameCtrl.addToPiecesPane(pieceImage);
+                    gameCtrl.addToPiecesPane(barraLifeBg);
+                    gameCtrl.addToPiecesPane(barraLife);
+                    if(getBlock(i, j).getPiece().getTpHero() == TypeHero.sheriff){//sheriff bullets
+                        switch(getBlock(i, j).getPiece().getTypePiece()){
+                            case tower: case horse: case  peon:
+                                gameCtrl.addToPiecesPane(bullet1);
+                                break;
+                            case king:
+                                gameCtrl.addToPiecesPane(bullet1);
+                                gameCtrl.addToPiecesPane(bullet2);
+                        }
+                    }
+                    //getBlock(i, j).getPiece().bulletViewConfig();
+                    getBlock(i, j).getPiece().lifeBarRealocate();
+                    pieceImage.setLayoutX((65*i));
+                    pieceImage.setLayoutY(-75 + (65*j));
+                }
+                gameCtrl.addToGrid(gameCtrl.makeBlock(i, j), i, j);
+                //pieceImage = null;
+            }
+        }
+    }
     //getset>>    
     /**
      * 
@@ -94,7 +150,6 @@ public class Table{
         table[pieceDestination.getX()][pieceDestination.getY()].setPiece(tempB);
     }
     
-    public void AttackManaging(){ }
     public Block callForSheriffKing(){//onde está o SheriffKing?
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){

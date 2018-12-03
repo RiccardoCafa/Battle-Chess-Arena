@@ -32,7 +32,7 @@ public abstract class Piece extends ImageView {
     protected Vetor vetor;
     private ImageView lifeBar;
     private ImageView lifeBarBg;
-    protected ImageView[] bullet;
+    protected ImageView[] bullet;//sheriff atribute
     protected ArrayList<Block> freeWay;
     protected ArrayList<Block> hitWay;
     protected ArrayList<Block> especialFreeWay;
@@ -48,20 +48,16 @@ public abstract class Piece extends ImageView {
         setPickOnBounds(true);
         setMouseTransparent(true);
         especial = false;
+        setTranslateZ((double)vetor.getY());
         lifeBar = new ImageView(new Image("InterfaceView/imagens/barraVerde.png", 60, 10, false, false));
+        imageConfig(lifeBar, "InterfaceView/imagens/barraVerde.png", 60, 10, false);
         lifeBarBg = new ImageView(new Image("InterfaceView/imagens/barraVermelha.png", 60, 10, false, false));
-        lifeBar.setPreserveRatio(false);
-        lifeBar.setFitWidth(60);
-        lifeBar.setFitHeight(10);
-        lifeBarBg.setFitWidth(60);
-        lifeBarBg.setFitHeight(10);
+        imageConfig(lifeBarBg, "InterfaceView/imagens/barraVermelha.png", 60, 10, true);
         bullet = new ImageView[2];
         bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-        bullet[0].setFitWidth(13);
-        bullet[0].setFitHeight(30);
+        imageConfig(bullet[0], "InterfaceView/imagens/bullet.png", 13, 30, true);
         bullet[1] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-        bullet[1].setFitWidth(13);
-        bullet[1].setFitHeight(30);
+        imageConfig(bullet[1], "InterfaceView/imagens/bullet.png", 13, 30, true);
     }
     protected Piece(TypePiece tpPiece, TypeHero tpHero, Vetor vetor){
         this.tpPiece = tpPiece;
@@ -72,22 +68,25 @@ public abstract class Piece extends ImageView {
         setPickOnBounds(true);
         setMouseTransparent(true);
         especial = false;
+        setTranslateZ(vetor.getY());
         lifeBar = new ImageView(new Image("InterfaceView/imagens/barraVerde.png", 60, 10, false, false));
+        imageConfig(lifeBar, "InterfaceView/imagens/barraVerde.png", 60, 10, false);
         lifeBarBg = new ImageView(new Image("InterfaceView/imagens/barraVermelha.png", 60, 10, false, false));
-        lifeBar.setPreserveRatio(false);
-        lifeBar.setFitWidth(60);
-        lifeBar.setFitHeight(10);
-        lifeBarBg.setFitWidth(60);
-        lifeBarBg.setFitHeight(10);
+        imageConfig(lifeBarBg, "InterfaceView/imagens/barraVermelha.png", 60, 10, true);
         bullet = new ImageView[2];
         bullet[0] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-        bullet[0].setFitWidth(13);
-        bullet[0].setFitHeight(30);
+        imageConfig(bullet[0], "InterfaceView/imagens/bullet.png", 13, 30, true);
         bullet[1] = new ImageView(new Image("InterfaceView/imagens/bullet.png", 13, 30, false, false));
-        bullet[1].setFitWidth(13);
-        bullet[1].setFitHeight(30);
+        imageConfig(bullet[1], "InterfaceView/imagens/bullet.png", 13, 30, true);
     }
     //metodos>>
+    private void imageConfig(ImageView image, String path, double width, double height, boolean ratio){
+        image.setPreserveRatio(ratio);
+        image.setFitWidth(width);
+        image.setFitHeight(height);
+        image.setTranslateZ((double)vetor.getY());
+        image.setMouseTransparent(true);
+    }
     public abstract void checkMove(Table table);//criação da freeWay
     public void recharge(){ }
     public Vetor getLastPosOf(Block hitedBlock) {
@@ -170,14 +169,14 @@ public abstract class Piece extends ImageView {
         return hitWay;
     }
     public void lifeBarToFront() {
-        lifeBarBg.toFront();
-        lifeBar.toFront();
+        //lifeBarBg.setTranslateZ(vetor.getY());
+        //lifeBar.setTranslateZ(vetor.getY());
     }
     public void lifeBarToBack() {
-        lifeBar.toBack();
-        lifeBarBg.toBack();
+        //lifeBar.setTranslateZ(vetor.getY());
+        //lifeBarBg.setTranslateZ(vetor.getY());
     }
-    public void lifeBarRealocate() {
+    public void lifeBarRealocate(){
         lifeBar.setLayoutX((65 * vetor.getX()) - (1 - ((float)hp/(float)maxHp))*30);
         lifeBarBg.setLayoutX(65 * vetor.getX());
         lifeBar.setLayoutY(-90 + (65 * vetor.getY()));
@@ -193,10 +192,10 @@ public abstract class Piece extends ImageView {
     public void bulletViewConfig(){
         bullet[0].setLayoutX(00 + 65*vetor.getX());
         bullet[0].setLayoutY(30 + 65*vetor.getY());
-        bullet[0].toFront();
+        bullet[0].setTranslateZ(vetor.getY());
         bullet[1].setLayoutX(17 + 65*vetor.getX());
         bullet[1].setLayoutY(30 + 65*vetor.getY());
-        bullet[1].toFront();
+        bullet[1].setTranslateZ(vetor.getY());
     }
     public void removePiece() {
         lifeBar.setVisible(false);
@@ -204,6 +203,20 @@ public abstract class Piece extends ImageView {
         bullet[0].setVisible(false);
         bullet[1].setVisible(false);
         setVisible(false);
+    }
+    public void AllToFront(){
+        toFront();
+        lifeBarBg.toFront();
+        lifeBar.toFront();
+        bullet[0].toFront();
+        bullet[1].toFront();
+    }
+    public void AllToBack(){
+        lifeBar.toBack();
+        lifeBarBg.toBack();
+        bullet[0].toBack();
+        bullet[1].toBack();
+        toBack();
     }
     //getset>>
     public TypePiece getPiece(){
