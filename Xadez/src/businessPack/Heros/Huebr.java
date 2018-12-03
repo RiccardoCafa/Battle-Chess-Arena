@@ -74,7 +74,7 @@ public class Huebr extends Hero {
     }
 
     @Override
-    public void GameManager(Table tab) {
+    public void GameManager(Table tab) { // Roda a cada turno
         if(isUsePower()){
             Players.passTurn();
             setUsePower(false);

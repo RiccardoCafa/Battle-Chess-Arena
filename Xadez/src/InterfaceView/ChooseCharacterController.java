@@ -1,6 +1,5 @@
 package InterfaceView;
 
-import businessPack.Hero;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
 import businessPack.Heros.Lenin;
@@ -15,9 +14,7 @@ import static businessPack.TypeHero.wizard;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.ResourceBundle;
-import java.util.Vector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -51,7 +48,7 @@ public class ChooseCharacterController implements Initializable {
     @FXML
     Button setaDir;
     @FXML
-    Button characterSelection;
+    ImageView characterSelection;
     @FXML
     Text heroName;
     @FXML
@@ -81,17 +78,17 @@ public class ChooseCharacterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO
-        int resX = 446;
-        int resY = 336;
-        perso[0] = new Image("InterfaceView/Personagens/huehuebr-01.png",resX, resY, false, false);
+        int resX = 350;
+        int resY = 350;
+        perso[0] = new Image("InterfaceView/Personagens/iconeHueBR.png",resX, resY, false, false);
         heroNames[0] = "Huehue br";
-        perso[1] = new Image("InterfaceView/Personagens/lapa-01.png",resX, resY, false, false);
+        perso[1] = new Image("InterfaceView/Personagens/iconeLapa.png",resX, resY, false, false);
         heroNames[1] = "Lapa";
-        perso[2] = new Image("InterfaceView/Personagens/lenin-01.png",resX, resY, false, false);
+        perso[2] = new Image("InterfaceView/Personagens/iconeLenin.png",resX, resY, false, false);
         heroNames[2] = "Czar Nicolau II";
-        perso[3] = new Image("InterfaceView/Personagens/omago-01.png", resX, resY, false, false);
+        perso[3] = new Image("InterfaceView/Personagens/iconeWizard.png", resX, resY, false, false);
         heroNames[3] = "The Wizard";
-        perso[4] = new Image("InterfaceView/Personagens/pistoleiro-01.png",resX, resY, false, false);
+        perso[4] = new Image("InterfaceView/Personagens/iconeSheriff.png",resX, resY, false, false);
         heroNames[4] = "Gunslinger";
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
@@ -99,7 +96,7 @@ public class ChooseCharacterController implements Initializable {
         myImage = new Image("InterfaceView/setadir.png");
         myImageView = new ImageView(myImage);
         setaDir.setGraphic(myImageView);
-        characterSelection.setGraphic(new ImageView(perso[0]));
+        characterSelection.setImage(perso[count]);
         
     }
       @FXML
@@ -137,7 +134,7 @@ public class ChooseCharacterController implements Initializable {
     
     public void changeCharImage() {
         heroName.setText(heroNames[count]);
-        characterSelection.setGraphic(new ImageView(perso[count]));
+        characterSelection.setImage(perso[count]);
     }
     @FXML
     public void onClickButton(MouseEvent e){
