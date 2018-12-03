@@ -277,7 +277,7 @@ public class GameManager {
         firstBlock = null;
         movingPiece = false;
         selectedVetor = null;
-        possibleBlocks.clear();
+        if(possibleBlocks != null) possibleBlocks.clear();
         possibleHits.clear();
         resetBlockTab();
         playing.getHero().GameManager(table);
@@ -425,8 +425,11 @@ public class GameManager {
             } else {
                 Lapa lapa = (Lapa) playing.getHero();
                 if(lapa.getBigBig() >= 5) {
-                    displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
                     possibleBlocks = lapa.getBombWays(table, playing);
+                    if(possibleBlocks == null) {
+                        return;
+                    }
+                    displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
                     showPossibleEnemys(possibleBlocks);
                     superPower = true;
                 } else {
@@ -440,6 +443,7 @@ public class GameManager {
         if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
             Huebr huebr = (Huebr) playing.getHero();
             huebr.setUsePower(true);
+            displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
         }
     }
