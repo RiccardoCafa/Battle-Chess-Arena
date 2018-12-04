@@ -112,4 +112,7 @@ public class Lenin extends Hero {
            Estacao = 3;
         }
     }
+    public int getEstacao(){
+        return Estacao;
+    }
 }

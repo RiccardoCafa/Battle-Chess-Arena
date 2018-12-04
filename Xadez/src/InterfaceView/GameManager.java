@@ -3,12 +3,14 @@ package InterfaceView;
 import businessPack.Block;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Lenin;
 import businessPack.Piece;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import static businessPack.TypeHero.lenin;
 import extras.BlockState;
 import extras.Vetor;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class GameManager {
     private Player player1;
     private Player player2;
     private Player playing;
-    
+    private Lenin estacao;
     private GameCtrl gameCtrl;
     
     private Block firstBlock;
@@ -68,6 +70,15 @@ public class GameManager {
     // >>>> MÉTODOS
     public void GameInit() {
         table.initTable(player1, player2);
+        if(player1.getHero().getHeroType() == lenin){
+            estacao = (Lenin) player1.getHero();
+            showSeason(estacao.getEstacao());
+        }
+        if(player2.getHero().getHeroType() == lenin){
+            estacao = (Lenin) player2.getHero();
+            showSeason(estacao.getEstacao());
+        }
+            
     }
      
     public void sheriffTowerShoot(Block actualBlock){//clique extra do tiro da SheriffTower
@@ -283,6 +294,7 @@ public class GameManager {
         playing.getHero().GameManager(table);
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
+        showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
     }
     
@@ -445,6 +457,22 @@ public class GameManager {
             huebr.setUsePower(true);
             displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
+        }
+    }
+    private void showSeason(int season){
+        switch(season){
+            case 1:
+                gameCtrl.season.setText("Inverno");
+                break;
+            case 2:
+                gameCtrl.season.setText("Outono");
+                break;
+            case 3:
+                gameCtrl.season.setText("Verão");
+                break;
+            case 4:
+                gameCtrl.season.setText("Primavera");
+                break;
         }
     }
     
