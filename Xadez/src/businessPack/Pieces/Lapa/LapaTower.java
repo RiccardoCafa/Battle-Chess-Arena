@@ -88,14 +88,14 @@ public class LapaTower implements IMovement {
             while(lefting < offSet) {
                 LookForLast(0, 1, lastPos, lefting); // Encontre em baixo, lefting blocks
                 LookForLast(0, -1, lastPos, lefting); // Encontre em cima, lefting blocks
-                lefting++; // Diminua os lefting
+                lefting++; // Aumenta os lefting
                 lastPos.setX(lastPos.getX() +( -1 * xDirection) ); // se mexa em direção x
             }
         } else if(yDirection != 0) {
             while(lefting < offSet) {
                 LookForLast(1, 0, lastPos, lefting); // Encontre na direita, lefting blocks
                 LookForLast(-1, 0, lastPos, lefting); // Encontre na esquerda, lefting blocks
-                lefting++; // Diminua os lefting
+                lefting++; // Aumenta os lefting
                 lastPos.setY(lastPos.getY() +( -1 * yDirection)); // se mexa em direção y
                 
             }
@@ -126,7 +126,6 @@ public class LapaTower implements IMovement {
         if(table.getBlock(i, j).getBlockState(player) == BlockState.Enemy) {
             if(!myMoves.contains(table.getBlock(newVetor))) { // Se essa casa não está na lista
                 myMoves.add(table.getBlock(newVetor)); // Add na lista
-                System.out.println("Adicionado bloco na posição (enemy): " + newVetor.getX() + " " + newVetor.getY());
             }
             return newVetor; // C.P.
         }
