@@ -266,8 +266,12 @@ public class GameManager {
         if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
             Huebr huebr = (Huebr) playing.getHero();
             huebr.setUsePower(true);
-            displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
+            if(huebr.Contador() <= 2){
+            displayMessage("Hue", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
+            }else{
+                displayMessage("Hue", "Huee Hueeee, já falei para parar de ser corrupto, ja usou seu poder " + huebr.Contador() + "vezes");
+            }
         }
     }
     //getset>>
