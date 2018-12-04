@@ -26,6 +26,7 @@ public class WizardBishop implements IMovement {
         Vetor ultPos;
          
         ultPos = behindBlocks(-1,1,vetor); //checar inferior esquerda
+        System.out.println("Ultima posicao: " + ultPos.getX() + " " + ultPos.getY());
         missY = Math.abs(ultPos.getY() - vetor.getY());//calcular o que sobra
         pickSideBlocks(-1,1,ultPos,missY);//redirecionar
         
@@ -72,8 +73,8 @@ public class WizardBishop implements IMovement {
             }
         }
         // condição de parada com o num
-        num--;
-        return behindBlocks(xGo,yGo, vet, num);
+        if(num == 0) return vet; 
+        else return behindBlocks(xGo,yGo, auxVetor, --num);
 
     }
     
@@ -111,38 +112,33 @@ public class WizardBishop implements IMovement {
         }
         return behindBlocks(xGo,yGo,auxVetor);
     }
- 
-   
-    
-    
      
     public void pickSideBlocks(int xDir, int yDir, Vetor ultPos,int missC){
         int sides = 0;
-        if((yDir == -1 && xDir != -1) || (yDir == 1 && xDir ==1)){
-            while(sides<=missC){ 
-                behindBlocks(1,-1,ultPos,sides);
-                behindBlocks(-1, 1, ultPos,sides);
-                ultPos.setX(ultPos.getX() + (-1 * xDir));
-                ultPos.setY(ultPos.getY() + (-1 * yDir));
-                System.out.println("-1 -1 / 1 1");
-                System.out.println("faltando " + sides + " posicoes");
-                System.out.println("Posicao encontrada: " + ultPos.getX() + " " + ultPos.getY());
-                sides++;
-            }
-
-        }else if((yDir == -1 && xDir == 1)|| (yDir == 1 && xDir == -1)){
-         while(sides<=missC){
-            behindBlocks(1,1,ultPos,sides); 
-            behindBlocks(-1,-1,ultPos,sides);
-            ultPos.setX(ultPos.getX() + (-1 * xDir));
-            ultPos.setY(ultPos.getY() + (-1 * yDir));
-            System.out.println("-1 1 / 1 -1");
-            System.out.println("faltando " + sides + " posicoes");
-            System.out.println("Posicao encontrada: " + ultPos.getX() + " " + ultPos.getY());
-            sides++;
-
-         }
-            
+        int newYDir, newXDir;
+        int newYDir2, newXDir2;
+        newYDir = newYDir2 = newXDir = newXDir2 = 0;
+        if((yDir == -1 && xDir == -1) || (yDir == 1 && xDir ==1)) {
+            newXDir = -1;
+            newYDir = 1;
+            newXDir2 = 1;
+            newYDir2 = -1;
+        }else if((yDir == -1 && xDir == 1) || (yDir == 1 && xDir == -1)){
+            newXDir = -1;
+            newYDir = -1;
+            newXDir2 = 1;
+            newYDir2 = 1;
+        }
+        
+        while(sides<=missC){
+               behindBlocks(newXDir,newYDir,ultPos,sides); 
+               behindBlocks(newXDir2,newYDir2,ultPos,sides);
+               ultPos.setX(ultPos.getX() + (-1 * xDir));
+               ultPos.setY(ultPos.getY() + (-1 * yDir));
+//               System.out.println("esquerda inferior / direita superior");
+//               System.out.println("faltando " + sides + " posicoes");
+//               System.out.println("Proxima posicao: " + ultPos.getX() + " " + ultPos.getY());
+               sides++;
         }
     }  
 }
