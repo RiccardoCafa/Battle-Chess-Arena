@@ -55,9 +55,6 @@ public class Tower extends Piece {
                 return new DefaultTower(Players.getPlayer(player));
         }
     }
-    public void realShoot(Table table, Block enemyBlock){
-        ((SheriffTower)shoot).realShoot(table, enemyBlock);
-    }
     public ArrayList<Block> getSheriffTowerHitWay(Table table){
         if(tpHero == TypeHero.sheriff)
             return ((SheriffTower)shoot).sheriffTowerHitWay(table, vetor);
@@ -66,8 +63,5 @@ public class Tower extends Piece {
     //getset>>
     public void setTypeTower(IMovement tpTower){//muda o comportamento do checkMove()
         strategy = tpTower;
-    }
-    public int getCharge(){
-        return ((SheriffTower)shoot).getCharge();
     }
 }

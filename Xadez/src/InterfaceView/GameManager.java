@@ -16,6 +16,7 @@ import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
+import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
 import businessPack.TypeHero;
 import static businessPack.TypeHero.lenin;
@@ -96,23 +97,6 @@ public class GameManager {
         }       
     }
     public void getOptionsInfo() {
-        File myFile = new File(System.getProperty("java.io.tmpdir") + "/BattleChessArena/options.txt");
-        if(!myFile.exists()) return;
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(myFile));
-            String st;
-//FileReader leitor = new FileReader(myFile);
-            while((st = in.readLine()) != null) {
-                
-            }
-            in.close();
-            //leitor.close();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(GameManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException e){
-            JOptionPane.showMessageDialog(null, "Erro 002");
-        }
-        
         
     }
     public void clearHighlight(){
@@ -237,43 +221,38 @@ public class GameManager {
         showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
     }
+    Block click2;
+    Block sheriffBlock;
     public void OnBlockClicked(MouseEvent e){
-        Block click2;
         clickSequence = true;
         while(clickSequence){
             switch(tpClick){
-                case first:
-                    clickOnBlock = new FirstClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case first:        clickOnBlock = new FirstClick(this);
                     break;
-                case move:
-                    clickOnBlock = new MoveClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case move:         clickOnBlock = new MoveClick(this, click1);
                     break;
-                case hit:
-                    clickOnBlock = new HitClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case reaction:     clickOnBlock = new ReactionClick(this, click1);
                     break;
-                case special:
-                    clickOnBlock = new SpecialClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case hit:          clickOnBlock = new HitClick(this, click1);
                     break;
-                case moveSpecial:
-                    clickOnBlock = new MoveSpecialClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case sheriffTower: clickOnBlock = sheriffBlock.getSheriffTower(this, click1);
                     break;
-                case last:
-                    clickOnBlock = new LastClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case special:      clickOnBlock = new SpecialClick(this, click1);
+                    break;
+                case moveSpecial:  clickOnBlock = new MoveSpecialClick(this, click1);
+                    break;
+                case last:         clickOnBlock = new LastClick(this);
                     break;
             }
+            click2 = (Block) e.getSource();
+            tpClick = clickOnBlock.click(click2);
         }
+    }
+    public void setSheriffBlock(Block sheriffBlock){
+        this.sheriffBlock = sheriffBlock;
+    }
+    public Block getSheriffBlock(){
+        return sheriffBlock;
     }
     public void displayMessage(String sender, String message) {
         gameCtrl.displayMessage(sender, message);
