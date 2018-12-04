@@ -1,5 +1,6 @@
 package businessPack;
 
+import InterfaceView.GameManager;
 import extras.BlockState;
 import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
@@ -11,6 +12,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import businessPack.Pieces.Interfaces.IMovement;
+import businessPack.Pieces.Sheriff.SheriffTower;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
@@ -218,6 +220,10 @@ public abstract class Piece extends ImageView {
         toBack();
     }
     //getset>>
+    public Pistol getShoot(GameManager game, Block priorBlockClicked){
+        ((SheriffTower)shoot).setTurnAtributes(game, priorBlockClicked);
+        return shoot;
+    }
     public TypePiece getPiece(){
         return tpPiece;
     }

@@ -18,7 +18,7 @@ public class MoveClick implements ClickOnBlock{
         if(game.getPossibleBlocks().contains(blockClicked)){//se o bloco clicado é válido para mover
             if(game.getPossibleHits().contains(blockClicked)){
                 game.setClickSequence(true);
-                return TypeClick.hit;
+                return TypeClick.reaction;
             }
             game.externalMove(priorBlockClicked, blockClicked);
             game.internalMove(priorBlockClicked, blockClicked);

@@ -7,11 +7,9 @@ import businessPack.Players;
 public class LastClick implements ClickOnBlock{
     //atributos>>
     GameManager game;
-    Block priorBlockClicked;
     //construtor>>
-    public LastClick(GameManager game, Block priorBlockClicked){
+    public LastClick(GameManager game){
         this.game = game;
-        this.priorBlockClicked = priorBlockClicked;
     }
     //metodos>>
     @Override
