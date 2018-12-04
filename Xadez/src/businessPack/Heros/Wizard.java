@@ -79,7 +79,9 @@ public class Wizard extends Hero {
     public void setWall(Vetor grandLine){
         wallPos =  grandLine.getY();
 //        getWallImage(wizardWall);
-        
+        wizardWall.setLayoutX(0);
+        System.out.println("Setei para y = " + (15 + 65 * wallPos) );
+        wizardWall.setLayoutY(15 + 65 * wallPos);
     }
 
     /**

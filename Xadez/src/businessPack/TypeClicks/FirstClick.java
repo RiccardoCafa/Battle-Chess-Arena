@@ -8,11 +8,9 @@ import extras.Vetor;
 public class FirstClick implements ClickOnBlock {
     //atributos>>
     GameManager game;
-    Block priorBlockClicked;
     //construtor>>
-    public FirstClick(GameManager game, Block priorBlockClicked){
+    public FirstClick(GameManager game){
         this.game = game;
-        this.priorBlockClicked = priorBlockClicked;
     }
     //metodos>>
     @Override

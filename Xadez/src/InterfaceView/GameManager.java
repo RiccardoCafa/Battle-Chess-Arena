@@ -16,7 +16,9 @@ import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
+import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
+import businessPack.TypeClicks.WizardClick;
 import businessPack.TypeHero;
 import extras.Vetor;
 import java.util.ArrayList;
@@ -203,43 +205,40 @@ public class GameManager {
         playing = Players.getTurn() == 1 ? player1 : player2;
         gameCtrl.superPowerBtnManager();
     }
+    Block click2;
+    Block sheriffBlock;
     public void OnBlockClicked(MouseEvent e){
-        Block click2;
         clickSequence = true;
         while(clickSequence){
             switch(tpClick){
-                case first:
-                    clickOnBlock = new FirstClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case first:        clickOnBlock = new FirstClick(this);
                     break;
-                case move:
-                    clickOnBlock = new MoveClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case move:         clickOnBlock = new MoveClick(this, click1);
                     break;
-                case hit:
-                    clickOnBlock = new HitClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case reaction:     clickOnBlock = new ReactionClick(this, click1);
                     break;
-                case special:
-                    clickOnBlock = new SpecialClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case hit:          clickOnBlock = new HitClick(this, click1);
                     break;
-                case moveSpecial:
-                    clickOnBlock = new MoveSpecialClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case sheriffTower: clickOnBlock = sheriffBlock.getSheriffTower(this, click1);
                     break;
-                case last:
-                    clickOnBlock = new LastClick(this, click1);
-                    click2 = (Block) e.getSource();
-                    tpClick = clickOnBlock.click(click2);
+                case special:      clickOnBlock = new SpecialClick(this, click1);
+                    break;
+                case moveSpecial:  clickOnBlock = new MoveSpecialClick(this, click1);
+                    break;
+                case last:         clickOnBlock = new LastClick(this);
+                    break;
+                case wizardClick:  clickOnBlock = new WizardClick(this);
                     break;
             }
+            click2 = (Block) e.getSource();
+            tpClick = clickOnBlock.click(click2);
         }
+    }
+    public void setSheriffBlock(Block sheriffBlock){
+        this.sheriffBlock = sheriffBlock;
+    }
+    public Block getSheriffBlock(){
+        return sheriffBlock;
     }
     public void displayMessage(String sender, String message) {
         gameCtrl.displayMessage(sender, message);
@@ -279,10 +278,13 @@ public class GameManager {
                 clearHighlight();
             } else {
                 Wizard mago = (Wizard) playing.getHero();
-                if(mago.getCanMove()) {
+                System.out.println("Entrei2");
+                if(!mago.isWallSetted() || mago.getCanMove()) {
+                    System.out.println("Entrei");
                     displayMessage(Players.getActualPlayer().getName(), "Contemplem o mago!!");
                     possibleBlocks = mago.getWallWays(table);
                     showPossibleWays(possibleBlocks);
+                    tpClick = TypeClick.wizardClick;
                 }
             }
         }
