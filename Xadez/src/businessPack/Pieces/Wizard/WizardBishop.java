@@ -130,14 +130,11 @@ public class WizardBishop implements IMovement {
             newYDir2 = 1;
         }
         
-        while(sides<=missC){
+        while(sides<missC){
                behindBlocks(newXDir,newYDir,ultPos,sides); 
                behindBlocks(newXDir2,newYDir2,ultPos,sides);
                ultPos.setX(ultPos.getX() + (-1 * xDir));
                ultPos.setY(ultPos.getY() + (-1 * yDir));
-//               System.out.println("esquerda inferior / direita superior");
-//               System.out.println("faltando " + sides + " posicoes");
-//               System.out.println("Proxima posicao: " + ultPos.getX() + " " + ultPos.getY());
                sides++;
         }
     }  
