@@ -5,10 +5,27 @@
  */
 package InterfaceView.sounds;
 
+import java.util.ArrayList;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 /**
  *
  * @author patri
  */
 public class HeroesMusics {
+    Media huebr;
+    Media lenin;
+    Media Mago;
+    Media lapa;
+    Media Sheriff;
+    
+    
+    public ArrayList<Media> HeroMusic(){
+       
+        
+       
+        return null; 
+    }
     
 }
