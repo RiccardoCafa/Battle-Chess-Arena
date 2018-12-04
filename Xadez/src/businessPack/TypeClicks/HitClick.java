@@ -20,31 +20,27 @@ public class HitClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
-        if(blockClicked.getPiece().reaction(game.getTable(), priorBlockClicked)){//se a reação é da SheriffTower
-            return TypeClick.sheriffTower;
-        }
-        if(!priorBlockClicked.isEmpty()){//se a reação não matou o atacante
-            if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
-                if(priorBlockClicked.getPiece().getTpHero() == TypeHero.lapa) {
-                    Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
-                    lapao.setBigBig(lapao.getBigBig() + 1);
-                    game.displayMessage(game.getPlaying().getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
-                            + lapao.getBigBig() + " bigbigs");
-                }
-                if(priorBlockClicked.getPiece().isSpecial()){//se a peça for special
-                    game.clearHighlight();
-                    game.setClickSequence(true);
-                    return TypeClick.special;
-                }else{//se não for special
-                    Vetor lastPos = priorBlockClicked.getPiece().getLastPosOf(blockClicked);//posição pós-ataque
-                    game.externalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
-                    game.internalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
-                }
-            }else{//se a peça atingida morreu
-                game.removeImage(blockClicked);
-                game.externalMove(priorBlockClicked, blockClicked);
-                game.internalMove(priorBlockClicked, blockClicked);
+        if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
+        if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
+            if(priorBlockClicked.getPiece().getTpHero() == TypeHero.lapa) {
+                Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
+                lapao.setBigBig(lapao.getBigBig() + 1);
+                game.displayMessage(game.getPlaying().getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
+                        + lapao.getBigBig() + " bigbigs");
             }
+            if(priorBlockClicked.getPiece().isSpecial()){//se a peça for special
+                game.clearHighlight();
+                game.setClickSequence(true);
+                return TypeClick.special;
+            }else{//se não for special
+                Vetor lastPos = priorBlockClicked.getPiece().getLastPosOf(blockClicked);//posição pós-ataque
+                game.externalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
+                game.internalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
+            }
+        }else{//se a peça atingida morreu
+            game.removeImage(blockClicked);
+            game.externalMove(priorBlockClicked, blockClicked);
+            game.internalMove(priorBlockClicked, blockClicked);
         }
         game.setClickSequence(true);
         return TypeClick.last;

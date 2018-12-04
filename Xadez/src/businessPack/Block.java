@@ -1,5 +1,7 @@
 
 package businessPack;
+import InterfaceView.GameManager;
+import businessPack.Pieces.Sheriff.SheriffTower;
 import extras.BlockState;
 import extras.Who;
 import javafx.scene.image.Image;
@@ -33,6 +35,9 @@ public class Block extends ImageView {
         return piece == null;
     }
     //getset>>
+    public SheriffTower getSheriffTower(GameManager game, Block priorBlockClicked){
+        return (SheriffTower) piece.getShoot(game, priorBlockClicked);
+    }
     public boolean hitPiece(int damage){
         boolean died = false;
         if(piece != null){
