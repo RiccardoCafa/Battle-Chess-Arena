@@ -28,10 +28,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javax.swing.JOptionPane;
+import InterfaceView.sounds.HeroesMusics;
 
 
 //String musicURL = "src/testemedia/dancing.mp3";
@@ -65,7 +68,6 @@ public class ChooseCharacterController implements Initializable {
     Text HeroPlayer2;
     
     private Stage primaryStage;
-
     Image myImage;
     ImageView myImageView;
     int count = 0,cont = 0;
@@ -74,9 +76,14 @@ public class ChooseCharacterController implements Initializable {
     String[] heroNames = new String[5];
     Player p1,p2;
     String name1 = "player1",name2 = "player2";
+
+
+    private HeroesMusics music = new HeroesMusics();
+
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        
         // TODO
         int resX = 350;
         int resY = 350;
@@ -96,25 +103,38 @@ public class ChooseCharacterController implements Initializable {
         myImage = new Image("InterfaceView/setadir.png");
         myImageView = new ImageView(myImage);
         setaDir.setGraphic(myImageView);
+
         characterSelection.setImage(perso[count]);
+
         
     }
       @FXML
     public void onSetaClickEsq(MouseEvent event) {
         //musicaAtual.stop();
+        //music.playMusic(count);
         if(count == 0){
             count = 4;
         }else{
             count--;
         }
+
+//        musicaAtual = musicas.get(count);;;
+//        musicaAtual.setStartTime(Duration.ZERO);
+//        musicaAtual.isAutoPlay();
+//        musicaAtual.play();
+        heroName.setText(heroNames[count]);
+        characterSelection.setImage(perso[count]);
+
         if(countAnt == count) {
             count--;
             if(count<0) count = 4;
         }
         changeCharImage();
+
     }
     @FXML
     public void onSetaClickDir(MouseEvent event){
+        //music.playMusic(count);
         if(count == 4){
             count = 0;
         }else{
@@ -129,11 +149,15 @@ public class ChooseCharacterController implements Initializable {
 //        musicaAtual.setStartTime(Duration.ZERO);
 //        musicaAtual.isAutoPlay();
 //        musicaAtual.play();
+
+//        heroName.setText(heroNames[count]);
+
         
     }
     
     public void changeCharImage() {
         heroName.setText(heroNames[count]);
+
         characterSelection.setImage(perso[count]);
     }
     @FXML
@@ -254,13 +278,33 @@ public class ChooseCharacterController implements Initializable {
             e.printStackTrace();
         }
     }
-    @FXML
-    public void onEnterClick(KeyEvent e){
-        if(e.getCode() == KeyCode.ENTER){
-            setName();
-        }
-    }
-    
+
+      @FXML
+      public void onEnterClick(KeyEvent e){
+          if(e.getCode() == KeyCode.ENTER){
+              if(cont == 0){
+                if("".equals(names1.getText())){
+                   System.out.println(name1);
+                   cont++;
+                }else{
+                  name1 = names1.getText();
+                  System.out.println(name1);
+                  PlayerName1.setText(name1);
+                  cont++;
+                }     
+              }else{
+                  if("".equals(names1.getText())){
+                   System.out.println(name2);
+              }else{
+                  name2 = names1.getText();
+                  System.out.println(name2);
+                  PlayerName2.setText(name2);
+              }
+              }
+              
+          }
+      }
+
     public boolean setName() {
         if(cont == 0){
             if(!names1.getText().equals("")){
@@ -279,5 +323,6 @@ public class ChooseCharacterController implements Initializable {
         }
         return true;
     }
+
 
 }

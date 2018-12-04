@@ -1,3 +1,4 @@
+
 package businessPack.Pieces.Sheriff;
 
 import javafx.scene.media.Media;
