@@ -3,6 +3,7 @@ package InterfaceView;
 import businessPack.Block;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Wizard;
 import businessPack.Piece;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
@@ -446,6 +447,13 @@ public class GameManager {
             displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
         }
+        
+        if(playing.getHero().getHeroType() == TypeHero.wizard && !movingPiece){
+            Wizard mago = (Wizard) playing.getHero();
+            mago.youShallNotPass();
+        }
+        
+        
     }
     
     // >>>> GETSET

@@ -1,8 +1,10 @@
 package businessPack.Heros;
 
+import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Block;
 import businessPack.Hero;
+import businessPack.Piece;
 import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
@@ -14,6 +16,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.TypePiece;
 import extras.BlockState;
 import extras.Vetor;
 import extras.Who;
@@ -29,6 +32,8 @@ public class Wizard extends Hero {
     Image wizardQueen;
     Image wizardHorse;
     Image wizardTower;
+    
+    Image wizardWall;
     
     public Wizard() {
         image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
@@ -60,9 +65,12 @@ public class Wizard extends Hero {
     public void GameManager(Table tab){
        String a = "Nothing";
     } 
-       
+       public Image getWallImage(Image wallImage){
+           return wallImage;
+       }
     //metodo para colocar a barreira no tabuleiro
     public ArrayList<Block> setWall(Table tab, Vetor grandLine){
+        
         ArrayList<Block> wall = new ArrayList<>();
         //adicionar os blocos que estão atras
         for(int i = grandLine.getX(); i!=0; i--){
@@ -71,15 +79,24 @@ public class Wizard extends Hero {
         //adicionar os blocos que estão na frente
         for(int i = grandLine.getX(); i<=7; i = grandLine.getX() + 1 ){
         wall.add(tab.getBlock(grandLine));
+        
         }
         
+        wizardWall = new Image("barreira.png",widthImg, heightImg, false, false);
+        getWallImage(wizardWall);
         
         return wall;
     }
     
     //método que procura os peões no tabuleiro
-    public boolean searchPeons(Table tab, Vetor pos){
-       return false;
+    public boolean searchPeons(Table tab, Vetor pos, GameManager game){
+        Player wzPlayer = Players.getActualPlayer();
+        for(Piece c : wzPlayer.getArmy().getArmyList()){
+            if(c.getPiece() == TypePiece.peon){
+               return true;
+            }
+        }
+        return false;
     }
 
     public void wallCross(Table tab, Vetor target, ArrayList<Block> wall){
@@ -96,7 +113,13 @@ public class Wizard extends Hero {
     }
     
  
-    
+    public void youShallNotPass(){
+        if(run == true){
+            setWall();
+        }
+        
+        
+    }
     
     
     

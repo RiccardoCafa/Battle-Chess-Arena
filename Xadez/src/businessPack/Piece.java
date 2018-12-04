@@ -246,7 +246,10 @@ public abstract class Piece extends ImageView {
         bulletViewConfig();
         return alive;
     }
-    private void setHP(int hp){
+    public void setHP(int hp){
+        if(hp>maxHp){
+            hp =  maxHp;
+        }
         this.hp = hp;
         alive = (hp > 0);
     }
