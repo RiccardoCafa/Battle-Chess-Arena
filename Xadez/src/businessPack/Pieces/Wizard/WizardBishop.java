@@ -29,18 +29,25 @@ public class WizardBishop implements IMovement {
         System.out.println("Ultima posicao: " + ultPos.getX() + " " + ultPos.getY());
         missY = Math.abs(ultPos.getY() - vetor.getY());//calcular o que sobra
         pickSideBlocks(-1,1,ultPos,missY);//redirecionar
+
+        
         
         ultPos = behindBlocks(-1,-1, vetor);//checar superior esquerda
         missY =  Math.abs(ultPos.getY() - vetor.getY());
         pickSideBlocks(-1,-1,ultPos,missY);
+ 
+        
         
         ultPos = behindBlocks(1,-1,vetor);//checar superior direita
-        missX = Math.abs(ultPos.getX() - vetor.getX());
-        pickSideBlocks(1,-1,ultPos,missX);
+        missY = Math.abs(ultPos.getY() - vetor.getY());
+        pickSideBlocks(1,-1,ultPos,missY);
+        
         
         ultPos = behindBlocks(1,1,vetor); // checar inferior direita
-        missX = Math.abs(ultPos.getX() - vetor.getX());
-        pickSideBlocks(1,1,ultPos,missX);
+        missY = Math.abs(ultPos.getY() - vetor.getY());
+        pickSideBlocks(1,1,ultPos,missY);
+        
+        
         return vect;
     }   
     // função que reconhece se há inimigos ou amigos
@@ -73,8 +80,10 @@ public class WizardBishop implements IMovement {
             }
         }
         // condição de parada com o num
+
         if(num == 0) return vet; 
         else return behindBlocks(xGo,yGo, auxVetor, --num);
+
 
     }
     
@@ -137,5 +146,12 @@ public class WizardBishop implements IMovement {
                ultPos.setY(ultPos.getY() + (-1 * yDir));
                sides++;
         }
-    }  
-}
+           
+    }
+        
+    }
+    
+    
+    
+    
+    

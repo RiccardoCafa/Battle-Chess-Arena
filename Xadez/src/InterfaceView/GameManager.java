@@ -426,7 +426,7 @@ public class GameManager {
                 Lapa lapa = (Lapa) playing.getHero();
                 if(lapa.getBigBig() >= 5) {
                     possibleBlocks = lapa.getBombWays(table, playing);
-                    if(possibleBlocks == null) {
+                    if(possibleBlocks.isEmpty()) {
                         return;
                     }
                     displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
@@ -485,33 +485,5 @@ public class GameManager {
      */
     public void setPossibleHits(ArrayList<Block> possibleHits) {
         this.possibleHits = possibleHits;
-    }
-
-    /**
-     * @return the sheriffTowerReaction
-     */
-    public boolean isSheriffTowerReaction() {
-        return sheriffTowerReaction;
-    }
-
-    /**
-     * @param sheriffTowerReaction the sheriffTowerReaction to set
-     */
-    public void setSheriffTowerReaction(boolean sheriffTowerReaction) {
-        this.sheriffTowerReaction = sheriffTowerReaction;
-    }
-    
-    /**
-     * @return the gridPane
-     */
-    public GridPane getGridPane() {
-        return gameCtrl.gridPane;
-    }
-
-    /**
-     * @return the pratoPieces
-     */
-    public Pane getPratoPieces() {
-        return gameCtrl.pratoPieces;
     }
 }
