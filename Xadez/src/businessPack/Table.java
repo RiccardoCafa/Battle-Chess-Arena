@@ -148,6 +148,9 @@ public class Table{
         tempB.setVetor(pieceDestination);
         table[piecePos.getX()][piecePos.getY()].setPiece(null);
         table[pieceDestination.getX()][pieceDestination.getY()].setPiece(tempB);
+        if(getBlock(piecePos).getPiece().getTypePiece() == TypePiece.peon){
+             
+        }
     }
     
     public Block callForSheriffKing(){//onde está o SheriffKing?

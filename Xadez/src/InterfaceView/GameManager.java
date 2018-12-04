@@ -270,7 +270,7 @@ public class GameManager {
             displayMessage("Hue", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
             }else{
-                displayMessage("Hue", "Huee Hueeee, já falei para parar de ser corrupto, ja usou seu poder " + huebr.Contador() + "vezes");
+                displayMessage("Hue", "Huee Hueeee, já falei para parar de ser corrupto, ja usou seu poder " + huebr.Contador() + " vezes");
             }
         }
     }

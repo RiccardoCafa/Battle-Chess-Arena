@@ -3,7 +3,6 @@ package businessPack.Pieces;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Pieces.Huebr.huebrPeon;
-import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -11,11 +10,12 @@ import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Sheriff.SheriffPeon;
-import businessPack.Pieces.Sheriff.Pistol;
 import businessPack.Pieces.Interfaces.IMovement;
-import javafx.scene.image.ImageView;
+
 
 public class Peon extends Piece {
+
+    
     //atributos>>
     //construtor>>
     public Peon(Who who, TypeHero tpHero, int x, int y) {
@@ -25,6 +25,7 @@ public class Peon extends Piece {
         tpPiece = TypePiece.peon;
         pieceName = "Peão";
         maxHp = hp;
+        boolean firstMove = true;
         updateImage();
     }
     //metodos>>

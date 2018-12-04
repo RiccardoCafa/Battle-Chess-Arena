@@ -71,6 +71,9 @@ public class Huebr extends Hero {
     public void setUsePower(boolean usePower) {
         this.usePower = usePower;
     }
+    public int Contador(){
+        return count;
+    }
 
     @Override
     public void GameManager(Table tab) { // Roda a cada turno
