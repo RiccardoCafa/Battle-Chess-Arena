@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Saver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,29 +35,18 @@ public class OptionMenuController implements Initializable {
     private Stage primaryStage;
     private File optionFile;
     private File gameFolder;
+    private Saver saver;
+    private String optionKey = "Option";
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        new File(System.getProperty("java.io.tmpdir") + "BattleChessArena").mkdir();
-        String tempPath = System.getProperty("java.io.tmpdir") + "/BattleChessArena";
-        System.out.println(tempPath);
-        optionFile = new File(tempPath, "options.txt");
+        saver = new Saver();
+        saver.makeFile(optionKey, "Options.txt");
     }
     @FXML
     public void onOptionsSave() {
-        
-        try {
-            //if(optionFile.exists()) {
-            FileWriter escrevedor = new FileWriter(optionFile);
-            escrevedor.write("Volume " + volumeSlider.getValue());
-            JOptionPane.showMessageDialog(null, "Configurações salvas!");
-            escrevedor.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(OptionMenuController.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
-        }
-        
+            saver.writeOnFile(optionKey, "Volume", Double.toString(volumeSlider.getValue()));
+            JOptionPane.showMessageDialog(null, "Suas configurações foram salvas!");
     }
     @FXML
     public void onBackClick(MouseEvent e){
