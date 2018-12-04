@@ -34,7 +34,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
-import InterfaceView.sounds.HeroesMusics;
+import Sounds.HeroesMusics;
 
 
 //String musicURL = "src/testemedia/dancing.mp3";
@@ -79,12 +79,13 @@ public class ChooseCharacterController implements Initializable {
 
 
     private HeroesMusics music = new HeroesMusics();
-
+    
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
         // TODO
+        
         int resX = 350;
         int resY = 350;
         perso[0] = new Image("InterfaceView/Personagens/iconeHueBR.png",resX, resY, false, false);
@@ -105,7 +106,7 @@ public class ChooseCharacterController implements Initializable {
         setaDir.setGraphic(myImageView);
 
         characterSelection.setImage(perso[count]);
-
+        music.playMusic(count);
         
     }
       @FXML
@@ -117,11 +118,6 @@ public class ChooseCharacterController implements Initializable {
         }else{
             count--;
         }
-
-//        musicaAtual = musicas.get(count);;;
-//        musicaAtual.setStartTime(Duration.ZERO);
-//        musicaAtual.isAutoPlay();
-//        musicaAtual.play();
         heroName.setText(heroNames[count]);
         characterSelection.setImage(perso[count]);
 
@@ -129,6 +125,7 @@ public class ChooseCharacterController implements Initializable {
             count--;
             if(count<0) count = 4;
         }
+        music.playMusic(count);
         changeCharImage();
 
     }
@@ -145,6 +142,7 @@ public class ChooseCharacterController implements Initializable {
             if(count > 4) count = 0;
         }
         changeCharImage();
+        music.playMusic(count);
 //        musicaAtual = musicas.get(count);
 //        musicaAtual.setStartTime(Duration.ZERO);
 //        musicaAtual.isAutoPlay();
