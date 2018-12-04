@@ -2,6 +2,7 @@ package InterfaceView;
 
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Wizard;
 import businessPack.Player;
 import businessPack.Players;
 import java.net.URL;
@@ -98,6 +99,15 @@ public class GameCtrl implements Initializable {
             btnSuperPower.setVisible(true);
         } else { 
             btnSuperPower.setVisible(false);
+        }
+        if(Players.getActualPlayer().getHero() instanceof Wizard) {
+            Wizard wiz = (Wizard) Players.getActualPlayer().getHero();
+            if(!wiz.isWallSetted() || wiz.getCanMove()) {
+            // Sou virgem ainda
+                btnSuperPower.setVisible(true);
+            } else {
+                btnSuperPower.setVisible(false);
+            }
         }
         persoImage.setImage(Players.getActualPlayer().getHero().getImage());
         gameplayChat.appendText("[" + gameName + "] Vez de " + Players.getActualPlayer().getName() + "\n");

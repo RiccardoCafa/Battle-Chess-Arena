@@ -22,21 +22,21 @@ import extras.Vetor;
 import extras.Who;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Wizard extends Hero {
     
     // atributos
-    Image wizardBishop;
-    Image wizardPeon;
-    Image wizardKing;
-    Image wizardQueen;
-    Image wizardHorse;
-    Image wizardTower;
     
-    Image wizardWall;
+    ImageView wizardWall;
+    
+    private int wallPos;
+    private boolean wallSetted = false;
+    private boolean canMoveWall = false;
     
     public Wizard() {
         image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
+        wizardWall = new ImageView(new Image("InterfaceView/imagens/barreira.png",65*8, 50, false, false));
         tpHero = TypeHero.wizard;
     }
     
@@ -65,64 +65,66 @@ public class Wizard extends Hero {
     public void GameManager(Table tab){
        String a = "Nothing";
     } 
-       public Image getWallImage(Image wallImage){
-           return wallImage;
-       }
-    //metodo para colocar a barreira no tabuleiro
-    public ArrayList<Block> setWall(Table tab, Vetor grandLine){
-        
-        ArrayList<Block> wall = new ArrayList<>();
-        //adicionar os blocos que estão atras
-        for(int i = grandLine.getX(); i!=0; i--){
-            wall.add(tab.getBlock(grandLine));
+    public ArrayList<Block> getWallWays(Table tab) {
+        ArrayList<Block> tempList = new ArrayList<>();
+        for(int i = 0; i < 8; i++) {
+            tempList.add(tab.getBlock(0, i));
         }
-        //adicionar os blocos que estão na frente
-        for(int i = grandLine.getX(); i<=7; i = grandLine.getX() + 1 ){
-        wall.add(tab.getBlock(grandLine));
-        
-        }
-        
-        wizardWall = new Image("barreira.png",widthImg, heightImg, false, false);
-        getWallImage(wizardWall);
-        
-        return wall;
+        return tempList;
     }
-    
-    //método que procura os peões no tabuleiro
-    public boolean searchPeons(Table tab, Vetor pos, GameManager game){
-        Player wzPlayer = Players.getActualPlayer();
-        for(Piece c : wzPlayer.getArmy().getArmyList()){
-            if(c.getPiece() == TypePiece.peon){
-               return true;
-            }
-        }
-        return false;
+    public ImageView getWallImage(){
+        return wizardWall;
+    }
+    //metodo para colocar a barreira no tabuleiro
+    public void setWall(Vetor grandLine){
+        wallPos =  grandLine.getY();
+//        getWallImage(wizardWall);
+        
     }
 
-    public void wallCross(Table tab, Vetor target, ArrayList<Block> wall){
-        int burnBlock =  1; 
-    if(tab.getBlock(target).getBlockState(player) == BlockState.Enemy){
-        //da dano na peça inimiga que estiver na barreira   
-        tab.getBlock(target).hitPiece(burnBlock);
-            
-       }else if(tab.getBlock(target).getBlockState(player) == BlockState.Friend){
-           //cura a peça
-           tab.getBlock(target).hitPiece(-1);
-        }
-        
+    /**
+     * @return the wallSetted
+     */
+    public boolean isWallSetted() {
+        return wallSetted;
     }
-    
+
+    /**
+     * @param wallSetted the wallSetted to set
+     */
+    public void setWallSetted(boolean wallSetted) {
+        this.wallSetted = wallSetted;
+    }
+
+    /**
+     * @return the canMove
+     */
+    public boolean getCanMove() {
+        return canMoveWall;
+    }
+
+    /**
+     * @param canMove the canMove to set
+     */
+    public void setCanMove(boolean canMove) {
+        this.canMoveWall = canMove;
+    }
+
+
  
-    public void youShallNotPass(){
-        if(run == true){
-            setWall();
+    
+    //função que finalmente seta a barreira
+    public void youShallNotPass(Block target){
+          int burnBlock =  1; 
+        if(target.getBlockState(player) == BlockState.Enemy){
+        //da dano na peça inimiga que estiver na barreira   
+            target.hitPiece(burnBlock);
+            
+        }else if(target.getBlockState(player) == BlockState.Friend){
+           //cura a peça
+           target.hitPiece(-1);
         }
-        
-        
+              
     }
-    
-    
-    
-    
     
 }

@@ -72,6 +72,10 @@ public class GameManager {
         table = new Table(8, 8, player1, player2);
         tpClick = TypeClick.first;
         table.setGameCtrl(gameCtrl);
+        if(player1.getHero() instanceof Wizard || player2.getHero() instanceof Wizard) {
+            Wizard wiz = (Wizard) (player1.getHero() instanceof Wizard ? player1.getHero() : player2.getHero());
+            gameCtrl.pratoPieces.getChildren().add(wiz.getWallImage());
+        }
     }
     //metodos>>
     public void GameInit() {
@@ -259,9 +263,7 @@ public class GameManager {
                 } else {
                     displayMessage(gameName, "Lapa você está sem bigbig, precisa de mais alunos interessados!");
                 }
-                
             }
-            
         }
         
         if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
@@ -269,6 +271,20 @@ public class GameManager {
             huebr.setUsePower(true);
             displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
+        }
+
+        if(playing.getHero().getHeroType() == TypeHero.wizard && !movingPiece) {
+            if(superPower) {
+                superPower = false;
+                clearHighlight();
+            } else {
+                Wizard mago = (Wizard) playing.getHero();
+                if(mago.getCanMove()) {
+                    displayMessage(Players.getActualPlayer().getName(), "Contemplem o mago!!");
+                    possibleBlocks = mago.getWallWays(table);
+                    showPossibleWays(possibleBlocks);
+                }
+            }
         }
     }
     //getset>>

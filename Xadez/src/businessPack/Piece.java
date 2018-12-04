@@ -1,5 +1,6 @@
 package businessPack;
 
+import businessPack.Heros.Wizard;
 import extras.BlockState;
 import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
@@ -239,7 +240,14 @@ public abstract class Piece extends ImageView {
     }
     public boolean hit(int damage){
         setHP(hp - damage);
-        if(!alive) removePiece();
+        if(!alive) {
+            if(getTypePiece() == TypePiece.peon && 
+               Players.getAdversaryPlayer().getHero() instanceof Wizard) {
+               Wizard wiz = (Wizard)Players.getAdversaryPlayer().getHero();
+               wiz.setCanMove(true);
+            }
+            removePiece();
+        }
         lifeBarResize();
         lifeBarRealocate();
         bulletViewConfig();
