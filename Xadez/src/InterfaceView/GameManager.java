@@ -249,7 +249,7 @@ public class GameManager {
                 Lapa lapa = (Lapa) playing.getHero();
                 if(lapa.getBigBig() >= 5) {
                     possibleBlocks = lapa.getBombWays(table, playing);
-                    if(possibleBlocks == null) {
+                    if(possibleBlocks.isEmpty()) {
                         return;
                     }
                     displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
@@ -262,6 +262,7 @@ public class GameManager {
             }
             
         }
+        
         if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
             Huebr huebr = (Huebr) playing.getHero();
             huebr.setUsePower(true);

@@ -89,6 +89,7 @@ public class GameCtrl implements Initializable {
                 gameManager.OnBlockEnter(e);
         });
         return g;
+
     }   
     
     public void superPowerBtnManager() {

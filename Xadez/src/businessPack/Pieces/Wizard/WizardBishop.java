@@ -24,22 +24,30 @@ public class WizardBishop implements IMovement {
         tab = table;
         int missX, missY;
         Vetor ultPos;
-        
-        ultPos = behindBlocks(-1,1,vetor); //checar superior esquerda
+         
+        ultPos = behindBlocks(-1,1,vetor); //checar inferior esquerda
+        System.out.println("Ultima posicao: " + ultPos.getX() + " " + ultPos.getY());
         missY = Math.abs(ultPos.getY() - vetor.getY());//calcular o que sobra
         pickSideBlocks(-1,1,ultPos,missY);//redirecionar
+
         
-        ultPos = behindBlocks(-1,-1, vetor);//checar superior direita
+        
+        ultPos = behindBlocks(-1,-1, vetor);//checar superior esquerda
         missY =  Math.abs(ultPos.getY() - vetor.getY());
         pickSideBlocks(-1,-1,ultPos,missY);
+ 
         
-        ultPos = behindBlocks(1,-1,vetor);//checar inferior direita
-        missX = Math.abs(ultPos.getX() - vetor.getX());
-        pickSideBlocks(1,-1,ultPos,missX);
         
-        ultPos = behindBlocks(1,1,vetor); // checar inferior esquerda
-        missX = Math.abs(ultPos.getX() - vetor.getX());
-        pickSideBlocks(1,1,ultPos,missX);
+        ultPos = behindBlocks(1,-1,vetor);//checar superior direita
+        missY = Math.abs(ultPos.getY() - vetor.getY());
+        pickSideBlocks(1,-1,ultPos,missY);
+        
+        
+        ultPos = behindBlocks(1,1,vetor); // checar inferior direita
+        missY = Math.abs(ultPos.getY() - vetor.getY());
+        pickSideBlocks(1,1,ultPos,missY);
+        
+        
         return vect;
     }   
     // função que reconhece se há inimigos ou amigos
@@ -48,7 +56,7 @@ public class WizardBishop implements IMovement {
         int j = vet.getY() + yGo;
         Vetor auxVetor = new Vetor(i, j);
         //condições de parada
-        if(j < 0 || j > 7 || i < 0 || i > 7 || num == 0){
+        if(j < 0 || j > 7 || i < 0 || i > 7 || num <= 0){
             return vet;
         }
         //verificar a existencia de inimigos
@@ -56,7 +64,6 @@ public class WizardBishop implements IMovement {
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 //adicionado na posição auxVetor.getx e na auxVetor.getY
-            return vet;
             }
             return auxVetor;
         }
@@ -73,7 +80,10 @@ public class WizardBishop implements IMovement {
             }
         }
         // condição de parada com o num
-            return behindBlocks(xGo,yGo, vet, num--);
+
+        if(num == 0) return vet; 
+        else return behindBlocks(xGo,yGo, auxVetor, --num);
+
 
     }
     
@@ -83,60 +93,65 @@ public class WizardBishop implements IMovement {
         int j = vet.getY() + yGo;
         Vetor auxVetor = new Vetor(i, j);
         //condições de parada
-        System.out.println("If is rigth?");
         if(j < 0 || j > 7 || i < 0 || i > 7){
             return vet;
         }
         //verificar a existencia de inimigos
         
-        System.out.println("There is a enemy here?");
+        
         if(tab.getBlock(i, j).getBlockState(playing) == BlockState.Enemy){
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 //adicionado na posição auxVetor.getx e na auxVetor.getY
-                return vet;
             }
             return auxVetor;
         }
         // checa se tem amigos
-        System.out.println("there is a friend here");
+        
         if(tab.getBlock(i,j).getBlockState(playing) == BlockState.Friend){
             return vet;
-            
         }
         // checa se está vazio
         if(tab.getBlock(i, j).getBlockState(playing) == BlockState.Empty){
             if(!vect.contains(tab.getBlock(auxVetor))){
                 vect.add(tab.getBlock(auxVetor));
                 // se ele não existe, adiciiona na lista
-                return behindBlocks(xGo,yGo,auxVetor);
             }
+            
         }
-        return vet;
+        return behindBlocks(xGo,yGo,auxVetor);
     }
- 
-   
-    
-    
      
     public void pickSideBlocks(int xDir, int yDir, Vetor ultPos,int missC){
         int sides = 0;
-        if(yDir != 0 && xDir != 0){
+        int newYDir, newXDir;
+        int newYDir2, newXDir2;
+        newYDir = newYDir2 = newXDir = newXDir2 = 0;
+        if((yDir == -1 && xDir == -1) || (yDir == 1 && xDir ==1)) {
+            newXDir = -1;
+            newYDir = 1;
+            newXDir2 = 1;
+            newYDir2 = -1;
+        }else if((yDir == -1 && xDir == 1) || (yDir == 1 && xDir == -1)){
+            newXDir = -1;
+            newYDir = -1;
+            newXDir2 = 1;
+            newYDir2 = 1;
+        }
+        
         while(sides<missC){
-            behindBlocks(1,1,ultPos); 
-                behindBlocks(1,-1,ultPos);
-                behindBlocks(-1, 1, ultPos);
-                behindBlocks(-1,-1,ultPos);
-                ultPos.setX(ultPos.getX() + (-1 * xDir));
+               behindBlocks(newXDir,newYDir,ultPos,sides); 
+               behindBlocks(newXDir2,newYDir2,ultPos,sides);
+               ultPos.setX(ultPos.getX() + (-1 * xDir));
                ultPos.setY(ultPos.getY() + (-1 * yDir));
                sides++;
         }
-            
-        }else if(xDir != 0){
-         while(sides<missC){
-             System.out.println("DO not going there");
-         }
-            
-        }
-    }  
-}
+           
+    }
+        
+    }
+    
+    
+    
+    
+    
