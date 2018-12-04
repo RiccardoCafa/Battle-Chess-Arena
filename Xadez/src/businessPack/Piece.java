@@ -84,7 +84,6 @@ public abstract class Piece extends ImageView {
         image.setPreserveRatio(ratio);
         image.setFitWidth(width);
         image.setFitHeight(height);
-        image.setTranslateZ((double)vetor.getY());
         image.setMouseTransparent(true);
     }
     public abstract void checkMove(Table table);//criação da freeWay
