@@ -123,7 +123,7 @@ public class ChooseCharacterController implements Initializable {
 //        musicaAtual.isAutoPlay();
 //        musicaAtual.play();
         heroName.setText(heroNames[count]);
-        characterSelection.setGraphic(new ImageView(perso[count]));
+        characterSelection.setImage(perso[count]);
 
         if(countAnt == count) {
             count--;

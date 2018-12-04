@@ -27,30 +27,24 @@ public class WizardBishop implements IMovement {
          
         ultPos = behindBlocks(-1,1,vetor); //checar inferior esquerda
         missY = Math.abs(ultPos.getY() - vetor.getY());//calcular o que sobra
-        missX = Math.abs(ultPos.getX() - vetor.getX());
         pickSideBlocks(-1,1,ultPos,missY);//redirecionar
-        pickSideBlocks(-1,1,ultPos,missX);
+
         
         
         ultPos = behindBlocks(-1,-1, vetor);//checar superior esquerda
         missY =  Math.abs(ultPos.getY() - vetor.getY());
-        missX =  Math.abs(ultPos.getX() - vetor.getX());
         pickSideBlocks(-1,-1,ultPos,missY);
-        pickSideBlocks(-1,-1,ultPos,missX);
+ 
         
         
         ultPos = behindBlocks(1,-1,vetor);//checar superior direita
-        missX = Math.abs(ultPos.getX() - vetor.getX());
         missY = Math.abs(ultPos.getY() - vetor.getY());
         pickSideBlocks(1,-1,ultPos,missY);
-        pickSideBlocks(1,-1,ultPos,missX);
         
         
         ultPos = behindBlocks(1,1,vetor); // checar inferior direita
         missY = Math.abs(ultPos.getY() - vetor.getY());
-        missX = Math.abs(ultPos.getX() - vetor.getX());
         pickSideBlocks(1,1,ultPos,missY);
-        pickSideBlocks(1,1,ultPos,missX);
         
         
         return vect;
@@ -86,7 +80,7 @@ public class WizardBishop implements IMovement {
         }
         // condição de parada com o num
         num--;
-        return behindBlocks(xGo,yGo, vet, num);
+        return behindBlocks(xGo,yGo,auxVetor, num);
 
     }
     
@@ -129,7 +123,7 @@ public class WizardBishop implements IMovement {
     public void pickSideBlocks(int xDir, int yDir, Vetor ultPos,int missC){
      int sides = 0;
         if((yDir == -1 && xDir == -1) || (yDir == 1 && xDir ==1)){
-            while(sides<=missC){ 
+            while(sides<missC){ 
                 behindBlocks(-1,-1,ultPos,sides);
                 behindBlocks(1, 1, ultPos,sides);
                 ultPos.setX(ultPos.getX() + (-1 * xDir));
@@ -141,7 +135,7 @@ public class WizardBishop implements IMovement {
             }
 
         }else if((yDir == -1 && xDir == 1)|| (yDir == 1 && xDir == -1)){
-         while(sides<=missC){
+         while(sides<missC){
             behindBlocks(-1,1,ultPos,sides); 
             behindBlocks(1,-1,ultPos,sides);
             ultPos.setX(ultPos.getX() + (-1 * xDir));
