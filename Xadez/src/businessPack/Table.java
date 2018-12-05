@@ -2,6 +2,7 @@ package businessPack;
 
 import InterfaceView.GameCtrl;
 import InterfaceView.GameManager;
+import businessPack.Pieces.Peon;
 import extras.Vetor;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
@@ -144,10 +145,16 @@ public class Table{
         return (x >= 0 && x < m && y >= 0 && y < n);
     }
     public void MovePiece(Vetor piecePos, Vetor pieceDestination) {
+        if(getBlock(piecePos).getPiece().getTypePiece() == TypePiece.peon){
+            Peon p= (Peon)getBlock(piecePos).getPiece();
+            p.setFirstmove(false);
+            System.out.println("Peon setado para false");
+        }
         Piece tempB = table[piecePos.getX()][piecePos.getY()].getPiece();
         tempB.setVetor(pieceDestination);
         table[piecePos.getX()][piecePos.getY()].setPiece(null);
         table[pieceDestination.getX()][pieceDestination.getY()].setPiece(tempB);
+        
     }
     
     public Block callForSheriffKing(){//onde está o SheriffKing?
