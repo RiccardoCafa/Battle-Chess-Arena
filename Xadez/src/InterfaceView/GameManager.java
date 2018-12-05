@@ -218,8 +218,9 @@ public class GameManager {
         playing.getHero().GameManager(table);
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
-        showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
+        System.err.println("to aq");
+        showSeason(estacao.getEstacao());
     }
     Block click2;
     Block sheriffBlock;
@@ -288,7 +289,7 @@ public class GameManager {
             System.out.println("Power ativado");
         }
     }
-    private void showSeason(int season){
+    public void showSeason(int season){
         switch(season){
             case 1:
                 gameCtrl.season.setText("Inverno");
@@ -297,6 +298,7 @@ public class GameManager {
                 gameCtrl.season.setText("Outono");
                 break;
             case 3:
+                System.err.println("to aq");
                 gameCtrl.season.setText("Verão");
                 break;
             case 4:
