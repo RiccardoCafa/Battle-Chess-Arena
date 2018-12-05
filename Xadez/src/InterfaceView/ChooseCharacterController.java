@@ -37,6 +37,12 @@ import javax.swing.JOptionPane;
 import Sounds.HeroesMusics;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 
 
 //String musicURL = "src/testemedia/dancing.mp3";
@@ -76,6 +82,8 @@ public class ChooseCharacterController implements Initializable {
     ImageView hero5;
     @FXML
     TextArea infoText;
+    @FXML
+    Pane back;
     
     private Stage primaryStage;
     Image myImage;
@@ -96,7 +104,8 @@ public class ChooseCharacterController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         
         // TODO
-        
+        back.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoVazio.png", 1186, 667, false, false), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         int resX = 350;
         int resY = 350;
         perso[0] = new Image("InterfaceView/Personagens/iconeHueBR.png",resX, resY, false, false);
