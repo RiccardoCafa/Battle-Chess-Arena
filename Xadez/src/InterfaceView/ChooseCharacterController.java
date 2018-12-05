@@ -180,6 +180,7 @@ public class ChooseCharacterController implements Initializable {
                         infoText.appendText(Lapa.movimentos);
                         break;
                 }
+                break;
             case 2:
                 
             case 3:
@@ -194,6 +195,17 @@ public class ChooseCharacterController implements Initializable {
                         infoText.appendText(Wizard.movimentos);
                         break;
                 }
+                break;
+            case 4://Sheriff
+                switch(infoType){
+                    case 1: infoText.appendText(Sheriff.description);
+                        break;
+                    case 2: infoText.appendText(Sheriff.skills);
+                        break;
+                    default: infoText.appendText(Sheriff.movimentos);
+                        break;
+                }
+                break;
             default:
                 break;
         }
