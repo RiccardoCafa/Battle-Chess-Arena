@@ -119,10 +119,8 @@ public class Lenin extends Hero {
         return Estacao;
     }
     public void leninSurgi(){
-        if(Estacao == 1){
+        if(Estacao == 1 && apareceae == true){
             apareceae = false;
-        }
-        if(apareceae == false){
             image = new Image(path + "transicao_lenin.gif", widthImg, heightImg, false, false);
             mudanca2 = true;
         }
