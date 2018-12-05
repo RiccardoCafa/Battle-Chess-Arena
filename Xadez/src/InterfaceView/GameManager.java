@@ -159,7 +159,7 @@ public class GameManager {
         int deltaX = destiny.getX() - source.getX();
         int deltaY = destiny.getY() - source.getY();
         TranslateTransition anim = new TranslateTransition();
-        for(int i = 1; i <= 4; i++){
+        for(int i = 1; i <= 5; i++){
             switch(i){
                 case 1: anim = new TranslateTransition(Duration.millis(1000), image); break;
                 case 2: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBar()); break;

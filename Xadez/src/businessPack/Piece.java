@@ -169,14 +169,6 @@ public abstract class Piece extends ImageView {
         }
         return hitWay;
     }
-    public void lifeBarToFront() {
-        //lifeBarBg.setTranslateZ(vetor.getY());
-        //lifeBar.setTranslateZ(vetor.getY());
-    }
-    public void lifeBarToBack() {
-        //lifeBar.setTranslateZ(vetor.getY());
-        //lifeBarBg.setTranslateZ(vetor.getY());
-    }
     public void lifeBarRealocate(){
         lifeBar.setLayoutX((65 * vetor.getX()) - (1 - ((float)hp/(float)maxHp))*30);
         lifeBarBg.setLayoutX(65 * vetor.getX());

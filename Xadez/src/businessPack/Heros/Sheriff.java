@@ -2,7 +2,6 @@ package businessPack.Heros;
 
 import businessPack.Army;
 import businessPack.Hero;
-import businessPack.Piece;
 import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
