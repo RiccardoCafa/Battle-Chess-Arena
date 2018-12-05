@@ -7,15 +7,10 @@ import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import businessPack.Pieces.Interfaces.IMovement;
 import businessPack.Pieces.Sheriff.SheriffTower;
-import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
 
 public abstract class Piece extends ImageView {
     //atributos>>

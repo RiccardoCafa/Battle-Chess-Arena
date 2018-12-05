@@ -35,6 +35,18 @@ public class Wizard extends Hero {
     private boolean wallSetted = false;
     private boolean canMoveWall = false;
     
+    
+    
+    public static String description = " O Mago Fandalg, senhor supremo do xadrez, capaz de obliterar as peças inimigas com seus bispos onipresentes"
+            + "e seu temivel controle de campo com a sua habilidade Suprema, a Barreira Magica Incandescente";
+    public static String skill= " A Barreira Mágica do Mago, queima inimigos e os transforma em cinzas, ao mesmo tempo que cura aliados, hes restaurando o vigor"
+            + " controlando o campo com supremacia e força";
+    public static String movimentos= "O mago temo auxilio dos Bispos Mágicos, seres de incríveis magia, capazes de quebrar seus movimentos na diagonal"
+            + "se tornando temíveis máquinas de destruição em massa do tabuleiro";
+    
+    
+    
+    
     public Wizard() {
 
         image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
