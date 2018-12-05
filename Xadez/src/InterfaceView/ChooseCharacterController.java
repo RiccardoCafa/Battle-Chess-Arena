@@ -117,7 +117,7 @@ public class ChooseCharacterController implements Initializable {
         perso[3] = new Image("InterfaceView/Personagens/iconeWizard.png", resX, resY, false, false);
         heroNames[3] = "The Wizard";
         perso[4] = new Image("InterfaceView/Personagens/iconeSheriff.png",resX, resY, false, false);
-        heroNames[4] = "Gunslinger";
+        heroNames[4] = "Sheriff";
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
         //setaEsq.setGraphic(myImageView);
