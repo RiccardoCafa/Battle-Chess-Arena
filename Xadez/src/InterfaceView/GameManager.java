@@ -89,11 +89,11 @@ public class GameManager {
     //metodos>>
     public void GameInit() {
         table.initTable(player1, player2);
-        if(player1.getHero().getHeroType() == lenin){
+        if(player1.getHero().getHeroType() == TypeHero.lenin){
             estacao = (Lenin) player1.getHero();
             showSeason(estacao.getEstacao());
         }
-        if(player2.getHero().getHeroType() == lenin){
+        if(player2.getHero().getHeroType() == TypeHero.lenin){
             estacao = (Lenin) player2.getHero();
             showSeason(estacao.getEstacao());
         }       
@@ -215,14 +215,14 @@ public class GameManager {
         movingPiece = false;
         selectedVetor = null;
         if(possibleBlocks != null) possibleBlocks.clear();
-        possibleHits.clear();
+        if(possibleHits != null) possibleHits.clear();
         clearHighlight();
         playing.getHero().GameManager(table);
+        if(estacao != null) showSeason(estacao.getEstacao());
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
         gameCtrl.superPowerBtnManager();
         System.err.println("to aq");
-        showSeason(estacao.getEstacao());
     }
     public void OnBlockClicked(MouseEvent e){
         clickSequence = true;
