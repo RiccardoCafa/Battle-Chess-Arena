@@ -35,6 +35,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
 import Sounds.HeroesMusics;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 
 //String musicURL = "src/testemedia/dancing.mp3";
@@ -46,10 +48,6 @@ public class ChooseCharacterController implements Initializable {
     ArrayList<MediaPlayer> musicas = new ArrayList<>();  
     MediaPlayer musicaAtual;
     
-    @FXML
-    Button setaEsq;
-    @FXML
-    Button setaDir;
     @FXML
     ImageView characterSelection;
     @FXML
@@ -66,6 +64,18 @@ public class ChooseCharacterController implements Initializable {
     Text HeroPlayer1;
     @FXML
     Text HeroPlayer2;
+    @FXML
+    ImageView hero1;
+    @FXML
+    ImageView hero2;
+    @FXML
+    ImageView hero3;
+    @FXML
+    ImageView hero4;
+    @FXML
+    ImageView hero5;
+    @FXML
+    TextArea infoText;
     
     private Stage primaryStage;
     Image myImage;
@@ -76,6 +86,7 @@ public class ChooseCharacterController implements Initializable {
     String[] heroNames = new String[5];
     Player p1,p2;
     String name1 = "player1",name2 = "player2";
+    private int infoType = 1;
 
 
     private HeroesMusics music = new HeroesMusics();
@@ -100,68 +111,98 @@ public class ChooseCharacterController implements Initializable {
         heroNames[4] = "Gunslinger";
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
-        setaEsq.setGraphic(myImageView);
+        //setaEsq.setGraphic(myImageView);
         myImage = new Image("InterfaceView/setadir.png");
         myImageView = new ImageView(myImage);
-        setaDir.setGraphic(myImageView);
+        //setaDir.setGraphic(myImageView);
+        
+        hero1.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            count = 0;
+            updateCharacterInfo();
+        });
+        
+        hero2.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            count = 1;
+            updateCharacterInfo();
+        });
+        
+        hero3.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            count = 2;
+            updateCharacterInfo();
+        });
+        
+        hero4.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            count = 3;
+            updateCharacterInfo();
+        });
+        
+        hero5.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
+            count = 4;
+            updateCharacterInfo();
+        });
 
         characterSelection.setImage(perso[count]);
         music.playMusic(count);
         
     }
-      @FXML
-    public void onSetaClickEsq(MouseEvent event) {
-        //musicaAtual.stop();
-        //music.playMusic(count);
-        if(count == 0){
-            count = 4;
-        }else{
-            count--;
-        }
+
+    public void updateCharacterInfo() {
         heroName.setText(heroNames[count]);
         characterSelection.setImage(perso[count]);
-
-        if(countAnt == count) {
-            count--;
-            if(count<0) count = 4;
-        }
         music.playMusic(count);
-        changeCharImage();
-
-    }
-    @FXML
-    public void onSetaClickDir(MouseEvent event){
-        //music.playMusic(count);
-        if(count == 4){
-            count = 0;
-        }else{
-            count++;
-        }
-        if(countAnt == count) {
-            count++;
-            if(count > 4) count = 0;
-        }
-        changeCharImage();
-        music.playMusic(count);
-//        musicaAtual = musicas.get(count);
-//        musicaAtual.setStartTime(Duration.ZERO);
-//        musicaAtual.isAutoPlay();
-//        musicaAtual.play();
-
-//        heroName.setText(heroNames[count]);
-
-        
+        updateInfoText();
     }
     
-    public void changeCharImage() {
-        heroName.setText(heroNames[count]);
-
-        characterSelection.setImage(perso[count]);
+    public void updateInfoText() {
+        infoText.setText("");
+        switch(count) {
+            case 0:
+                
+                break;
+            case 1:
+                switch (infoType) {
+                    case 1:
+                        infoText.appendText(Lapa.description);
+                        break;
+                    case 2:
+                        infoText.appendText(Lapa.skills);
+                        break;
+                    default:
+                        infoText.appendText(Lapa.movimentos);
+                        break;
+                }
+                break;
+            default:
+                
+                break;
+        }
     }
+    
+    @FXML
+    public void onSkillsInfoClick(MouseEvent e) {
+        infoType = 2;
+        updateInfoText();
+    }
+    
+    @FXML
+    public void onDescrInfoClick(MouseEvent e) {
+        infoType = 1;
+        updateInfoText();
+    }
+    
+    @FXML
+    public void onPieceInfoClick(MouseEvent e) {
+        infoType = 3;
+        updateInfoText();
+    }
+    
     @FXML
     public void onClickButton(MouseEvent e){
-        System.out.println(name1);
-        System.out.println(name2);
+        
+        if(countAnt == count) {
+            JOptionPane.showMessageDialog(null, "Esse personagem já foi selecionado!");
+            return;
+        }
         
         if(!setName()) {
             JOptionPane.showMessageDialog(null, "Nomes iguais!");
@@ -172,14 +213,8 @@ public class ChooseCharacterController implements Initializable {
             case 0:
                 //name = "Hue";
                 if(p1 != null){
-                    if(p1.getHero().getHeroType() != huebr){
                         p2 = new Player(-1, new Huebr(), 2,name2);
                         HeroPlayer2.setText("Huebr");
-                    }else{
-                        
-                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
-
-                    } 
                 }else{
                     p1 = new Player(1, new Huebr(), 1, name1);
                     HeroPlayer1.setText("Huebr");
@@ -188,13 +223,8 @@ public class ChooseCharacterController implements Initializable {
             case 1:
                 //name = "Lapa";
                    if(p1 != null){
-                    if(p1.getHero().getHeroType() != lapa){
                         p2 = new Player(-1, new Lapa(), 2,name2);
                         HeroPlayer2.setText("Lapa");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
-
-                    }
                 }else{
                      p1 = new Player(1, new Lapa(), 1, name1);
                      HeroPlayer1.setText("Lapa");
@@ -203,13 +233,8 @@ public class ChooseCharacterController implements Initializable {
             case 2:
                 //name = "Czar";
                    if(p1 != null){
-                        if(p1.getHero().getHeroType() != lenin){
                             p2 = new Player(-1, new Lenin(), 2,name2);
                             HeroPlayer2.setText("Lenin");
-                        }else{
-                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
-
-                    }
                 }else{
                          p1 = new Player(1, new Lenin(), 1, name1);
                          HeroPlayer1.setText("Lenin");
@@ -218,13 +243,8 @@ public class ChooseCharacterController implements Initializable {
             case 3:
                 //name = "Mago"; 
                 if(p1 != null){
-                   if(p1.getHero().getHeroType() != wizard){
                         p2 = new Player(-1, new Wizard(), 2,name2);
                         HeroPlayer2.setText("Wizard");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
-
-                    }
                 }else{
                         p1 = new Player(1, new Wizard(), 1, name1);
                         HeroPlayer1.setText("Wizard");
@@ -233,12 +253,8 @@ public class ChooseCharacterController implements Initializable {
             case 4:
                 //name = "Pistoleiro";
                    if(p1 != null){
-                   if(p1.getHero().getHeroType() != sheriff){
                         p2 = new Player(-1, new Sheriff(), 2,name2);
                         HeroPlayer2.setText("Sheriff");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "personagem ja selecionado");
-                    }
                 }else{
                         p1 = new Player(1, new Sheriff(), 1, name1);
                         HeroPlayer1.setText("Sheriff");
@@ -248,60 +264,17 @@ public class ChooseCharacterController implements Initializable {
         countAnt = count;
         count++;
         if(count > 4) count = 0;
-        changeCharImage();
+        updateCharacterInfo();
         names1.setText("");
         //funcao para pegar o player
+
         if(p1 != null && p2 != null){
             primaryStage = (Stage) background.getScene().getWindow();
+            music.stopMusic();
             LoadScene("Game8x8.fxml");
             primaryStage.close();   
         }
     }
-      private void LoadScene(String sceneName){
-        try{
-            System.out.println("loading");
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
-            Parent rooter = loader.load();
-            GameCtrl gameCtrl = loader.getController();
-            gameCtrl.gameCtrl(p1, p2);
-            Scene eltonJhon = new Scene(rooter);
-            Stage stage = new Stage();
-            
-            stage.setTitle("Choose Your Character!");
-            stage.setScene(eltonJhon);
-            stage.show();
-        } catch(IOException e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
-            System.out.println("Nao foi possível abrir a janela");
-            e.printStackTrace();
-        }
-    }
-
-      @FXML
-      public void onEnterClick(KeyEvent e){
-          if(e.getCode() == KeyCode.ENTER){
-              if(cont == 0){
-                if("".equals(names1.getText())){
-                   System.out.println(name1);
-                   cont++;
-                }else{
-                  name1 = names1.getText();
-                  System.out.println(name1);
-                  PlayerName1.setText(name1);
-                  cont++;
-                }     
-              }else{
-                  if("".equals(names1.getText())){
-                   System.out.println(name2);
-              }else{
-                  name2 = names1.getText();
-                  System.out.println(name2);
-                  PlayerName2.setText(name2);
-              }
-              }
-              
-          }
-      }
 
     public boolean setName() {
         if(cont == 0){
@@ -321,6 +294,67 @@ public class ChooseCharacterController implements Initializable {
         }
         return true;
     }
+    private void LoadScene(String sceneName){
+        try{
+            System.out.println("loading");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+            Parent rooter = loader.load();
+            GameCtrl gameCtrl = loader.getController();
+            gameCtrl.gameCtrl(p1, p2);
+            Scene eltonJhon = new Scene(rooter);
+            Stage stage = new Stage();
+            
+            stage.setTitle("Choose Your Character!");
+            stage.setScene(eltonJhon);
+            stage.show();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
+            System.out.println("Nao foi possível abrir a janela");
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void onSetaClickEsq(MouseEvent event) {
+        //musicaAtual.stop();
+        //music.playMusic(count);
+        if(count == 0){
+            count = 4;
+        }else{
+            count--;
+        }
+        heroName.setText(heroNames[count]);
+        characterSelection.setImage(perso[count]);
 
+        if(countAnt == count) {
+            count--;
+            if(count<0) count = 4;
+        }
+        music.playMusic(count);
+        updateCharacterInfo();
+
+    }
+    @FXML
+    public void onSetaClickDir(MouseEvent event){
+        //music.playMusic(count);
+        if(count == 4){
+            count = 0;
+        }else{
+            count++;
+        }
+        if(countAnt == count) {
+            count++;
+            if(count > 4) count = 0;
+        }
+        updateCharacterInfo();
+        music.playMusic(count);
+//        musicaAtual = musicas.get(count);
+//        musicaAtual.setStartTime(Duration.ZERO);
+//        musicaAtual.isAutoPlay();
+//        musicaAtual.play();
+
+//        heroName.setText(heroNames[count]);
+
+        
+    }
 
 }
