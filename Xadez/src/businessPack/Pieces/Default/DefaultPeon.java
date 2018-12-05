@@ -68,11 +68,6 @@ public class DefaultPeon implements IMovement {
         Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
         int i = newVetor.getX(); int j = newVetor.getY();
         if(i < 0 || i > 7 || j < 0 || j > 7 || count <= 0 ) return vetor;
-        
-        if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Enemy) {
-            vector.add(tab.getBlock(newVetor));
-            return newVetor;
-        }
         if(tab.getBlock(newVetor).getBlockState(playing) == BlockState.Empty) {
             vector.add(tab.getBlock(newVetor));
             count = count - 1;
