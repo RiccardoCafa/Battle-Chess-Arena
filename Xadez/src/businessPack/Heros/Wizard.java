@@ -38,7 +38,8 @@ public class Wizard extends Hero {
     public Wizard() {
 
         image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
-
+        wizardWall = new ImageView(new Image("InterfaceView/imagens/barreira.png", 8*65, 50, false, false));
+        wizardWall.setVisible(false);
         tpHero = TypeHero.wizard;
     }
     
@@ -103,7 +104,7 @@ public class Wizard extends Hero {
     
     
     public void setWallSetted(boolean wallSetted) {
-        
+        wizardWall.setVisible(true);
         this.wallSetted = wallSetted;
         
     }
