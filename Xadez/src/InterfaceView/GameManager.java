@@ -211,6 +211,14 @@ public class GameManager {
             anim.play();
         }
     }
+    public void showHit(ImageView piece) throws InterruptedException{
+        for(int i = 0; i < 3; i++){
+            piece.setOpacity(0);
+            piece.wait(500);
+            piece.setOpacity(1);
+            piece.wait(500);
+        }
+    }
     public void OnBlockEnter(MouseEvent e) {
         Block blockOver = (Block) e.getSource();
         if(blockOver.getPiece() != null)
