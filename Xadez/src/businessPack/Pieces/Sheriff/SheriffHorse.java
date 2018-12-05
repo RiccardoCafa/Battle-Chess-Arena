@@ -26,7 +26,7 @@ public class SheriffHorse implements IMovement, Pistol {
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            pistolSounds.playRechargeSound();
+            MP3.playRechargeSound();
         }
         bullet1.setVisible(true);
     }
@@ -40,7 +40,7 @@ public class SheriffHorse implements IMovement, Pistol {
                     table.getBlock(iE, vetor.getY()).hitPiece(charge);
                     bullet1.setVisible(false);
                     charge--;
-                    pistolSounds.playShootSound();
+                    MP3.playShootSound();
                     break;
                 }
             }
@@ -51,7 +51,7 @@ public class SheriffHorse implements IMovement, Pistol {
                         bullet1.setVisible(false);
                         charge--;
                     }else table.getBlock(iW, vetor.getY()).hitPiece(1);
-                    pistolSounds.playShootSound();
+                    MP3.playShootSound();
                     break;
                 }
             }

@@ -36,8 +36,9 @@ public class Wizard extends Hero {
     private boolean canMoveWall = false;
     
     public Wizard() {
-        image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
-        wizardWall = new ImageView(new Image("InterfaceView/imagens/barreira.png",65*8, 50, false, false));
+
+        image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
+
         tpHero = TypeHero.wizard;
     }
     

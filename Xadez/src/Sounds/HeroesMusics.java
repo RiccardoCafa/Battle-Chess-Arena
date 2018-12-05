@@ -37,4 +37,8 @@ public class HeroesMusics {
        // tockers.setStartTime(Duration.ZERO);
        // tockers.play();
     }
+    
+    public void stopMusic() {
+        tockers.stop();
+    }
 }

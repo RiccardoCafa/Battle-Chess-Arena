@@ -2,13 +2,10 @@ package businessPack.Pieces.Sheriff;
 
 import InterfaceView.GameManager;
 import businessPack.Block;
-import businessPack.Heros.Lapa;
 import businessPack.Table;
 import businessPack.Player;
-import businessPack.Players;
 import businessPack.TypeClicks.ClickOnBlock;
 import businessPack.TypeClicks.TypeClick;
-import businessPack.TypeHero;
 import extras.Vetor;
 import java.util.ArrayList;
 import extras.BlockState;
@@ -20,9 +17,9 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     ImageView bullet1;
     int charge;
     boolean discharging;//descarregando o pente
+    boolean isShooting;
     Block priorBlockClicked;
     GameManager game;
-    boolean isShooting;
     //construtor>>
     public SheriffTower(Player player, ImageView bullet1){
         this.player = player;
@@ -36,7 +33,7 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            pistolSounds.playRechargeSound();
+            MP3.playRechargeSound();
         }
         isShooting = false;
         bullet1.setVisible(true);
@@ -84,41 +81,46 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     public TypeClick click(Block blockClicked){
         ArrayList<Block> hitWay = sheriffTowerHitWay(game.getTable(), game.getSheriffBlock().getVetor());
         if(!isShooting){//se é o momento de mostrar as opções de tiro
-            System.out.println("11111111111111111111111111");
             game.clearHighlight();
+            isShooting = true;
+            game.setSheriffBlock(blockClicked);
             if(hitWay.isEmpty()){//se não existe opção para atirar
                 isShooting = false;
                 game.setSheriffBlock(null);
                 game.setClickSequence(true);
                 return TypeClick.hit;
-            }else if(hitWay.size() == 1){//se existe apenas uma opção de tiro
-                priorBlockClicked.hitPiece(charge);
+            }else if(hitWay.size() == 1){//se só existe uma opção
+                blockClicked.hitPiece(charge);
+                isShooting = false;
                 bullet1.setVisible(false);//bala usada
                 charge--;
-                pistolSounds.playShootSound();
-                isShooting = false;
-                game.setSheriffBlock(null);
-                game.setClickSequence(true);
-                return TypeClick.hit;
+                MP3.playShootSound();
+                if(priorBlockClicked != null){//se a peça atingida estiver viva
+                    game.clearHighlight();
+                    game.setClickSequence(true);
+                    return TypeClick.hit;
+                }else{//se a peça atingida morreu
+                    game.removeImage(priorBlockClicked);
+                    game.setSheriffBlock(null);
+                    game.setClickSequence(true);
+                    return TypeClick.last;
+                }
             }else{//se existe mais de uma opção de ataque
-                game.clearHighlight();
-                game.setPossibleHits(hitWay);
                 game.showPossibleEnemys(hitWay);
                 isShooting = true;
                 game.setClickSequence(false);
                 return TypeClick.sheriffTower;
             }
         }else{//se é o momento de atirar
-            if(!hitWay.contains(blockClicked)){
+            if(!hitWay.contains(blockClicked)){//se clicou num bloco inválido
                 game.setClickSequence(false);
                 return TypeClick.sheriffTower;
             }
-            System.out.println("222222222222222222222222222222");
             blockClicked.hitPiece(charge);
             isShooting = false;
             bullet1.setVisible(false);//bala usada
             charge--;
-            pistolSounds.playShootSound();
+            MP3.playShootSound();
             if(priorBlockClicked != null){//se a peça atingida estiver viva
                 game.clearHighlight();
                 game.setClickSequence(true);

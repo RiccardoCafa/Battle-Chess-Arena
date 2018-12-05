@@ -2,7 +2,6 @@ package businessPack.Heros;
 
 import businessPack.Army;
 import businessPack.Hero;
-import businessPack.Piece;
 import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
@@ -18,7 +17,7 @@ import javafx.scene.image.Image;
 public class Sheriff extends Hero {
     //construtor>>
     public Sheriff(){
-        image = new Image(path + "pistoleiro-01.png", widthImg, heightImg, false, false);
+        image = new Image(path + "animSheriff.gif", widthImg, heightImg, false, false);
         tpHero = TypeHero.sheriff;
     }
     //metodos>>
