@@ -31,7 +31,7 @@ public class Wizard extends Hero {
     Image wizardTower;
     
     public Wizard() {
-        image = new Image(path + "omago-01.png", widthImg, heightImg, false, false);
+        image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
         tpHero = TypeHero.wizard;
     }
     

@@ -15,7 +15,6 @@ public class SpecialClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
-        System.out.println("special");
         if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
         game.setPossibleBlocks(priorBlockClicked.getPiece().getSpecialMovesLikeJagger(game.getTable(), blockClicked.getVetor()));
         if(game.getPossibleBlocks().isEmpty()){

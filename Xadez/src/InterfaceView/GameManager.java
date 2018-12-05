@@ -71,6 +71,8 @@ public class GameManager {
     private GameCtrl gameCtrl;
     
     private Block click1;
+    private Block click2;
+    private Block sheriffBlock;
     //construtor>>
     public GameManager(Player p1, Player p2, GameCtrl gameCtrl) {
         this.player1 = p1;
@@ -221,8 +223,6 @@ public class GameManager {
         showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
     }
-    Block click2;
-    Block sheriffBlock;
     public void OnBlockClicked(MouseEvent e){
         clickSequence = true;
         while(clickSequence){
@@ -247,17 +247,6 @@ public class GameManager {
             click2 = (Block) e.getSource();
             tpClick = clickOnBlock.click(click2);
         }
-    }
-    public void setSheriffBlock(Block sheriffBlock){
-        System.out.println("set sheriff block");
-        this.sheriffBlock = sheriffBlock;
-    }
-    public Block getSheriffBlock(){
-        if(sheriffBlock == null)
-            System.out.println("get sheriff block: null");
-        else
-            System.out.println("get sheriff block: not null");
-        return sheriffBlock;
     }
     public void displayMessage(String sender, String message) {
         gameCtrl.displayMessage(sender, message);
@@ -310,6 +299,12 @@ public class GameManager {
         }
     }
     //getset>>
+    public void setSheriffBlock(Block sheriffBlock){
+        this.sheriffBlock = sheriffBlock;
+    }
+    public Block getSheriffBlock(){
+        return sheriffBlock;
+    }
     public Player getPlaying(){
         return playing;
     }

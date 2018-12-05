@@ -82,7 +82,6 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     }
     @Override
     public TypeClick click(Block blockClicked){
-        System.out.println("sheriff tower");
         ArrayList<Block> hitWay = sheriffTowerHitWay(game.getTable(), game.getSheriffBlock().getVetor());
         if(!isShooting){//se é o momento de mostrar as opções de tiro
             game.clearHighlight();

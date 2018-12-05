@@ -20,7 +20,6 @@ public class HitClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
-        System.out.println("hit");
         if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
         if(priorBlockClicked != null){//se a peça atacante não morreu
             if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
