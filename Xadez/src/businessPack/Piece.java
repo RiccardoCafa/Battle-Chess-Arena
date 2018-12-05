@@ -254,11 +254,13 @@ public abstract class Piece extends ImageView {
         bulletViewConfig();
         return alive;
     }
-    public void setHP(int hp){
+    public boolean setHP(int hp){
         if(hp>maxHp){
-            hp =  maxHp;
+            hp = maxHp;
         }
         this.hp = hp;
+        if(hp <= 0) alive = false;
+        return alive;
     }
     public void healPiece(int hp){
         this.hp += hp ;
