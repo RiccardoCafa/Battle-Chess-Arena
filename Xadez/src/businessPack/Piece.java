@@ -251,6 +251,9 @@ public abstract class Piece extends ImageView {
                Players.getAdversaryPlayer().getHero() instanceof Wizard) {
                Wizard wiz = (Wizard)Players.getAdversaryPlayer().getHero();
                wiz.setCanMove(true);
+               if(wiz.getCanMove()){
+                   wiz.setCanMove(false);
+               }
             }
             removePiece();
         }

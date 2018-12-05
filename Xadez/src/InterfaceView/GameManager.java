@@ -133,7 +133,8 @@ public class GameManager {
         if(Players.getActualPlayer().getHero().getHeroType() == TypeHero.wizard){
 
             wiz = (Wizard) Players.getActualPlayer().getHero();
-
+           
+            
         }else if (Players.getAdversaryPlayer().getHero().getHeroType() == TypeHero.wizard){
 
             wiz =  (Wizard) Players.getAdversaryPlayer().getHero();     
