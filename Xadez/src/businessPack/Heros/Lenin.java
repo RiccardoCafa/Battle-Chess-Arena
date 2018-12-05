@@ -33,7 +33,7 @@ public class Lenin extends Hero {
     private int Estacao = 4;
     private boolean apareceae = true;
     private boolean mudanca2 = false;
-    public static String description = "Grande Imperador do Imperio russo use poderoso exercito com seu mais temido general,mas existe um mau a espreitar pelo seu governo";
+    public static String description = "Grande Imperador do Imperio russo use poderoso exercito com seu mais temido general,mas existe um mau a espreita do seu governo";
     public static String skills = "General Inverno:" + "Cada turno agora é representado por estações do ano.Quando o inverno chega seu melhor general aparece e congela os peos inimigos e danifica a movimentacao do cavalo";
     public static String movimentos = "As peças especiais so aparecem quando o seu general chegar são a torre que ganha uma unidade de movimento para as diagonais,bispo que ganha uma unidade de movimento para as direcoes N,S,L,O,e o rei que anda uma unidade a mais em todas as direções";
     //construtor>>
