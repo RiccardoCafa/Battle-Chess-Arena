@@ -19,10 +19,11 @@ public class MoveSpecialClick implements ClickOnBlock{
             game.externalMove(priorBlockClicked, blockClicked);
             game.internalMove(priorBlockClicked, blockClicked);
             game.clearHighlight();
+            game.setSheriffBlock(null);
             game.setClickSequence(true);
             return TypeClick.last;
         }else{//se o bloco clicado não está entre as opções
-            game.setClickSequence(true);
+            game.setClickSequence(false);
             return TypeClick.moveSpecial;
         }
     }

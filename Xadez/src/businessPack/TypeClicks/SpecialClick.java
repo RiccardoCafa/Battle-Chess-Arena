@@ -15,14 +15,17 @@ public class SpecialClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
+        if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
         game.setPossibleBlocks(priorBlockClicked.getPiece().getSpecialMovesLikeJagger(game.getTable(), blockClicked.getVetor()));
-        if(game.getPossibleBlocks().isEmpty()) {
+        if(game.getPossibleBlocks().isEmpty()){
+            game.setSheriffBlock(null);
             game.setClickSequence(true);
             return TypeClick.last;
         }
-        if(game.getPossibleBlocks().size() == 1) {
+        if(game.getPossibleBlocks().size() == 1){
             game.externalMove(priorBlockClicked, game.getPossibleBlocks().get(0));
             game.internalMove(priorBlockClicked, game.getPossibleBlocks().get(0));
+            game.setSheriffBlock(null);
             game.setClickSequence(true);
             return TypeClick.last;
         }
