@@ -74,15 +74,15 @@ public class Huebr extends Hero {
         }
         return usePower = false;
 }
+    public int Contador(){
+        return count;
+    }
 
     /**
      * @param usePower the usePower to set
      */
     public void setUsePower(boolean usePower) {
         this.usePower = usePower;
-    }
-    public int Contador(){
-        return count;
     }
 
     @Override
