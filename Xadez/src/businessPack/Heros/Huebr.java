@@ -8,9 +8,7 @@ import businessPack.Pieces.King;
 import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
-import businessPack.Player;
 import businessPack.Players;
-import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.Table;
 import extras.Who;
@@ -29,6 +27,9 @@ public class Huebr extends Hero {
     
     boolean isHitted = false;
     
+    /**
+     *
+     */
     public static String description = "Este é HueBr, o deus da zoeira, jogando com ele você irá trolar seu inimigo ao máximo." +
                 " Sua peça especial será de bom uso, você possui 8 delas, então mesmo sendo zoeiro, aproveite com sabedoria !";
     public static String skills = "O poder dispovível para o Huebr poderá ser usado 3 vezes por jogo, Você terá a possibilidade de usar quando quiser " + 
