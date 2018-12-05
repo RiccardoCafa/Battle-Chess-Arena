@@ -31,9 +31,11 @@ public class Lenin extends Hero {
     Image LeninQueenImage;
     Image LeninHorseImage;
     private int Estacao = 4;
+    private boolean apareceae = true;
+    private boolean mudanca2 = false;
     //construtor>>
     public Lenin() {
-        image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
+        image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
         tpHero = TypeHero.lenin;
     }
 
@@ -111,8 +113,21 @@ public class Lenin extends Hero {
            }
            Estacao = 4;
         }
+        leninSurgi();
     }
     public int getEstacao(){
         return Estacao;
+    }
+    public void leninSurgi(){
+        if(Estacao == 1){
+            apareceae = false;
+        }
+        if(apareceae == false){
+            image = new Image(path + "transicao_lenin.gif", widthImg, heightImg, false, false);
+            mudanca2 = true;
+        }
+        if(mudanca2 == true && Estacao == 4){
+            image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
+        }
     }
 }
