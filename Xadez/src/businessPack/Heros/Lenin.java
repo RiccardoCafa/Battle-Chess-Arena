@@ -31,6 +31,8 @@ public class Lenin extends Hero {
     Image LeninQueenImage;
     Image LeninHorseImage;
     private int Estacao = 4;
+    private boolean apareceae = true;
+    private boolean mudanca2 = false;
     //construtor>>
     public Lenin() {
         image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
@@ -60,7 +62,7 @@ public class Lenin extends Hero {
         Player enemyPlayer = Players.getPlayer(myPlayer.getWho() == Who.player1 ? Who.player2 : Who.player1);
         System.err.println("Estacao"+Estacao);
         Estacao--;
-        if(Estacao == 0){
+        if(Estacao == 1){
            for(Piece b : myPlayer.getArmy().getArmyList()){
                if(b.getPiece() == TypePiece.bishop){
                    LeninBishop LB = new LeninBishop(myPlayer);
@@ -87,7 +89,7 @@ public class Lenin extends Hero {
                }
            }
         }
-        if(Estacao < 0){
+        if(Estacao < 1){
             //System.out.println("Estacao virou");
             for(Piece b : myPlayer.getArmy().getArmyList()){
                if(b.getPiece() == TypePiece.bishop){
@@ -109,7 +111,21 @@ public class Lenin extends Hero {
                     b.setStrategy(b.getHeroStrategy());
                }
            }
-           Estacao = 3;
+           Estacao = 4;
+        }
+        leninSurgi();
+    }
+    public int getEstacao(){
+        return Estacao;
+    }
+    public void leninSurgi(){
+        if(Estacao == 1 && apareceae == true){
+            apareceae = false;
+            image = new Image(path + "transicao_lenin.gif", widthImg, heightImg, false, false);
+            mudanca2 = true;
+        }
+        if(mudanca2 == true && Estacao == 4){
+            image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
         }
     }
 }
