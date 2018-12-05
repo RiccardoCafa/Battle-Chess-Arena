@@ -24,7 +24,7 @@ public class SheriffPeon implements Pistol{
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            pistolSounds.playRechargeSound();
+            MP3.playRechargeSound();
         }
         bullet1.setVisible(true);
     }
@@ -38,7 +38,7 @@ public class SheriffPeon implements Pistol{
                     table.getBlock(vetor.getX(), j).hitPiece(charge);
                     bullet1.setVisible(false);//bala usada
                     charge--;
-                    pistolSounds.playShootSound();
+                    MP3.playShootSound();
                     break;
                 }
             }

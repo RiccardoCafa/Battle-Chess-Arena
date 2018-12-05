@@ -2,13 +2,10 @@ package businessPack.Pieces.Sheriff;
 
 import InterfaceView.GameManager;
 import businessPack.Block;
-import businessPack.Heros.Lapa;
 import businessPack.Table;
 import businessPack.Player;
-import businessPack.Players;
 import businessPack.TypeClicks.ClickOnBlock;
 import businessPack.TypeClicks.TypeClick;
-import businessPack.TypeHero;
 import extras.Vetor;
 import java.util.ArrayList;
 import extras.BlockState;
@@ -20,9 +17,9 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     ImageView bullet1;
     int charge;
     boolean discharging;//descarregando o pente
+    boolean isShooting;
     Block priorBlockClicked;
     GameManager game;
-    boolean isShooting;
     //construtor>>
     public SheriffTower(Player player, ImageView bullet1){
         this.player = player;
@@ -36,7 +33,7 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     public void recharge(){//recarga
         if(charge < 1){
             charge++;
-            pistolSounds.playRechargeSound();
+            MP3.playRechargeSound();
         }
         isShooting = false;
         bullet1.setVisible(true);
@@ -92,6 +89,22 @@ public class SheriffTower implements Pistol, ClickOnBlock{
                 game.setSheriffBlock(null);
                 game.setClickSequence(true);
                 return TypeClick.hit;
+            }else if(hitWay.size() == 1){//se só existe uma opção
+                blockClicked.hitPiece(charge);
+                isShooting = false;
+                bullet1.setVisible(false);//bala usada
+                charge--;
+                MP3.playShootSound();
+                if(priorBlockClicked != null){//se a peça atingida estiver viva
+                    game.clearHighlight();
+                    game.setClickSequence(true);
+                    return TypeClick.hit;
+                }else{//se a peça atingida morreu
+                    game.removeImage(priorBlockClicked);
+                    game.setSheriffBlock(null);
+                    game.setClickSequence(true);
+                    return TypeClick.last;
+                }
             }else{//se existe mais de uma opção de ataque
                 game.showPossibleEnemys(hitWay);
                 isShooting = true;
@@ -107,7 +120,7 @@ public class SheriffTower implements Pistol, ClickOnBlock{
             isShooting = false;
             bullet1.setVisible(false);//bala usada
             charge--;
-            pistolSounds.playShootSound();
+            MP3.playShootSound();
             if(priorBlockClicked != null){//se a peça atingida estiver viva
                 game.clearHighlight();
                 game.setClickSequence(true);

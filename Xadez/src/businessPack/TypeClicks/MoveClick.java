@@ -25,9 +25,14 @@ public class MoveClick implements ClickOnBlock{
             game.clearHighlight();
             game.setClickSequence(true);
             return TypeClick.last;
-        }else{//se o bloco clicado não está entre as opções
+        }else if(blockClicked.isEmpty() ||//se clicou num lugar vazio ou 
+                 blockClicked.getPiece().getTpHero() != priorBlockClicked.getPiece().getTpHero()){//clicou nunm inimigo inválido
             game.clearHighlight();
             game.setClickSequence(false);
+            return TypeClick.first;
+        }else{//se clicou num aliado
+            game.clearHighlight();
+            game.setClickSequence(true);
             return TypeClick.first;
         }
     }

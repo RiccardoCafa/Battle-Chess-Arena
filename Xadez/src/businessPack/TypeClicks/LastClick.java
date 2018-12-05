@@ -14,12 +14,13 @@ public class LastClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked) {
-        if(game.getPossibleBlocks() != null) game.getPossibleBlocks().clear();
-        game.getPlaying().getHero().GameManager(game.getTable());
-        Players.passTurn();
-        game.setPlaying(Players.getTurn() == 1 ? game.getPlayer1() : game.getPlayer2());
-        game.getGameCtrl().superPowerBtnManager();
-        game.clearHighlight();
+        //if(game.getPossibleBlocks() != null) game.getPossibleBlocks().clear();
+        //game.getPlaying().getHero().GameManager(game.getTable());
+        //Players.passTurn();
+        //game.setPlaying(Players.getTurn() == 1 ? game.getPlayer1() : game.getPlayer2());
+        //game.getGameCtrl().superPowerBtnManager();
+        //game.clearHighlight();
+        game.EndOfTurn();
         game.setClickSequence(false);
         return TypeClick.first;
     }

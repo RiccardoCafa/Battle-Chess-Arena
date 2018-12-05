@@ -27,13 +27,18 @@ public class HeroesMusics {
        exaltaSamba.add(Mago);//index = 3
        exaltaSamba.add(Sheriff);//index = 4
        tockers = new MediaPlayer(exaltaSamba.get(0));
+       tockers.setMute(true);
     } 
     
     public void playMusic(int indexMusic){
         
         tockers.stop();
         tockers = new MediaPlayer(exaltaSamba.get(indexMusic));
-        tockers.setStartTime(Duration.ZERO);
-        tockers.play();
+       // tockers.setStartTime(Duration.ZERO);
+       // tockers.play();
+    }
+    
+    public void stopMusic() {
+        tockers.stop();
     }
 }

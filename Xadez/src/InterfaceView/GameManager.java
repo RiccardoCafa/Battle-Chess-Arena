@@ -6,6 +6,7 @@ import businessPack.TypeClicks.SpecialClick;
 import businessPack.TypeClicks.FirstClick;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Wizard;
 import businessPack.Heros.Lenin;
 import businessPack.TypeClicks.HitClick;
 import businessPack.TypeClicks.LastClick;
@@ -18,6 +19,7 @@ import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
+import businessPack.TypeClicks.WizardClick;
 import businessPack.TypeHero;
 import static businessPack.TypeHero.lenin;
 import extras.Vetor;
@@ -84,16 +86,23 @@ public class GameManager {
         table = new Table(8, 8, player1, player2);
         tpClick = TypeClick.first;
         table.setGameCtrl(gameCtrl);
+
+        if(player1.getHero() instanceof Wizard || player2.getHero() instanceof Wizard) {
+            Wizard wiz = (Wizard) (player1.getHero() instanceof Wizard ? player1.getHero() : player2.getHero());
+            gameCtrl.pratoPieces.getChildren().add(wiz.getWallImage());
+        }
+
         getOptionsInfo();
+
     }
     //metodos>>
     public void GameInit() {
         table.initTable(player1, player2);
-        if(player1.getHero().getHeroType() == lenin){
+        if(player1.getHero().getHeroType() == TypeHero.lenin){
             estacao = (Lenin) player1.getHero();
             showSeasons(estacao.getEstacao());
         }
-        if(player2.getHero().getHeroType() == lenin){
+        if(player2.getHero().getHeroType() == TypeHero.lenin){
             estacao = (Lenin) player2.getHero();
             showSeasons(estacao.getEstacao());
         }       
@@ -122,9 +131,32 @@ public class GameManager {
         }
     }
     public void internalMove(Block sourceBlock, Block destinyBlock){
+        Wizard wiz = null;
+        if(Players.getActualPlayer().getHero().getHeroType() == TypeHero.wizard){
+
+            wiz = (Wizard) Players.getActualPlayer().getHero();
+           
+            
+        }else if (Players.getAdversaryPlayer().getHero().getHeroType() == TypeHero.wizard){
+
+            wiz =  (Wizard) Players.getAdversaryPlayer().getHero();     
+        }
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(click1.getVetor()).colorDefault();
         movingPiece = false;//desabilita a movimentação
+        if(wiz != null) {  
+           if((sourceBlock.getVetor().getY() <= wiz.getWallVetorY() &&
+               destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
+               sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
+               destinyBlock.getVetor().getY() <= wiz.getWallVetorY()){
+               System.out.println("Barreira na posição: "+ wiz.getWallVetorY());
+               System.out.println("Source: " + sourceBlock.getVetor().getY());
+               System.out.println("Destiny:"+ destinyBlock.getVetor().getY());
+               wiz.youShallNotPass(destinyBlock);
+
+           }
+
+         }
         destinyBlock.getPiece().lifeBarRealocate();
         for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
@@ -159,7 +191,7 @@ public class GameManager {
         int deltaX = destiny.getX() - source.getX();
         int deltaY = destiny.getY() - source.getY();
         TranslateTransition anim = new TranslateTransition();
-        for(int i = 1; i <= 4; i++){
+        for(int i = 1; i <= 5; i++){
             switch(i){
                 case 1: anim = new TranslateTransition(Duration.millis(1000), image); break;
                 case 2: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBar()); break;
@@ -215,15 +247,17 @@ public class GameManager {
         movingPiece = false;
         selectedVetor = null;
         if(possibleBlocks != null) possibleBlocks.clear();
-        possibleHits.clear();
+
+        if(possibleHits != null) possibleHits.clear();
+
         clearHighlight();
         playing.getHero().GameManager(table);
+        if(estacao != null) showSeasons(estacao.getEstacao());
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
         if(estacao != null) showSeasons(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
         System.err.println("to aq");
-        
     }
     public void OnBlockClicked(MouseEvent e){
         clickSequence = true;
@@ -244,6 +278,8 @@ public class GameManager {
                 case moveSpecial:  clickOnBlock = new MoveSpecialClick(this, click1);
                     break;
                 case last:         clickOnBlock = new LastClick(this);
+                    break;
+                case wizardClick:  clickOnBlock = new WizardClick(this);
                     break;
             }
             click2 = (Block) e.getSource();
@@ -272,9 +308,7 @@ public class GameManager {
                 } else {
                     displayMessage(gameName, "Lapa você está sem bigbig, precisa de mais alunos interessados!");
                 }
-                
             }
-            
         }
         
         if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
@@ -282,6 +316,23 @@ public class GameManager {
             huebr.setUsePower(true);
             displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
+        }
+
+        if(playing.getHero().getHeroType() == TypeHero.wizard && !movingPiece) {
+            if(superPower) {
+                superPower = false;
+                clearHighlight();
+            } else {
+                Wizard mago = (Wizard) playing.getHero();
+//                System.out.println("Entrei2");
+                if(!mago.isWallSetted() || mago.getCanMove()) {
+                    //System.out.println("Entrei");
+                    displayMessage(Players.getActualPlayer().getName(), "Contemplem o mago!!");
+                    possibleBlocks = mago.getWallWays(table);
+                    showPossibleWays(possibleBlocks);
+                    tpClick = TypeClick.wizardClick;
+                }
+            }
         }
     }
     public void showSeasons(int count){
@@ -349,4 +400,225 @@ public class GameManager {
     public Pane getPratoPieces() {
         return gameCtrl.pratoPieces;
     }
+    /*public boolean isSheriffTowerReaction() {
+        return sheriffTowerReaction;
+    }*/
+    /*public void setSheriffTowerReaction(boolean sheriffTowerReaction) {
+        this.sheriffTowerReaction = sheriffTowerReaction;
+    }*/
+    /*
+    public void sheriffTowerShoot(Block actualBlock){//clique extra do tiro da SheriffTower
+        if(!combo){//se não se trata de uma reação a uma peça special
+            if(!possibleHits.contains(actualBlock)) return;//o bloco clicado não está dentre as opções
+            sheriffTower.realShoot(table, actualBlock);
+            sheriffTowerBlock = table.getBlock(sheriffTower);
+        }else{//se a peça inimiga é special, já foi atingida, não morreu, e agora precisa se mover
+            if(possibleBlocks.contains(actualBlock)){//se clicou num bloco válido
+                externalMove(firstBlock, actualBlock);
+                internalMove(firstBlock, actualBlock);
+                combo = false;
+                sheriffTowerReaction = false;//desativa a reação
+                EndOfTurn();
+            }else return;
+        }
+        if(!firstBlock.isEmpty()){//se a reação não matou o atacante
+            //ataque inimigo pós-reação
+            if(!sheriffTowerBlock.hitPiece(firstBlock.getPiece().getDamage())){//se a peça atingida está viva
+                if(firstBlock.getPiece().getTpHero() == TypeHero.lapa){//se a peça atacante é de Lapa
+                    Lapa lapa = (Lapa) Players.getActualPlayer().getHero();
+                    lapa.setBigBig(lapa.getBigBig() + 1);
+                    gameCtrl.displayMessage(playing.getName(),
+                                   "Acaba de receber 1 bigbig! Agora ele tem " + lapa.getBigBig() + " bigbigs");
+                }
+                if(!firstBlock.getPiece().isSpecial()){//se a peça atacante não for special
+                    sheriffTowerReaction = false;//desativa a reação
+                    Vetor lastPos = firstBlock.getPiece().getLastPosOf(sheriffTowerBlock);//fica na melhor posição disponível
+                    externalMove(firstBlock, table.getBlock(lastPos));
+                    internalMove(firstBlock, table.getBlock(lastPos));
+                }else{//se a peça atacante é special
+                    possibleBlocks = firstBlock.getPiece().getSpecialMovesLikeJagger(table, sheriffTowerBlock.getVetor());//exibe o novo freeWay
+                    if(possibleBlocks.isEmpty()){//se não há lugar para ficar
+                        sheriffTower = null;
+                        sheriffTowerBlock = null;
+                        EndOfTurn();
+                        return;
+                    }
+                    if(possibleBlocks.size() == 1){//se só há uma posição disponível
+                        sheriffTower = null;
+                        sheriffTowerBlock = null;
+                        externalMove(firstBlock, possibleBlocks.get(0));
+                        internalMove(firstBlock, possibleBlocks.get(0));
+                        EndOfTurn();
+                        return;
+                    }
+                    clearHighlight();//reseta os highlights
+                    showPossibleWays(possibleBlocks);//mostra o novo highlight
+                    combo = true;//Torna combo true (no próximo clique, irá pular as ações do início deste método)
+                    pieceMovingImage = firstBlock.getPiece();
+                }
+            }else{//se a peça atingida morreu
+                externalMove(firstBlock, sheriffTowerBlock);
+                internalMove(firstBlock, sheriffTowerBlock);
+                removeImage(sheriffTowerBlock);//remove a imagem do atingido
+                sheriffTower = null;
+                sheriffTowerBlock = null;
+                sheriffTowerReaction = false;
+            }
+        }else sheriffTowerReaction = false;//desativa a reação
+    }*/
+    /*
+    public void firstClick(Block actualBlock){
+        if(actualBlock.isEmpty()){//se o bloco está vazio
+            firstBlock = null;
+            movingPiece = false;
+            selectedVetor = null;
+            clearHighlight();
+            //System.out.println("Nada aqui");
+        }else{//se há peça
+            if(playing != actualBlock.getPiece().getPlayer()){//se a peça desse bloco é do outro jogador
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                //System.out.println("Nao é seu turno babaca");
+            }else{//se a peça é sua
+                combo = false;
+                movingPiece = true;
+                firstBlock = actualBlock;
+                selectedVetor = new Vetor(actualBlock.getVetor());
+                showMoves(actualBlock);
+            }
+        }
+    }
+    */
+    /*
+    public void OnBlockClicked(MouseEvent e) {
+        Block actualBlock = (Block) e.getSource();//bloco clicado
+        if(sheriffTowerReaction){//sheriff power
+            sheriffTowerShoot(actualBlock);
+            return;
+        }
+        if(superPower && playing.getHero().getHeroType() == TypeHero.lapa
+                && possibleBlocks.contains(actualBlock)) {
+            Lapa lapa = (Lapa) playing.getHero();
+            lapa.ExplodeBomb(table, actualBlock.getVetor(), this);
+            superPower = false;
+            clearHighlight();
+            return;
+        }
+        if(!combo && !actualBlock.isEmpty() &&                                  //se o bloco clicado não está vazio e
+           actualBlock.getBlockState(playing) == BlockState.Friend &&//clicar em uma peça aliada e
+           selectedVetor != null){                                  //já tiver sido clicada uma peça
+            if(actualBlock != firstBlock){//se a peça clicada for outra aliada
+                clearHighlight();
+                movingPiece = false;
+            }
+        }
+        if(!movingPiece){//primeiro clique
+            firstClick(actualBlock);
+        }else{//segundo clique
+            if(actualBlock == firstBlock){//se o bloco é o mesmo clicado antes
+                if(combo) return;
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                possibleBlocks.clear();
+                possibleHits.clear();
+                clearHighlight();
+            }else if(possibleBlocks.contains(actualBlock)){//se é possível se movimentar
+                if(!possibleHits.contains(actualBlock)){//se é caminho livre, ou seja, não há inimigos
+                    if(combo){
+                        externalMove(firstBlock, actualBlock);
+                        internalMove(firstBlock, actualBlock);
+                        combo = false;
+                    }else{
+                        externalMove(firstBlock, actualBlock);
+                        internalMove(firstBlock, actualBlock);
+                    }
+                    EndOfTurn();
+                }else if(actualBlock.getBlockState(playing) == BlockState.Enemy){//se há inimigo
+                    /*
+                    HIT
+                    /
+                    if(actualBlock.getPiece().reaction(table, firstBlock)){//se a reação é da SheriffTower
+                        if(possibleHits.size() > 1){//ativa a opção de escolha da reação da SheriffTower
+                            sheriffTower = (Tower) actualBlock.getPiece();//guarda a peça
+                            sheriffTowerReaction = true;
+                            possibleHits = sheriffTower.getSheriffTowerHitWay(table);//mostra as opções de tiro
+                            clearHighlight();
+                            showPossibleEnemys(possibleHits);
+                            return;
+                        }
+                    }
+                    sheriffTower = null;
+                    sheriffTowerReaction = false;
+                    if(!firstBlock.isEmpty()){//se a reação não matou o atacante
+                        if(!actualBlock.hitPiece(firstBlock.getPiece().getDamage())){ // Hita a peça e retorna se está morto
+                            // Está vivo
+                            if(firstBlock.getPiece().getTpHero() == TypeHero.lapa) {
+                                Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
+                                lapao.setBigBig(lapao.getBigBig() + 1);
+                                displayMessage(playing.getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
+                                        + lapao.getBigBig() + " bigbigs");
+                            }
+                            if(!firstBlock.getPiece().isSpecial()){ // se a peça não for special
+                                Vetor lastPos = firstBlock.getPiece().getLastPosOf(actualBlock); // Pega a melhor posição para ficar
+                                externalMove(firstBlock, table.getBlock(lastPos));
+                                internalMove(firstBlock, table.getBlock(lastPos));
+                            } else {
+                                possibleBlocks = firstBlock.getPiece().getSpecialMovesLikeJagger(table, actualBlock.getVetor()); // Pega o novo free way
+                                if(possibleBlocks.isEmpty()) {
+                                    EndOfTurn();
+                                    return;
+                                }
+                                if(possibleBlocks.size() == 1) {
+                                    externalMove(firstBlock, possibleBlocks.get(0));
+                                    internalMove(firstBlock, possibleBlocks.get(0));
+                                    EndOfTurn();
+                                    return;
+                                }
+                                clearHighlight(); // Reseta os highlights
+                                showPossibleWays(possibleBlocks); // Mostra o novo highlight
+                                combo = true; // Torna combo true
+                                pieceMovingImage = firstBlock.getPiece();
+                                // TODO CHECAR DEPOIS DE POSSIBLE BLOCKS ESTIVER VAZIO PARA TRATAR ISSO AI 
+                                //(isso provavelmente pode ocorrer com peças que pulam)
+                            }
+                        } else {
+                            // Morreu o mizeravel
+                            removeImage(actualBlock); // remove a imagem do mizere
+                            externalMove(firstBlock, actualBlock);
+                            internalMove(firstBlock, actualBlock);
+                        }
+                    }
+                    if(!combo) {
+                        EndOfTurn(); // Se não tiver combo, passa o turno
+                    }
+                }
+                /* else { ISSO OCORRE QUANDO NÃO HÁ INIMIGO - ESTÁ INDO PARA UMA POSIÇÃO VAZIA 
+                    EndOfTurn();
+                }/
+            }else if(actualBlock.isEmpty()){//se está vazio
+                if(combo) return;
+                firstBlock = null;
+                movingPiece = false;
+                selectedVetor = null;
+                possibleBlocks.clear();
+                possibleHits.clear();
+                clearHighlight();
+            }
+        }
+        
+        
+    }
+    
+    // >>>> GETSET
+    public Player getPlayer1() {
+        return player1;
+    }
+    public Player getPlayer2() {
+        return player2;
+    }
+    public Table getTable() {
+        return table;
+    }*/
 }

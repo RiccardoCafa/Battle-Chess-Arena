@@ -36,10 +36,20 @@ public class Lapa extends Hero {
     
     private int bigBig = 10;
     
+    public static String description = "Este é Lapa God, seus poderes são infinitos... Cuidado para não deixar ele acumular muitos big bigs" +
+                " pode não ser muito vantajoso para você." + "\nEle tem apenas uma peça especial, mas não a subestime!";
+    public static String skills = "Ronaldo, pode ser chamado por Lapa por um preço de 5 big bigs." + "\nApós ativado o poder, poderá escolher " + 
+                "um inimigo para jogar uma bomba e atingir os alvos ao redor." + "\n-3HP para o alvo central\n-2HP para os alvos " +
+                " na horizontal e vertical\n-1HP para os alvos nas diagonais";
+    public static String movimentos = "A peça especial de Lapa é a torre de duas cabeças!\n Ela é capaz de quebrar seu movimento na vertical e horizontal " +
+                ", por exemplo, a torre tem 5 casas livres em sua frente, ela pode andar as 5 ou andar 4 e 1 para cada lado ou andar 3 e 2 "
+                + "para cada lado, e assim por diante. \n Além disso, os peões em frente a Torre começam 2 casas pra frente!";
+    
     public Lapa() {
         tpHero = TypeHero.lapa;
         image = new Image(path + "animLapa.gif", widthImg, heightImg, false, false);
     }
+    
 
     @Override
     public void createArmy(Army army, int sentido, Who jogador) {

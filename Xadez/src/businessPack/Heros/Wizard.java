@@ -1,8 +1,11 @@
 package businessPack.Heros;
 
+
+import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Block;
 import businessPack.Hero;
+import businessPack.Piece;
 import businessPack.Pieces.Bishop;
 import businessPack.Pieces.Horse;
 import businessPack.Pieces.King;
@@ -14,29 +17,33 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
+import businessPack.TypePiece;
 import extras.BlockState;
 import extras.Vetor;
 import extras.Who;
 import java.util.ArrayList;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Wizard extends Hero {
     
     // atributos
-    Image wizardBishop;
-    Image wizardPeon;
-    Image wizardKing;
-    Image wizardQueen;
-    Image wizardHorse;
-    Image wizardTower;
+    
+    ImageView wizardWall;
+    
+    private int wallPos;
+    private boolean wallSetted = false;
+    private boolean canMoveWall = false;
     
     public Wizard() {
+
         image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
+
         tpHero = TypeHero.wizard;
     }
     
+    
     // comtemplem o mago
-
     @Override
     public void createArmy(Army army, int sentido, Who jogador) {
         this.player = Players.getPlayer(jogador);
@@ -59,43 +66,88 @@ public class Wizard extends Hero {
     @Override
     public void GameManager(Table tab){
        String a = "Nothing";
-    } 
-       
-    //metodo para colocar a barreira no tabuleiro
-    public ArrayList<Block> setWall(Table tab, Vetor grandLine){
-        ArrayList<Block> wall = new ArrayList<>();
-        //adicionar os blocos que estão atras
-        for(int i = grandLine.getX(); i!=0; i--){
-            wall.add(tab.getBlock(grandLine));
-        }
-        //adicionar os blocos que estão na frente
-        for(int i = grandLine.getX(); i<=7; i = grandLine.getX() + 1 ){
-        wall.add(tab.getBlock(grandLine));
-        }
-        
-        
-        return wall;
     }
     
-    //método que procura os peões no tabuleiro
-    public boolean searchPeons(Table tab, Vetor pos){
-       return false;
+    
+    public ArrayList<Block> getWallWays(Table tab) {
+        ArrayList<Block> tempList = new ArrayList<>();
+        for(int i = 0; i < 8; i++) {
+            tempList.add(tab.getBlock(0, i));
+        }
+        return tempList;
+    }
+    
+    
+    public ImageView getWallImage(){
+        return wizardWall;
+    }
+    
+    
+    //metodo para colocar a barreira no tabuleiro
+    public void setWall(Vetor grandLine){
+        wallPos =  grandLine.getY();
+//        getWallImage(wizardWall);
+        wizardWall.setLayoutX(0);
+        System.out.println("Setei para y = " + (15 + 65 * wallPos) );
+        wizardWall.setLayoutY(15 + 65 * wallPos);
     }
 
-    public void wallCross(Table tab, Vetor target, ArrayList<Block> wall){
+    
+    
+    public boolean isWallSetted() {
+        
+        return wallSetted;
+        
+    }
+
+    
+    
+    public void setWallSetted(boolean wallSetted) {
+        
+        this.wallSetted = wallSetted;
+        
+    }
+
+    
+    
+    public boolean getCanMove() {
+        
+        return canMoveWall;
+        
+    }
+
+    
+    
+    public void setCanMove(boolean canMove) {
+        
+        this.canMoveWall = canMove;
+    
+    }
+
+    
+    
+    //função que finalmente seta a barreira
+    public void youShallNotPass(Block target){
+    
         int burnBlock =  1; 
-    if(tab.getBlock(target).getBlockState(player) == BlockState.Enemy){
+        System.out.println("O inimigo vai entrar viado");
+        if(target.getBlockState(player) == BlockState.Enemy){
+            System.out.println("Virei duas caras");
         //da dano na peça inimiga que estiver na barreira   
-        tab.getBlock(target).hitPiece(burnBlock);
-            
-       }else if(tab.getBlock(target).getBlockState(player) == BlockState.Friend){
+            target.hitPiece(burnBlock);    
+        }else if(target.getBlockState(player) == BlockState.Friend){
            //cura a peça
-           tab.getBlock(target).hitPiece(-1);
+            System.out.println("Curei o aliado");
+           target.getPiece().healPiece(1);
         }
+        
         
     }
     
- 
+    public int getWallVetorY(){
+        
+        return wallPos;
+    }
     
     
     

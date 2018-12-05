@@ -69,6 +69,7 @@ public class MenuController implements Initializable {
             Scene johnCena = new Scene(loader);
             Stage stage = new Stage();
             stage.setTitle("Choose Your Character!");
+            stage.getIcons().add(new Image("InterfaceView/imagens/iconGameAlpha.png", 500, 500, false, false));
             stage.setScene(johnCena);
             stage.show();
         } catch(IOException e) {
