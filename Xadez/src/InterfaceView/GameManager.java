@@ -625,6 +625,19 @@ public class GameManager {
         }
         
         
+
+        if(playing.getHero().getHeroType() == TypeHero.huebr && !movingPiece) {
+            Huebr huebr = (Huebr) playing.getHero();
+            huebr.setUsePower(true);
+            if(huebr.Contador() <= 2){
+            displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
+            System.out.println("Power ativado");
+            }else{
+            displayMessage(gameName, "Hue Hueee, já te disse para nao ser corrupto, só " +huebr.Contador()+ " vezes cara!!!");
+        }
+        }
+
+
     }
     
     // >>>> GETSET
