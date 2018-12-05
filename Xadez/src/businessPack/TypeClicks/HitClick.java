@@ -10,8 +10,10 @@ import extras.Vetor;
 
 public class HitClick implements ClickOnBlock{
     //atributos>>
+    
     GameManager game;
     Block priorBlockClicked;
+    
     //construtor>>
     public HitClick(GameManager game, Block priorBlockClicked){
         this.game = game;
