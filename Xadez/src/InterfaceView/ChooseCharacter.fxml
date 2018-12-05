@@ -17,12 +17,12 @@
    <children>
       <Pane fx:id="back" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1186.0">
          <children>
-            <Text layoutX="48.0" layoutY="42.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="Escolha seu herói" textOrigin="CENTER" wrappingWidth="373.00000381469727">
+            <Text layoutX="473.0" layoutY="29.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center;" text="Escolha seu herói" textOrigin="CENTER" wrappingWidth="373.00000381469727">
                <font>
                   <Font name="Century Schoolbook" size="33.0" />
                </font>
             </Text>
-            <Text fx:id="heroName" layoutX="46.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HuehueBr" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="182.99999943375587">
+            <Text fx:id="heroName" layoutX="183.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HuehueBr" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="182.99999943375587">
                <font>
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
@@ -38,18 +38,18 @@
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
             </Text>
-            <Text fx:id="HeroPlayer1" layoutX="254.0" layoutY="634.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personagem P1" textOrigin="CENTER">
+            <Text fx:id="HeroPlayer1" layoutX="50.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perso P1" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="174.62108835577965">
                <font>
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
             </Text>
-            <Text fx:id="HeroPlayer2" layoutX="645.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="148.50781519711018">
+            <Text fx:id="HeroPlayer2" layoutX="253.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perso 2" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="189.9999817609787">
                <font>
                   <Font name="Segoe UI Italic" size="28.0" />
                </font>
             </Text>
             <ImageView fx:id="characterSelection" fitHeight="316.0" fitWidth="356.0" layoutX="708.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true" />
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="144.0" layoutY="62.0" text="Clique no herói para selecioná-lo" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="633.0" layoutY="609.0" text="Clique no herói para selecioná-lo" textAlignment="CENTER" />
             <HBox layoutX="633.0" layoutY="509.0" prefHeight="100.0" prefWidth="500.0" spacing="20.0">
                <children>
                   <ImageView fx:id="hero1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
@@ -87,7 +87,7 @@
                <content>
                   <TextArea fx:id="infoText" editable="false" prefHeight="370.0" prefWidth="463.0" wrapText="true">
                      <font>
-                        <Font name="Century Schoolbook" size="12.0" />
+                        <Font name="Century Schoolbook" size="18.0" />
                      </font>
                   </TextArea>
                </content>

@@ -29,7 +29,7 @@ public class Wizard extends Hero {
     
     // atributos
     
-    ImageView wizardWall;
+    ImageView wizardWall[] = new ImageView[8];
     
     private int wallPos;
     private boolean wallSetted = false;
@@ -50,7 +50,11 @@ public class Wizard extends Hero {
     public Wizard() {
 
         image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
-
+        for(int i = 0; i < 8; i ++ ) {
+            wizardWall[i] = new ImageView(new Image("InterfaceView/imagens/barreira.png", 65, 50, false, false));
+            wizardWall[i].setVisible(false);
+        }
+        
         tpHero = TypeHero.wizard;
     }
     
@@ -90,8 +94,8 @@ public class Wizard extends Hero {
     }
     
     
-    public ImageView getWallImage(){
-        return wizardWall;
+    public ImageView getWallImage(int index){
+        return wizardWall[index];
     }
     
     
@@ -99,9 +103,13 @@ public class Wizard extends Hero {
     public void setWall(Vetor grandLine){
         wallPos =  grandLine.getY();
 //        getWallImage(wizardWall);
-        wizardWall.setLayoutX(0);
-        System.out.println("Setei para y = " + (15 + 65 * wallPos) );
-        wizardWall.setLayoutY(15 + 65 * wallPos);
+        for(int i = 0; i < 8; i ++ ) {
+            wizardWall[i].setLayoutX(0);
+//        System.out.println("Setei para y = " + (15 + 65 * wallPos) );
+            wizardWall[i].setLayoutY(15 + 65 * wallPos);
+            wizardWall[i].setLayoutX(i * 65);
+        }
+        
     }
 
     
@@ -115,7 +123,9 @@ public class Wizard extends Hero {
     
     
     public void setWallSetted(boolean wallSetted) {
-        
+        for(int i = 0; i < 8; i ++ ) {
+            wizardWall[i].setVisible(true);
+        }
         this.wallSetted = wallSetted;
         
     }
@@ -135,8 +145,14 @@ public class Wizard extends Hero {
         this.canMoveWall = canMove;
     
     }
-
     
+    public void wallToBack(int i) {
+        wizardWall[i].toBack();
+    }
+    
+    public void wallToFront(int i) {
+        wizardWall[i].toFront();
+    }
     
     //função que finalmente seta a barreira
     public void youShallNotPass(Block target){

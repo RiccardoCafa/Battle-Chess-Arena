@@ -89,7 +89,9 @@ public class GameManager {
 
         if(player1.getHero() instanceof Wizard || player2.getHero() instanceof Wizard) {
             Wizard wiz = (Wizard) (player1.getHero() instanceof Wizard ? player1.getHero() : player2.getHero());
-            gameCtrl.pratoPieces.getChildren().add(wiz.getWallImage());
+            for(int i = 0; i < 8; i ++) {
+                gameCtrl.pratoPieces.getChildren().add(wiz.getWallImage(i));
+            }
         }
 
         getOptionsInfo();
@@ -145,27 +147,28 @@ public class GameManager {
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(click1.getVetor()).colorDefault();
         movingPiece = false;//desabilita a movimentação
-        if(wiz != null) {  
-           if((sourceBlock.getVetor().getY() <= wiz.getWallVetorY() &&
-               destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
-               sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
-               destinyBlock.getVetor().getY() <= wiz.getWallVetorY()){
-               System.out.println("Barreira na posição: "+ wiz.getWallVetorY());
-               System.out.println("Source: " + sourceBlock.getVetor().getY());
-               System.out.println("Destiny:"+ destinyBlock.getVetor().getY());
-               wiz.youShallNotPass(destinyBlock);
-
-           }
-
-         }
         destinyBlock.getPiece().lifeBarRealocate();
+        if(wiz != null) {  
+            if((sourceBlock.getVetor().getY() <= wiz.getWallVetorY() &&
+                destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
+                sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
+                destinyBlock.getVetor().getY() <= wiz.getWallVetorY()){
+                System.out.println("Barreira na posição: "+ wiz.getWallVetorY());
+                System.out.println("Source: " + sourceBlock.getVetor().getY());
+                System.out.println("Destiny:"+ destinyBlock.getVetor().getY());
+                wiz.youShallNotPass(destinyBlock);
+            }
+        }
+        if(destinyBlock.getPiece() == null) return;
         for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
                 table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToFront();
+            if(wiz!=null && wiz.getWallVetorY() == j) wiz.wallToFront(destinyBlock.getVetor().getX());
         }
         for(int j = destinyBlock.getVetor().getY() - 1; j >= 0; j--){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
                 table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToBack();
+            if(wiz!=null && wiz.getWallVetorY() == j) wiz.wallToBack(destinyBlock.getVetor().getX());
         }
         clearHighlight();
     }
