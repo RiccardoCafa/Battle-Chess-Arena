@@ -181,6 +181,18 @@ public class ChooseCharacterController implements Initializable {
                         break;
                 }
                 break;
+            case 2:
+                switch(infoType){
+                    case 1:
+                        infoText.appendText(Lenin.description);
+                        break;
+                    case 2:
+                        infoText.appendText(Lenin.skills);
+                        break;
+                    default:
+                        infoText.appendText(Lenin.movimentos);
+                        break;
+                }
             default:
                 
                 break;

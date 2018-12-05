@@ -87,7 +87,7 @@
                <content>
                   <TextArea fx:id="infoText" editable="false" prefHeight="370.0" prefWidth="463.0" wrapText="true">
                      <font>
-                        <Font name="Century Schoolbook" size="12.0" />
+                        <Font name="Century Schoolbook" size="18.0" />
                      </font>
                   </TextArea>
                </content>
