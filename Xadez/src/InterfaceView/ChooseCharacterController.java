@@ -165,8 +165,19 @@ public class ChooseCharacterController implements Initializable {
     public void updateInfoText() {
         infoText.setText("");
         switch(count) {
+               
             case 0:
-                
+                switch (infoType) {
+                    case 1:
+                        infoText.appendText(Huebr.description);
+                        break;
+                    case 2:
+                        infoText.appendText(Huebr.skills);
+                        break;
+                    default:
+                        infoText.appendText(Huebr.movimentos);
+                        break;
+                }
                 break;
             case 1:
                 switch (infoType) {
@@ -180,7 +191,6 @@ public class ChooseCharacterController implements Initializable {
                         infoText.appendText(Lapa.movimentos);
                         break;
                 }
-                break;
             default:
                 
                 break;

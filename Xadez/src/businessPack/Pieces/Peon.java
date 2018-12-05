@@ -3,7 +3,6 @@ package businessPack.Pieces;
 import businessPack.Piece;
 import businessPack.Pieces.Default.DefaultPeon;
 import businessPack.Pieces.Huebr.huebrPeon;
-import businessPack.Player;
 import businessPack.Players;
 import businessPack.Table;
 import businessPack.TypeHero;
@@ -11,12 +10,14 @@ import businessPack.TypePiece;
 import extras.Who;
 import javafx.scene.image.Image;
 import businessPack.Pieces.Sheriff.SheriffPeon;
-import businessPack.Pieces.Sheriff.Pistol;
 import businessPack.Pieces.Interfaces.IMovement;
-import javafx.scene.image.ImageView;
+
 
 public class Peon extends Piece {
+
+    
     //atributos>>
+    private boolean firstMove=true;
     //construtor>>
     public Peon(Who who, TypeHero tpHero, int x, int y) {
         super(who, tpHero, x, y);
@@ -54,5 +55,11 @@ public class Peon extends Piece {
     //getset>>
     public void setTypePeon(IMovement tpPeon){//muda o comportamento do checkMove()
         strategy = tpPeon;
+    }
+    public boolean getFirstmove(){
+        return firstMove;
+    }
+    public void setFirstmove(boolean move){
+        this.firstMove = move;  
     }
 }
