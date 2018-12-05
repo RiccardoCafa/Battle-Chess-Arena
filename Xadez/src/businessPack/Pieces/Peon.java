@@ -17,6 +17,7 @@ public class Peon extends Piece {
 
     
     //atributos>>
+    private boolean firstMove=true;
     //construtor>>
     public Peon(Who who, TypeHero tpHero, int x, int y) {
         super(who, tpHero, x, y);
@@ -25,7 +26,6 @@ public class Peon extends Piece {
         tpPiece = TypePiece.peon;
         pieceName = "Peão";
         maxHp = hp;
-        boolean firstMove = true;
         updateImage();
     }
     //metodos>>
@@ -55,5 +55,11 @@ public class Peon extends Piece {
     //getset>>
     public void setTypePeon(IMovement tpPeon){//muda o comportamento do checkMove()
         strategy = tpPeon;
+    }
+    public boolean getFirstmove(){
+        return firstMove;
+    }
+    public void setFirstmove(boolean move){
+        this.firstMove = move;  
     }
 }
