@@ -6,7 +6,7 @@ import extras.Vetor;
 
 public interface Pistol {
     //atributos>>
-    PistolSound pistolSounds = new PistolSound();
+    PistolSound MP3 = new PistolSound();
     //metodos>>
     public boolean reaction(Table table, Vetor vetor, Block enemyBlock);
     public void recharge();
