@@ -104,6 +104,31 @@ public class GameManager {
         }
     }
     public void internalMove(Block sourceBlock, Block destinyBlock){
+        Wizard wiz = new Wizard();
+        
+        //adversario mago
+        if(Players.getAdversaryPlayer().getHero().getHeroType() == TypeHero.wizard){
+            if((sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
+                    destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
+                    sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
+                    destinyBlock.getVetor().getY()<wiz.getWallVetorY()){
+                
+                wiz.youShallNotPass(click1);
+            }
+            
+            
+            
+            
+        }
+        //você é o fodendo mago caralho
+        if(playing.getHero().getHeroType() == TypeHero.wizard){
+            
+            wiz.youShallNotPass(destinyBlock);
+            
+            
+        }
+        
+        
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(click1.getVetor()).colorDefault();
         movingPiece = false;//desabilita a movimentação

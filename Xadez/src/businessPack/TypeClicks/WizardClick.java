@@ -20,6 +20,8 @@ public class WizardClick implements ClickOnBlock {
             Wizard wiz = (Wizard) Players.getActualPlayer().getHero();
             wiz.setWall(blockClicked.getVetor());
             wiz.setWallSetted(true);
+            wiz.youShallNotPass(blockClicked);
+            
         }
         gameManager.setClickSequence(false);
         gameManager.clearHighlight();

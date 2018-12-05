@@ -1,5 +1,6 @@
 package businessPack.Heros;
 
+
 import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Block;
@@ -40,8 +41,8 @@ public class Wizard extends Hero {
         tpHero = TypeHero.wizard;
     }
     
+    
     // comtemplem o mago
-
     @Override
     public void createArmy(Army army, int sentido, Who jogador) {
         this.player = Players.getPlayer(jogador);
@@ -64,7 +65,9 @@ public class Wizard extends Hero {
     @Override
     public void GameManager(Table tab){
        String a = "Nothing";
-    } 
+    }
+    
+    
     public ArrayList<Block> getWallWays(Table tab) {
         ArrayList<Block> tempList = new ArrayList<>();
         for(int i = 0; i < 8; i++) {
@@ -72,9 +75,13 @@ public class Wizard extends Hero {
         }
         return tempList;
     }
+    
+    
     public ImageView getWallImage(){
         return wizardWall;
     }
+    
+    
     //metodo para colocar a barreira no tabuleiro
     public void setWall(Vetor grandLine){
         wallPos =  grandLine.getY();
@@ -84,49 +91,65 @@ public class Wizard extends Hero {
         wizardWall.setLayoutY(15 + 65 * wallPos);
     }
 
-    /**
-     * @return the wallSetted
-     */
+    
+    
     public boolean isWallSetted() {
+        
         return wallSetted;
+        
     }
 
-    /**
-     * @param wallSetted the wallSetted to set
-     */
+    
+    
     public void setWallSetted(boolean wallSetted) {
+        
         this.wallSetted = wallSetted;
+        
     }
 
-    /**
-     * @return the canMove
-     */
+    
+    
     public boolean getCanMove() {
+        
         return canMoveWall;
+        
     }
 
-    /**
-     * @param canMove the canMove to set
-     */
+    
+    
     public void setCanMove(boolean canMove) {
+        
         this.canMoveWall = canMove;
+    
     }
 
-
- 
+    
     
     //função que finalmente seta a barreira
     public void youShallNotPass(Block target){
-          int burnBlock =  1; 
+    
+        int burnBlock =  1; 
+        System.out.println("O inimigo vai entrar viado");
         if(target.getBlockState(player) == BlockState.Enemy){
+            System.out.println("O inimigo se fudeu");
         //da dano na peça inimiga que estiver na barreira   
             target.hitPiece(burnBlock);
             
         }else if(target.getBlockState(player) == BlockState.Friend){
            //cura a peça
+            System.out.println("Curei o aliado");
            target.hitPiece(-1);
         }
-              
+        
+        
     }
+    
+    public int getWallVetorY(){
+        
+        return wallPos;
+    }
+    
+    
+    
     
 }
