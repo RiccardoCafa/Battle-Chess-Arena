@@ -90,7 +90,7 @@ public class SheriffTower implements Pistol, ClickOnBlock{
                 game.setClickSequence(true);
                 return TypeClick.hit;
             }else if(hitWay.size() == 1){//se só existe uma opção
-                blockClicked.hitPiece(charge);
+                hitWay.get(0).hitPiece(charge);
                 isShooting = false;
                 bullet1.setVisible(false);//bala usada
                 charge--;
