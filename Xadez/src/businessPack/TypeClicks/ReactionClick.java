@@ -19,6 +19,7 @@ public class ReactionClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
+        System.out.println("reaction");
         if(blockClicked.getPiece().reaction(game.getTable(), priorBlockClicked)){//se a reação é da SheriffTower
             game.setSheriffBlock(blockClicked);
             game.setClickSequence(true);

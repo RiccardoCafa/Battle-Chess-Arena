@@ -31,7 +31,7 @@ public class Huebr extends Hero {
     //construtor>>
 
     public Huebr() {
-        image = new Image(path + "huehuebr-01.png", widthImg, heightImg, false, false);
+        image = new Image(path + "huehuebr-01.gif", widthImg, heightImg, false, false);
         tpHero = TypeHero.huebr;
         
     }

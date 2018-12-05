@@ -227,9 +227,14 @@ public class GameManager {
         }
     }
     public void setSheriffBlock(Block sheriffBlock){
+        System.out.println("set sheriff block");
         this.sheriffBlock = sheriffBlock;
     }
     public Block getSheriffBlock(){
+        if(sheriffBlock == null)
+            System.out.println("get sheriff block: null");
+        else
+            System.out.println("get sheriff block: not null");
         return sheriffBlock;
     }
     public void displayMessage(String sender, String message) {

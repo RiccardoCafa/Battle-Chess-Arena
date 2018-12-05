@@ -20,28 +20,38 @@ public class HitClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
+        System.out.println("hit");
         if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
-        if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
-            if(priorBlockClicked.getPiece().getTpHero() == TypeHero.lapa) {
-                Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
-                lapao.setBigBig(lapao.getBigBig() + 1);
-                game.displayMessage(game.getPlaying().getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
-                        + lapao.getBigBig() + " bigbigs");
-            }
-            if(priorBlockClicked.getPiece().isSpecial()){//se a peça for special
+        if(priorBlockClicked != null){//se a peça atacante não morreu
+            if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
+                if(priorBlockClicked.getPiece().getTpHero() == TypeHero.lapa){
+                    Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
+                    lapao.setBigBig(lapao.getBigBig() + 1);
+                    game.displayMessage(game.getPlaying().getName(), "Acaba de receber 1 bigbig! Agora ele tem " 
+                            + lapao.getBigBig() + " bigbigs");
+                }
                 game.clearHighlight();
+                if(priorBlockClicked.getPiece().isSpecial()){//se a peça for especial
+                    game.setClickSequence(true);
+                    return TypeClick.special;
+                }else{//se não for especial
+                    Vetor lastPos = priorBlockClicked.getPiece().getLastPosOf(blockClicked);//posição pós-ataque
+                    game.externalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
+                    game.internalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
+                    game.setSheriffBlock(null);
+                    game.setClickSequence(true);
+                    return TypeClick.last;
+                }
+            }else{//se a peça atingida morreu
+                game.removeImage(blockClicked);
+                game.externalMove(priorBlockClicked, blockClicked);
+                game.internalMove(priorBlockClicked, blockClicked);
+                game.setSheriffBlock(null);
                 game.setClickSequence(true);
-                return TypeClick.special;
-            }else{//se não for special
-                Vetor lastPos = priorBlockClicked.getPiece().getLastPosOf(blockClicked);//posição pós-ataque
-                game.externalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
-                game.internalMove(priorBlockClicked, game.getTable().getBlock(lastPos));
+                return TypeClick.last;
             }
-        }else{//se a peça atingida morreu
-            game.removeImage(blockClicked);
-            game.externalMove(priorBlockClicked, blockClicked);
-            game.internalMove(priorBlockClicked, blockClicked);
         }
+        game.setSheriffBlock(null);
         game.setClickSequence(true);
         return TypeClick.last;
     }

@@ -15,14 +15,17 @@ public class MoveSpecialClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
+        System.out.println("move special");
+        if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
         if(game.getPossibleBlocks().contains(blockClicked)){//se o bloco clicado é válido para mover
             game.externalMove(priorBlockClicked, blockClicked);
             game.internalMove(priorBlockClicked, blockClicked);
             game.clearHighlight();
+            game.setSheriffBlock(null);
             game.setClickSequence(true);
             return TypeClick.last;
         }else{//se o bloco clicado não está entre as opções
-            game.setClickSequence(true);
+            game.setClickSequence(false);
             return TypeClick.moveSpecial;
         }
     }
