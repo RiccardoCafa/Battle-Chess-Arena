@@ -22,6 +22,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class GameCtrl implements Initializable {
     /*
@@ -43,6 +44,8 @@ public class GameCtrl implements Initializable {
     TextArea gameplayChat;
     @FXML
     Button PassTurn;
+    @FXML
+    Text season;
     
     String gameName = "System";
     

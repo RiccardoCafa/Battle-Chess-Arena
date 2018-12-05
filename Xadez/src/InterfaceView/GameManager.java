@@ -6,6 +6,7 @@ import businessPack.TypeClicks.SpecialClick;
 import businessPack.TypeClicks.FirstClick;
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Lenin;
 import businessPack.TypeClicks.HitClick;
 import businessPack.TypeClicks.LastClick;
 import businessPack.TypeClicks.MoveClick;
@@ -18,49 +19,58 @@ import businessPack.Table;
 import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
 import businessPack.TypeHero;
+import static businessPack.TypeHero.lenin;
 import extras.Vetor;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import javax.swing.JOptionPane;
 
 public class GameManager {
     //atributos>>
     ClickOnBlock clickOnBlock;
     TypeClick tpClick;
     
+    // Vetores auxiliares
     Vetor myVector;
     Vetor selectedVetor;
     
+    // Lista de posíveis movimentações e hits
     private ArrayList<Block> possibleBlocks;
     private ArrayList<Block> possibleHits;
     
+    // Booleanas para controle
     private boolean movingPiece = false;
     private boolean superPower = false;
-    //private boolean specialActive = false;
     private boolean combo = false;
-    private boolean sheriffTowerReaction;//sheriff power
     private boolean clickSequence;
     
+    // System & More
     private String gameName = "System";
+    private float volumeSound;
     
+    // Game Variables
     private Table table;
-    
     private Player player1;
     private Player player2;
     private Player playing;
-    
+    private Lenin estacao;
     private GameCtrl gameCtrl;
     
     private Block click1;
-    private Block firstBlock;
-    private Block sheriffTowerBlock;
-    
-    private Tower sheriffTower;
-    private Piece pieceMovingImage;
     //construtor>>
     public GameManager(Player p1, Player p2, GameCtrl gameCtrl) {
         this.player1 = p1;
@@ -72,10 +82,22 @@ public class GameManager {
         table = new Table(8, 8, player1, player2);
         tpClick = TypeClick.first;
         table.setGameCtrl(gameCtrl);
+        getOptionsInfo();
     }
     //metodos>>
     public void GameInit() {
         table.initTable(player1, player2);
+        if(player1.getHero().getHeroType() == lenin){
+            estacao = (Lenin) player1.getHero();
+            showSeason(estacao.getEstacao());
+        }
+        if(player2.getHero().getHeroType() == lenin){
+            estacao = (Lenin) player2.getHero();
+            showSeason(estacao.getEstacao());
+        }       
+    }
+    public void getOptionsInfo() {
+        
     }
     public void clearHighlight(){
         for(int i = 0; i < Table.getN(); i++){
@@ -188,7 +210,6 @@ public class GameManager {
         }
     }
     public void EndOfTurn() {
-        firstBlock = null;
         movingPiece = false;
         selectedVetor = null;
         if(possibleBlocks != null) possibleBlocks.clear();
@@ -197,6 +218,7 @@ public class GameManager {
         playing.getHero().GameManager(table);
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
+        showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
     }
     Block click2;
@@ -269,6 +291,22 @@ public class GameManager {
             huebr.setUsePower(true);
             displayMessage("Lapa", "Huebr acaba de causar problemas! Joga dois turnos!");
             System.out.println("Power ativado");
+        }
+    }
+    private void showSeason(int season){
+        switch(season){
+            case 1:
+                gameCtrl.season.setText("Inverno");
+                break;
+            case 2:
+                gameCtrl.season.setText("Outono");
+                break;
+            case 3:
+                gameCtrl.season.setText("Verão");
+                break;
+            case 4:
+                gameCtrl.season.setText("Primavera");
+                break;
         }
     }
     //getset>>
