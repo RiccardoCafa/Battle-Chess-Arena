@@ -145,20 +145,19 @@ public class GameManager {
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(click1.getVetor()).colorDefault();
         movingPiece = false;//desabilita a movimentação
-        if(wiz != null) {  
-           if((sourceBlock.getVetor().getY() <= wiz.getWallVetorY() &&
-               destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
-               sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
-               destinyBlock.getVetor().getY() <= wiz.getWallVetorY()){
-               System.out.println("Barreira na posição: "+ wiz.getWallVetorY());
-               System.out.println("Source: " + sourceBlock.getVetor().getY());
-               System.out.println("Destiny:"+ destinyBlock.getVetor().getY());
-               wiz.youShallNotPass(destinyBlock);
-
-           }
-
-         }
         destinyBlock.getPiece().lifeBarRealocate();
+        if(wiz != null) {  
+            if((sourceBlock.getVetor().getY() <= wiz.getWallVetorY() &&
+                destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
+                sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
+                destinyBlock.getVetor().getY() <= wiz.getWallVetorY()){
+                System.out.println("Barreira na posição: "+ wiz.getWallVetorY());
+                System.out.println("Source: " + sourceBlock.getVetor().getY());
+                System.out.println("Destiny:"+ destinyBlock.getVetor().getY());
+                wiz.youShallNotPass(destinyBlock);
+            }
+        }
+        if(destinyBlock.getPiece() == null) return;
         for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
                 table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToFront();
