@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="background" prefHeight="677.0" prefWidth="1333.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.GameCtrl">
    <children>
@@ -49,6 +50,11 @@
                   <Font size="29.0" />
                </font>
             </Button>
+            <Text fx:id="season" layoutX="191.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="154.89453125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <GridPane fx:id="gridPane" layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">

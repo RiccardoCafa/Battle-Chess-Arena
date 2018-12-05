@@ -1,11 +1,15 @@
 
 package businessPack;
+import InterfaceView.GameManager;
+import businessPack.Pieces.Sheriff.SheriffTower;
 import extras.BlockState;
 import extras.Who;
 import javafx.scene.image.Image;
 import extras.Vetor;
 import java.util.ArrayList;
+import javafx.animation.FadeTransition;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 public class Block extends ImageView {
     //atributos>>
@@ -33,15 +37,28 @@ public class Block extends ImageView {
         return piece == null;
     }
     //getset>>
+    public SheriffTower getSheriffTower(GameManager game, Block priorBlockClicked){
+        return (SheriffTower) piece.getShoot(game, priorBlockClicked);
+    }
     public boolean hitPiece(int damage){
         boolean died = false;
         if(piece != null){
+            showHit();
             if(!piece.hit(damage)){
                 died = true;
                 setPiece(null);
             }
         }
         return died;//está morto ou não?
+    }
+    public void showHit(){
+        FadeTransition anim = new FadeTransition(Duration.millis(250));
+        anim.setNode(piece);
+        anim.setFromValue(1);
+        anim.setToValue(0);
+        anim.setCycleCount(4);
+        anim.setAutoReverse(true);
+        anim.play();
     }
     public Vetor getVetor(){
         return vetor;

@@ -2,6 +2,7 @@ package InterfaceView;
 
 import businessPack.Heros.Huebr;
 import businessPack.Heros.Lapa;
+import businessPack.Heros.Wizard;
 import businessPack.Player;
 import businessPack.Players;
 import java.net.URL;
@@ -22,6 +23,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class GameCtrl implements Initializable {
     /*
@@ -43,6 +45,8 @@ public class GameCtrl implements Initializable {
     TextArea gameplayChat;
     @FXML
     Button PassTurn;
+    @FXML
+    Text season;
     
     String gameName = "System";
     
@@ -89,6 +93,7 @@ public class GameCtrl implements Initializable {
                 gameManager.OnBlockEnter(e);
         });
         return g;
+
     }   
     
     public void superPowerBtnManager() {
@@ -97,6 +102,15 @@ public class GameCtrl implements Initializable {
             btnSuperPower.setVisible(true);
         } else { 
             btnSuperPower.setVisible(false);
+        }
+        if(Players.getActualPlayer().getHero() instanceof Wizard) {
+            Wizard wiz = (Wizard) Players.getActualPlayer().getHero();
+            if(!wiz.isWallSetted() || wiz.getCanMove()) {
+            // Sou virgem ainda
+                btnSuperPower.setVisible(true);
+            } else {
+                btnSuperPower.setVisible(false);
+            }
         }
         persoImage.setImage(Players.getActualPlayer().getHero().getImage());
         gameplayChat.appendText("[" + gameName + "] Vez de " + Players.getActualPlayer().getName() + "\n");

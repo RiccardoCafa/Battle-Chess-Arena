@@ -31,6 +31,11 @@ public class Lenin extends Hero {
     Image LeninQueenImage;
     Image LeninHorseImage;
     private int Estacao = 4;
+    private boolean apareceae = true;
+    private boolean mudanca2 = false;
+    public static String description = "Grande Imperador do Imperio russo use poderoso exercito com seu mais temido general,mas existe um mau a espreitar pelo seu governo";
+    public static String skills = "General Inverno:" + "Cada turno agora é representado por estações do ano.Quando o inverno chega seu melhor general aparece e congela os peos inimigos e danifica a movimentacao do cavalo";
+    public static String movimentos = "As peças especiais so aparecem quando o seu general chegar são a torre que ganha uma unidade de movimento para as diagonais,bispo que ganha uma unidade de movimento para as direcoes N,S,L,O,e o rei que anda uma unidade a mais em todas as direções";
     //construtor>>
     public Lenin() {
         image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
@@ -60,7 +65,7 @@ public class Lenin extends Hero {
         Player enemyPlayer = Players.getPlayer(myPlayer.getWho() == Who.player1 ? Who.player2 : Who.player1);
         System.err.println("Estacao"+Estacao);
         Estacao--;
-        if(Estacao == 0){
+        if(Estacao == 1){
            for(Piece b : myPlayer.getArmy().getArmyList()){
                if(b.getPiece() == TypePiece.bishop){
                    LeninBishop LB = new LeninBishop(myPlayer);
@@ -87,7 +92,7 @@ public class Lenin extends Hero {
                }
            }
         }
-        if(Estacao < 0){
+        if(Estacao < 1){
             //System.out.println("Estacao virou");
             for(Piece b : myPlayer.getArmy().getArmyList()){
                if(b.getPiece() == TypePiece.bishop){
@@ -109,7 +114,21 @@ public class Lenin extends Hero {
                     b.setStrategy(b.getHeroStrategy());
                }
            }
-           Estacao = 3;
+           Estacao = 4;
+        }
+        leninSurgi();
+    }
+    public int getEstacao(){
+        return Estacao;
+    }
+    public void leninSurgi(){
+        if(Estacao == 1 && apareceae == true){
+            apareceae = false;
+            image = new Image(path + "transicao_lenin.gif", widthImg, heightImg, false, false);
+            mudanca2 = true;
+        }
+        if(mudanca2 == true && Estacao == 4){
+            image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
         }
     }
 }

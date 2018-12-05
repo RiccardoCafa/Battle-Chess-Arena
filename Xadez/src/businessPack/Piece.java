@@ -1,18 +1,16 @@
 package businessPack;
 
+import businessPack.Heros.Wizard;
+import InterfaceView.GameManager;
 import extras.BlockState;
 import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import businessPack.Pieces.Interfaces.IMovement;
-import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
+import businessPack.Pieces.Sheriff.SheriffTower;
 
 public abstract class Piece extends ImageView {
     //atributos>>
@@ -84,7 +82,6 @@ public abstract class Piece extends ImageView {
         image.setPreserveRatio(ratio);
         image.setFitWidth(width);
         image.setFitHeight(height);
-        image.setTranslateZ((double)vetor.getY());
         image.setMouseTransparent(true);
     }
     public abstract void checkMove(Table table);//criação da freeWay
@@ -168,14 +165,6 @@ public abstract class Piece extends ImageView {
         }
         return hitWay;
     }
-    public void lifeBarToFront() {
-        //lifeBarBg.setTranslateZ(vetor.getY());
-        //lifeBar.setTranslateZ(vetor.getY());
-    }
-    public void lifeBarToBack() {
-        //lifeBar.setTranslateZ(vetor.getY());
-        //lifeBarBg.setTranslateZ(vetor.getY());
-    }
     public void lifeBarRealocate(){
         lifeBar.setLayoutX((65 * vetor.getX()) - (1 - ((float)hp/(float)maxHp))*30);
         lifeBarBg.setLayoutX(65 * vetor.getX());
@@ -219,6 +208,10 @@ public abstract class Piece extends ImageView {
         toBack();
     }
     //getset>>
+    public Pistol getShoot(GameManager game, Block priorBlockClicked){
+        ((SheriffTower)shoot).setTurnAtributes(game, priorBlockClicked);
+        return shoot;
+    }
     public TypePiece getPiece(){
         return tpPiece;
     }
@@ -240,15 +233,36 @@ public abstract class Piece extends ImageView {
     }
     public boolean hit(int damage){
         setHP(hp - damage);
-        if(!alive) removePiece();
+        if(!alive) {
+            if(getTypePiece() == TypePiece.peon && 
+               Players.getAdversaryPlayer().getHero() instanceof Wizard) {
+               Wizard wiz = (Wizard)Players.getAdversaryPlayer().getHero();
+               wiz.setCanMove(true);
+               if(wiz.getCanMove()){
+                   wiz.setCanMove(false);
+               }
+            }
+            removePiece();
+        }
         lifeBarResize();
         lifeBarRealocate();
         bulletViewConfig();
         return alive;
     }
-    private void setHP(int hp){
+    public boolean setHP(int hp){
+        if(hp>maxHp){
+            hp = maxHp;
+        }
         this.hp = hp;
-        alive = (hp > 0);
+        if(hp <= 0) alive = false;
+        return alive;
+    }
+    public void healPiece(int hp){
+        this.hp += hp ;
+        if(this.hp>maxHp){
+            this.hp =  maxHp;
+        }
+        System.out.println("New hp: " + this.hp);
     }
     public boolean imAlive(){
         return alive;
