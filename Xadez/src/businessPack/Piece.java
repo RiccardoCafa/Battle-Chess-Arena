@@ -7,15 +7,10 @@ import businessPack.Pieces.Sheriff.Pistol;
 import extras.Who;
 import java.util.ArrayList;
 import extras.Vetor;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import businessPack.Pieces.Interfaces.IMovement;
 import businessPack.Pieces.Sheriff.SheriffTower;
-import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
 
 public abstract class Piece extends ImageView {
     //atributos>>
@@ -254,11 +249,13 @@ public abstract class Piece extends ImageView {
         bulletViewConfig();
         return alive;
     }
-    public void setHP(int hp){
+    public boolean setHP(int hp){
         if(hp>maxHp){
-            hp =  maxHp;
+            hp = maxHp;
         }
         this.hp = hp;
+        if(hp <= 0) alive = false;
+        return alive;
     }
     public void healPiece(int hp){
         this.hp += hp ;
