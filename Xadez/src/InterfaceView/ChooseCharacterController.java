@@ -6,11 +6,6 @@ import businessPack.Heros.Lenin;
 import businessPack.Heros.Sheriff;
 import businessPack.Heros.Wizard;
 import businessPack.Player;
-import static businessPack.TypeHero.huebr;
-import static businessPack.TypeHero.lapa;
-import static businessPack.TypeHero.lenin;
-import static businessPack.TypeHero.sheriff;
-import static businessPack.TypeHero.wizard;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,22 +15,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import javax.swing.JOptionPane;
 import Sounds.HeroesMusics;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -165,8 +154,19 @@ public class ChooseCharacterController implements Initializable {
     public void updateInfoText() {
         infoText.setText("");
         switch(count) {
+               
             case 0:
-                
+                switch (infoType) {
+                    case 1:
+                        infoText.appendText(Huebr.description);
+                        break;
+                    case 2:
+                        infoText.appendText(Huebr.skills);
+                        break;
+                    default:
+                        infoText.appendText(Huebr.movimentos);
+                        break;
+                }
                 break;
             case 1:
                 switch (infoType) {
@@ -180,9 +180,21 @@ public class ChooseCharacterController implements Initializable {
                         infoText.appendText(Lapa.movimentos);
                         break;
                 }
-                break;
-            default:
+            case 2:
                 
+            case 3:
+                switch (infoType) {
+                    case 1:
+                        infoText.appendText(Wizard.description);
+                        break;
+                    case 2:
+                        infoText.appendText(Wizard.skill);
+                        break;
+                    default:
+                        infoText.appendText(Wizard.movimentos);
+                        break;
+                }
+            default:
                 break;
         }
     }

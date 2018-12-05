@@ -8,9 +8,7 @@ import businessPack.Pieces.King;
 import businessPack.Pieces.Peon;
 import businessPack.Pieces.Queen;
 import businessPack.Pieces.Tower;
-import businessPack.Player;
 import businessPack.Players;
-import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.Table;
 import extras.Who;
@@ -28,6 +26,18 @@ public class Huebr extends Hero {
     private int count = 0;
     
     boolean isHitted = false;
+    
+    /**
+     *
+     */
+    public static String description = "Este é HueBr, o deus da zoeira, jogando com ele você irá trolar seu inimigo ao máximo." +
+                " Sua peça especial será de bom uso, você possui 8 delas, então mesmo sendo zoeiro, aproveite com sabedoria !";
+    public static String skills = "O poder dispovível para o Huebr poderá ser usado 3 vezes por jogo, Você terá a possibilidade de usar quando quiser " + 
+                " Poderá jogar no lugar do inimigo no próximo turno." + "Voltando o movimento para o próximo jogador no turno seguinte. " +
+                "Use seu poder com sua sabedoria e obviamente trole o inimigo o máximo que puder ";
+    public static String movimentos = "A peça especial de HueBr é o peão de duas cabeças! Ela é capaz de andar duas casas para frente sempre " +
+                ", uma para baixo e pode comer os inimigos que estão a sua frente e nas primeiras diagonais.";
+    
     //construtor>>
 
     public Huebr() {
@@ -70,6 +80,9 @@ public class Huebr extends Hero {
      */
     public void setUsePower(boolean usePower) {
         this.usePower = usePower;
+    }
+    public int Contador(){
+        return count;
     }
 
     @Override

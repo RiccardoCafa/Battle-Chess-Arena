@@ -1,6 +1,5 @@
 package businessPack.Heros;
 
-import InterfaceView.GameCtrl;
 import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Block;

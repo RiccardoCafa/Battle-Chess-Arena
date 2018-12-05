@@ -34,11 +34,12 @@ public class HeroesMusics {
         
         tockers.stop();
         tockers = new MediaPlayer(exaltaSamba.get(indexMusic));
-       // tockers.setStartTime(Duration.ZERO);
-       // tockers.play();
+        tockers.setStartTime(Duration.ZERO);
+         tockers.play();
     }
     
     public void stopMusic() {
         tockers.stop();
     }
+
 }
