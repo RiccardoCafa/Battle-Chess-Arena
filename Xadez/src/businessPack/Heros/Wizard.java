@@ -131,14 +131,13 @@ public class Wizard extends Hero {
         int burnBlock =  1; 
         System.out.println("O inimigo vai entrar viado");
         if(target.getBlockState(player) == BlockState.Enemy){
-            System.out.println("O inimigo se fudeu");
+            System.out.println("Virei duas caras");
         //da dano na peça inimiga que estiver na barreira   
-            target.hitPiece(burnBlock);
-            
+            target.hitPiece(burnBlock);    
         }else if(target.getBlockState(player) == BlockState.Friend){
            //cura a peça
             System.out.println("Curei o aliado");
-           target.hitPiece(-1);
+           target.getPiece().healPiece(1);
         }
         
         
@@ -148,6 +147,8 @@ public class Wizard extends Hero {
         
         return wallPos;
     }
+    
+    
     
     
     

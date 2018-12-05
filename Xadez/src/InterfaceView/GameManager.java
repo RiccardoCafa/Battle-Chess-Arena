@@ -129,34 +129,38 @@ public class GameManager {
         }
     }
     public void internalMove(Block sourceBlock, Block destinyBlock){
-        Wizard wiz = new Wizard();
+      Wizard wiz =  null;
+      if(Players.getActualPlayer().getHero().getHeroType() == TypeHero.wizard){
+          
+          wiz = (Wizard) Players.getActualPlayer().getHero();
+          
+      }else if (Players.getAdversaryPlayer().getHero().getHeroType() == TypeHero.wizard){
+          
+          wiz =  (Wizard) Players.getAdversaryPlayer().getHero();     
+      }
         
-        //adversario mago
-        if(Players.getAdversaryPlayer().getHero().getHeroType() == TypeHero.wizard){
-            if((sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
-                    destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
-                    sourceBlock.getVetor().getY() > wiz.getWallVetorY() &&
-                    destinyBlock.getVetor().getY()<wiz.getWallVetorY()){
-                
-                wiz.youShallNotPass(click1);
-            }
-            
-            
-            
-            
-        }
-        //você é o fodendo mago caralho
-        if(playing.getHero().getHeroType() == TypeHero.wizard){
-            
-            wiz.youShallNotPass(destinyBlock);
-            
-            
-        }
+     
+      
+  //você é o fodendo mago caralho
+       
         
         
         table.MovePiece(sourceBlock.getVetor(), destinyBlock.getVetor());
         table.getBlock(click1.getVetor()).colorDefault();
         movingPiece = false;//desabilita a movimentação
+         if(wiz != null) {  
+            if((sourceBlock.getVetor().getY() <= wiz.getWallVetorY() &&
+                destinyBlock.getVetor().getY() > wiz.getWallVetorY()) ||
+                sourceBlock.getVetor().getY() < wiz.getWallVetorY() &&
+                destinyBlock.getVetor().getY() >= wiz.getWallVetorY()){
+                System.out.println("Barreira na posição: "+ wiz.getWallVetorY());
+                System.out.println("Source: " + sourceBlock.getVetor().getY());
+                System.out.println("Destiny:"+ destinyBlock.getVetor().getY());
+                wiz.youShallNotPass(destinyBlock);
+                
+            }
+     
+      }
         destinyBlock.getPiece().lifeBarRealocate();
         for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
@@ -247,12 +251,12 @@ public class GameManager {
         movingPiece = false;
         selectedVetor = null;
         if(possibleBlocks != null) possibleBlocks.clear();
-        possibleHits.clear();
+       if(possibleHits != null) possibleHits.clear();
         clearHighlight();
         playing.getHero().GameManager(table);
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
-        showSeason(estacao.getEstacao());
+       // showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
     }
     Block click2;

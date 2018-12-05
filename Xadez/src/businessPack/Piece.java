@@ -266,6 +266,12 @@ public abstract class Piece extends ImageView {
         this.hp = hp;
         alive = (hp > 0);
     }
+    public void healPiece(int hp){
+        this.hp += hp ;
+        if(this.hp>maxHp){
+            this.hp =  maxHp;
+        }
+    }
     public boolean imAlive(){
         return alive;
     }
