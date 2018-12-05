@@ -102,11 +102,11 @@ public class GameManager {
         table.initTable(player1, player2);
         if(player1.getHero().getHeroType() == TypeHero.lenin){
             estacao = (Lenin) player1.getHero();
-            showSeason(estacao.getEstacao());
+            showSeasons(estacao.getEstacao());
         }
         if(player2.getHero().getHeroType() == TypeHero.lenin){
             estacao = (Lenin) player2.getHero();
-            showSeason(estacao.getEstacao());
+            showSeasons(estacao.getEstacao());
         }       
     }
     public void getOptionsInfo() {
@@ -264,9 +264,10 @@ public class GameManager {
 
         clearHighlight();
         playing.getHero().GameManager(table);
-        if(estacao != null) showSeason(estacao.getEstacao());
+        if(estacao != null) showSeasons(estacao.getEstacao());
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
+        if(estacao != null) showSeasons(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
         System.err.println("to aq");
     }
@@ -350,8 +351,8 @@ public class GameManager {
             }
         }
     }
-    public void showSeason(int season){
-        switch(season){
+    public void showSeasons(int count){
+        switch(count){
             case 1:
                 gameCtrl.season.setText("Inverno");
                 break;
@@ -359,7 +360,6 @@ public class GameManager {
                 gameCtrl.season.setText("Outono");
                 break;
             case 3:
-                System.err.println("to aq");
                 gameCtrl.season.setText("Verão");
                 break;
             case 4:
