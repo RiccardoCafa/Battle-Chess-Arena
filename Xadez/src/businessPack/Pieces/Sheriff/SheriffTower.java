@@ -84,36 +84,25 @@ public class SheriffTower implements Pistol, ClickOnBlock{
     public TypeClick click(Block blockClicked){
         ArrayList<Block> hitWay = sheriffTowerHitWay(game.getTable(), game.getSheriffBlock().getVetor());
         if(!isShooting){//se é o momento de mostrar as opções de tiro
-            System.out.println("11111111111111111111111111");
             game.clearHighlight();
+            isShooting = true;
+            game.setSheriffBlock(blockClicked);
             if(hitWay.isEmpty()){//se não existe opção para atirar
                 isShooting = false;
                 game.setSheriffBlock(null);
                 game.setClickSequence(true);
                 return TypeClick.hit;
-            }else if(hitWay.size() == 1){//se existe apenas uma opção de tiro
-                priorBlockClicked.hitPiece(charge);
-                bullet1.setVisible(false);//bala usada
-                charge--;
-                pistolSounds.playShootSound();
-                isShooting = false;
-                game.setSheriffBlock(null);
-                game.setClickSequence(true);
-                return TypeClick.hit;
             }else{//se existe mais de uma opção de ataque
-                game.clearHighlight();
-                game.setPossibleHits(hitWay);
                 game.showPossibleEnemys(hitWay);
                 isShooting = true;
                 game.setClickSequence(false);
                 return TypeClick.sheriffTower;
             }
         }else{//se é o momento de atirar
-            if(!hitWay.contains(blockClicked)){
+            if(!hitWay.contains(blockClicked)){//se clicou num bloco inválido
                 game.setClickSequence(false);
                 return TypeClick.sheriffTower;
             }
-            System.out.println("222222222222222222222222222222");
             blockClicked.hitPiece(charge);
             isShooting = false;
             bullet1.setVisible(false);//bala usada

@@ -33,7 +33,7 @@ public class Lenin extends Hero {
     private int Estacao = 4;
     //construtor>>
     public Lenin() {
-        image = new Image(path + "lenin-01.png", widthImg, heightImg, false, false);
+        image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
         tpHero = TypeHero.lenin;
     }
 
