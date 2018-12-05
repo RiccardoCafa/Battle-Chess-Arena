@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class InterfaceMain extends Application {
 
     //private Stage primaryStage;
-    private Image gameIcone = new Image("InterfaceView/Personagens/iconeLapa.png");
+    private Image gameIcone = new Image("InterfaceView/imagens/iconGameAlpha.png");
     @Override
     public void start(Stage primaryStage) {
         Parent rootLayout = null;
