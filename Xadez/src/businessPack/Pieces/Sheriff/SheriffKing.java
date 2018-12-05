@@ -25,7 +25,7 @@ public class SheriffKing implements Pistol{
     public void recharge(){//recarga
         if(charge < 2){
             charge++;
-            pistolSounds.playRechargeSound();
+            MP3.playRechargeSound();
         }
         if(charge == 1) bullet1.setVisible(true);
         if(charge == 2) bullet2.setVisible(true);
@@ -40,7 +40,7 @@ public class SheriffKing implements Pistol{
             if(charge == 1) bullet1.setVisible(false);//última bala do pente usada 
             if(charge == 2) bullet2.setVisible(false);//bala usada
             charge--;
-            pistolSounds.playShootSound();
+            MP3.playShootSound();
         }else recharge();//pente vazio, comece a encher
         return false;
     }

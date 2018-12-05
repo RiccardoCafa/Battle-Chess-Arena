@@ -71,6 +71,8 @@ public class GameManager {
     private GameCtrl gameCtrl;
     
     private Block click1;
+    private Block click2;
+    private Block sheriffBlock;
     //construtor>>
     public GameManager(Player p1, Player p2, GameCtrl gameCtrl) {
         this.player1 = p1;
@@ -157,7 +159,7 @@ public class GameManager {
         int deltaX = destiny.getX() - source.getX();
         int deltaY = destiny.getY() - source.getY();
         TranslateTransition anim = new TranslateTransition();
-        for(int i = 1; i <= 4; i++){
+        for(int i = 1; i <= 5; i++){
             switch(i){
                 case 1: anim = new TranslateTransition(Duration.millis(1000), image); break;
                 case 2: anim = new TranslateTransition(Duration.millis(1000), ((Piece)image).getLifeBar()); break;
@@ -218,11 +220,10 @@ public class GameManager {
         playing.getHero().GameManager(table);
         Players.passTurn();
         playing = Players.getTurn() == 1 ? player1 : player2;
-        showSeason(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
+        System.err.println("to aq");
+        showSeason(estacao.getEstacao());
     }
-    Block click2;
-    Block sheriffBlock;
     public void OnBlockClicked(MouseEvent e){
         clickSequence = true;
         while(clickSequence){
@@ -247,12 +248,6 @@ public class GameManager {
             click2 = (Block) e.getSource();
             tpClick = clickOnBlock.click(click2);
         }
-    }
-    public void setSheriffBlock(Block sheriffBlock){
-        this.sheriffBlock = sheriffBlock;
-    }
-    public Block getSheriffBlock(){
-        return sheriffBlock;
     }
     public void displayMessage(String sender, String message) {
         gameCtrl.displayMessage(sender, message);
@@ -288,7 +283,7 @@ public class GameManager {
             System.out.println("Power ativado");
         }
     }
-    private void showSeason(int season){
+    public void showSeason(int season){
         switch(season){
             case 1:
                 gameCtrl.season.setText("Inverno");
@@ -297,6 +292,7 @@ public class GameManager {
                 gameCtrl.season.setText("Outono");
                 break;
             case 3:
+                System.err.println("to aq");
                 gameCtrl.season.setText("Verão");
                 break;
             case 4:
@@ -305,6 +301,12 @@ public class GameManager {
         }
     }
     //getset>>
+    public void setSheriffBlock(Block sheriffBlock){
+        this.sheriffBlock = sheriffBlock;
+    }
+    public Block getSheriffBlock(){
+        return sheriffBlock;
+    }
     public Player getPlaying(){
         return playing;
     }
