@@ -89,7 +89,9 @@ public class GameManager {
 
         if(player1.getHero() instanceof Wizard || player2.getHero() instanceof Wizard) {
             Wizard wiz = (Wizard) (player1.getHero() instanceof Wizard ? player1.getHero() : player2.getHero());
-            gameCtrl.pratoPieces.getChildren().add(wiz.getWallImage());
+            for(int i = 0; i < 8; i ++) {
+                gameCtrl.pratoPieces.getChildren().add(wiz.getWallImage(i));
+            }
         }
 
         getOptionsInfo();
@@ -161,10 +163,12 @@ public class GameManager {
         for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
                 table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToFront();
+            if(wiz!=null && wiz.getWallVetorY() == j) wiz.wallToFront(destinyBlock.getVetor().getX());
         }
         for(int j = destinyBlock.getVetor().getY() - 1; j >= 0; j--){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
                 table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToBack();
+            if(wiz!=null && wiz.getWallVetorY() == j) wiz.wallToBack(destinyBlock.getVetor().getX());
         }
         clearHighlight();
     }
