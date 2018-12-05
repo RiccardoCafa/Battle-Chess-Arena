@@ -122,6 +122,7 @@ public class GameManager {
         possibleBlocks = actualBlock.getPiece().getFreeWay();
         if(possibleBlocks == null || possibleBlocks.isEmpty()){//se o freeWay for vazio ou nulo, saia do evento
             GameManager.this.setClickSequence(false);
+            click1 = null;
             return TypeClick.first;
         }else{
             possibleHits = actualBlock.getPiece().getHitWay();
@@ -262,7 +263,7 @@ public class GameManager {
         clickSequence = true;
         while(clickSequence){
             switch(tpClick){
-                case first:        clickOnBlock = new FirstClick(this);
+                case first:        clickOnBlock = new FirstClick(this, click1);
                     break;
                 case move:         clickOnBlock = new MoveClick(this, click1);
                     break;
@@ -402,10 +403,10 @@ public class GameManager {
     }
     /*public boolean isSheriffTowerReaction() {
         return sheriffTowerReaction;
-    }*/
+    }
     /*public void setSheriffTowerReaction(boolean sheriffTowerReaction) {
         this.sheriffTowerReaction = sheriffTowerReaction;
-    }*/
+    }
     /*
     public void sheriffTowerShoot(Block actualBlock){//clique extra do tiro da SheriffTower
         if(!combo){//se não se trata de uma reação a uma peça special
