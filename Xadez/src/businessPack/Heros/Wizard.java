@@ -156,31 +156,23 @@ public class Wizard extends Hero {
     }
     
     //função que finalmente seta a barreira
-    public void youShallNotPass(Block target){
+    public void youShallNotPass(Block sourceBlock, Block destinyBlock){
     
-        int burnBlock =  1; 
-        System.out.println("O inimigo vai entrar viado");
-        if(target.getBlockState(player) == BlockState.Enemy){
-            System.out.println("Virei duas caras");
-        //da dano na peça inimiga que estiver na barreira   
-            target.hitPiece(burnBlock);    
-        }else if(target.getBlockState(player) == BlockState.Friend){
-           //cura a peça
-            System.out.println("Curei o aliado");
-           target.getPiece().healPiece(1);
+        if((sourceBlock.getVetor().getY() <= getWallVetorY() &&
+            destinyBlock.getVetor().getY() > getWallVetorY()) ||
+            sourceBlock.getVetor().getY() > getWallVetorY() &&
+            destinyBlock.getVetor().getY() <= getWallVetorY()){
+            int burnBlock =  1; 
+            if(destinyBlock.getBlockState(player) == BlockState.Enemy){
+                destinyBlock.hitPiece(burnBlock);    
+            }else if(destinyBlock.getBlockState(player) == BlockState.Friend){
+               destinyBlock.getPiece().healPiece(1);
+            }
         }
-        
-        
     }
     
     public int getWallVetorY(){
         
         return wallPos;
     }
-    
-    
-    
-    
-    
-    
 }

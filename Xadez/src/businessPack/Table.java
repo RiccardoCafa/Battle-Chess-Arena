@@ -1,14 +1,10 @@
 package businessPack;
 
 import InterfaceView.GameCtrl;
-import InterfaceView.GameManager;
 import businessPack.Pieces.Peon;
 import extras.Vetor;
-import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javax.swing.JOptionPane;
 
 public class Table{
