@@ -27,7 +27,7 @@ public class Lapa extends Hero {
     
     private boolean jaFoiLapa = false;
     
-    private int bigBig = 10;
+    private int bigBig = 0;
     
     public static String description = "Este é Lapa God, um programador com poderes de hack o quanto suspeitos... Cuidado para não deixar ele acumular muitos big bigs" +
                 " pode não ser muito vantajoso para você." + "\nEle tem apenas uma peça especial, mas não a subestime, ela foi programada por díscipulos dele!";
