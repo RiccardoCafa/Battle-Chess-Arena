@@ -16,7 +16,9 @@ import businessPack.Piece;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
+import businessPack.Saver;
 import businessPack.Table;
+import businessPack.TypeClicks.LapaClick;
 import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
 import businessPack.TypeClicks.WizardClick;
@@ -62,7 +64,8 @@ public class GameManager {
     
     // System & More
     private String gameName = "System";
-    private float volumeSound;
+    private double volumeSound;
+    Saver saver = new Saver();
     
     // Game Variables
     private Table table;
@@ -117,7 +120,11 @@ public class GameManager {
         }
     }
     public void getOptionsInfo() {
-        
+        String vol = saver.readOnFile("Option", "Volume");
+        if(vol==null) return;
+        else{
+            volumeSound = Double.parseDouble(vol);
+        }
     }
     public void clearHighlight(){
         for(int i = 0; i < Table.getN(); i++){
@@ -248,7 +255,9 @@ public class GameManager {
         selectedVetor = null;
         if(possibleBlocks != null) possibleBlocks.clear();
         if(possibleHits != null) possibleHits.clear();
-
+        if(Players.getAdversaryPlayer().getArmy().getArmyList().isEmpty()) {
+            gameCtrl.LoadScene(Players.getActualPlayer());
+        }
         clearHighlight();
         playing.getHero().GameManager(table);
         if(estacao != null) showSeasons(estacao.getEstacao());
@@ -256,7 +265,6 @@ public class GameManager {
         playing = Players.getTurn() == 1 ? player1 : player2;
         if(estacao != null) showSeasons(estacao.getEstacao());
         gameCtrl.superPowerBtnManager();
-        System.err.println("to aq");
     }
     public void OnBlockClicked(MouseEvent e){
         clickSequence = true;
@@ -279,6 +287,15 @@ public class GameManager {
                 case last:         clickOnBlock = new LastClick(this);
                     break;
                 case wizardClick:  clickOnBlock = new WizardClick(this);
+                    break;
+                case lapaClick:    
+                    Lapa lapao = null;
+                    if(Players.getActualPlayer().getHero() instanceof Lapa) lapao = (Lapa) Players.getActualPlayer().getHero();
+                    else {
+                        tpClick = TypeClick.first;
+                        return;
+                    }
+                    clickOnBlock = new LapaClick(this, lapao);
                     break;
             }
             click2 = (Block) e.getSource();
@@ -303,7 +320,7 @@ public class GameManager {
                     }
                     displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
                     showPossibleEnemys(possibleBlocks);
-                    superPower = true;
+                    tpClick = TypeClick.lapaClick;
                 } else {
                     displayMessage(gameName, "Lapa você está sem bigbig, precisa de mais alunos interessados!");
                 }

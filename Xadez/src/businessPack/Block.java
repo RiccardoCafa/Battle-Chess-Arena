@@ -45,6 +45,7 @@ public class Block extends ImageView {
         if(piece != null){
             showHit();
             if(!piece.hit(damage)){
+                Players.getAdversaryPlayer().getArmy().getArmyList().remove(getPiece());
                 died = true;
                 setPiece(null);
             }
