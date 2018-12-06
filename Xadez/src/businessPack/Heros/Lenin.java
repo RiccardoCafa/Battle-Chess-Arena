@@ -1,5 +1,6 @@
 package businessPack.Heros;
 
+import InterfaceView.GameManager;
 import businessPack.Army;
 import businessPack.Hero;
 import businessPack.Piece;
@@ -20,16 +21,14 @@ import businessPack.Table;
 import businessPack.TypeHero;
 import businessPack.TypePiece;
 import extras.Who;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Lenin extends Hero {
     //atributos>>
-    Image leninTowerImage;
-    Image LeninBishopImage;
-    Image LeninPeonImage;
-    Image LeninKingImage;
-    Image LeninQueenImage;
-    Image LeninHorseImage;
+    private ImageView persoImage;
     private int Estacao = 4;
     private boolean apareceae = true;
     private boolean mudanca2 = false;
@@ -129,7 +128,22 @@ public class Lenin extends Hero {
         if(Estacao == 1 && apareceae == true){
             apareceae = false;
             image = new Image(path + "transicao_lenin.gif", widthImg, heightImg, false, false);
+            GameManager.gameCtrl.getPersoImage().setImage(image);
             mudanca2 = true;
+            Runnable runner = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(3000);
+                        System.out.println("Acordei!");
+                        image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
+                        GameManager.gameCtrl.getPersoImage().setImage(image);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Lenin.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            };
+            new Thread(runner).start();
         }
         if(mudanca2 == true && Estacao == 4){
             image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);

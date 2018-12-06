@@ -71,7 +71,7 @@ public class GameManager {
     private Player playing;
     private Lenin estacao;
     private Wizard wiz;
-    private GameCtrl gameCtrl;
+    public static GameCtrl gameCtrl;
     
     private Block click1;
     private Block click2;
