@@ -93,7 +93,9 @@ public class ChooseCharacterController implements Initializable {
     private int infoType = 1;
     
     private double volumeSound;
-    //Saver saver = new Saver();
+
+//    Saver saver = new Saver();
+
 
     private HeroesMusics music = new HeroesMusics();
     
@@ -102,7 +104,7 @@ public class ChooseCharacterController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         
         //getOptionsInfo();
-        setConfig();
+        //setConfig();
         // TODO
         back.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoVazio.png", 1186, 667, false, false), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
