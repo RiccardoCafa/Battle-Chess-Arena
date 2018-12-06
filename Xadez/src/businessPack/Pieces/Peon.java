@@ -26,7 +26,7 @@ public class Peon extends Piece {
         tpPiece = TypePiece.peon;
         pieceName = "Peão";
         if(tpHero == TypeHero.huebr){
-        maxHp = hp + 8;
+            hp = 6;
         }
         maxHp = hp;
         updateImage();
