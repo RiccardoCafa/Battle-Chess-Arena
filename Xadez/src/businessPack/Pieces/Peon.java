@@ -25,6 +25,9 @@ public class Peon extends Piece {
         strategy = getHeroStrategy();//new DefaultPeon();
         tpPiece = TypePiece.peon;
         pieceName = "Peão";
+        if(tpHero == TypeHero.huebr){
+            hp = 6;
+        }
         maxHp = hp;
         updateImage();
     }

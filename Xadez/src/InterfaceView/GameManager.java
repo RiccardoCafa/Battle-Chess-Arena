@@ -98,7 +98,9 @@ public class GameManager {
             }
         }
 
-        //getOptionsInfo();
+
+  //      getOptionsInfo();
+
 
     }
     //metodos>>
@@ -120,11 +122,12 @@ public class GameManager {
         }
     }
     public void getOptionsInfo() {
-//        String vol = saver.readOnFile("Option", "Volume");
-//        if(vol==null) return;
-//        else{
-//            volumeSound = Double.parseDouble(vol);
-//        }
+
+    //    String vol = saver.readOnFile("Option", "Volume");
+      //  if(vol==null) return;
+        //else{
+          //  volumeSound = Double.parseDouble(vol);
+        //}
     }
     public void clearHighlight(){
         for(int i = 0; i < Table.getN(); i++){
@@ -202,10 +205,8 @@ public class GameManager {
             }
             anim.setFromX(-65*deltaX);
             anim.setFromY(-65*deltaY);
-            anim.setFromZ(source.getY());
             anim.setToX(0);
             anim.setToY(0);
-            anim.setToZ(destiny.getY());
             anim.setCycleCount(1);
             anim.setAutoReverse(true);
             anim.play();
