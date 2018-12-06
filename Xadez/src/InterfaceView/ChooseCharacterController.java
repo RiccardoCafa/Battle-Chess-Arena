@@ -93,7 +93,9 @@ public class ChooseCharacterController implements Initializable {
     private int infoType = 1;
     
     private double volumeSound;
+
 //    Saver saver = new Saver();
+
 
     private HeroesMusics music = new HeroesMusics();
     
@@ -155,14 +157,14 @@ public class ChooseCharacterController implements Initializable {
         updateCharacterInfo();
         
     }
-
+/*
     public void getOptionsInfo() {
-//        String vol = saver.readOnFile("Options", "Volume");
-//        if(vol==null) return;
-//        else{
-//            volumeSound = Double.parseDouble(vol);
-//        }
-    }
+        String vol = saver.readOnFile("Options", "Volume");
+        if(vol==null) return;
+        else{
+            volumeSound = Double.parseDouble(vol);
+        }
+    }*/
     public void setConfig() {
         music.volumeChange(volumeSound/100);
     }
