@@ -21,12 +21,6 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 
 public class Lapa extends Hero {
-    Image lapaTowerImage;
-    Image lapaBishopImage;
-    Image lapaPeonImage;
-    Image lapaKingImage;
-    Image lapaQueenImage;
-    Image lapaHorseImage;
     
     GameManager game;
     Table tab;

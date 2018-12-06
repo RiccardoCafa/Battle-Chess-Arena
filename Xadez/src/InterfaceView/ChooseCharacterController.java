@@ -370,7 +370,7 @@ public class ChooseCharacterController implements Initializable {
             Scene eltonJhon = new Scene(rooter);
             Stage stage = new Stage();
             
-            stage.setTitle("Choose Your Character!");
+            stage.setTitle("Battle Chess Arena!");
             stage.setScene(eltonJhon);
             stage.show();
         } catch(IOException e) {
