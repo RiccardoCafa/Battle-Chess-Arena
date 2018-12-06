@@ -46,7 +46,7 @@ public class Lenin extends Hero {
     public void createArmy(Army army, int sentido, Who jogador){
         this.player = Players.getPlayer(jogador);
         for(int k = 0;k<8;k++){
-            army.addPiece(new Peon(jogador, TypeHero.lenin, k,(int)(3.5 + sentido*2.5)));
+            //army.addPiece(new Peon(jogador, TypeHero.lenin, k,(int)(3.5 + sentido*2.5)));
         }
         army.addPiece(new Peon(jogador, TypeHero.lenin, 1,(int)(3.5 + sentido*1.5)));
         army.addPiece(new Peon(jogador, TypeHero.lenin, 3,(int)(3.5 + sentido*1.5)));
@@ -134,10 +134,12 @@ public class Lenin extends Hero {
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(4500);
                         System.out.println("Acordei!");
                         image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
-                        GameManager.gameCtrl.getPersoImage().setImage(image);
+                        if(Players.getActualPlayer().getHero() instanceof Lenin) {
+                            GameManager.gameCtrl.getPersoImage().setImage(image);
+                        }
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Lenin.class.getName()).log(Level.SEVERE, null, ex);
                     }

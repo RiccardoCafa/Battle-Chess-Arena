@@ -5,12 +5,17 @@ import businessPack.Heros.Lapa;
 import businessPack.Heros.Wizard;
 import businessPack.Player;
 import businessPack.Players;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,6 +29,8 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 public class GameCtrl implements Initializable {
     /*
@@ -40,13 +47,17 @@ public class GameCtrl implements Initializable {
     @FXML
     Pane pratoPieces;
     @FXML
-    Button btnSuperPower;
+    Pane btnSuperPower;
     @FXML
     TextArea gameplayChat;
     @FXML
-    Button PassTurn;
+    ImageView PassTurn;
     @FXML
     Text season;
+    @FXML
+    Label playerName1;
+    @FXML
+    Label playerName2;
     
     String gameName = "System";
     
@@ -64,6 +75,8 @@ public class GameCtrl implements Initializable {
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
         getPersoImage().setImage(Players.getActualPlayer().getHero().getImage());
         superPowerBtnManager();
+        playerName1.setText(p2.getName());
+        playerName2.setText(p1.getName());
     }
     
     @Override
@@ -95,7 +108,27 @@ public class GameCtrl implements Initializable {
         return g;
 
     }   
-
+    public void LoadScene(Player playerVic){
+        Stage primaryStage = (Stage) background.getScene().getWindow();
+        try{
+            System.out.println("loading");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Victory.fxml"));
+            Parent rooter = loader.load();
+            VictoryController vicCtrl = loader.getController();
+            vicCtrl.setPlayerVictorious(playerVic);
+            Scene eltonJhon = new Scene(rooter);
+            Stage stage = new Stage();
+            
+            stage.setTitle("Battle Chess Arena!");
+            stage.setScene(eltonJhon);
+            stage.show();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
+            System.out.println("Nao foi possível abrir a janela");
+            e.printStackTrace();
+        }
+        primaryStage.close();
+    }
     /**
      * @return the persoImage
      */

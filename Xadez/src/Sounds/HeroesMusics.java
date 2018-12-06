@@ -41,5 +41,12 @@ public class HeroesMusics {
     public void stopMusic() {
         tockers.stop();
     }
+    /*
+    * 
+    * @param volume tem que ser entre 0 e 1;
+    */
+    public void volumeChange(double volume) {
+        tockers.setVolume(volume);
+    }
 
 }

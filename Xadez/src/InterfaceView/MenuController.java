@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.Saver;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -60,7 +61,6 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) background.getScene().getWindow();
         stage.close();
     }
-    
     private void LoadScene(String sceneName){
         try{
             System.out.println("loading");

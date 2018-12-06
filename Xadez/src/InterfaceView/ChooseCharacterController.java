@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import Sounds.HeroesMusics;
+import businessPack.Saver;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -90,7 +91,9 @@ public class ChooseCharacterController implements Initializable {
     Player p1,p2;
     String name1 = "player1",name2 = "player2";
     private int infoType = 1;
-
+    
+    private double volumeSound;
+    Saver saver = new Saver();
 
     private HeroesMusics music = new HeroesMusics();
     
@@ -98,6 +101,8 @@ public class ChooseCharacterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
+        getOptionsInfo();
+        setConfig();
         // TODO
         back.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoVazio.png", 1186, 667, false, false), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
@@ -151,6 +156,16 @@ public class ChooseCharacterController implements Initializable {
         
     }
 
+    public void getOptionsInfo() {
+        String vol = saver.readOnFile("Options", "Volume");
+        if(vol==null) return;
+        else{
+            volumeSound = Double.parseDouble(vol);
+        }
+    }
+    public void setConfig() {
+        music.volumeChange(volumeSound/100);
+    }
     public void updateCharacterInfo() {
         infoType = 1;
         heroName.setText(heroNames[count]);
@@ -355,7 +370,7 @@ public class ChooseCharacterController implements Initializable {
             Scene eltonJhon = new Scene(rooter);
             Stage stage = new Stage();
             
-            stage.setTitle("Choose Your Character!");
+            stage.setTitle("Battle Chess Arena!");
             stage.setScene(eltonJhon);
             stage.show();
         } catch(IOException e) {
