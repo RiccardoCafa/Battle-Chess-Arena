@@ -262,6 +262,8 @@ public abstract class Piece extends ImageView {
         if(this.hp>maxHp){
             this.hp =  maxHp;
         }
+        lifeBarResize();
+        lifeBarRealocate();
         System.out.println("New hp: " + this.hp);
     }
     public boolean imAlive(){

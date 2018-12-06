@@ -73,6 +73,12 @@ public class ChooseCharacterController implements Initializable {
     TextArea infoText;
     @FXML
     Pane back;
+    @FXML
+    ImageView habImgBtn;
+    @FXML
+    ImageView descrImgBtn;
+    @FXML
+    ImageView pieceImgBtn;
     
     private Stage primaryStage;
     Image myImage;
@@ -112,6 +118,9 @@ public class ChooseCharacterController implements Initializable {
         //setaEsq.setGraphic(myImageView);
         myImage = new Image("InterfaceView/setadir.png");
         myImageView = new ImageView(myImage);
+        habImgBtn.setImage(new Image("InterfaceView/imagens/botaoVazio.png", 125, 50, false, false));
+        descrImgBtn.setImage(new Image("InterfaceView/imagens/botaoVazio.png", 125, 50, false, false));
+        pieceImgBtn.setImage(new Image("InterfaceView/imagens/botaoVazio.png", 125, 50, false, false));
         //setaDir.setGraphic(myImageView);
         
         hero1.addEventHandler(MouseEvent.MOUSE_RELEASED, (MouseEvent e) -> {
@@ -138,13 +147,12 @@ public class ChooseCharacterController implements Initializable {
             count = 4;
             updateCharacterInfo();
         });
-
-        characterSelection.setImage(perso[count]);
-        music.playMusic(count);
+        updateCharacterInfo();
         
     }
 
     public void updateCharacterInfo() {
+        infoType = 1;
         heroName.setText(heroNames[count]);
         characterSelection.setImage(perso[count]);
         music.playMusic(count);
@@ -306,8 +314,7 @@ public class ChooseCharacterController implements Initializable {
                 break;
         }
         countAnt = count;
-        count++;
-        if(count > 4) count = 0;
+        count = 0;
         updateCharacterInfo();
         names1.setText("");
         //funcao para pegar o player
