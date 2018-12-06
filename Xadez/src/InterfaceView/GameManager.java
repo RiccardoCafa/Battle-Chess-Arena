@@ -16,6 +16,7 @@ import businessPack.Piece;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
+import businessPack.Saver;
 import businessPack.Table;
 import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
@@ -62,7 +63,8 @@ public class GameManager {
     
     // System & More
     private String gameName = "System";
-    private float volumeSound;
+    private double volumeSound;
+    Saver saver = new Saver();
     
     // Game Variables
     private Table table;
@@ -117,7 +119,11 @@ public class GameManager {
         }
     }
     public void getOptionsInfo() {
-        
+        String vol = saver.readOnFile("Option", "Volume");
+        if(vol==null) return;
+        else{
+            volumeSound = Double.parseDouble(vol);
+        }
     }
     public void clearHighlight(){
         for(int i = 0; i < Table.getN(); i++){

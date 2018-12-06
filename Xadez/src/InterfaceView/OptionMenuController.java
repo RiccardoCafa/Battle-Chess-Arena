@@ -36,16 +36,15 @@ public class OptionMenuController implements Initializable {
     private File optionFile;
     private File gameFolder;
     private Saver saver;
-    private String optionKey = "Option";
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         saver = new Saver();
-        saver.makeFile(optionKey, "Options.txt");
+        optionFile = saver.makeFile("Options.txt");
     }
     @FXML
     public void onOptionsSave() {
-            saver.writeOnFile(optionKey, "Volume", Double.toString(volumeSlider.getValue()));
+            saver.writeOnFile(optionFile.getName(), "Volume", Double.toString(volumeSlider.getValue()));
             JOptionPane.showMessageDialog(null, "Suas configurações foram salvas!");
     }
     @FXML
