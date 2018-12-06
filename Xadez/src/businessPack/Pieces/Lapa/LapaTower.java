@@ -28,56 +28,56 @@ public class LapaTower implements IMovement {
         int xOffSet, yOffSet;
         this.table = table;
         
-        System.out.println("Starting at: " + vetor.getX() + " " + vetor.getY());
+//        System.out.println("Starting at: " + vetor.getX() + " " + vetor.getY());
         
         // Checa em cima dele quantas casas estão livres
-        System.out.println("Going up");
+//        System.out.println("Going up");
         lastPosition = LookForLast(0, -1, vetor);
-        System.out.println("Last Position: " + lastPosition.getX() + " " + lastPosition.getY());
+//        System.out.println("Last Position: " + lastPosition.getX() + " " + lastPosition.getY());
         // Calcula quantas casas sobram
                 //xOffSet = Math.abs(lastPosition.getX() - vetor.getX());
         yOffSet = Math.abs(lastPosition.getY() - vetor.getY());
         // Pega todas as casas restantes
-        System.out.println("Looking for lefting blocks");
+//        System.out.println("Looking for lefting blocks");
         TakeLeftingBlocks(0, -1, lastPosition, yOffSet);
         
-        System.out.println();
+//        System.out.println();
         
         // Checa em baixo dele
-        System.out.println("Going down");
+//        System.out.println("Going down");
         lastPosition = LookForLast(0, 1, vetor);
         // Calcula quantas casas sobram
         //xOffSet = Math.abs(lastPosition.getX() - vetor.getX());
         yOffSet = Math.abs(lastPosition.getY() - vetor.getY());
         // Pega todas as casas restantes
-        System.out.println("Looking for lefting blocks");
+//        System.out.println("Looking for lefting blocks");
         TakeLeftingBlocks(0, 1, lastPosition, yOffSet);
         
-        System.out.println();
+//        System.out.println();
         
         // Checa na direita dele
-        System.out.println("Going right");
+//        System.out.println("Going right");
         lastPosition = LookForLast(1, 0, vetor);
         // Calcula quantas casas sobram
         xOffSet = Math.abs(lastPosition.getX() - vetor.getX());
             //yOffSet = Math.abs(lastPosition.getY() - vetor.getY());
         // Pega todas as casas restantes
-        System.out.println("Looking for lefting blocks");
+//        System.out.println("Looking for lefting blocks");
         TakeLeftingBlocks(1, 0, lastPosition, xOffSet);
         
-        System.out.println();
+//        System.out.println();
         
         // Checa esquerda dele
-        System.out.println("Going left");
+//        System.out.println("Going left");
         lastPosition = LookForLast(-1, 0, vetor);
         // Calcula quantas casas sobram
         xOffSet = Math.abs(lastPosition.getX() - vetor.getX());
             //yOffSet = Math.abs(lastPosition.getY() - vetor.getY());
         // Pega todas as casas restantes
-        System.out.println("Looking for lefting blocks");
+//        System.out.println("Looking for lefting blocks");
         TakeLeftingBlocks(-1, 0, lastPosition, xOffSet);
         
-        System.out.println();
+//        System.out.println();
         
         return myMoves;
     }
@@ -138,7 +138,7 @@ public class LapaTower implements IMovement {
             // Se não tiver na lista
             if(!myMoves.contains(table.getBlock(newVetor))) {
                 myMoves.add(table.getBlock(newVetor)); // Adiciona na lista
-                System.out.println("Adicionado bloco na posição: " + newVetor.getX() + " " + newVetor.getY());
+//                System.out.println("Adicionado bloco na posição: " + newVetor.getX() + " " + newVetor.getY());
             }
             if(num != 0) // Se num não for zero
                 return LookForLast(xDirection, yDirection, newVetor, --num); // Chamada recursiva
@@ -167,7 +167,7 @@ public class LapaTower implements IMovement {
         if(table.getBlock(i, j).getBlockState(player) == BlockState.Enemy) {
             if(!myMoves.contains(table.getBlock(newVetor))) { 
                 myMoves.add(table.getBlock(newVetor));
-                System.out.println("Adicionado bloco na posição (enemy): " + newVetor.getX() + " " + newVetor.getY());
+//                System.out.println("Adicionado bloco na posição (enemy): " + newVetor.getX() + " " + newVetor.getY());
             }
             return newVetor;
         }
@@ -180,7 +180,7 @@ public class LapaTower implements IMovement {
             
             if(!myMoves.contains(table.getBlock(newVetor))) { 
                 myMoves.add(table.getBlock(newVetor));
-                System.out.println("Adicionado bloco na posição: " + newVetor.getX() + " " + newVetor.getY());
+//                System.out.println("Adicionado bloco na posição: " + newVetor.getX() + " " + newVetor.getY());
             }
             return LookForLast(xDirection, yDirection, newVetor);
         }

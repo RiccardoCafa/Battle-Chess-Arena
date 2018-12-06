@@ -18,6 +18,7 @@ import businessPack.Player;
 import businessPack.Players;
 import businessPack.Saver;
 import businessPack.Table;
+import businessPack.TypeClicks.LapaClick;
 import businessPack.TypeClicks.ReactionClick;
 import businessPack.TypeClicks.TypeClick;
 import businessPack.TypeClicks.WizardClick;
@@ -288,6 +289,15 @@ public class GameManager {
                     break;
                 case wizardClick:  clickOnBlock = new WizardClick(this);
                     break;
+                case lapaClick:    
+                    Lapa lapao = null;
+                    if(Players.getActualPlayer().getHero() instanceof Lapa) lapao = (Lapa) Players.getActualPlayer().getHero();
+                    else {
+                        tpClick = TypeClick.first;
+                        return;
+                    }
+                    clickOnBlock = new LapaClick(this, lapao);
+                    break;
             }
             click2 = (Block) e.getSource();
             tpClick = clickOnBlock.click(click2);
@@ -311,7 +321,7 @@ public class GameManager {
                     }
                     displayMessage("Lapa", "Está preparando seus poderosos Bigbigs para atacar!");
                     showPossibleEnemys(possibleBlocks);
-                    superPower = true;
+                    tpClick = TypeClick.lapaClick;
                 } else {
                     displayMessage(gameName, "Lapa você está sem bigbig, precisa de mais alunos interessados!");
                 }

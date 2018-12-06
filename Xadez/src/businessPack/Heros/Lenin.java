@@ -134,10 +134,12 @@ public class Lenin extends Hero {
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(6000);
                         System.out.println("Acordei!");
                         image = new Image(path + "animLenin.gif", widthImg, heightImg, false, false);
-                        GameManager.gameCtrl.getPersoImage().setImage(image);
+                        if(Players.getActualPlayer().getHero() instanceof Lenin) {
+                            GameManager.gameCtrl.getPersoImage().setImage(image);
+                        }
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Lenin.class.getName()).log(Level.SEVERE, null, ex);
                     }
