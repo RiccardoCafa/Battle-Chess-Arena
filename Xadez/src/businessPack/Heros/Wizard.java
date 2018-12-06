@@ -37,11 +37,12 @@ public class Wizard extends Hero {
     
     
     
-    public static String description = " O Mago Fandalg, senhor supremo do xadrez, capaz de obliterar as peças inimigas com seus bispos onipresentes"
-            + "e seu temivel controle de campo com a sua habilidade Suprema, a Barreira Magica Incandescente";
-    public static String skill= " A Barreira Mágica do Mago, queima inimigos e os transforma em cinzas, ao mesmo tempo que cura aliados, hes restaurando o vigor"
+    public static String description = "Contemplem o Mago Supremo Fandalg, senhor supremo das estratégias, este temivel"
+            + " ser participa do xadrez com grande inteligencia e perspicácia, são poucos os oponentes que "
+            + "o desafiaram e sobreviveram para contar a história, porém, todos eles concordam: se o Mago quiser, ninguem vai passar";
+    public static String skill= " A Barreira Mágica do Mago, queima inimigos e os transforma em cinzas, ao mesmo tempo que cura aliados, lhes restaurando o vigor"
             + " controlando o campo com supremacia e força";
-    public static String movimentos= "O mago temo auxilio dos Bispos Mágicos, seres de incríveis magia, capazes de quebrar seus movimentos na diagonal"
+    public static String movimentos= "O Mago tem o auxilio dos Bispos Mágicos, seres de incríveis magia, capazes de quebrar seus movimentos na diagonal"
             + "se tornando temíveis máquinas de destruição em massa do tabuleiro";
     
     
