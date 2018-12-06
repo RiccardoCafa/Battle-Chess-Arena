@@ -37,11 +37,12 @@ public class Wizard extends Hero {
     
     
     
-    public static String description = " O Mago Fandalg, senhor supremo do xadrez, capaz de obliterar as peças inimigas com seus bispos onipresentes"
-            + "e seu temivel controle de campo com a sua habilidade Suprema, a Barreira Magica Incandescente";
-    public static String skill= " A Barreira Mágica do Mago, queima inimigos e os transforma em cinzas, ao mesmo tempo que cura aliados, hes restaurando o vigor"
+    public static String description = "Contemplem o Mago Supremo Fandalg, senhor supremo das estratégias, este temivel"
+            + " ser participa do xadrez com grande inteligencia e perspicácia, são poucos os oponentes que "
+            + "o desafiaram e sobreviveram para contar a história, porém, todos eles concordam: se o Mago quiser, ninguem vai passar";
+    public static String skill= " A Barreira Mágica do Mago, queima inimigos e os transforma em cinzas, ao mesmo tempo que cura aliados, lhes restaurando o vigor"
             + " controlando o campo com supremacia e força";
-    public static String movimentos= "O mago temo auxilio dos Bispos Mágicos, seres de incríveis magia, capazes de quebrar seus movimentos na diagonal"
+    public static String movimentos= "O Mago tem o auxilio dos Bispos Mágicos, seres de incríveis magia, capazes de quebrar seus movimentos na diagonal"
             + "se tornando temíveis máquinas de destruição em massa do tabuleiro";
     
     
@@ -155,31 +156,23 @@ public class Wizard extends Hero {
     }
     
     //função que finalmente seta a barreira
-    public void youShallNotPass(Block target){
+    public void youShallNotPass(Block sourceBlock, Block destinyBlock){
     
-        int burnBlock =  1; 
-        System.out.println("O inimigo vai entrar viado");
-        if(target.getBlockState(player) == BlockState.Enemy){
-            System.out.println("Virei duas caras");
-        //da dano na peça inimiga que estiver na barreira   
-            target.hitPiece(burnBlock);    
-        }else if(target.getBlockState(player) == BlockState.Friend){
-           //cura a peça
-            System.out.println("Curei o aliado");
-           target.getPiece().healPiece(1);
+        if((sourceBlock.getVetor().getY() <= getWallVetorY() &&
+            destinyBlock.getVetor().getY() > getWallVetorY()) ||
+            sourceBlock.getVetor().getY() > getWallVetorY() &&
+            destinyBlock.getVetor().getY() <= getWallVetorY()){
+            int burnBlock =  1; 
+            if(destinyBlock.getBlockState(player) == BlockState.Enemy){
+                destinyBlock.hitPiece(burnBlock);    
+            }else if(destinyBlock.getBlockState(player) == BlockState.Friend){
+               destinyBlock.getPiece().healPiece(1);
+            }
         }
-        
-        
     }
     
     public int getWallVetorY(){
         
         return wallPos;
     }
-    
-    
-    
-    
-    
-    
 }

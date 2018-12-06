@@ -34,7 +34,7 @@ public class GameCtrl implements Initializable {
     @FXML
     AnchorPane background;
     @FXML
-    ImageView persoImage;
+    private ImageView persoImage;
     @FXML
     Pane paneRef;
     @FXML
@@ -62,7 +62,7 @@ public class GameCtrl implements Initializable {
         gameplayChat.appendText("[" + gameName + "] Bem-vindo ao Battle Chess Arena!\n");
         gameplayChat.appendText("[" + gameName + "] Os exércitos foram montados.\n");
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
-        persoImage.setImage(Players.getActualPlayer().getHero().getImage());
+        getPersoImage().setImage(Players.getActualPlayer().getHero().getImage());
         superPowerBtnManager();
     }
     
@@ -95,6 +95,13 @@ public class GameCtrl implements Initializable {
         return g;
 
     }   
+
+    /**
+     * @return the persoImage
+     */
+    public ImageView getPersoImage() {
+        return persoImage;
+    }
     
     public void superPowerBtnManager() {
         if(Players.getActualPlayer().getHero() instanceof Lapa ||
@@ -112,7 +119,7 @@ public class GameCtrl implements Initializable {
                 btnSuperPower.setVisible(false);
             }
         }
-        persoImage.setImage(Players.getActualPlayer().getHero().getImage());
+        getPersoImage().setImage(Players.getActualPlayer().getHero().getImage());
         gameplayChat.appendText("[" + gameName + "] Vez de " + Players.getActualPlayer().getName() + "\n");
     }
     

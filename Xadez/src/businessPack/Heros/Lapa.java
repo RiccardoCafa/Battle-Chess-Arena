@@ -35,8 +35,8 @@ public class Lapa extends Hero {
     
     private int bigBig = 10;
     
-    public static String description = "Este é Lapa God, seus poderes são infinitos... Cuidado para não deixar ele acumular muitos big bigs" +
-                " pode não ser muito vantajoso para você." + "\nEle tem apenas uma peça especial, mas não a subestime!";
+    public static String description = "Este é Lapa God, um programador com poderes de hack o quanto suspeitos... Cuidado para não deixar ele acumular muitos big bigs" +
+                " pode não ser muito vantajoso para você." + "\nEle tem apenas uma peça especial, mas não a subestime, ela foi programada por díscipulos dele!";
     public static String skills = "Ronaldo, pode ser chamado por Lapa por um preço de 5 big bigs." + "\nApós ativado o poder, poderá escolher " + 
                 "um inimigo para jogar uma bomba e atingir os alvos ao redor." + "\n-3HP para o alvo central\n-2HP para os alvos " +
                 " na horizontal e vertical\n-1HP para os alvos nas diagonais";

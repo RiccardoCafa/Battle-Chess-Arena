@@ -3,6 +3,8 @@ package businessPack.TypeClicks;
 import InterfaceView.GameManager;
 import businessPack.Block;
 import businessPack.Heros.Lapa;
+import businessPack.Piece;
+import businessPack.Pieces.Peon;
 import businessPack.Pieces.Tower;
 import businessPack.Players;
 import businessPack.TypeHero;
@@ -22,8 +24,10 @@ public class HitClick implements ClickOnBlock{
     //metodos>>
     @Override
     public TypeClick click(Block blockClicked){
+        Piece tempPiece;
         if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
         if(priorBlockClicked != null){//se a peça atacante não morreu
+            tempPiece = blockClicked.getPiece();
             if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
                 if(priorBlockClicked.getPiece().getTpHero() == TypeHero.lapa){
                     Lapa lapao = (Lapa) Players.getActualPlayer().getHero();
@@ -44,6 +48,9 @@ public class HitClick implements ClickOnBlock{
                     return TypeClick.last;
                 }
             }else{//se a peça atingida morreu
+                if(tempPiece.getTpHero() == TypeHero.wizard && tempPiece instanceof Peon) {
+                    game.getWizard().setCanMove(true);
+                }
                 game.removeImage(blockClicked);
                 game.externalMove(priorBlockClicked, blockClicked);
                 game.internalMove(priorBlockClicked, blockClicked);
