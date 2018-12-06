@@ -43,7 +43,7 @@ public class Wizard extends Hero {
     public static String skill= " A Barreira Mágica do Mago, queima inimigos e os transforma em cinzas, ao mesmo tempo que cura aliados, lhes restaurando o vigor"
             + " controlando o campo com supremacia e força";
     public static String movimentos= "O Mago tem o auxilio dos Bispos Mágicos, seres de incríveis magia, capazes de quebrar seus movimentos na diagonal"
-            + "se tornando temíveis máquinas de destruição em massa do tabuleiro";
+            + " se tornando temíveis máquinas de destruição em massa do tabuleiro";
     
     
     
