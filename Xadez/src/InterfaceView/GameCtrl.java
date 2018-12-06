@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -46,13 +47,17 @@ public class GameCtrl implements Initializable {
     @FXML
     Pane pratoPieces;
     @FXML
-    Button btnSuperPower;
+    Pane btnSuperPower;
     @FXML
     TextArea gameplayChat;
     @FXML
-    Button PassTurn;
+    ImageView PassTurn;
     @FXML
     Text season;
+    @FXML
+    Label playerName1;
+    @FXML
+    Label playerName2;
     
     String gameName = "System";
     
@@ -70,6 +75,8 @@ public class GameCtrl implements Initializable {
         gameplayChat.appendText("[" + gameName + "] Que os jogos comecem!\n");
         getPersoImage().setImage(Players.getActualPlayer().getHero().getImage());
         superPowerBtnManager();
+        playerName1.setText(p2.getName());
+        playerName2.setText(p1.getName());
     }
     
     @Override
