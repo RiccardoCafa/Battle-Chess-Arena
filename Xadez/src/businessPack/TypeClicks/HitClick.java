@@ -26,7 +26,7 @@ public class HitClick implements ClickOnBlock{
     public TypeClick click(Block blockClicked){
         Piece tempPiece;
         if(game.getSheriffBlock() != null) blockClicked = game.getSheriffBlock();
-        if(priorBlockClicked != null){//se a peça atacante não morreu
+        if(priorBlockClicked.getPiece() != null){//se a peça atacante não morreu
             tempPiece = blockClicked.getPiece();
             if(!blockClicked.hitPiece(priorBlockClicked.getPiece().getDamage())){//atinge a peça; se estiver viva...
                 if(priorBlockClicked.getPiece().getTpHero() == TypeHero.lapa){

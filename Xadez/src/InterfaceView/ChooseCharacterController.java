@@ -93,7 +93,7 @@ public class ChooseCharacterController implements Initializable {
     private int infoType = 1;
     
     private double volumeSound;
-    Saver saver = new Saver();
+    //Saver saver = new Saver();
 
     private HeroesMusics music = new HeroesMusics();
     
@@ -101,7 +101,7 @@ public class ChooseCharacterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
-        getOptionsInfo();
+        //getOptionsInfo();
         setConfig();
         // TODO
         back.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/fundoVazio.png", 1186, 667, false, false), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -155,14 +155,14 @@ public class ChooseCharacterController implements Initializable {
         updateCharacterInfo();
         
     }
-
+/*
     public void getOptionsInfo() {
         String vol = saver.readOnFile("Options", "Volume");
         if(vol==null) return;
         else{
             volumeSound = Double.parseDouble(vol);
         }
-    }
+    }*/
     public void setConfig() {
         music.volumeChange(volumeSound/100);
     }

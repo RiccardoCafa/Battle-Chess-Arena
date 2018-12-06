@@ -65,7 +65,7 @@ public class GameManager {
     // System & More
     private String gameName = "System";
     private double volumeSound;
-    Saver saver = new Saver();
+//    Saver saver = new Saver();
     
     // Game Variables
     private Table table;
@@ -98,7 +98,7 @@ public class GameManager {
             }
         }
 
-        getOptionsInfo();
+  //      getOptionsInfo();
 
     }
     //metodos>>
@@ -120,11 +120,11 @@ public class GameManager {
         }
     }
     public void getOptionsInfo() {
-        String vol = saver.readOnFile("Option", "Volume");
-        if(vol==null) return;
-        else{
-            volumeSound = Double.parseDouble(vol);
-        }
+    //    String vol = saver.readOnFile("Option", "Volume");
+      //  if(vol==null) return;
+        //else{
+          //  volumeSound = Double.parseDouble(vol);
+        //}
     }
     public void clearHighlight(){
         for(int i = 0; i < Table.getN(); i++){
