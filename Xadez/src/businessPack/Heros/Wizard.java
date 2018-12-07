@@ -46,10 +46,8 @@ public class Wizard extends Hero {
             + "se tornando temíveis máquinas de destruição em massa do tabuleiro";
     
     
-    
-    
     public Wizard() {
-
+        heroName = "Wizard";
         image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
         for(int i = 0; i < 8; i ++ ) {
             wizardWall[i] = new ImageView(new Image("InterfaceView/imagens/barreira.png", 65, 50, false, false));

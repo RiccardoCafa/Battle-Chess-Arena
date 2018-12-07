@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,10 @@ public class Saver {
     private Map<String, File> saveFiles = new HashMap<>();
     private String dirPath = System.getProperty("java.io.tmpdir") + "/BattleChessArena";
     
-    
+    /**
+     * Makes a temp directory of the game if it doesn't exists
+     * Load all files inside if exists
+     */
     public Saver() {
         File direc = new File(dirPath);
         if(!direc.exists()) new File(dirPath).mkdir();
@@ -26,7 +30,14 @@ public class Saver {
         }
     }
     
+    /**
+     * 
+     * @param saveKey This key is the file name to find
+     * @param key This is the key to write inside the saveKey file
+     * @param value This is the value to write
+     */
     public void writeOnFile(String saveKey, String key, String value) {
+        direcManager();
         File f = saveFiles.get(saveKey);
         try {
             FileWriter fw = new FileWriter(f);
@@ -36,13 +47,23 @@ public class Saver {
             Logger.getLogger(Saver.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void writeOnFile(String saveKey, String[] key, String[] value) {
+    /**
+     * 
+     * @param saveKey This key is the file name to find
+     * @param lista a HashMap with the Key - Value to put int the file saveKey
+     */
+    public void writeOnFile(String saveKey, HashMap<String, String> lista) {
+        direcManager();
         File f = saveFiles.get(saveKey);
         try {
+            Iterator it = lista.entrySet().iterator();
             FileWriter fw = new FileWriter(f);
-            for(int i = 0; i < key.length; i++) {
-                fw.write(key[i] + " " + value[i]);
+            
+            while(it.hasNext()) {
+                Map.Entry pair;
+                pair = (Map.Entry<String, String>)it.next();
+                fw.write(pair.getKey() + " " + pair.getValue());
+                it.remove();
             }
             fw.close();
         } catch (IOException ex) {
@@ -51,16 +72,13 @@ public class Saver {
     }
     
     public String readOnFile(String saveKey, String key) {
+        direcManager();
         File f = null;
         try {
             f = getFile(saveFiles.get(saveKey).toString());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        if(!f.exists()) return null;
-        String st;
-        String[] stF;
-        try {
+            if(!f.exists()) return null;
+            String st;
+            String[] stF;
             BufferedReader br = new BufferedReader(new FileReader(f));
             while((st = br.readLine()) != null) {
                 stF = st.split(" ");
@@ -69,16 +87,15 @@ public class Saver {
                 }
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Não possível pegar a informação: " + saveKey);
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
         }
+        
         return null;
     }
     
     public File makeFile(String file) {
         File tempFile = null;
-        if(!dirExists()) {
-            new File(System.getProperty("java.io.tmpdir") + "BattleChessArena").mkdir();
-        } 
+        direcManager();
         tempFile = new File(dirPath, file);
         saveFiles.put(tempFile.getName(), tempFile);
         return tempFile;
@@ -92,4 +109,12 @@ public class Saver {
         File f = new File(dirPath);
         return f.exists();
     }
+    
+    private void direcManager() {
+        if(!dirExists()) 
+        {
+            new File(System.getProperty("java.io.tmpdir") + "BattleChessArena").mkdir();
+        }
+    }
+    
 }

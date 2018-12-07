@@ -1,5 +1,6 @@
 package Sounds;
 
+import businessPack.TypeHero;
 import java.util.ArrayList;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -36,6 +37,25 @@ public class HeroesMusics {
         tockers = new MediaPlayer(exaltaSamba.get(indexMusic));
         tockers.setStartTime(Duration.ZERO);
          tockers.play();
+    }
+    
+    public void playMusic(TypeHero hero){
+        int indexMusic = transfromHeroToIndex(hero);
+        tockers.stop();
+        tockers = new MediaPlayer(exaltaSamba.get(indexMusic));
+        tockers.setStartTime(Duration.ZERO);
+         tockers.play();
+    }
+    
+    private int transfromHeroToIndex(TypeHero hero) {
+        switch(hero){
+            case huebr:   return 0;
+            case lapa:    return 1;
+            case lenin:   return 2;
+            case wizard:  return 3;
+            case sheriff: return 4;
+        }
+        return 0;
     }
     
     public void stopMusic() {

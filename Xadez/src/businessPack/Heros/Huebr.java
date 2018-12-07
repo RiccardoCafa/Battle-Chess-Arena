@@ -43,6 +43,7 @@ public class Huebr extends Hero {
     public Huebr() {
         image = new Image(path + "animHueBR.gif", widthImg, heightImg, false, false);
         tpHero = TypeHero.huebr;
+        heroName = "HueBR";
         
     }
     //metodos>>

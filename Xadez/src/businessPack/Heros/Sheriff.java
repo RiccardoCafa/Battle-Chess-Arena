@@ -46,6 +46,7 @@ public class Sheriff extends Hero {
     public Sheriff(){
         image = new Image(path + "animSheriff.gif", widthImg, heightImg, false, false);
         tpHero = TypeHero.sheriff;
+        heroName = "Sheriff";
     }
     //metodos>>
     @Override

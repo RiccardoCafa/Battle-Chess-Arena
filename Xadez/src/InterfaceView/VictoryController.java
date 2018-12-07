@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import Sounds.HeroesMusics;
 import businessPack.Player;
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,8 @@ public class VictoryController implements Initializable {
     @FXML
     AnchorPane back;
     
+    HeroesMusics heroMusics = new HeroesMusics();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -34,20 +37,8 @@ public class VictoryController implements Initializable {
         playerName.setText(player.getName());
         int width = 375;
         int height = 330;
-        // TODO MELHORAR ESSE SWITCH AQUI DEPOIS (00:26 TO CANSADO) (COLOCAR UMA FUNCAO PADRAO, JA CHAMAMOS UMAS 3x KKKKKK CADE O RE USO DE CODIGO GENTE)
-        switch(player.getHero().getHeroType()) {
-            case lapa: playerHero.setImage(new Image("InterfaceView/Personagens/iconeLapa.png", width, height, false, false));
-                break;
-            case huebr: playerHero.setImage(new Image("InterfaceView/Personagens/iconeHueBR.png", width, height, false, false));
-                break;
-            case lenin: playerHero.setImage(new Image("InterfaceView/Personagens/iconeLenin.png", width, height, false, false));
-                break;
-            case sheriff: playerHero.setImage(new Image("InterfaceView/Personagens/iconeSheriff.png", width, height, false, false));
-                break;
-            case wizard: playerHero.setImage(new Image("InterfaceView/Personagens/iconeWizard.png", width, height, false, false));
-                break;
-        }
-        
+        playerHero.setImage(player.getHero().getImageIcon(375, 330));
+        heroMusics.playMusic(player.getHero().getHeroType());
     }
     
     @FXML
