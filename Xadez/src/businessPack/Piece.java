@@ -117,17 +117,17 @@ public abstract class Piece extends ImageView {
     }
     public ArrayList<Block> getSpecialMovesLikeJagger(Table tab, Vetor hitedPos) {
         freeWay = new ArrayList<>();
-        JaggerMoves(tab, hitedPos, 1, 0);
-        JaggerMoves(tab, hitedPos, -1, 0);
-        JaggerMoves(tab, hitedPos, 0, 1);
-        JaggerMoves(tab, hitedPos, 0, -1);
-        JaggerMoves(tab, hitedPos, 1, 1);
-        JaggerMoves(tab, hitedPos, -1, 1);
-        JaggerMoves(tab, hitedPos, 1, -1);
-        JaggerMoves(tab, hitedPos, -1, -1);
+        jaggerMoves(tab, hitedPos, 1, 0);
+        jaggerMoves(tab, hitedPos, -1, 0);
+        jaggerMoves(tab, hitedPos, 0, 1);
+        jaggerMoves(tab, hitedPos, 0, -1);
+        jaggerMoves(tab, hitedPos, 1, 1);
+        jaggerMoves(tab, hitedPos, -1, 1);
+        jaggerMoves(tab, hitedPos, 1, -1);
+        jaggerMoves(tab, hitedPos, -1, -1);
         return freeWay;
     }
-    private void JaggerMoves(Table tab, Vetor hitedPos, int xDir, int yDir) {
+    private void jaggerMoves(Table tab, Vetor hitedPos, int xDir, int yDir) {
         Vetor vet = new Vetor(hitedPos.getX() + xDir, hitedPos.getY() + yDir);
         Player maPlayer = Players.getPlayer(player);
         if(Table.isInside(vet)) {
@@ -193,14 +193,14 @@ public abstract class Piece extends ImageView {
         bullet[1].setVisible(false);
         setVisible(false);
     }
-    public void AllToFront(){
+    public void allToFront(){
         toFront();
         lifeBarBg.toFront();
         lifeBar.toFront();
         bullet[0].toFront();
         bullet[1].toFront();
     }
-    public void AllToBack(){
+    public void allToBack(){
         lifeBar.toBack();
         lifeBarBg.toBack();
         bullet[0].toBack();
