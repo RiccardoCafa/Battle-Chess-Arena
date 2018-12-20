@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="1204.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.MenuController">
    <children>
@@ -13,18 +17,57 @@
       </ImageView>
       <ImageView fx:id="StartBtn" fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="339.0" onMouseClicked="#onPlayClick" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@imagens/buttons/JogarButton.png" />
+            <Image url="@imagens/botaoVazio.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="452.0" onMouseClicked="#OnOptionClick" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="OptionBtn" fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="452.0" onMouseClicked="#OnOptionClick" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@imagens/buttons/opcoesButton.png" />
+            <Image url="@imagens/botaoVazio.png" />
          </image>
       </ImageView>
       <ImageView fx:id="QuitBtn" fitHeight="150.0" fitWidth="200.0" layoutX="502.0" layoutY="566.0" onMouseClicked="#onCloseClick" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@imagens/buttons/sairButton.png" />
+            <Image url="@imagens/botaoVazio.png" />
          </image>
       </ImageView>
+      <Label fx:id="StartText" alignment="CENTER" layoutX="502.0" layoutY="339.0" mouseTransparent="true" prefHeight="69.0" prefWidth="200.0" text="Jogar" textAlignment="CENTER">
+         <font>
+            <Font name="Japanese 3017" size="42.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.5333333333333332">
+               <stops>
+                  <Stop color="#f0afaf" />
+                  <Stop color="#ffdfdf" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label fx:id="OptionText" alignment="CENTER" layoutX="502.0" layoutY="452.0" mouseTransparent="true" prefHeight="69.0" prefWidth="200.0" text="Opcoes" textAlignment="CENTER">
+         <font>
+            <Font name="Japanese 3017" size="42.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.5333333333333332">
+               <stops>
+                  <Stop color="#f0afaf" />
+                  <Stop color="#ffdfdf" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label fx:id="SairText" alignment="CENTER" layoutX="502.0" layoutY="566.0" mouseTransparent="true" prefHeight="69.0" prefWidth="200.0" text="Sair">
+         <font>
+            <Font name="Japanese 3017" size="42.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.5333333333333332">
+               <stops>
+                  <Stop color="#430101" />
+                  <Stop color="BLACK" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.MultiLanguage;
 import businessPack.TempSaver;
 import java.io.IOException;
 import java.net.URL;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +29,12 @@ public class MenuController implements Initializable {
     @FXML
     ImageView StartBtn;
     @FXML
+    Label StartText;
+    @FXML
+    Label OptionText;
+    @FXML
+    Label SairText;
+    @FXML
     ImageView OptionBtn;
     @FXML
     ImageView QuitBtn;
@@ -39,9 +47,25 @@ public class MenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/telaInicial.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        String btnPath = "InterfaceView/imagens/buttons/";
-        StartBtn.setImage(new Image(btnPath + "JogarButton.png"));
-        QuitBtn.setImage(new Image(btnPath + "sairButton.png"));
+        String btnPath = "InterfaceView/imagens/botaoVazio.png";
+        Image imgBotaoVazio = new Image(btnPath);
+        
+        MultiLanguage.AddText("JogarBtn-pt", "Jogar");
+        MultiLanguage.AddText("JogarBtn-en", "Play");
+        MultiLanguage.AddText("OpcoesBtn-pt", "Opcoes");
+        MultiLanguage.AddText("OpcoesBtn-en", "Options");
+        MultiLanguage.AddText("SairBtn-pt", "Sair");
+        MultiLanguage.AddText("SairBtn-en", "Quit");
+        
+        StartBtn.setImage(imgBotaoVazio);
+        OptionBtn.setImage(imgBotaoVazio);
+        QuitBtn.setImage(imgBotaoVazio);
+        System.out.println(MultiLanguage.GetText("JogarBtn"));
+        StartText.setText(MultiLanguage.GetText("JogarBtn"));
+        OptionText.setText(MultiLanguage.GetText("OpcoesBtn"));
+        SairText.setText(MultiLanguage.GetText("SairBtn"));
+        
+        
     }
     
     @FXML
