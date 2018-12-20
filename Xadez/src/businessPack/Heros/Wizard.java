@@ -46,10 +46,8 @@ public class Wizard extends Hero {
             + "se tornando temíveis máquinas de destruição em massa do tabuleiro";
     
     
-    
-    
     public Wizard() {
-
+        heroName = "Wizard";
         image = new Image(path + "animWizard.gif", widthImg, heightImg, false, false);
         for(int i = 0; i < 8; i ++ ) {
             wizardWall[i] = new ImageView(new Image("InterfaceView/imagens/barreira.png", 65, 50, false, false));
@@ -71,10 +69,11 @@ public class Wizard extends Hero {
         army.addPiece(new Horse(jogador , TypeHero.wizard, 1, (int)(3.5 + sentido*3.5)));
         army.addPiece(new Bishop(jogador , TypeHero.wizard, 2, (int)(3.5 + sentido*3.5)));
         army.addPiece(new King(jogador , TypeHero.wizard, 3, (int)(3.5 + sentido*3.5)));
-        army.addPiece(new Queen(jogador , TypeHero.wizard, 4, (int)(3.5 + sentido*3.5)));        army.addPiece(new Bishop(jogador , TypeHero.wizard, 5, (int)(3.5 + sentido*3.5)));
+        army.addPiece(new Queen(jogador , TypeHero.wizard, 4, (int)(3.5 + sentido*3.5)));        
+        army.addPiece(new Bishop(jogador , TypeHero.wizard, 5, (int)(3.5 + sentido*3.5)));
         army.addPiece(new Horse(jogador , TypeHero.wizard, 6, (int)(3.5 + sentido*3.5)));
         army.addPiece(new Tower(jogador , TypeHero.wizard, 7, (int)(3.5 + sentido*3.5)));
-                            
+//                            
         army.addPiece(new Bishop(jogador, TypeHero.wizard, 5,(int)(3.5 + sentido*3.5)));
 
                             

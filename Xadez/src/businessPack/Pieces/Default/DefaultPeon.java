@@ -16,6 +16,10 @@ public class DefaultPeon implements IMovement {
     Player playing;
     Peon peon;
     
+    /**
+     *
+     * @param playing - The player who the peon will take information to make some calculus.
+     */
     public DefaultPeon(Player playing){
         this.playing = playing;
     }
@@ -34,6 +38,13 @@ public class DefaultPeon implements IMovement {
         moveEnemy(-1,-1*playing.getSentido(),vetor);
         return vector;
     }
+
+    /**
+     *
+     * @param xDir The direction on the Horizontal axis
+     * @param yDir The direction on the Vertical axis
+     * @param vetor The position that will start making calculus of the movement
+     */
     public void move(int xDir, int yDir, Vetor vetor) {
         //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()
         Vetor newVetor = new Vetor(vetor.getX() + xDir, vetor.getY() + yDir);
@@ -58,10 +69,10 @@ public class DefaultPeon implements IMovement {
        
     /**
      *
-     * @param xDir
-     * @param yDir
-     * @param vetor
-     * @return
+     * @param xDir The direction on the Horizontal axis
+     * @param yDir The direction on the Vertical axis
+     * @param vetor The position that will start making calculus of the movement
+     * @return Last position of the movement
      */
     public Vetor moveFrontDefault(int xDir, int yDir, Vetor vetor, int count) {
         //tab.getBlock(vetor).getPiece().getTpHero() != tab.getBlock(vetor).getPiece().getTpHero()

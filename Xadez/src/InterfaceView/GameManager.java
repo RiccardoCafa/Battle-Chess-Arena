@@ -16,7 +16,7 @@ import businessPack.Piece;
 import businessPack.Pieces.Tower;
 import businessPack.Player;
 import businessPack.Players;
-import businessPack.Saver;
+import businessPack.TempSaver;
 import businessPack.Table;
 import businessPack.TypeClicks.LapaClick;
 import businessPack.TypeClicks.ReactionClick;
@@ -159,12 +159,12 @@ public class GameManager {
         if(destinyBlock.getPiece() == null) return;
         for(int j = destinyBlock.getVetor().getY() + 1; j < 8; j++){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
-                table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToFront();
+                table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().allToFront();
             if(wiz!=null && wiz.getWallVetorY() == j) wiz.wallToFront(destinyBlock.getVetor().getX());
         }
         for(int j = destinyBlock.getVetor().getY() - 1; j >= 0; j--){
             if(!table.getBlock(destinyBlock.getVetor().getX(), j).isEmpty())
-                table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().AllToBack();
+                table.getBlock(destinyBlock.getVetor().getX(), j).getPiece().allToBack();
             if(wiz!=null && wiz.getWallVetorY() == j) wiz.wallToBack(destinyBlock.getVetor().getX());
         }
         clearHighlight();

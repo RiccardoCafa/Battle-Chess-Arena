@@ -1,6 +1,6 @@
 package InterfaceView;
 
-import businessPack.Saver;
+import businessPack.TempSaver;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -34,12 +34,11 @@ public class OptionMenuController implements Initializable {
     Button SaveBtn;
     private Stage primaryStage;
     private File optionFile;
-    private File gameFolder;
-    private Saver saver;
+    private TempSaver saver;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        saver = new Saver();
+        saver = new TempSaver();
         optionFile = saver.makeFile("Options.txt");
     }
     @FXML
@@ -62,7 +61,7 @@ public class OptionMenuController implements Initializable {
             aroldo.setScene(new Scene(root1));
             aroldo.show();
         } catch(IOException e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
+            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
             System.out.println("Nao foi possível abrir a janela");
         }
     }

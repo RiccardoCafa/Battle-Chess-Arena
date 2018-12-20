@@ -25,16 +25,16 @@
                   <Image url="@imagens/fundoJogo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="persoImage" fitHeight="420.0" fitWidth="520.0" layoutY="359.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="persoImage" fitHeight="272.0" fitWidth="376.0" layoutY="478.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Personagens/lenin-01.png" />
                </image>
             </ImageView>
-            <ScrollPane layoutX="9.0" layoutY="8.0" prefHeight="128.0" prefWidth="388.0">
+            <ScrollPane layoutX="9.0" layoutY="8.0" prefHeight="153.0" prefWidth="448.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="110.0" prefWidth="382.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="151.0" prefWidth="446.0">
                      <children>
-                        <TextArea fx:id="gameplayChat" editable="false" prefHeight="128.0" prefWidth="388.0" promptText="Gameplay " wrapText="true" />
+                        <TextArea fx:id="gameplayChat" editable="false" prefHeight="153.0" prefWidth="448.0" promptText="Gameplay " wrapText="true" />
                      </children>
                   </AnchorPane>
               </content>
@@ -42,7 +42,7 @@
                   <Bloom threshold="1.0" />
                </effect>
             </ScrollPane>
-            <Pane fx:id="btnSuperPower" layoutX="68.0" layoutY="179.0" prefHeight="70.0" prefWidth="200.0">
+            <Pane fx:id="btnSuperPower" layoutX="29.0" layoutY="190.0" prefHeight="70.0" prefWidth="200.0">
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" onMouseReleased="#OnBtnPower" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -64,12 +64,12 @@
                   </Label>
                </children>
             </Pane>
-            <ImageView fx:id="PassTurn" fitHeight="150.0" fitWidth="200.0" layoutX="68.0" layoutY="266.0" onMouseReleased="#PassTurnOnClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="PassTurn" fitHeight="150.0" fitWidth="200.0" layoutX="29.0" layoutY="277.0" onMouseReleased="#PassTurnOnClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/botaoVazio.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="68.0" layoutY="266.0" mouseTransparent="true" prefHeight="70.0" prefWidth="200.0" text="Passa Turno">
+            <Label alignment="CENTER" layoutX="29.0" layoutY="277.0" mouseTransparent="true" prefHeight="70.0" prefWidth="200.0" text="Passa Turno">
                <font>
                   <Font name="Russian" size="26.0" />
                </font>
@@ -82,36 +82,46 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="297.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="258.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/botaoVazio.png" />
                </image>
             </ImageView>
-            <Text fx:id="season" fill="#2f2f2f" layoutX="297.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="199.9999838769436">
+            <Text fx:id="season" fill="#2f2f2f" layoutX="258.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="199.9999838769436">
                <font>
                   <Font name="Russian" size="26.0" />
                </font>
             </Text>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="454.0" layoutY="579.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="160.0" layoutX="507.0" layoutY="614.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/botaoVazio.png" />
                </image>
             </ImageView>
-            <Label fx:id="playerName2" alignment="CENTER" layoutX="454.0" layoutY="579.0" prefHeight="70.0" prefWidth="200.0" text="Player 2" textAlignment="CENTER">
+            <Label fx:id="playerName2" alignment="CENTER" layoutX="507.0" layoutY="614.0" prefHeight="56.0" prefWidth="160.0" text="Player 2" textAlignment="CENTER">
                <font>
                   <Font name="Century Schoolbook" size="24.0" />
                </font>
             </Label>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="454.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="60.0" fitWidth="160.0" layoutX="506.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/botaoVazio.png" />
                </image>
             </ImageView>
-            <Label fx:id="playerName1" alignment="CENTER" layoutX="454.0" layoutY="65.0" prefHeight="70.0" prefWidth="200.0" text="Player 1" textAlignment="CENTER">
+            <Label fx:id="playerName1" alignment="CENTER" layoutX="506.0" layoutY="72.0" prefHeight="56.0" prefWidth="163.0" text="Player 1" textAlignment="CENTER">
                <font>
                   <Font name="Century Schoolbook" size="24.0" />
                </font>
             </Label>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="258.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/botaoVazio.png" />
+               </image>
+            </ImageView>
+            <Text fill="#2f2f2f" layoutX="258.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="199.9999838769436">
+               <font>
+                  <Font name="Russian" size="26.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <GridPane fx:id="gridPane" layoutX="698.0" layoutY="94.0" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="520.0" prefWidth="520.0">
