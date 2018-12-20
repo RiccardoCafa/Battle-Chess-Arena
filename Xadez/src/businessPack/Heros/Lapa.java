@@ -29,12 +29,12 @@ public class Lapa extends Hero {
     
     private int bigBig = 0;
     
-    public static String description = "Este é Lapa God, um programador com poderes de hack o quanto suspeitos... Cuidado para não deixar ele acumular muitos big bigs" +
+    public static String description = "Este é o Professor God, um programador com poderes de hack o quanto suspeitos... Cuidado para não deixar ele acumular muitos big bigs" +
                 " pode não ser muito vantajoso para você." + "\nEle tem apenas uma peça especial, mas não a subestime, ela foi programada por díscipulos dele!";
-    public static String skills = "Ronaldo, pode ser chamado por Lapa por um preço de 5 big bigs." + "\nApós ativado o poder, poderá escolher " + 
+    public static String skills = "O seu assistente, pode ser chamado pelo Professor por um preço de 5 big bigs." + "\nApós ativado o poder, poderá escolher " + 
                 "um inimigo para jogar uma bomba e atingir os alvos ao redor." + "\n-3HP para o alvo central\n-2HP para os alvos " +
                 " na horizontal e vertical\n-1HP para os alvos nas diagonais";
-    public static String movimentos = "A peça especial de Lapa é a torre de duas cabeças!\n Ela é capaz de quebrar seu movimento na vertical e horizontal " +
+    public static String movimentos = "A peça especial do Professor é a torre de duas cabeças!\n Ela é capaz de quebrar seu movimento na vertical e horizontal " +
                 ", por exemplo, a torre tem 5 casas livres em sua frente, ela pode andar as 5 ou andar 4 e 1 para cada lado ou andar 3 e 2 "
                 + "para cada lado, e assim por diante. \n Além disso, os peões em frente a Torre começam 2 casas pra frente!";
     
@@ -67,7 +67,6 @@ public class Lapa extends Hero {
     @Override
     public void GameManager(Table tab) {
         jaFoiLapa = false;
-        System.out.println("Lapa é bom demais, n precisa de poderes");
     }
     
     public ArrayList<Block> getBombWays(Table tab, Player playing) {
@@ -91,7 +90,7 @@ public class Lapa extends Hero {
         if(!tab.getBlock(target).isEmpty()) {
             String pieceName = tab.getBlock(target).getPiece().getPieceName();
             if(tab.getBlock(target).hitPiece(4)) {
-                game.displayMessage("Lapa", "Exterminou o(a) " + pieceName +
+                game.displayMessage("O Professor", "Exterminou o(a) " + pieceName +
                             " adversária!");
             }
         }
@@ -120,13 +119,13 @@ public class Lapa extends Hero {
             if(xDir == 0 || yDir == 0) {
                 if(tab.getBlock(newTarget).hitPiece(2)) {
                     //game.removeImage(newTarget);
-                    game.displayMessage("Lapa", "Exterminou o(a) " + pieceName +
+                    game.displayMessage("Professor", "Exterminou o(a) " + pieceName +
                             " adversária!");
                 }
             } else {
                 if(tab.getBlock(newTarget).hitPiece(1)) {
                     //game.removeImage(newTarget);
-                    game.displayMessage("Lapa", "Exterminou o(a) " + pieceName +
+                    game.displayMessage("Professor", "Exterminou o(a) " + pieceName +
                             " adversário(a)!");
                 }
             }

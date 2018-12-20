@@ -112,14 +112,14 @@ public class ChooseCharacterController implements Initializable {
         int resY = 350;
         perso[0] = new Image("InterfaceView/Personagens/iconeHueBR.png",resX, resY, false, false);
         heroNames[0] = "Huehue br";
-        perso[1] = new Image("InterfaceView/Personagens/iconeLapa.png",resX, resY, false, false);
-        heroNames[1] = "Lapa";
-        perso[2] = new Image("InterfaceView/Personagens/iconeLenin.png",resX, resY, false, false);
+        heroNames[1] = "Professor";
         heroNames[2] = "Czar Nicolau II";
-        perso[3] = new Image("InterfaceView/Personagens/iconeWizard.png", resX, resY, false, false);
         heroNames[3] = "The Wizard";
-        perso[4] = new Image("InterfaceView/Personagens/iconeSheriff.png",resX, resY, false, false);
         heroNames[4] = "Sheriff";
+        perso[1] = new Image("InterfaceView/Personagens/iconeLapa.png",resX, resY, false, false);
+        perso[2] = new Image("InterfaceView/Personagens/iconeLenin.png",resX, resY, false, false);
+        perso[3] = new Image("InterfaceView/Personagens/iconeWizard.png", resX, resY, false, false);
+        perso[4] = new Image("InterfaceView/Personagens/iconeSheriff.png",resX, resY, false, false);
         myImage = new Image("InterfaceView/setaesq.png");
         myImageView = new ImageView(myImage);
         //setaEsq.setGraphic(myImageView);
@@ -293,10 +293,10 @@ public class ChooseCharacterController implements Initializable {
                 //name = "Lapa";
                    if(p1 != null){
                         p2 = new Player(-1, new Lapa(), 2,name2);
-                        HeroPlayer2.setText("Lapa");
+                        HeroPlayer2.setText("Professor");
                 }else{
                      p1 = new Player(1, new Lapa(), 1, name1);
-                     HeroPlayer1.setText("Lapa");
+                     HeroPlayer1.setText("Professor");
                 } 
                 break;
             case 2:
