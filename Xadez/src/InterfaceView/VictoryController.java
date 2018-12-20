@@ -44,6 +44,7 @@ public class VictoryController implements Initializable {
     @FXML
     public void onPlayAgain() {
         Stage primary = (Stage) back.getScene().getWindow();
+        heroMusics.stopMusic();
         try{
             System.out.println("loading");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ChooseCharacter.fxml"));

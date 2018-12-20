@@ -41,7 +41,7 @@ public class Lapa extends Hero {
     public Lapa() {
         tpHero = TypeHero.lapa;
         image = new Image(path + "animLapa.gif", widthImg, heightImg, false, false);
-        heroName = "HueBR";
+        heroName = "Lapa";
     }
     
 
