@@ -12,39 +12,49 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class Saver {
+/**
+ * TempSaver description - makes temporary files wich will manage player preferences, like volume.
+ * @author ricca
+ */
+public class TempSaver {
     
     /* DECLARAÇÃO DE VARIÁVEIS */
-    private Map<String, File> saveFiles = new HashMap<>();
-    private String dirPath = System.getProperty("java.io.tmpdir") + "/BattleChessArena";
+    public static Map<String, File> saveFiles = new HashMap<String, File>();
+    private String dirPath = System.getProperty("java.io.tmpdir") + "BattleChessArena";
     
     /**
-     * Makes a temp directory of the game if it doesn't exists
-     * Load all files inside if exists
+     * TempSaver constructor makes the temporary directory if doesn't exist, and load all files if exist
      */
-    public Saver() {
+    public TempSaver() {
         File direc = new File(dirPath);
-        if(!direc.exists()) new File(dirPath).mkdir();
+        direcManager();
         for(File f : direc.listFiles()) {
             saveFiles.put(f.getName(), f);
         }
+        System.out.println(dirPath);
     }
     
     /**
-     * 
+     * writeOnFile description - writes a pair of key/file in a hashMap, then writes on this file the value to write
      * @param saveKey This key is the file name to find
      * @param key This is the key to write inside the saveKey file
      * @param value This is the value to write
      */
     public void writeOnFile(String saveKey, String key, String value) {
         direcManager();
-        File f = saveFiles.get(saveKey);
+        File f;
+        if(saveFiles.containsKey(saveKey)){
+            f = saveFiles.get(saveKey);
+        } else {
+            f = makeFile(saveKey + ".txt");
+        }
+        if(f==null)return;
         try {
             FileWriter fw = new FileWriter(f);
             fw.write(key + " " + value);
             fw.close();
         } catch (IOException ex) {
-            Logger.getLogger(Saver.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TempSaver.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**
@@ -54,6 +64,7 @@ public class Saver {
      */
     public void writeOnFile(String saveKey, HashMap<String, String> lista) {
         direcManager();
+        System.out.println("WriteOnFile(String saveKey, HashMap<String, String> lista) - Useless for now.");
         File f = saveFiles.get(saveKey);
         try {
             Iterator it = lista.entrySet().iterator();
@@ -67,32 +78,49 @@ public class Saver {
             }
             fw.close();
         } catch (IOException ex) {
-            Logger.getLogger(Saver.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TempSaver.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    /**
+     * readOnFile description - read the file pair of saveKey on the hashMap, look for key pair and return it as string.
+     * @param saveKey The file name (without extension, all are .txt)
+     * @param key The key to look for
+     * @return the value of the pair
+     */
     public String readOnFile(String saveKey, String key) {
         direcManager();
-        File f = null;
+        File f;
+        System.out.println("Reading the file...");
         try {
-            f = getFile(saveFiles.get(saveKey).toString());
-            if(!f.exists()) return null;
+            f = saveFiles.get(saveKey + ".txt");
+            if(f==null || !f.exists()) {
+                System.out.println("File doesn't exist");
+                return null;
+            }
             String st;
             String[] stF;
             BufferedReader br = new BufferedReader(new FileReader(f));
             while((st = br.readLine()) != null) {
                 stF = st.split(" ");
-                if(stF.equals(key)) {
+                System.out.println(stF[0]);
+                if(stF[0].equals(key)) {
+                    System.out.println(stF[0]);
                     return stF[1];
                 }
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage());
         }
         
         return null;
     }
     
+    /**
+     * makeFile makes a file with the name specified on the parameter and put it on the hashmap
+     * @param file the file name that will be created
+     * @return the new file
+     */
     public File makeFile(String file) {
         File tempFile = null;
         direcManager();
@@ -101,15 +129,27 @@ public class Saver {
         return tempFile;
     }
     
+    /**
+     * getFile description - look for the file in the saveKey pair hashmap
+     * @param saveKey the key to loop for in the hashmap
+     * @return the pair file of this key
+     */
     public File getFile(String saveKey) {
         return saveFiles.get(saveKey);
     }
     
+    /**
+     * dirExists description - check if the temporary directory exists
+     * @return if temporary directory exists
+     */
     private boolean dirExists() {
         File f = new File(dirPath);
         return f.exists();
     }
     
+    /**
+     * direcManager description - check if the temporary directory exists, if not then creates one
+     */
     private void direcManager() {
         if(!dirExists()) 
         {

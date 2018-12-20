@@ -1,6 +1,6 @@
 package InterfaceView;
 
-import businessPack.Saver;
+import businessPack.TempSaver;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
