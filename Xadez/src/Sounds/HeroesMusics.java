@@ -14,14 +14,9 @@ public class HeroesMusics {
    
     private ArrayList<Media> exaltaSamba = new ArrayList<>();
     MediaPlayer tockers;
-    double volume;
+    private double volume;
     
     public HeroesMusics(){
-        TempSaver saver = new TempSaver();
-        String value = saver.readOnFile("Options", "Volume");
-        System.out.println(value);
-        if(value == null) value = "100";
-        volume = Double.parseDouble(value)/100;
         //medias a serem tocadas
         Media hue3 = new Media(getClass().getResource("MUSICA HUE HUE BR.mp3").toString());
         Media Lapa = new Media(getClass().getResource("Lapa.mp3").toString());
@@ -35,7 +30,7 @@ public class HeroesMusics {
         exaltaSamba.add(Mago);//index = 3
         exaltaSamba.add(Sheriff);//index = 4
         tockers = new MediaPlayer(exaltaSamba.get(0));
-        tockers.setVolume(0.1);
+        updateVolumeBySave();
     } 
     
     public void playMusic(int indexMusic){
@@ -74,8 +69,18 @@ public class HeroesMusics {
     * 
     * @param volume tem que ser entre 0 e 1;
     */
-    public void volumeChange(double volume) {
+    public void setVolume(double volume) {
         tockers.setVolume(volume);
     }
-
+    
+    public void updateVolumeBySave() {
+        if(tockers == null) return;
+        TempSaver saver = new TempSaver();
+        String value = saver.readOnFile("Options", "Volume");
+        System.out.println(value);
+        if(value == null) value = "100";
+        volume = Double.parseDouble(value)/100;
+        tockers.setVolume(volume);
+    }
+    
 }

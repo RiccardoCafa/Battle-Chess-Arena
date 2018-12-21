@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import businessPack.MultiLanguage;
 import businessPack.TempSaver;
 import java.io.IOException;
 import java.net.URL;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +29,12 @@ public class MenuController implements Initializable {
     @FXML
     ImageView StartBtn;
     @FXML
+    Label StartText;
+    @FXML
+    Label OptionText;
+    @FXML
+    Label SairText;
+    @FXML
     ImageView OptionBtn;
     @FXML
     ImageView QuitBtn;
@@ -39,9 +47,25 @@ public class MenuController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         background.setBackground(new Background( new BackgroundImage(new Image("InterfaceView/imagens/telaInicial.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
                 BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        String btnPath = "InterfaceView/imagens/buttons/";
-        StartBtn.setImage(new Image(btnPath + "JogarButton.png"));
-        QuitBtn.setImage(new Image(btnPath + "sairButton.png"));
+        String btnPath = "InterfaceView/imagens/botaoVazio.png";
+        Image imgBotaoVazio = new Image(btnPath);
+        
+        MultiLanguage.addText("JogarBtn-pt", "Jogar");
+        MultiLanguage.addText("JogarBtn-en", "Play");
+        MultiLanguage.addText("OpcoesBtn-pt", "Opcoes");
+        MultiLanguage.addText("OpcoesBtn-en", "Options");
+        MultiLanguage.addText("SairBtn-pt", "Sair");
+        MultiLanguage.addText("SairBtn-en", "Quit");
+        
+        StartBtn.setImage(imgBotaoVazio);
+        OptionBtn.setImage(imgBotaoVazio);
+        QuitBtn.setImage(imgBotaoVazio);
+        System.out.println(MultiLanguage.getText("JogarBtn"));
+        StartText.setText(MultiLanguage.getText("JogarBtn"));
+        OptionText.setText(MultiLanguage.getText("OpcoesBtn"));
+        SairText.setText(MultiLanguage.getText("SairBtn"));
+        
+        
     }
     
     @FXML
@@ -53,7 +77,7 @@ public class MenuController implements Initializable {
     @FXML
     public void OnOptionClick(MouseEvent e){
         primaryStage = (Stage) background.getScene().getWindow();
-        LoadScene("OptionMenu.fxml");
+        LoadOptionScene();
         primaryStage.close();        
     }
     @FXML
@@ -76,6 +100,25 @@ public class MenuController implements Initializable {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");
             e.printStackTrace();
+        }
+    }
+    
+    private void LoadOptionScene() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OptionMenu.fxml"));
+            Parent root1 = (Parent) loader.load();
+            
+            OptionMenuController optioner = loader.getController();
+            optioner.SetSceneCallBack("Menu.fxml");
+            
+            Stage aroldo = new Stage();
+            aroldo.setScene(new Scene(root1));
+            
+            aroldo.setTitle("Battle Chess Arena - Options!");
+            aroldo.show();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
+            System.out.println("Nao foi possível abrir a janela");
         }
     }
 

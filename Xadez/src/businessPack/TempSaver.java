@@ -61,6 +61,7 @@ public class TempSaver {
      * 
      * @param saveKey This key is the file name to find
      * @param lista a HashMap with the Key - Value to put int the file saveKey
+     * @deprecated 
      */
     public void writeOnFile(String saveKey, HashMap<String, String> lista) {
         direcManager();
@@ -91,11 +92,9 @@ public class TempSaver {
     public String readOnFile(String saveKey, String key) {
         direcManager();
         File f;
-        System.out.println("Reading the file...");
         try {
             f = saveFiles.get(saveKey + ".txt");
             if(f==null || !f.exists()) {
-                System.out.println("File doesn't exist");
                 return null;
             }
             String st;
