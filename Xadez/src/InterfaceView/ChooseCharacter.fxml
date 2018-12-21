@@ -169,6 +169,16 @@
                   <Font name="Russian" size="29.0" />
                </font>
             </Label>
+            <ImageView fitHeight="31.0" fitWidth="149.0" layoutX="14.0" layoutY="14.0" onMouseReleased="#OpenOptionScene" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/botaoVazio.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" mouseTransparent="true" pickOnBounds="false" prefHeight="31.0" prefWidth="89.0" text="Opcoes">
+               <font>
+                  <Font name="Russian" size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

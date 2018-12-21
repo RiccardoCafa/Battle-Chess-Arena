@@ -166,7 +166,7 @@ public class ChooseCharacterController implements Initializable {
         }
     }*/
     public void setConfig() {
-        music.volumeChange(volumeSound/100);
+        music.setVolume(volumeSound/100);
     }
     public void updateCharacterInfo() {
         infoType = 1;
@@ -379,6 +379,26 @@ public class ChooseCharacterController implements Initializable {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");
             e.printStackTrace();
+        }
+    }
+    @FXML
+    public void OpenOptionScene() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OptionMenu.fxml"));
+            Parent root1 = (Parent) loader.load();
+            
+            OptionMenuController optioner = loader.getController();
+            optioner.SetSceneCallBack("none");
+            optioner.SetMusicPlayer(music);
+            
+            Stage aroldo = new Stage();
+            aroldo.setScene(new Scene(root1));
+            
+            aroldo.setTitle("Battle Chess Arena - Options!");
+            aroldo.show();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
+            System.out.println("Nao foi possível abrir a janela");
         }
     }
     @FXML

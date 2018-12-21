@@ -1,5 +1,6 @@
 package InterfaceView;
 
+import Sounds.HeroesMusics;
 import businessPack.TempSaver;
 import java.io.File;
 import java.io.FileWriter;
@@ -35,26 +36,42 @@ public class OptionMenuController implements Initializable {
     private Stage primaryStage;
     private File optionFile;
     private TempSaver saver;
+    private String sceneCall;
+    private HeroesMusics musica;
+    private Runnable gameControl;
+    private boolean running = true;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         saver = new TempSaver();
-        optionFile = saver.makeFile("Options.txt");
+        //optionFile = saver.makeFile("Options.txt");
+        String valueS = saver.readOnFile("Options", "Volume");
+        if(valueS != null) { 
+            double value = Double.parseDouble(valueS);
+            volumeSlider.setValue(value);
+        } else {
+            volumeSlider.setValue(1);
+        }
     }
     @FXML
     public void onOptionsSave() {
-            saver.writeOnFile(optionFile.getName(), "Volume", Double.toString(volumeSlider.getValue()));
-            JOptionPane.showMessageDialog(null, "Suas configurações foram salvas!");
+        saver.writeOnFile("Options.txt", "Volume", Double.toString(volumeSlider.getValue()));
     }
     @FXML
     public void onBackClick(MouseEvent e){
         primaryStage = (Stage) rootPane.getScene().getWindow();
-        LoadScene("Menu.fxml");
+        onOptionsSave();
+        BackToScene();
         primaryStage.close();
     }
-     private void LoadScene(String scene){
+    private void BackToScene(){
+        if(musica!=null) musica.updateVolumeBySave();
+        running = false;
+        if(sceneCall.equals("none")) {
+            return;
+        }
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(scene));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneCall));
             Parent root1 = (Parent) loader.load();
             Stage aroldo = new Stage();
             aroldo.setTitle("Choose Your Character!");
@@ -64,5 +81,28 @@ public class OptionMenuController implements Initializable {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
             System.out.println("Nao foi possível abrir a janela");
         }
+    }
+    public void SetSceneCallBack(String sceneCall) {
+        this.sceneCall = sceneCall;
+    }
+    public void SetMusicPlayer(HeroesMusics musica) {
+        this.musica = musica;
+        gameControl = new Runnable() {
+            @Override
+            public void run() {
+                while(running) {
+                    if(musica==null) running = false;
+                    if(volumeSlider == null) running = false;
+                    musica.setVolume(volumeSlider.getValue()/100);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        JOptionPane.showMessageDialog(null, "Something happen");
+                    }
+                }
+            }
+        };
+        Thread tControl = new Thread(gameControl);
+        tControl.start();
     }
 }

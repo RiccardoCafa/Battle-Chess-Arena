@@ -77,7 +77,7 @@ public class MenuController implements Initializable {
     @FXML
     public void OnOptionClick(MouseEvent e){
         primaryStage = (Stage) background.getScene().getWindow();
-        LoadScene("OptionMenu.fxml");
+        LoadOptionScene();
         primaryStage.close();        
     }
     @FXML
@@ -100,6 +100,25 @@ public class MenuController implements Initializable {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
             System.out.println("Nao foi possível abrir a janela");
             e.printStackTrace();
+        }
+    }
+    
+    private void LoadOptionScene() {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OptionMenu.fxml"));
+            Parent root1 = (Parent) loader.load();
+            
+            OptionMenuController optioner = loader.getController();
+            optioner.SetSceneCallBack("Menu.fxml");
+            
+            Stage aroldo = new Stage();
+            aroldo.setScene(new Scene(root1));
+            
+            aroldo.setTitle("Battle Chess Arena - Options!");
+            aroldo.show();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
+            System.out.println("Nao foi possível abrir a janela");
         }
     }
 
