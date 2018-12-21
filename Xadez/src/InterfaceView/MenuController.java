@@ -50,20 +50,20 @@ public class MenuController implements Initializable {
         String btnPath = "InterfaceView/imagens/botaoVazio.png";
         Image imgBotaoVazio = new Image(btnPath);
         
-        MultiLanguage.AddText("JogarBtn-pt", "Jogar");
-        MultiLanguage.AddText("JogarBtn-en", "Play");
-        MultiLanguage.AddText("OpcoesBtn-pt", "Opcoes");
-        MultiLanguage.AddText("OpcoesBtn-en", "Options");
-        MultiLanguage.AddText("SairBtn-pt", "Sair");
-        MultiLanguage.AddText("SairBtn-en", "Quit");
+        MultiLanguage.addText("JogarBtn-pt", "Jogar");
+        MultiLanguage.addText("JogarBtn-en", "Play");
+        MultiLanguage.addText("OpcoesBtn-pt", "Opcoes");
+        MultiLanguage.addText("OpcoesBtn-en", "Options");
+        MultiLanguage.addText("SairBtn-pt", "Sair");
+        MultiLanguage.addText("SairBtn-en", "Quit");
         
         StartBtn.setImage(imgBotaoVazio);
         OptionBtn.setImage(imgBotaoVazio);
         QuitBtn.setImage(imgBotaoVazio);
-        System.out.println(MultiLanguage.GetText("JogarBtn"));
-        StartText.setText(MultiLanguage.GetText("JogarBtn"));
-        OptionText.setText(MultiLanguage.GetText("OpcoesBtn"));
-        SairText.setText(MultiLanguage.GetText("SairBtn"));
+        System.out.println(MultiLanguage.getText("JogarBtn"));
+        StartText.setText(MultiLanguage.getText("JogarBtn"));
+        OptionText.setText(MultiLanguage.getText("OpcoesBtn"));
+        SairText.setText(MultiLanguage.getText("SairBtn"));
         
         
     }

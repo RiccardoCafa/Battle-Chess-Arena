@@ -1,5 +1,6 @@
 package businessPack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,7 +19,7 @@ public class MultiLanguage {
      * @param text the text to be showed
      * @param code the code to find this text later
      */
-    public static void AddText(String code, String text) 
+    public static void addText(String code, String text) 
     {
         textos.put(code, text);
     }
@@ -30,18 +31,24 @@ public class MultiLanguage {
      * @param code the code to find the specific text 
      * @return the text translated to the current language
      */
-    public static String GetText(String code) {
+    public static String getText(String code) {
         return textos.get(code + "-" + lang);
     }
     
     /**
      * UpdateLang description - Updates the language looking for Options files.
      */
-    public static void UpdateLang() {
+    public static void updateLang() {
         TempSaver saver = new TempSaver();
         String lg = saver.readOnFile("Options", "lang");
         if(lg != null) {
             lang = lg;
+        }
+    }
+    
+    public static void setLang(String lang) {
+        if(lang == "pt" || lang == "en") {
+            MultiLanguage.lang = lang;
         }
     }
 }

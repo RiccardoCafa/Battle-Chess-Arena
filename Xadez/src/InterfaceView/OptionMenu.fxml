@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
@@ -10,14 +11,17 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InterfaceView.OptionMenuController">
    <children>
-      <Button fx:id="SaveBtn" layoutX="265.0" layoutY="309.0" mnemonicParsing="false" onMouseReleased="#onOptionsSave" prefHeight="38.0" prefWidth="70.0" text="Save" />
-      <Button fx:id="QuitBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#onBackClick" prefHeight="20.0" prefWidth="63.0" text="Voltar" />
-      <Label layoutX="257.0" layoutY="27.0" prefHeight="46.0" prefWidth="83.0" text="Opcoes">
+      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@imagens/fundoVazio.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="219.0" layoutY="24.0" prefHeight="52.0" prefWidth="158.0" text="Opcoes">
          <font>
-            <Font size="24.0" />
+            <Font name="Russian" size="25.0" />
          </font>
          <textFill>
-            <RadialGradient centerX="0.5" centerY="0.46190476190476193" focusDistance="0.5813953488372094" radius="0.7325581395348837">
+            <RadialGradient centerX="0.27222222222222214" centerY="0.7904761904761906" focusDistance="0.5813953488372094" radius="0.7325581395348837">
                <stops>
                   <Stop color="#ee1f18" />
                   <Stop color="#221313" offset="1.0" />
@@ -25,11 +29,51 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <Label layoutX="257.0" layoutY="96.0" prefHeight="46.0" prefWidth="83.0" text="Volume">
+      <Label alignment="CENTER" layoutX="254.0" layoutY="87.0" prefHeight="37.0" prefWidth="84.0" text="Volume">
          <font>
-            <Font size="24.0" />
+            <Font name="Russian" size="20.0" />
          </font>
       </Label>
-      <Slider fx:id="volumeSlider" layoutX="230.0" layoutY="142.0" value="100.0" />
+      <Slider fx:id="volumeSlider" layoutX="228.0" layoutY="132.0" prefHeight="18.0" prefWidth="140.0" value="100.0" />
+      <ImageView fitHeight="46.0" fitWidth="156.0" layoutX="234.0" layoutY="321.0" onMouseReleased="#onOptionsSave" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/botaoVazio.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="234.0" layoutY="321.0" mouseTransparent="true" prefHeight="46.0" prefWidth="132.0" text="Salvar">
+         <font>
+            <Font name="Russian" size="21.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="46.0" fitWidth="106.0" layoutX="14.0" layoutY="10.0" onMouseReleased="#onBackClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/botaoVazio.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="14.0" layoutY="11.0" mouseTransparent="true" prefHeight="37.0" prefWidth="106.0" text="Voltar">
+         <font>
+            <Font name="Russian" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="232.0" layoutY="215.0" onMouseReleased="#setPtLang" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/langFlag/brazil.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="316.0" layoutY="215.0" onMouseReleased="#setEnLang" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@imagens/langFlag/united-kingdom.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="258.0" layoutY="163.0" prefHeight="37.0" prefWidth="84.0" text="Idioma">
+         <font>
+            <Font name="Russian" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="langText" alignment="CENTER" layoutX="247.0" layoutY="275.0" prefHeight="30.0" prefWidth="106.0" text="Português">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

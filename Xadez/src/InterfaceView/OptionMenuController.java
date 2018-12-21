@@ -1,6 +1,7 @@
 package InterfaceView;
 
 import Sounds.HeroesMusics;
+import businessPack.MultiLanguage;
 import businessPack.TempSaver;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,6 +35,8 @@ public class OptionMenuController implements Initializable {
     Slider volumeSlider;
     @FXML
     Button SaveBtn;
+    @FXML
+    Label langText;
     private Stage primaryStage;
     private File optionFile;
     private TempSaver saver;
@@ -55,19 +59,35 @@ public class OptionMenuController implements Initializable {
     }
     @FXML
     public void onOptionsSave() {
-        saver.writeOnFile("Options.txt", "Volume", Double.toString(volumeSlider.getValue()));
+//        JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+        int resp = JOptionPane.showConfirmDialog(null, "Deseja confirmar?", "Salvar alterações", JOptionPane.YES_NO_OPTION);
+        if(resp == 0) {
+            saver.writeOnFile("Options.txt", "Volume", Double.toString(volumeSlider.getValue()));
+            BackToScene();
+        } else if(resp == 1) {
+            BackToScene();
+        }
     }
     @FXML
     public void onBackClick(MouseEvent e){
-        primaryStage = (Stage) rootPane.getScene().getWindow();
-        onOptionsSave();
         BackToScene();
-        primaryStage.close();
+    }
+    @FXML
+    public void setEnLang() {
+        MultiLanguage.setLang("en");
+        langText.setText("English");
+    }
+    @FXML
+    public void setPtLang() {
+        MultiLanguage.setLang("pt");
+        langText.setText("Português");
     }
     private void BackToScene(){
+        primaryStage = (Stage) rootPane.getScene().getWindow();
         if(musica!=null) musica.updateVolumeBySave();
         running = false;
         if(sceneCall.equals("none")) {
+            primaryStage.close();
             return;
         }
         try{
@@ -81,6 +101,7 @@ public class OptionMenuController implements Initializable {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
             System.out.println("Nao foi possível abrir a janela");
         }
+        primaryStage.close();
     }
     public void SetSceneCallBack(String sceneCall) {
         this.sceneCall = sceneCall;
