@@ -50,6 +50,12 @@ public class OptionMenuController implements Initializable {
         saver = new TempSaver();
         //optionFile = saver.makeFile("Options.txt");
         String valueS = saver.readOnFile("Options", "Volume");
+        String langCh = saver.readOnFile("Language", "Lang");
+        if(langCh != null && langCh.equals("en")) {
+            langText.setText("English");
+        } else {
+            langText.setText("Português");
+        }
         if(valueS != null) { 
             double value = Double.parseDouble(valueS);
             volumeSlider.setValue(value);
@@ -62,7 +68,8 @@ public class OptionMenuController implements Initializable {
 //        JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         int resp = JOptionPane.showConfirmDialog(null, "Deseja confirmar?", "Salvar alterações", JOptionPane.YES_NO_OPTION);
         if(resp == 0) {
-            saver.writeOnFile("Options.txt", "Volume", Double.toString(volumeSlider.getValue()));
+            setLangPref(MultiLanguage.lang);
+            saver.writeOnFile("Options", "Volume", Double.toString(volumeSlider.getValue()));
             BackToScene();
         } else if(resp == 1) {
             BackToScene();
@@ -76,11 +83,16 @@ public class OptionMenuController implements Initializable {
     public void setEnLang() {
         MultiLanguage.setLang("en");
         langText.setText("English");
+        
     }
     @FXML
     public void setPtLang() {
         MultiLanguage.setLang("pt");
         langText.setText("Português");
+        
+    }
+    public void setLangPref(String langPref) {
+        saver.writeOnFile("Language", "Lang", langPref);
     }
     private void BackToScene(){
         primaryStage = (Stage) rootPane.getScene().getWindow();
@@ -98,8 +110,8 @@ public class OptionMenuController implements Initializable {
             aroldo.setScene(new Scene(root1));
             aroldo.show();
         } catch(IOException e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
-            System.out.println("Nao foi possível abrir a janela");
         }
         primaryStage.close();
     }
