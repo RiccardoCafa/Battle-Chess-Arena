@@ -47,7 +47,7 @@ public class MultiLanguage {
     }
     
     public static void setLang(String lang) {
-        if(lang == "pt" || lang == "en") {
+        if("pt".equals(lang) || "en".equals(lang)) {
             MultiLanguage.lang = lang;
         }
     }

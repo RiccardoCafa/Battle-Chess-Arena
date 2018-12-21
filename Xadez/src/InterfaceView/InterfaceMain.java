@@ -1,5 +1,7 @@
 package InterfaceView;
 
+import businessPack.MultiLanguage;
+import businessPack.TempSaver;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ public class InterfaceMain extends Application {
     private Image gameIcone = new Image("InterfaceView/imagens/iconGameAlpha.png");
     @Override
     public void start(Stage primaryStage) {
+        
         Parent rootLayout = null;
         try {
             rootLayout = FXMLLoader.load(getClass().getResource("Menu.fxml"));

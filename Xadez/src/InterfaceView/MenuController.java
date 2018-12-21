@@ -50,6 +50,11 @@ public class MenuController implements Initializable {
         String btnPath = "InterfaceView/imagens/botaoVazio.png";
         Image imgBotaoVazio = new Image(btnPath);
         
+        // Carrega a linguagem de preferencia do usuário
+        TempSaver saver = new TempSaver();
+        String lang = saver.readOnFile("Language", "Lang");
+        MultiLanguage.setLang(lang);
+        
         MultiLanguage.addText("JogarBtn-pt", "Jogar");
         MultiLanguage.addText("JogarBtn-en", "Play");
         MultiLanguage.addText("OpcoesBtn-pt", "Opcoes");
@@ -98,7 +103,6 @@ public class MenuController implements Initializable {
             stage.show();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela");
-            System.out.println("Nao foi possível abrir a janela");
             e.printStackTrace();
         }
     }
@@ -118,7 +122,7 @@ public class MenuController implements Initializable {
             aroldo.show();
         } catch(IOException e) {
             JOptionPane.showMessageDialog(null, "Não foi possível abrir a janela, por favor, reporte isso para podermos melhorar!");
-            System.out.println("Nao foi possível abrir a janela");
+            e.printStackTrace();
         }
     }
 
